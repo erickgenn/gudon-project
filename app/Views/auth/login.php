@@ -55,7 +55,7 @@
       <!-- /.social-auth-links -->
 
       <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
+        <a href="<?php echo base_url(); ?>/register/index" class="text-center">Register a new membership</a>
       </p>
     </div>
     <!-- /.card-body -->
