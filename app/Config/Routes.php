@@ -34,6 +34,10 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->post('register','Auth::register');
 
+// warehouse
+$routes->get('/warehouse/index', 'Warehouse::load_table');
+$routes->get('/warehouse/view/(:num)', 'Warehouse::view_detail/$1');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
