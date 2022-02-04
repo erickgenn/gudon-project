@@ -36,7 +36,8 @@ $routes->get('/', 'Home::index');
 $routes->get('login', 'AuthController::login');
 $routes->post('login/auth', 'AuthController::loginAuth');
 
-$routes->post('register','Auth::register');
+$routes->post('register','AuthController::store');
+$routes->get('register/index','AuthController::register');
 
 // warehouse
 $routes->get('/warehouse/index', 'Warehouse::load_table');

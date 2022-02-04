@@ -42,6 +42,13 @@
             </div>
           </div>
         </div>
+        <div>
+          <?php if(session()->getFlashdata('msg')):?>
+            <div class="alert alert-warning">
+              <?= session()->getFlashdata('msg') ?>
+            </div>
+          <?php endif;?>
+          </div>
         <div class="row">
           <div class="col-8">
           </div>
@@ -55,7 +62,7 @@
       <!-- /.social-auth-links -->
 
       <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
+        <a href="<?php echo base_url(); ?>/register/index" class="text-center">Register a new membership</a>
       </p>
     </div>
     <!-- /.card-body -->
