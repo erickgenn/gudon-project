@@ -22,8 +22,8 @@ class AuthController extends BaseController
             'fullname'          => 'required|min_length[2]|max_length[50]',
             'email'         => 'required|min_length[4]|max_length[100]|valid_email|is_unique[mst_customer.email]',
             'password'      => 'required|min_length[4]|max_length[50]',
-            'phone'         => 'required|min_length[10]|max_length[18]',
-            'confirm password'  => 'matches[password]'
+            'phone'         => 'required|min_length[7]|max_length[18]',
+            'confirm_password'  => 'required|matches[password]'
         ];
         
         if($this->validate($rules)){
