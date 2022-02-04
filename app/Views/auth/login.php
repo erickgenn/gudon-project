@@ -42,6 +42,13 @@
             </div>
           </div>
         </div>
+        <div>
+          <?php if(session()->getFlashdata('msg')):?>
+            <div class="alert alert-warning">
+              <?= session()->getFlashdata('msg') ?>
+            </div>
+          <?php endif;?>
+          </div>
         <div class="row">
           <div class="col-8">
           </div>
