@@ -33,6 +33,7 @@ class Database extends Config
     public $default = [
         'DSN'      => '',
         'hostname' => 'localhost',
+        'schema' => '',
         'username' => '',
         'password' => '',
         'database' => '',
