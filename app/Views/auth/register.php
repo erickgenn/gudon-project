@@ -50,7 +50,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" name="password" placeholder="Password" required>
+          <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -58,7 +58,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" name="rpassword" placeholder="Retype password">
+          <input type="password" class="form-control" name="confirm password" id="confirm password" placeholder="Retype password" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -66,13 +66,11 @@
           </div>
         </div>
         <div>
-          <?php if(isset($validation)): ?>
-            <div class="col-12">
-              <div class="alert alert-danger" role="alert">
-                <?= $validation->listErrors() ?>
-              </div>
-            </div>
-          <?php endif; ?>
+              <?php if(isset($validation)):?>
+                <div class="alert alert-warning">
+                   <?= $validation->listErrors() ?>
+                </div>
+              <?php endif;?>
         </div>
         <div class="row">
           <div class="col-8">
@@ -85,7 +83,7 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block" onclick="checkinputs()">Register</button>
+            <button type="submit" class="btn btn-primary btn-block" id="submit_btn">Register</button>
           </div>
           <!-- /.col -->
         </div>
@@ -105,22 +103,3 @@
 <script src="<?php echo base_url(); ?>/dist/js/adminlte.min.js"></script>
 </body>
 </html>
-<script>
-  const password = document.getElementById('password');
-  const rpassword = document.getElementById('rpassword');
-
-  form.addEventListener('submit',(e) => {
-    e.preventDefault();
-
-    checkinputs();
-  });
-
-  function checkinputs(){
-    const passwordvalue = password.value.trim();
-    const rpasswordvalue = rpassword.value.trim();
-
-    if(passwordvalue !== rpasswordvalue){
-      setErrorFor(rpassword, 'Password Does Not Match');
-    }
-  }
-</script>
