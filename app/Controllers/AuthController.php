@@ -66,7 +66,7 @@ class AuthController extends BaseController
                 'isLoggedIn' => TRUE
             ];
             $session->set($session_data);
-            return redirect()->to('/');
+            return redirect()->to('home');
         } else {
             $session->setFlashdata('msg', 'Email or Password is incorrect!');
             return view('auth/login');
