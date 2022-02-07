@@ -46,6 +46,10 @@ $routes->get('register/index','AuthController::register');
 $routes->get('/warehouse/index', 'Warehouse::load_table');
 $routes->get('/warehouse/view/(:num)', 'Warehouse::view_detail/$1');
 
+//order
+$routes->get('order/index', 'OrderController::index');
+$routes->get('order/search', 'OrderController::search');
+$routes->get('order/view/(:num)', 'OrderController::view/$1');
 
 
 
