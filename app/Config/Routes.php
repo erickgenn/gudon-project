@@ -37,6 +37,7 @@ $routes->get('home', 'Home::index');
 
 $routes->get('login', 'AuthController::login');
 $routes->post('login/auth', 'AuthController::loginAuth');
+$routes->get('logout', 'AuthController::logout');
 
 $routes->post('register','AuthController::store');
 $routes->get('register/index','AuthController::register');
@@ -44,6 +45,7 @@ $routes->get('register/index','AuthController::register');
 // warehouse
 $routes->get('/warehouse/index', 'Warehouse::load_table');
 $routes->get('/warehouse/view/(:num)', 'Warehouse::view_detail/$1');
+
 
 
 
