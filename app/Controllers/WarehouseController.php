@@ -18,4 +18,11 @@ class WarehouseController extends BaseController
         $shelf['shelf'] = $model->get_detail($id)->getResultArray();
         return view('warehouse/view', $shelf);
     }
+
+    public function view_detail_v2($id)
+    {
+        $model = new Warehouse;
+        $shelf['shelf'] = $model->get_detail($id)->getResultArray();
+        return view('warehouse/view_v2', $shelf);
+    }
 }
