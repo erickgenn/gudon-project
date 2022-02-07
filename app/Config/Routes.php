@@ -17,8 +17,8 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
-$routes->setDefaultMethod('index');
+$routes->setDefaultController('AuthController');
+$routes->setDefaultMethod('login');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 $routes->setAutoRoute(true);
@@ -32,6 +32,17 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+
+$routes->get('login', 'AuthController::login');
+$routes->post('login/auth', 'AuthController::loginAuth');
+
+$routes->post('register','AuthController::store');
+$routes->get('register/index','AuthController::register');
+
+// warehouse
+$routes->get('/warehouse/index', 'WarehouseController::load_table');
+$routes->get('/warehouse/view/(:num)', 'WarehouseController::view_detail/$1');
+$routes->get('/warehouse/view_v2/(:num)', 'WarehouseController::view_detail_v2/$1');
 
 /*
  * --------------------------------------------------------------------
