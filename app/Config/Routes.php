@@ -40,8 +40,8 @@ $routes->post('register','AuthController::store');
 $routes->get('register/index','AuthController::register');
 
 // warehouse
-$routes->get('/warehouse/index', 'Warehouse::load_table');
-$routes->get('/warehouse/view/(:num)', 'Warehouse::view_detail/$1');
+$routes->get('/warehouse/index', 'WarehouseController::load_table');
+$routes->get('/warehouse/view/(:num)', 'WarehouseController::view_detail/$1');
 
 /*
  * --------------------------------------------------------------------

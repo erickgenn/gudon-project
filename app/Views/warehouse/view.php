@@ -170,7 +170,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Detail Rak </h3>
+                <h3 class="card-title">Detail Rak: <strong><?php echo $shelf[0]['nama_warehouse'];?></strong></h3>
 
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
@@ -189,20 +189,24 @@
                 <table class="table table-hover text-nowrap" id="warehouse-table">
                 <thead>
                     <tr>
-                      <th>ID</th>
-                      <th>Nama</th>
-                      <th>Berat Maksimal</th>
-                      <th>Volume Maksimal</th>
+                      <th>Nomor Rak</th>
+                      <th>Nama Product</th>
+                      <th>Total Berat</th>
+                      <th>Total Volume</th>
+                      <th>Kuantitas Produk</th>
+                      <th>Nama Pemilik</th>
                       <th>Status</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php for($i=0;$i<sizeof($shelf);$i++):?>
-                      <td><?php echo $shelf[0]['id'];?></td>
-                      <td><?php echo $shelf[0]['name'];?></td>
-                      <td><?php echo $shelf[0]['max_weight'];?></td>
-                      <td><?php echo $shelf[0]['max_volume'];?></td>
-                      <td><?php if($shelf[0]['is_active']=="1") echo "Active"; else echo "Not Active";?></td>
+                      <td><?php echo $shelf[$i]['id_shelf'];?></td>
+                      <td><?php echo $shelf[$i]['nama_produk'];?></td>
+                      <td><?php echo ($shelf[$i]['berat_produk'] * $shelf[$i]['kuantitas_produk']);?></td>
+                      <td><?php echo ($shelf[$i]['volume_produk'] * $shelf[$i]['kuantitas_produk']);?></td>
+                      <td><?php echo $shelf[$i]['kuantitas_produk'];?></td>
+                      <td><?php echo $shelf[$i]['nama_customer'];?></td>
+                      <td><?php if($shelf[$i]['is_active']=="1") echo "Active"; else echo "Not Active";?></td>
                     </tr>
                     <?php endfor;?>
                   </tbody>
