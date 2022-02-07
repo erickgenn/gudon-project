@@ -200,12 +200,34 @@
                   </thead>
                   <tbody>
                     <?php for($i=0;$i<sizeof($shelf);$i++):?>
-                      <td><?php echo $shelf[$i]['id_shelf'];?></td>
-                      <td><?php echo $shelf[$i]['nama_produk'];?></td>
-                      <td><?php echo ($shelf[$i]['berat_produk'] * $shelf[$i]['kuantitas_produk']);?></td>
-                      <td><?php echo ($shelf[$i]['volume_produk'] * $shelf[$i]['kuantitas_produk']);?></td>
-                      <td><?php echo $shelf[$i]['kuantitas_produk'];?></td>
-                      <td><?php echo $shelf[$i]['nama_customer'];?></td>
+                      <td>
+                      <div class="card">
+                          <div class="card-header">
+                            <h3 class="card-title">
+                              
+                            </h3>
+
+                            <div class="card-tools">
+                              <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                              </button>
+                            </div>
+                          </div>
+                          <div class="card-body" style="display: block;">
+                            <td><?php echo $shelf[$i]['nama_produk'];?></td>
+                            <td><?php echo ($shelf[$i]['berat_produk'] * $shelf[$i]['kuantitas_produk']);?></td>
+                            <td><?php echo ($shelf[$i]['volume_produk'] * $shelf[$i]['kuantitas_produk']);?></td>
+                            <td><?php echo $shelf[$i]['kuantitas_produk'];?></td>
+                            <td><?php echo $shelf[$i]['nama_customer'];?></td>
+                          </div>
+                          <!-- /.card-body -->
+                          <div class="card-footer" style="display: block;">
+                            Footer
+                          </div>
+                          <!-- /.card-footer-->
+                        </div>
+                      </td>
+                      
                       <td><?php if($shelf[$i]['is_active']=="1") echo "Active"; else echo "Not Active";?></td>
                     </tr>
                     <?php endfor;?>
