@@ -30,8 +30,8 @@ class WarehouseController extends BaseController
     public function warehouse_detail($id)
     {
         $model = new Warehouse;
-        $shelf = $model->get_detail($id)->getResultArray();
-        return json_encode($shelf);
+        $shelf['d'] = $model->get_detail($id)->getResultArray();
+        return $shelf;
     }
 
     public function view_detail_v2($id)

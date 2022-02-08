@@ -7,11 +7,11 @@
   <title>GudOn | Dashboard</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback%22%3E">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css%22%3E">
   <!-- Tempusdominus Bootstrap 4 -->
   <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- iCheck -->
@@ -20,12 +20,6 @@
   <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url() ?>/dist/css/adminlte.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/daterangepicker/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/summernote/summernote-bs4.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -224,31 +218,15 @@
 </script>
 <!-- Bootstrap 4 -->
 <script src="<?php echo base_url();?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="<?php echo base_url();?>/plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="<?php echo base_url();?>/plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="<?php echo base_url();?>/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="<?php echo base_url();?>/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="<?php echo base_url();?>/plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="<?php echo base_url();?>/plugins/moment/moment.min.js"></script>
-<script src="<?php echo base_url();?>/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="<?php echo base_url();?>/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="<?php echo base_url();?>/plugins/summernote/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="<?php echo base_url();?>/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url();?>/dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url();?>/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?php echo base_url();?>/dist/js/pages/dashboard.js"></script>
-
+<script src="<?php echo base_url('/adminlte/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
+<script src="<?php echo base_url('/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"></script>
 
 <script>
@@ -260,18 +238,13 @@
         'Volume Produk: '+d.volume_produk+'<br>'+
         'Nama Produk: '+d.nama_produk+'<br>';
   }
- 
+
   $(document).ready(function() {
-      var dt = $('#warehouse-table').DataTable( {
-          "processing": true,
-          "serverSide": true,
-          "ajax": {
-            "url" : "<?php echo base_url('/warehouse/view_detail/');?><?php echo $shelf[0]['id_warehouse'];?>",
-            "dataSrc" : ""
-          },
-          "columns": [
+    var table = $('#warehouse-table').DataTable( {
+        "ajax": "<?php echo base_url('/warehouse/view_detail/');?><?php echo $shelf[0]['id_warehouse'];?>",
+        "columns": [
               {
-                  "class":          "details-control",
+                  "class":          "dt-control",
                   "orderable":      false,
                   "data":           null,
                   "defaultContent": ""
@@ -280,42 +253,28 @@
               { "data": "nama_rak" },
               { "data": "is_active" }
           ],
-          "order": [[1, 'asc']]
-      } );
-  
-      // Array to track the ids of the details displayed rows
-      var detailRows = [];
-  
-      $('#warehouse-table tbody').on( 'click', 'tr td.details-control', function () {
-          var tr = $(this).closest('tr');
-          var row = dt.row( tr );
-          var idx = $.inArray( tr.attr('id'), detailRows );
-  
-          if ( row.child.isShown() ) {
-              tr.removeClass( 'details' );
-              row.child.hide();
-  
-              // Remove from the 'open' array
-              detailRows.splice( idx, 1 );
-          }
-          else {
-              tr.addClass( 'details' );
-              row.child( format( row.data() ) ).show();
-  
-              // Add to the 'open' array
-              if ( idx === -1 ) {
-                  detailRows.push( tr.attr('id') );
-              }
-          }
-      } );
-  
-      // On each draw, loop over the `detailRows` array and show any child rows
-      dt.on( 'draw', function () {
-          $.each( detailRows, function ( i, id ) {
-              $('#'+id+' td.details-control').trigger( 'click' );
-          } );
-      } );
-  } );
+        "order": [[1, 'asc']]
+    } );
+     
+    // Add event listener for opening and closing details
+    $('#example tbody').on('click', 'td.dt-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+ 
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
+    } );
+} );
+ 
+ 
 </script>
 
 </body>
