@@ -52,7 +52,7 @@ $routes->get('order/index', 'OrderController::index');
 $routes->get('order/search', 'OrderController::search');
 $routes->get('order/view/(:num)', 'OrderController::view/$1');
 $routes->get('order/(:num)/delete', 'OrderController::delete/$1');
-
+$routes->get('order/create_order', 'OrderController::create');
 
 
 /*

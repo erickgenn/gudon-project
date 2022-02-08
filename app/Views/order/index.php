@@ -62,6 +62,11 @@
             <div class="card" >
               <div class="card-header">
                 <h3 class="card-title">Data Order</h3>
+                  <div class="float-right">
+                    <a href="<?php echo base_url('/order/create_order/');?>">  
+                      <button  type="button" class="btn btn-block btn-success">Create Order</button>
+                    </a>
+                  </div>
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive" style="align-content:flex-end">

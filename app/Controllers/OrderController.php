@@ -26,4 +26,8 @@ class OrderController extends BaseController
         return json_encode($order);
     }
 
+    public function create()
+    {
+        return view('order/create_order');
+    }
 }
