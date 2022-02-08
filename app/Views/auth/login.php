@@ -20,11 +20,11 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <p class="h1"><b>GudOn</b></p>
+    <img src="<?php echo base_url() ?>/assets/gudon_logo.png" alt="AdminLTE Logo" style="opacity: .8" width="50%">
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
 
+      <p class="login-box-msg"><b>Sign in to start your session</b></p>
       <form action="<?php echo base_url("login/auth") ?>" method="post">
         <div class="input-group mb-3">
           <input type="email" class="form-control" id="email" name="email" placeholder="Email">

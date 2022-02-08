@@ -56,7 +56,7 @@
           <img src="<?php echo base_url() ?>/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block"><?php echo $_SESSION['name']; ?></a>
         </div>
       </div>
 
@@ -162,6 +162,9 @@
         }
         if(current.includes('/warehouse/index')){
             document.getElementById("warehouse").className = "nav-link active";
+        }
+        if(current.includes('/order/index')){
+            document.getElementById("order").className = "nav-link active";
         }
     });
 

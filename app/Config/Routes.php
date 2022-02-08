@@ -17,8 +17,8 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('AuthController');
-$routes->setDefaultMethod('login');
+$routes->setDefaultController('Home');
+$routes->setDefaultMethod('home');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 $routes->setAutoRoute(true);
@@ -50,6 +50,7 @@ $routes->get('/warehouse/view/(:num)', 'Warehouse::view_detail/$1');
 $routes->get('order/index', 'OrderController::index');
 $routes->get('order/search', 'OrderController::search');
 $routes->get('order/view/(:num)', 'OrderController::view/$1');
+$routes->get('order/(:num)/delete', 'OrderController::delete/$1');
 
 
 
