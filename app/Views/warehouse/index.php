@@ -184,10 +184,11 @@
                 </div>
               </div>
               <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <table class="table table-striped dataTable table-bordered" id="warehouse-table">
+              <div class="card-body">
+                <table id="warehouse-table" class="table table-striped dataTable table-bordered" style="width:100%">
                   <thead>
                     <tr>
+                      <th></th>
                       <th>ID</th>
                       <th>Nama</th>
                       <th>Alamat</th>

@@ -186,52 +186,15 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap" id="warehouse-table">
+                <table class="table table-hover text-nowrap display" id="warehouse-table" style="width:100%">
                 <thead>
                     <tr>
-                      <th>Nomor Rak</th>
-                      <th>Nama Product</th>
-                      <th>Total Berat</th>
-                      <th>Total Volume</th>
-                      <th>Kuantitas Produk</th>
-                      <th>Nama Pemilik</th>
+                      <th></th>
+                      <th>ID</th>
+                      <th>Nama Rak</th>
                       <th>Status</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <?php for($i=0;$i<sizeof($shelf);$i++):?>
-                      <td>
-                      <div class="card">
-                          <div class="card-header">
-                            <h3 class="card-title">
-                              
-                            </h3>
-
-                            <div class="card-tools">
-                              <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                <i class="fas fa-minus"></i>
-                              </button>
-                            </div>
-                          </div>
-                          <div class="card-body" style="display: block;">
-                            <td><?php echo $shelf[$i]['nama_produk'];?></td>
-                            <td><?php echo ($shelf[$i]['berat_produk'] * $shelf[$i]['kuantitas_produk']);?></td>
-                            <td><?php echo ($shelf[$i]['volume_produk'] * $shelf[$i]['kuantitas_produk']);?></td>
-                            <td><?php echo $shelf[$i]['kuantitas_produk'];?></td>
-                            <td><?php echo $shelf[$i]['nama_customer'];?></td>
-                          </div>
-                          <!-- /.card-body -->
-                          <div class="card-footer" style="display: block;">
-                            Footer
-                          </div>
-                          <!-- /.card-footer-->
-                        </div>
-                      </td>
-                      
-                      <td><?php if($shelf[$i]['is_active']=="1") echo "Active"; else echo "Not Active";?></td>
-                    </tr>
-                    <?php endfor;?>
-                  </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
@@ -285,5 +248,75 @@
 <script src="<?php echo base_url();?>/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?php echo base_url();?>/dist/js/pages/dashboard.js"></script>
+
+<script src="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"></script>
+
+<script>
+  function format ( d ) {
+    return 'Nama Customer: '+d.nama_customer+'<br>'+
+        'Nama Produk: '+d.nama_produk+'<br>'+
+        'Kuantitas Produk: '+d.kuantitas_produk+'<br>'+
+        'Berat Produk: '+d.berat_produk+'<br>'+
+        'Volume Produk: '+d.volume_produk+'<br>'+
+        'Nama Produk: '+d.nama_produk+'<br>';
+  }
+ 
+  $(document).ready(function() {
+      var dt = $('#warehouse-table').DataTable( {
+          "processing": true,
+          "serverSide": true,
+          "ajax": {
+            "url" : "<?php echo base_url('/warehouse/view_detail/');?><?php echo $shelf[0]['id_warehouse'];?>",
+            "dataSrc" : ""
+          },
+          "columns": [
+              {
+                  "class":          "details-control",
+                  "orderable":      false,
+                  "data":           null,
+                  "defaultContent": ""
+              },
+              { "data": "id_shelf" },
+              { "data": "nama_rak" },
+              { "data": "is_active" }
+          ],
+          "order": [[1, 'asc']]
+      } );
+  
+      // Array to track the ids of the details displayed rows
+      var detailRows = [];
+  
+      $('#warehouse-table tbody').on( 'click', 'tr td.details-control', function () {
+          var tr = $(this).closest('tr');
+          var row = dt.row( tr );
+          var idx = $.inArray( tr.attr('id'), detailRows );
+  
+          if ( row.child.isShown() ) {
+              tr.removeClass( 'details' );
+              row.child.hide();
+  
+              // Remove from the 'open' array
+              detailRows.splice( idx, 1 );
+          }
+          else {
+              tr.addClass( 'details' );
+              row.child( format( row.data() ) ).show();
+  
+              // Add to the 'open' array
+              if ( idx === -1 ) {
+                  detailRows.push( tr.attr('id') );
+              }
+          }
+      } );
+  
+      // On each draw, loop over the `detailRows` array and show any child rows
+      dt.on( 'draw', function () {
+          $.each( detailRows, function ( i, id ) {
+              $('#'+id+' td.details-control').trigger( 'click' );
+          } );
+      } );
+  } );
+</script>
+
 </body>
 </html>
