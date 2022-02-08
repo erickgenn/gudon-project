@@ -22,7 +22,6 @@
     </div>
     <div class="card-body">
       <p class="login-box-msg">Register a new account</p>
-
       <form action="<?php echo base_url('register') ?>" method="post">
         <div class="input-group mb-3">
           <input type="text" class="form-control" name="fullname" placeholder="Full name" required>
