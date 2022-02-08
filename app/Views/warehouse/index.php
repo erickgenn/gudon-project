@@ -79,19 +79,20 @@
                 </div>
               </div>
               <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap" id="warehouse-table">
+              <div class="card-body">
+                <table id="warehouse-table" class="table table-striped dataTable table-bordered" style="width:100%">
                   <thead>
                     <tr>
+                      <th></th>
                       <th>ID</th>
                       <th>Nama</th>
                       <th>Alamat</th>
                       <th>Status</th>
-                      <th>Aksi</th>
+                      <!-- <th>Aksi</th> -->
                     </tr>
                   </thead>
                   <tbody>
-                    <?php for($i=0;$i<sizeof($warehouse);$i++):?>
+                    <!-- <?php for($i=0;$i<sizeof($warehouse);$i++):?>
                       <tr>
                         <td><?php echo $warehouse[$i]['id'];?></td>
                         <td><?php echo $warehouse[$i]['name'];?></td>
@@ -99,7 +100,7 @@
                         <td><?php if($warehouse[$i]['is_active']=="1") echo "Active"; else echo "Not Active";?></td>
                         <td><a href="<?php echo base_url('/warehouse/view/'.$warehouse[$i]['id']);?>" style="background-color:#5cc5e6" class="btn" id="<?php echo $warehouse[$i]['id'];?>"><i class="fas fa-eye"></i></a></td>
                       </tr>
-                    <?php endfor;?>
+                    <?php endfor;?> -->
                   </tbody>
                 </table>
               </div>
@@ -152,6 +153,38 @@
 <script src="<?php echo base_url();?>/dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url();?>/dist/js/demo.js"></script>
+
+<script src="<?php echo base_url();?>/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url();?>/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"></script>
+
+<script>
+      $(document).ready(function() {
+    $('#warehouse-table').DataTable( {
+        "ajax": {
+            "url": "<?php echo base_url('/warehouse/search'); ?>",
+            "dataSrc": ""
+        },
+        "columns": [
+           {
+              searchable: false,
+              sortable: false,
+              data: null,
+              name: null,
+              render: function(data, type, row, meta){
+                return meta.row + meta.settings._iDisplayStart + 1;
+              }
+            },
+            { "data": "id" },
+            { "data": "name" },
+            { "data": "address" },
+            { "data": "is_active" }
+        ]
+    } );
+} );
+</script>
+
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?php echo base_url();?>/dist/js/pages/dashboard.js"></script>
 </body>

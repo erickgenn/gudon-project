@@ -45,6 +45,7 @@ $routes->get('register/index','AuthController::register');
 // warehouse
 $routes->get('/warehouse/index', 'WarehouseController::load_table');
 $routes->get('/warehouse/view/(:num)', 'WarehouseController::view_detail/$1');
+$routes->get('/warehouse/view_detail/(:num)', 'WarehouseController::warehouse_detail/$1');
 $routes->get('/warehouse/view_v2/(:num)', 'WarehouseController::view_detail_v2/$1');
 
 //order
