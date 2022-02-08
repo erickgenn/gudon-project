@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GudOn | Dashboard</title>
+  <title>GudOn | Warehouse</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -20,12 +20,7 @@
   <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url() ?>/dist/css/adminlte.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/daterangepicker/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/summernote/summernote-bs4.min.css">
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -41,7 +36,6 @@
   <!-- Main Sidebar Container -->
   <?php include(APPPATH . "Views/layout/aside.php"); ?>
 
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -49,13 +43,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <a href="<?php echo base_url('/warehouse/index')?>" style="color:grey;"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
-            <h1 class="m-0">Warehouse View</h1>
+          <a href="<?php echo base_url('order/index')?>" style="color:grey;"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+            <h1 class="m-0">Order</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Warehouse</li>
+              <li class="breadcrumb-item active">Order</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -68,43 +62,74 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Detail Rak </h3>
+                <h3 class="card-title">Data Order</h3>
 
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
 
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default">
-                        <i class="fas fa-search"></i>
-                      </button>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
               <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap" id="warehouse-table">
-                <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Nama</th>
-                      <th>Berat Maksimal</th>
-                      <th>Volume Maksimal</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
+              <div class="card-body table-responsive">
+              <table id="order-table" class="table table-striped table-bordered" style="width:100%">
                   <tbody>
-                    <?php for($i=0;$i<sizeof($shelf);$i++):?>
-                      <td><?php echo $shelf[0]['id'];?></td>
-                      <td><?php echo $shelf[0]['name'];?></td>
-                      <td><?php echo $shelf[0]['max_weight'];?></td>
-                      <td><?php echo $shelf[0]['max_volume'];?></td>
-                      <td><?php if($shelf[0]['is_active']=="1") echo "Active"; else echo "Not Active";?></td>
-                    </tr>
-                    <?php endfor;?>
-                  </tbody>
-                </table>
+                      <tr>
+                          <th>No.</th>
+                          <td>1</td>
+                      </tr>
+                      <tr>
+                          <th>Nama Warehouse</th>
+                          <td><?php echo $order[0]['nama_warehouse'];?></td>
+                      </tr>
+                      <tr>
+                          <th>Nama Customer</th>
+                          <td><?php echo $order[0]['nama_customer'];?></td>
+                      </tr>
+                      <tr>
+                          <th>Nama Produk</th>
+                          <td><?php echo $order[0]['nama_produk'];?></td>
+                          
+                      </tr>
+                      <tr>
+                          <th>Berat Produk</th>
+                          <td><?php echo $order[0]['berat_produk'];?></td>
+                      </tr>
+                      <tr>
+                          <th>Volume Produk</th>
+                          <td><?php echo $order[0]['volume_produk'];?></td>
+                      </tr>
+                      <tr>
+                          <th>Kuantitas Produk</th>
+                          <td><?php echo $order[0]['kuantitas_produk'];?></td>
+                      </tr>
+                      <tr>
+                          <th>Alamat Tujuan</th>
+                          <td><?php echo $order[0]['alamat_tujuan'];?></td>
+                      </tr>
+                      <tr>
+                          <th>Total Harga</th>
+                          <td><?php echo $order[0]['total_harga'];?></td>
+                      </tr>
+                      <tr>
+                          <th>Status</th>
+                          <td><?php echo $order[0]['status_order'];?></td>
+                      </tr>
+                      <tr>
+                          <th>Nama Pengiriman</th>
+                          <td><?php echo $order[0]['nama_pengiriman'];?></td>
+                      </tr>
+                      <tr>
+                          <th>Ongkos Kirim</th>
+                          <td><?php echo $order[0]['ongkos_kirim'];?></td>
+                      </tr>
+                      <tr>
+                          <th>Status Pengiriman</th>
+                          <td><?php echo $order[0]['status_pengiriman'];?></td>
+                      </tr>
+                    </tbody>
+              </table>
               </div>
               <!-- /.card-body -->
             </div>
@@ -123,38 +148,16 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery -->
-<script src="<?php echo base_url();?>/plugins/jquery/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="<?php echo base_url();?>/plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
+<script src="<?php echo base_url('adminlte/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"></script>
+
 <!-- Bootstrap 4 -->
 <script src="<?php echo base_url();?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="<?php echo base_url();?>/plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="<?php echo base_url();?>/plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="<?php echo base_url();?>/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="<?php echo base_url();?>/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="<?php echo base_url();?>/plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="<?php echo base_url();?>/plugins/moment/moment.min.js"></script>
-<script src="<?php echo base_url();?>/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="<?php echo base_url();?>/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="<?php echo base_url();?>/plugins/summernote/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="<?php echo base_url();?>/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url();?>/dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url();?>/dist/js/demo.js"></script>
+
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?php echo base_url();?>/dist/js/pages/dashboard.js"></script>
 </body>

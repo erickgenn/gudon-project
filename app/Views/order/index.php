@@ -20,12 +20,7 @@
   <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url() ?>/dist/css/adminlte.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/daterangepicker/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/summernote/summernote-bs4.min.css">
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -64,37 +59,27 @@
     <!-- Main content -->
     <div class="row">
           <div class="col-12">
-            <div class="card">
+            <div class="card" >
               <div class="card-header">
-                <h3 class="card-title">Data Warehouse</h3>
-
-                <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default">
-                        <i class="fas fa-search"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                <h3 class="card-title">Data Order</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
-              <table id="order-table" class="table table-striped dataTable table-bordered" style="width:100%">
+              <div class="card-body table-responsive" style="align-content:flex-end">
+              <table id="order-table" class="table table-striped table-bordered table-sm" style="width:100%">
                   <thead>
                       <tr>
                           <th>No.</th>
-                          <th>Warehouse</th>
-                          <th>Office</th>
-                          <th>Age</th>
-                          <th>Start date</th>
-                          <th>Salary</th>
+                          <th>Nama Penerima</th>
+                          <th>Alamat Tujuan</th>
+                          <th>Total Harga</th>
+                          <th>Ongkos Kirim</th>
+                          <th>Tanggal dan Waktu</th>
+                          <th>Status</th>
+                          <th>Status Pengantaran</th>
+                          <th>Aksi</th>
                       </tr>
                   </thead>
                   <tbody>
-                     
                   </tbody>
               </table>
               </div>
@@ -114,6 +99,7 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+<link rel="stylesheet" href="<?php echo base_url('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
 
 <script src="<?php echo base_url('adminlte/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
 <script src="<?php echo base_url('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
@@ -134,7 +120,7 @@
             "dataSrc": ""
         },
         "columns": [
-           {
+            {
               searchable: false,
               sortable: false,
               data: null,
@@ -143,12 +129,26 @@
                 return meta.row + meta.settings._iDisplayStart + 1;
               }
             },
-            { "data": "id" },
-            { "data": "customer_id" },
-            { "data": "office" },
-            { "data": "extn" },
-            { "data": "start_date" },
-            { "data": "salary" }
+            { "data": "destination_name" },
+            { "data": "destination_address" },
+            { "data": "total_price" },
+            { "data": "delivery_price" },
+            { "data": "created_at" },
+            { "data": "status" },
+            { "data": "delivery_status" },
+            {
+              data: null,
+              name: null,
+              sortable: false,
+              render: function(data, type, row, meta){
+                return `
+                  <a class='btn btn-info' href='<?php echo base_url('order/view')?>/${row.id}'>VIEW</a>
+                    <form method='POST' action='{{base_url('order')}}/${row.id}/delete' style='display: unset;'>
+                      <button type='submit' class='btn btn-danger' onclick="return confirm('Apakah Anda yakin akan menghapus data ini?')">DELETE</button>
+                    </form>
+                  `;
+                }
+            },
         ]
     } );
 } );
