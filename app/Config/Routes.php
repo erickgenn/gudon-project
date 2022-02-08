@@ -44,9 +44,9 @@ $routes->get('register/index','AuthController::register');
 
 // warehouse
 $routes->get('/warehouse/index', 'WarehouseController::load_table');
-$routes->get('/warehouse/view/(:num)', 'WarehouseController::view_detail/$1');
-$routes->get('/warehouse/view_detail/(:num)', 'WarehouseController::warehouse_detail/$1');
-$routes->get('/warehouse/view_v2/(:num)', 'WarehouseController::view_detail_v2/$1');
+$routes->get('/warehouse/search', 'WarehouseController::search');
+$routes->get('/warehouse/view/(:num)', 'WarehouseController::view_shelf/$1');
+$routes->get('/warehouse/view_product/(:num)', 'WarehouseController::view_product/$1');
 
 //order
 $routes->get('order/index', 'OrderController::index');

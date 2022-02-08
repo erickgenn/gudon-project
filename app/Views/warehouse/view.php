@@ -189,25 +189,24 @@
                 <table class="table table-hover text-nowrap" id="warehouse-table">
                 <thead>
                     <tr>
+                      <th>ID</th>
                       <th>Nomor Rak</th>
-                      <th>Nama Product</th>
-                      <th>Total Berat</th>
-                      <th>Total Volume</th>
-                      <th>Kuantitas Produk</th>
-                      <th>Nama Pemilik</th>
+                      <th>Berat Maksimal</th>
+                      <th>Volume Maksimal</th>
                       <th>Status</th>
+                      <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php for($i=0;$i<sizeof($shelf);$i++):?>
-                      <td><?php echo $shelf[$i]['id_shelf'];?></td>
-                      <td><?php echo $shelf[$i]['nama_produk'];?></td>
-                      <td><?php echo ($shelf[$i]['berat_produk'] * $shelf[$i]['kuantitas_produk']);?></td>
-                      <td><?php echo ($shelf[$i]['volume_produk'] * $shelf[$i]['kuantitas_produk']);?></td>
-                      <td><?php echo $shelf[$i]['kuantitas_produk'];?></td>
-                      <td><?php echo $shelf[$i]['nama_customer'];?></td>
-                      <td><?php if($shelf[$i]['is_active']=="1") echo "Active"; else echo "Not Active";?></td>
-                    </tr>
+                      <tr>
+                        <td><?php echo $shelf[$i]['id_shelf'];?></td>
+                        <td><?php echo $shelf[$i]['nama_rak'];?></td>
+                        <td><?php echo $shelf[$i]['berat_maks'];?></td>
+                        <td><?php echo $shelf[$i]['volume_maks'];?></td>
+                        <td><?php if($shelf[$i]['is_active']=="1") echo "Active"; else echo "Not Active";?></td>
+                        <td><button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#myModal" onclick="table(<?php echo $shelf[$i]['id_shelf'];?>)">Lihat Detail</button></td>
+                      </tr>
                     <?php endfor;?>
                   </tbody>
                 </table>
@@ -221,6 +220,33 @@
   </div>
   <!-- /.content-wrapper -->
 
+  <!-- Modal -->
+  <div id="myModal" class="modal fade" role="dialog">
+                          <div class="modal-dialog modal-lg">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-body">
+                                <table id="shelf-table" class="table table-hover text-nowrap">
+                                  <thead>
+                                    <th>#</th>
+                                    <th>Nama Produk</th>
+                                    <th>Kuantitas Produk</th>
+                                    <th>Berat Produk</th>
+                                    <th>Volume Produk</th>
+                                  </thead>
+                                  <tbody>
+                                  </tbody>
+                                </table>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
@@ -228,6 +254,8 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+
+<link rel="stylesheet" href="<?php echo base_url('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
 
 <!-- jQuery -->
 <script src="<?php echo base_url();?>/plugins/jquery/jquery.min.js"></script>
@@ -241,27 +269,53 @@
 <script src="<?php echo base_url();?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
 <script src="<?php echo base_url();?>/plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="<?php echo base_url();?>/plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="<?php echo base_url();?>/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="<?php echo base_url();?>/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="<?php echo base_url();?>/plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="<?php echo base_url();?>/plugins/moment/moment.min.js"></script>
-<script src="<?php echo base_url();?>/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="<?php echo base_url();?>/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="<?php echo base_url();?>/plugins/summernote/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="<?php echo base_url();?>/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url();?>/dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url();?>/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?php echo base_url();?>/dist/js/pages/dashboard.js"></script>
+
+<script src="<?php echo base_url('/adminlte/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
+<script src="<?php echo base_url('/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"></script>
+
+<script>
+  let tabel;
+  let count = 0;
+  function table($id) {
+    count++;
+    if(count === 1){
+      tabel = $('#shelf-table').DataTable( {
+          "ajax": {
+              "url": `<?php echo base_url('/warehouse/view_product');?>/${$id}`,
+              "dataSrc": ""
+          },
+          "columns": [
+                { "data": "nama_produk" },
+                { "data": "kuantitas_produk" },
+                { "data": "berat_produk" },
+                { "data": "volume_produk" }
+          ]
+      } );
+    } else {
+      tabel.destroy();
+      tabel = $('#shelf-table').DataTable( {
+          "ajax": {
+              "url": `<?php echo base_url('/warehouse/view_product');?>/${$id}`,
+              "dataSrc": ""
+          },
+          "columns": [
+                { "data": "nama_produk" },
+                { "data": "kuantitas_produk" },
+                { "data": "berat_produk" },
+                { "data": "volume_produk" }
+          ]
+      } );
+    }
+}
+</script>
+
 </body>
 </html>

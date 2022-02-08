@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,6 +38,10 @@
   
   <?php include(APPPATH . "Views/layout/aside.php"); ?>
 
+  <?php if(session()->getFlashdata('msg')):?>
+    <script>window.alert("Silahkan daftarkan produk anda untuk melihat halaman ini");</script>
+  <?php endif;?>
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -65,42 +68,20 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Data Warehouse</h3>
-
-                <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default">
-                        <i class="fas fa-search"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
-                <table id="warehouse-table" class="table table-striped dataTable table-bordered" style="width:100%">
+              <div class="card-body table-responsive" style="align-content:flex-end">
+                <table id="warehouse-table" class="table table-striped table-bordered table-sm" style="width:100%">
                   <thead>
                     <tr>
-                      <th></th>
                       <th>ID</th>
                       <th>Nama</th>
                       <th>Alamat</th>
                       <th>Status</th>
-                      <!-- <th>Aksi</th> -->
+                      <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <!-- <?php for($i=0;$i<sizeof($warehouse);$i++):?>
-                      <tr>
-                        <td><?php echo $warehouse[$i]['id'];?></td>
-                        <td><?php echo $warehouse[$i]['name'];?></td>
-                        <td><?php echo $warehouse[$i]['address'];?></td>
-                        <td><?php if($warehouse[$i]['is_active']=="1") echo "Active"; else echo "Not Active";?></td>
-                        <td><a href="<?php echo base_url('/warehouse/view/'.$warehouse[$i]['id']);?>" style="background-color:#5cc5e6" class="btn" id="<?php echo $warehouse[$i]['id'];?>"><i class="fas fa-eye"></i></a></td>
-                      </tr>
-                    <?php endfor;?> -->
                   </tbody>
                 </table>
               </div>
@@ -120,6 +101,8 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+
+<link rel="stylesheet" href="<?php echo base_url('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
 
 <!-- jQuery -->
 <script src="<?php echo base_url();?>/plugins/jquery/jquery.min.js"></script>
@@ -159,6 +142,8 @@
 <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"></script>
 
+
+
 <script>
       $(document).ready(function() {
     $('#warehouse-table').DataTable( {
@@ -167,19 +152,20 @@
             "dataSrc": ""
         },
         "columns": [
-           {
-              searchable: false,
-              sortable: false,
-              data: null,
-              name: null,
-              render: function(data, type, row, meta){
-                return meta.row + meta.settings._iDisplayStart + 1;
-              }
-            },
             { "data": "id" },
             { "data": "name" },
             { "data": "address" },
-            { "data": "is_active" }
+            { "data": "is_active" },
+            {
+              data: null,
+              name: null,
+              sortable: false,
+              render: function(data, type, row, meta){
+                return `
+                <a href="<?php echo base_url('/warehouse/view');?>/${row.id}" style="background-color:#5cc5e6" class="btn"><i class="fas fa-eye"></i></a>
+                  `;
+                }
+            }
         ]
     } );
 } );
