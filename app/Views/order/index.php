@@ -35,7 +35,31 @@
     <!-- /.navbar -->
     <!-- Main Sidebar Container -->
     <?php include(APPPATH . "Views/layout/aside.php"); ?>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    <?php if (session()->getFlashdata('msg_success')) : ?>
+      <script>
+        swal({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Order Berhasil Dihapus!',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      </script>
+    <?php endif; ?>
+
+    <?php if (session()->getFlashdata('msg_fail')) : ?>
+      <script>
+        swal({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Order Gagal Dihapus!',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      </script>
+    <?php endif; ?>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
@@ -101,16 +125,19 @@
   <!-- ./wrapper -->
   <link rel="stylesheet" href="<?php echo base_url('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
 
+  <script src="<?php echo base_url('adminlte/plugins/jquery/jquery.min.js'); ?>"></script>
   <script src="<?php echo base_url('adminlte/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
   <script src="<?php echo base_url('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
   <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
   <script src="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"></script>
-
   <!-- Bootstrap 4 -->
   <script src="<?php echo base_url(); ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- AdminLTE App -->
   <script src="<?php echo base_url(); ?>/dist/js/adminlte.js"></script>
 
+  <script>
+
+  </script>
 
   <script>
     $(document).ready(function() {
@@ -154,12 +181,18 @@
             name: null,
             sortable: false,
             render: function(data, type, row, meta) {
-              return `
-                  <a class='btn btn-info' href='<?php echo base_url('order/view') ?>/${row.id}'>VIEW</a>
-                    <form method='POST' action='{{base_url('order')}}/${row.id}/delete' style='display: unset;'>
-                      <button type='submit' class='btn btn-danger' onclick="return confirm('Apakah Anda yakin akan menghapus data ini?')">DELETE</button>
-                    </form>
-                  `;
+              switch (row.status) {
+                case "SEDANG DIPROSES":
+                  return `<a class='btn btn-info' href='<?php echo base_url('order/view') ?>/${row.id}'>DETAIL</a>
+                          <form method='POST' action='<?php echo base_url('order') ?>/${row.id}/delete' style='display: unset;'>
+                            <button type='submit' class='btn btn-danger' onclick="return confirm('Apakah Anda yakin akan menghapus data ini?')">HAPUS</button>
+                          </form>
+                          `;
+                  break;
+                default:
+                  return `<a class='btn btn-info' href='<?php echo base_url('order/view') ?>/${row.id}'>DETAIL</a>`;
+                  break;
+              }
             }
           },
         ]
