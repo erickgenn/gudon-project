@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use \App\Models\Warehouse;
+use \App\Models\Shelf;
 
 class WarehouseController extends BaseController
 {
@@ -12,13 +13,6 @@ class WarehouseController extends BaseController
         return view('warehouse/index', $warehouse);
     }
 
-    public function view_detail($id)
-    {
-        $model = new Warehouse;
-        $shelf['shelf'] = $model->get_detail($id)->getResultArray();
-        return view('warehouse/view', $shelf);
-    }
-
     public function search(){
         $model = new Warehouse;
 
@@ -27,17 +21,25 @@ class WarehouseController extends BaseController
         return json_encode($warehouse);
     }
 
-    public function warehouse_detail($id)
+    // ini untuk bagian shelf
+    public function view_shelf($id)
     {
-        $model = new Warehouse;
-        $shelf['d'] = $model->get_detail($id)->getResultArray();
-        return $shelf;
+        $model = new Shelf;
+        $validate = $model->cust_validate()->getResultArray();
+        if(!$validate) {
+            $session = session();
+            $session->setFlashdata('msg', 'Silahkan daftarkan produk anda untuk melihat halaman ini');
+            return view('warehouse/index');
+        } else {
+            $shelf['shelf'] = $model->get_shelf($id)->getResultArray();
+            return view('warehouse/view', $shelf);
+        }
     }
 
-    public function view_detail_v2($id)
+    public function view_product($id)
     {
-        $model = new Warehouse;
-        $shelf['shelf'] = $model->get_detail($id)->getResultArray();
-        return view('warehouse/view_v2', $shelf);
+        $model = new Shelf;
+        $shelf = $model->get_detail($id)->getResultArray();
+        return json_encode($shelf);
     }
 }

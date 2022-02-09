@@ -34,115 +34,13 @@
   <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="<?php echo base_url() ?>/assets/gudon_logo.png" alt="AdminLTELogo" height="60" width="60">
   </div>
-
- 
-  <!-- /.navbar -->
-
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link" style="background-color:#5cc5e6">
-      <img src="<?php echo base_url() ?>/assets/gudon_logo_white.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">GuDon</span>
-    </a>
+  
+  <?php include(APPPATH . "Views/layout/aside.php"); ?>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="<?php echo base_url() ?>/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
-        </div>
-      </div>
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item">
-            <a href="<?php echo base_url('/') ?>" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Home
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?php echo base_url('warehouse/index'); ?>" class="nav-link active">
-              <i class="nav-icon fas fa-building"></i>
-              <p>
-                Warehouse
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Layout Options
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Top Navigation</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Top Navigation + Sidebar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/boxed.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Boxed</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/fixed-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Sidebar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/fixed-sidebar-custom.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Sidebar <small>+ Custom Area</small></p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/fixed-topnav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Navbar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/fixed-footer.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Footer</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Collapsed Sidebar</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
+  <?php if(session()->getFlashdata('msg')):?>
+    <script>window.alert("Silahkan daftarkan produk anda untuk melihat halaman ini");</script>
+  <?php endif;?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -171,43 +69,30 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Detail Rak: <strong><?php echo $shelf[0]['nama_warehouse'];?></strong></h3>
-
-                <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default">
-                        <i class="fas fa-search"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
               </div>
               <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
+              <div class="card-body table-responsive">
                 <table class="table table-hover text-nowrap" id="warehouse-table">
                 <thead>
                     <tr>
+                      <th>ID</th>
                       <th>Nomor Rak</th>
-                      <th>Nama Product</th>
-                      <th>Total Berat</th>
-                      <th>Total Volume</th>
-                      <th>Kuantitas Produk</th>
-                      <th>Nama Pemilik</th>
+                      <th>Berat Maksimal</th>
+                      <th>Volume Maksimal</th>
                       <th>Status</th>
+                      <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php for($i=0;$i<sizeof($shelf);$i++):?>
-                      <td><?php echo $shelf[$i]['id_shelf'];?></td>
-                      <td><?php echo $shelf[$i]['nama_produk'];?></td>
-                      <td><?php echo ($shelf[$i]['berat_produk'] * $shelf[$i]['kuantitas_produk']);?></td>
-                      <td><?php echo ($shelf[$i]['volume_produk'] * $shelf[$i]['kuantitas_produk']);?></td>
-                      <td><?php echo $shelf[$i]['kuantitas_produk'];?></td>
-                      <td><?php echo $shelf[$i]['nama_customer'];?></td>
-                      <td><?php if($shelf[$i]['is_active']=="1") echo "Active"; else echo "Not Active";?></td>
-                    </tr>
+                      <tr>
+                        <td><?php echo $shelf[$i]['id_shelf'];?></td>
+                        <td><?php echo $shelf[$i]['nama_rak'];?></td>
+                        <td><?php echo $shelf[$i]['berat_maks'];?></td>
+                        <td><?php echo $shelf[$i]['volume_maks'];?></td>
+                        <td><?php if($shelf[$i]['is_active']=="1") echo "Aktif"; else echo "Non Aktif";?></td>
+                        <td><button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(<?php echo $shelf[$i]['id_shelf'];?>)">Lihat Detail</button></td>
+                      </tr>
                     <?php endfor;?>
                   </tbody>
                 </table>
@@ -221,6 +106,32 @@
   </div>
   <!-- /.content-wrapper -->
 
+  <!-- Modal -->
+  <div id="shelfModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-body table-responsive">
+          <table id="shelf-table" class="table table-hover text-nowrap">
+            <thead>
+              <th>#</th>
+              <th>Nama Produk</th>
+              <th>Kuantitas Produk</th>
+              <th>Berat Produk</th>
+              <th>Volume Produk</th>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
@@ -228,6 +139,8 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+
+<link rel="stylesheet" href="<?php echo base_url('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
 
 <!-- jQuery -->
 <script src="<?php echo base_url();?>/plugins/jquery/jquery.min.js"></script>
@@ -241,27 +154,75 @@
 <script src="<?php echo base_url();?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
 <script src="<?php echo base_url();?>/plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="<?php echo base_url();?>/plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="<?php echo base_url();?>/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="<?php echo base_url();?>/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="<?php echo base_url();?>/plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="<?php echo base_url();?>/plugins/moment/moment.min.js"></script>
-<script src="<?php echo base_url();?>/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="<?php echo base_url();?>/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="<?php echo base_url();?>/plugins/summernote/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="<?php echo base_url();?>/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url();?>/dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url();?>/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?php echo base_url();?>/dist/js/pages/dashboard.js"></script>
+
+<script src="<?php echo base_url('/adminlte/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
+<script src="<?php echo base_url('/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"></script>
+
+<script>
+  var table = $('#warehouse-table').DataTable();
+</script>
+
+<script>
+  let tabel;
+  let count = 0;
+  function table($id) {
+    count++;
+    if(count === 1){
+      tabel = $('#shelf-table').DataTable( {
+          "ajax": {
+              "url": `<?php echo base_url('/warehouse/view_product');?>/${$id}`,
+              "dataSrc": ""
+          },
+          "columns": [
+            {
+              searchable: false,
+              sortable: false,
+              data: null,
+              name: null,
+              render: function(data, type, row, meta){
+                return meta.row + meta.settings._iDisplayStart + 1;
+              }
+            },
+            { "data": "nama_produk" },
+            { "data": "kuantitas_produk" },
+            { "data": "berat_produk" },
+            { "data": "volume_produk" }
+          ]
+      } );
+    } else {
+      tabel.destroy();
+      tabel = $('#shelf-table').DataTable( {
+          "ajax": {
+              "url": `<?php echo base_url('/warehouse/view_product');?>/${$id}`,
+              "dataSrc": ""
+          },
+          "columns": [
+            {
+              searchable: false,
+              sortable: false,
+              data: null,
+              name: null,
+              render: function(data, type, row, meta){
+                return meta.row + meta.settings._iDisplayStart + 1;
+              }
+            },
+            { "data": "nama_produk" },
+            { "data": "kuantitas_produk" },
+            { "data": "berat_produk" },
+            { "data": "volume_produk" }
+          ]
+      } );
+    }
+}
+</script>
+
 </body>
 </html>
