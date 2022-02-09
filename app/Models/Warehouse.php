@@ -39,4 +39,13 @@ class Warehouse extends Model
         $builder->orderBy('cms_storage.id', 'ASC');
         return $builder->get();
     }
+    public function get_warehouse_id()
+    {
+        $builder = $this->db->table('mst_gudon.cms_storage');
+        $builder->select('mst_warehouse.id as warehouse_id, mst_warehouse.name as warehouse_name');
+        $builder->join('mst_gudon.mst_product', 'mst_product.storage_id = cms_storage.id');
+        $builder->join('mst_gudon.mst_warehouse', 'mst_warehouse.id = cms_storage.warehouse_id');
+        $builder->where('mst_product.customer_id', $_SESSION["id"]);
+        return $builder->get();
+    }
 }

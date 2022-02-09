@@ -83,23 +83,11 @@
                                         <label>Kuantitas</label>
                                         <input type="number" name="kuantitas" id="kuantitas" class="form-control">
                                     </div>
-                                    <div class="form-group">
-                                        <label>Warehouse</label>
-                                        <div class="input-group">
-                                            <select class="form-control" id="customer_ids" name="warehouse" data-placeholder="-Pilih-"style="width: 50%;" required>
-                                                <option value="" hidden></option>
-                                                <?php for($i=0 ;$i<sizeOf($groupwarehouse);$i++ ) : ?>
-                                                    <option value="<?=$groupwarehouse[$i]['id']?>"><?=$groupwarehouse[$i]['name']?></option>
-                                                <?php endfor;?>
-                                                <option value="" hidden></option>
-                                            </select>                                  
-                                        </div>                                      
-                                        <input type="hidden" id="list_customer_ids" name="list_customer_ids" value="">
-                                    </div>
+                            
                                     <div class="form-group">
                                         <label>Daftar Barang</label>
                                         <div class="input-group">
-                                            <select class="form-control" id="customer_ids" name="barang" data-placeholder="-Pilih-"style="width: 50%;" required>
+                                            <select class="form-control" id="barang" name="barang" data-placeholder="-Pilih-"style="width: 50%;" required>
                                                 <option value="" hidden></option>
                                                 <?php for($i=0 ;$i<sizeOf($groupproduct);$i++ ) : ?>
                                                     <option value="<?=$groupproduct[$i]['id']?>"><?=$groupproduct[$i]['name']?></option>
@@ -108,7 +96,7 @@
                                             </select>                                          
                                         </div>
                                         
-                                        <input type="hidden" id="list_customer_ids" name="list_customer_ids" value="">
+                                       
                                     </div>
                                 
                                             
@@ -129,6 +117,7 @@
                                             <td>Alamat</td>
                                             <td>Kuantitas</td>
                                             <td>Barang</td>
+                                            
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -136,7 +125,7 @@
                                         </tbody>
                                     </table>
                                     <div class="float-right">
-                                        <button  type="button" class="btn btn-block btn-success">submit</button>
+                                        <button  type="button" class="btn btn-block btn-success" onclick="getCellValues();">submit</button>
                                     </div>
                                 </div>
                                 
@@ -173,6 +162,7 @@
 <script src="<?php echo base_url('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"></script>
+<script src="<?php echo base_url('adminlte/plugins/jquery/jquery.min.js'); ?>"></script>
 
 <!-- Bootstrap 4 -->
 <script src="<?php echo base_url();?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -206,29 +196,57 @@
     }
 </script>
 
-<script type="text/javascript">
+<script>
+    function getCellValues() {
+      let arr_table = []
+      var table = document.getElementById('cust-table');
+      for (var r = 0, n = table.rows.length; r < n-1; r++) {
+        arr_table[r] = new Array();
+        for (var i = 1, j = table.rows.length; i <= j-1; i++) {
+          arr_table[r]["nama"] = table.rows[i].cells[0].innerHTML;
+          arr_table[r]["alamat"] = table.rows[i].cells[1].innerHTML;
+          arr_table[r]["kuantitas"] = table.rows[i].cells[2].innerHTML;
+          arr_table[r]["barang"] = table.rows[i].cells[3].innerHTML;
+          arr_table[r]["gudang"] = table.rows[i].cells[4].innerHTML;
+          
+        }
+      }
+      console.log(arr_table[0]["nama"]);
+      return false;
+      $('#list_customer_ids').val(arr_table); //ini kirim ke input hidden dalam form supaya bisa disend dalam form submit method post
+    }
+</script>
+
+
+
+<!-- <script type="text/javascript">
     function addRow()
     {
+        
         var nama=document.createorder.nama.value;
         var alamat=document.createorder.alamat.value;
         var kuantitas=document.createorder.kuantitas.value;
-        var barang=document.createorder.barang.value;
-
+        var barang = $( "#barang option:selected" ).text();
+       
+        // var barang=document.createorder.barang.id;
+        alert(warehouse);
         var tr =  document.createElement('tr');
 
         var td1 =  tr.appendChild(document.createElement('td'));
         var td2 =  tr.appendChild(document.createElement('td'));
         var td3 =  tr.appendChild(document.createElement('td'));
         var td4 =  tr.appendChild(document.createElement('td'));
+        
 
         td1.innerHTML=nama;
         td2.innerHTML=alamat;
         td3.innerHTML=kuantitas;
         td4.innerHTML=barang;
+       
 
         document.getElementById("cust-table").appendChild(tr);
     }
-</script>
+</script> -->
 
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?php echo base_url();?>/dist/js/pages/dashboard.js"></script>

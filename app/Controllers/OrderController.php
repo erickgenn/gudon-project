@@ -39,9 +39,8 @@ class OrderController extends BaseController
     {
         $orderModel = new ProductModel();
         $orderModel1 = new Warehouse();
-        $data['groupproduct'] = $orderModel->findAll();
-        $data['groupwarehouse'] = $orderModel1->findAll();
-        
+        $data['groupproduct'] = $orderModel->where('customer_id',$_SESSION["id"])->findAll();
+        $data['groupwarehouse'] = $orderModel1->get_warehouse_id()->getResultArray();
         return view('order/create_order', $data);
     }
 
