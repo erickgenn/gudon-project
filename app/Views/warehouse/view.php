@@ -167,6 +167,10 @@
 <script src="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"></script>
 
 <script>
+  var table = $('#warehouse-table').DataTable();
+</script>
+
+<script>
   let tabel;
   let count = 0;
   function table($id) {
