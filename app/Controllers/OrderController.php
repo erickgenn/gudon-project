@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use Exception;
 
 class OrderController extends BaseController
 {
@@ -35,7 +36,11 @@ class OrderController extends BaseController
     {
         $orderModel = new \App\Models\OrderModel();
 
-        $order = $orderModel->where('customer_id', $_SESSION['id'])->where('status !=', 'CANCELLED')->where('deleted_at', null)->findAll();
+        $order = $orderModel->where('customer_id', $_SESSION['id'])
+            ->where('is_active', 1)
+            ->where('status !=', 'CANCELLED')
+            ->where('deleted_at', null)
+            ->findAll();
 
         for ($i = 0; $i < count($order); $i++) {
             $order[$i]['total_price'] = MoneyFormatController::money_format_rupiah($order[$i]['total_price']);
@@ -43,5 +48,28 @@ class OrderController extends BaseController
         }
 
         return json_encode($order);
+    }
+
+    public function delete($id)
+    {
+        $session = session();
+        $orderModel = new \App\Models\OrderModel();
+        $detailOrderModel = new \App\Models\DetailOrderModel();
+        try {
+            $data = [
+                'is_active' => 0,
+            ];
+
+            $detailOrderModel->detailDelete($id);
+            $detailOrderModel->where('order_id', $id)->delete();
+
+            $orderModel->update($id, $data);
+            $orderModel->where('id', $id)->delete();
+
+            $session->setFlashdata('msg_success', 'Order Telah Dihapus!');
+        } catch (Exception $e) {
+            $session->setFlashdata('msg_fail', 'Order Gagal Dihapus!');
+        }
+        return redirect()->to('order/index');
     }
 }
