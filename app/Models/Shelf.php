@@ -69,7 +69,7 @@ class Shelf extends Model
         $builder->join('mst_gudon.mst_warehouse', 'mst_warehouse.id = cms_storage.warehouse_id');
         $builder->join('mst_gudon.mst_product', 'mst_product.storage_id = cms_storage.id');
         $builder->join('mst_gudon.mst_customer', 'mst_customer.id = mst_product.customer_id');
-        $builder->where('cms_storage.warehouse_id', $id);
+        $builder->where('cms_storage.shelf_id', $id);
         $builder->where('mst_product.customer_id',$_SESSION['id']);
         $builder->orderBy('cms_storage.id', 'ASC');
         return $builder->get();

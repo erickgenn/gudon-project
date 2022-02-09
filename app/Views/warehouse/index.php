@@ -70,8 +70,8 @@
                 <h3 class="card-title">Data Warehouse</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body table-responsive" style="align-content:flex-end">
-                <table id="warehouse-table" class="table table-striped table-bordered table-sm" style="width:100%">
+              <div class="card-body table-responsive">
+                <table id="warehouse-table" class="table table-hover text-nowrap" style="width:100%">
                   <thead>
                     <tr>
                       <th>ID</th>
@@ -155,14 +155,31 @@
             { "data": "id" },
             { "data": "name" },
             { "data": "address" },
-            { "data": "is_active" },
+            {
+              data: null,
+              name: null,
+              sortable: false,
+              render: function (data, type, row, meta) {
+                switch (row.is_active){
+                  case "1":
+                    return `Aktif`;
+                    break;
+                  case "0":
+                    return `Tidak Aktif`;
+                    break;
+                  default:
+                    return `Tidak Aktif`;
+                    break;
+                }
+              }
+            },
             {
               data: null,
               name: null,
               sortable: false,
               render: function(data, type, row, meta){
                 return `
-                <a href="<?php echo base_url('/warehouse/view');?>/${row.id}" style="background-color:#5cc5e6" class="btn"><i class="fas fa-eye"></i></a>
+                <a href="<?php echo base_url('/warehouse/view');?>/${row.id}" style="background-color:#5cc5e6;color:white;" class="btn"><i class="fas fa-eye"></i></a>
                   `;
                 }
             }
