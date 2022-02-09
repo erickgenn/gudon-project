@@ -1,10 +1,19 @@
 <?php namespace App\Controllers;
 
+use \App\Models\OrderModel;
+use \App\Models\CreateOrderTemp;
+use \App\Models\ProductModel;
+use \App\Models\Warehouse;
+
 
 class OrderController extends BaseController
 {
 
     //forms
+    function __construct(){
+        $this->group = new OrderModel();
+    }
+
     public function index()
     {
         return view('order/index');
@@ -28,6 +37,20 @@ class OrderController extends BaseController
 
     public function create()
     {
-        return view('order/create_order');
+        $orderModel = new ProductModel();
+        $orderModel1 = new Warehouse();
+        $data['groupproduct'] = $orderModel->findAll();
+        $data['groupwarehouse'] = $orderModel1->findAll();
+        
+        return view('order/create_order', $data);
     }
+
+    // public function tampilDataOrder()
+    // {
+    //     if($this->request->isAJAX()){
+    //         $nama = $this->request->getPost('nama')
+
+    //         // $modalCreateOrderTemp = new CreateOrderTemp;
+    //     }
+    // }
 }

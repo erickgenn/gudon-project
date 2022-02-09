@@ -73,36 +73,38 @@
                                     <div class="form-group">
                                         <br>
                                         <label>Nama Customer</label>
-                                        <input type="text" name="nama" class="form-control">
+                                        <input type="text" name="nama" id="nama" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label>Alamat Tujuan</label>
-                                        <input type="text" name="alamat" class="form-control">
+                                        <input type="text" name="alamat" id="alamat" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label>Kuantitas</label>
-                                        <input type="number" name="kuantitas" class="form-control">
+                                        <input type="number" name="kuantitas" id="kuantitas" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label>Warehouse</label>
                                         <div class="input-group">
-                                            <select class="form-control"
-                                                id="customer_ids"
-                                                name="customer_ids"
-                                                data-placeholder="-Pilih-"
-                                                style="width: 50%;">
-                                            </select>                                         
+                                            <select class="form-control" id="customer_ids" name="warehouse" data-placeholder="-Pilih-"style="width: 50%;" required>
+                                                <option value="" hidden></option>
+                                                <?php for($i=0 ;$i<sizeOf($groupwarehouse);$i++ ) : ?>
+                                                    <option value="<?=$groupwarehouse[$i]['id']?>"><?=$groupwarehouse[$i]['name']?></option>
+                                                <?php endfor;?>
+                                                <option value="" hidden></option>
+                                            </select>                                  
                                         </div>                                      
                                         <input type="hidden" id="list_customer_ids" name="list_customer_ids" value="">
                                     </div>
                                     <div class="form-group">
                                         <label>Daftar Barang</label>
                                         <div class="input-group">
-                                            <select class="form-control"
-                                                id="customer_ids"
-                                                name="customer_ids"
-                                                data-placeholder="-Pilih-"
-                                                style="width: 50%;">
+                                            <select class="form-control" id="customer_ids" name="barang" data-placeholder="-Pilih-"style="width: 50%;" required>
+                                                <option value="" hidden></option>
+                                                <?php for($i=0 ;$i<sizeOf($groupproduct);$i++ ) : ?>
+                                                    <option value="<?=$groupproduct[$i]['id']?>"><?=$groupproduct[$i]['name']?></option>
+                                                <?php endfor;?>
+                                                <option value="" hidden></option>
                                             </select>                                          
                                         </div>
                                         
@@ -142,7 +144,12 @@
                             
             </div>
                         
-        </div>  
+        </div>
+        <div class="row">
+            <div class="col-lg-12 tampilDataOrder">
+
+            </div>
+        </div>
                     
     </div>
     </form>    
@@ -172,22 +179,52 @@
 <!-- AdminLTE App -->
 <script src="<?php echo base_url();?>/dist/js/adminlte.js"></script>
 
+<script>
+    function tampilDataOrder()
+    {
+        let nama = $('#nama'),val();
+        $.ajax({
+            type: "post",
+            url: "/createorder/tampilDataOrder",
+            data: {
+                nama1 : nama
+            },
+            dataType: "json",
+            beforeSend :   function(){
+                $('.tampilDataOrder').html("<i class='fa fa-spin fa-spinner'></i>")
+            },
+            success: function (response) {
+                if(response.data){
+                    $('.tampilDataOrder').html(response.data)
+                }
+            }
+            error: function(xhr, ajaxOptions, throwError){
+                alert(xhr.status + '\n' + thrownError);
+            }
+        });
+
+    }
+</script>
+
 <script type="text/javascript">
     function addRow()
     {
         var nama=document.createorder.nama.value;
         var alamat=document.createorder.alamat.value;
         var kuantitas=document.createorder.kuantitas.value;
+        var barang=document.createorder.barang.value;
 
         var tr =  document.createElement('tr');
 
         var td1 =  tr.appendChild(document.createElement('td'));
         var td2 =  tr.appendChild(document.createElement('td'));
         var td3 =  tr.appendChild(document.createElement('td'));
+        var td4 =  tr.appendChild(document.createElement('td'));
 
         td1.innerHTML=nama;
         td2.innerHTML=alamat;
         td3.innerHTML=kuantitas;
+        td4.innerHTML=barang;
 
         document.getElementById("cust-table").appendChild(tr);
     }
