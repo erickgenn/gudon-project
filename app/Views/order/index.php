@@ -33,7 +33,7 @@
 
     <!-- /.content-header -->
 
-    
+
 
     <!-- /.navbar -->
     <!-- Main Sidebar Container -->
@@ -82,20 +82,20 @@
         </div><!-- /.container-fluid -->
       </div>
       <!-- /.content-header -->
-        <!-- Main content -->
-    <div class="row">
-          <div class="col-12">
-            <div class="card" >
-              <div class="card-header">
-                <h3 class="card-title">Data Order</h3>
-                  <div class="float-right">
-                    <a href="<?php echo base_url('/order/create_order/');?>">  
-                      <button  type="button" class="btn btn-block btn-success">Create Order</button>
-                    </a>
-                  </div>
+      <!-- Main content -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Data Order</h3>
+              <div class="float-right">
+                <a href="<?php echo base_url('/order/create_order/'); ?>">
+                  <button type="button" class="btn btn-block btn-success">Create Order</button>
+                </a>
               </div>
-              <!-- /.card-header -->
-              <div class="card-body table-responsive" style="align-content:flex-end">
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive" style="align-content:flex-end">
               <table id="order-table" class="table table-striped table-bordered table-sm" style="width:100%">
                 <thead>
                   <tr>
@@ -122,6 +122,40 @@
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+
+    <!-- Modal -->
+    <div id="shelfModal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-body table-responsive">
+            <table id="detail-table" class="table table-hover text-nowrap">
+              <thead>
+                <th>#</th>
+                <th>Nama Warehouse</th>
+                <th>Nama Pengirim</th>
+                <th>Nama Produk</th>
+                <th>Berat Produk</th>
+                <th>Volume Produk</th>
+                <th>Kuantitas Produk</th>
+                <th>Alamat Tujuan</th>
+                <th>Total Harga</th>
+                <th>Status</th>
+                <th>Nama Pengiriman</th>
+                <th>Ongkos Kirim</th>
+                <th>Status Pengiriman</th>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -190,9 +224,9 @@
             render: function(data, type, row, meta) {
               switch (row.status) {
                 case "SEDANG DIPROSES":
-                  return `<a class='btn btn-info' href='<?php echo base_url('order/view') ?>/${row.id}'>DETAIL</a>
+                  return `<button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(${row.id})">Lihat Detail</button>
                           <form method='POST' action='<?php echo base_url('order') ?>/${row.id}/delete' style='display: unset;'>
-                            <button type='submit' class='btn btn-danger' onclick="return confirm('Apakah Anda yakin akan menghapus data ini?')">HAPUS</button>
+                            <button type='submit' class='btn btn-danger' onclick="return confirm('Apakah Anda yakin akan membatalkan order ini?')">BATAL</button>
                           </form>
                           `;
                   break;
@@ -205,6 +239,124 @@
         ]
       });
     });
+  </script>
+  <script>
+    let tabel;
+    let count = 0;
+
+    function table($id) {
+      count++;
+      if (count === 1) {
+        tabel = $('#detail-table').DataTable({
+          "scrollX": true,
+          "ajax": {
+            "url": `<?php echo base_url('order/search/detail'); ?>/${$id}`,
+            "dataSrc": ""
+          },
+          "columns": [{
+              searchable: false,
+              sortable: false,
+              data: null,
+              name: null,
+              render: function(data, type, row, meta) {
+                return meta.row + meta.settings._iDisplayStart + 1;
+              }
+            },
+            {
+              "data": "nama_warehouse"
+            },
+            {
+              "data": "nama_customer"
+            },
+            {
+              "data": "nama_produk"
+            },
+            {
+              "data": "berat_produk"
+            },
+            {
+              "data": "volume_produk"
+            },
+            {
+              "data": "kuantitas_produk"
+            },
+            {
+              "data": "alamat_tujuan"
+            },
+            {
+              "data": "total_harga"
+            },
+            {
+              "data": "status_order"
+            },
+            {
+              "data": "nama_pengiriman"
+            },
+            {
+              "data": "ongkos_kirim"
+            },
+            {
+              "data": "status_pengiriman"
+            },
+          ]
+        });
+      } else {
+        tabel.destroy();
+        tabel = $('#detail-table').DataTable({
+          "scrollX": true,
+          "ajax": {
+            "url": `<?php echo base_url('order/search/detail'); ?>/${$id}`,
+            "dataSrc": ""
+          },
+          "columns": [{
+              searchable: false,
+              sortable: false,
+              data: null,
+              name: null,
+              render: function(data, type, row, meta) {
+                return meta.row + meta.settings._iDisplayStart + 1;
+              }
+            },
+            {
+              "data": "nama_warehouse"
+            },
+            {
+              "data": "nama_customer"
+            },
+            {
+              "data": "nama_produk"
+            },
+            {
+              "data": "berat_produk"
+            },
+            {
+              "data": "volume_produk"
+            },
+            {
+              "data": "kuantitas_produk"
+            },
+            {
+              "data": "alamat_tujuan"
+            },
+            {
+              "data": "total_harga"
+            },
+            {
+              "data": "status_order"
+            },
+            {
+              "data": "nama_pengiriman"
+            },
+            {
+              "data": "ongkos_kirim"
+            },
+            {
+              "data": "status_pengiriman"
+            },
+          ]
+        });
+      }
+    }
   </script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="<?php echo base_url(); ?>/dist/js/pages/dashboard.js"></script>

@@ -20,7 +20,6 @@ class OrderController extends BaseController
     {
         $result = "Rp " . number_format($num, 2, ',', '.');
         return $result;
-
     }
 
     public function index()
@@ -60,6 +59,18 @@ class OrderController extends BaseController
         return json_encode($order);
     }
 
+    public function searchDetail($id)
+    {
+        $orderModel = new \App\Models\OrderModel();
+        $order = $orderModel->get_detail($id)->getResultArray();
+        for ($i = 0; $i < count($order); $i++) {
+            $order[$i]['total_harga'] = MoneyFormatController::money_format_rupiah($order[$i]['total_harga']);
+            $order[$i]['ongkos_kirim'] = MoneyFormatController::money_format_rupiah($order[$i]['ongkos_kirim']);
+        }
+
+        return json_encode($order);
+    }
+
 
     public function create()
     {
@@ -85,7 +96,7 @@ class OrderController extends BaseController
             //Untuk mencari warehouse_id
 
             $product = $productModel->find($this->request->getPost('id_produk')); //isi find adalah array dari id Product
-            
+
             $warehouse_id_arr = [];
             $total_price = 0;
             $temp_data_produk = $this->request->getPost('data_produk');
@@ -150,14 +161,6 @@ class OrderController extends BaseController
         echo json_encode($response);
     }
 
-    // public function tampilDataOrder()
-    // {
-    //     if($this->request->isAJAX()){
-    //         $nama = $this->request->getPost('nama')
-
-    //         // $modalCreateOrderTemp = new CreateOrderTemp;
-    //     }
-    // }
 
     public function delete($id)
     {
@@ -181,5 +184,4 @@ class OrderController extends BaseController
         }
         return redirect()->to('order/index');
     }
-
 }
