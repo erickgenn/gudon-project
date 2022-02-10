@@ -4,12 +4,12 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProductModel extends Model
+class StorageModel extends Model
 {
-    protected $table      = 'mst_product';
+    protected $table      = 'cms_storage';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['name', 'quantity', 'price', 'picture', 'description', 'weight', 'volume', 'is_active', 'storage_id', 'customer_id'];
+    protected $allowedFields = ['shelf_id', 'warehouse_id', 'is_active'];
     protected $useSoftDeletes = true;
 
     protected $createdField  = 'created_at';

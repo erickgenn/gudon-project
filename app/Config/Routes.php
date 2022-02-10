@@ -39,8 +39,8 @@ $routes->get('login', 'AuthController::login');
 $routes->post('login/auth', 'AuthController::loginAuth');
 $routes->get('logout', 'AuthController::logout');
 
-$routes->post('register','AuthController::store');
-$routes->get('register/index','AuthController::register');
+$routes->post('register', 'AuthController::store');
+$routes->get('register/index', 'AuthController::register');
 
 // warehouse
 $routes->get('/warehouse/index', 'WarehouseController::load_table');
@@ -49,10 +49,12 @@ $routes->get('/warehouse/view_v2/(:num)', 'WarehouseController::view_detail_v2/$
 
 //order
 $routes->get('order/index', 'OrderController::index');
+$routes->get('order/store', 'OrderController::store');
 $routes->get('order/search', 'OrderController::search');
 $routes->get('order/view/(:num)', 'OrderController::view/$1');
 $routes->get('order/(:num)/delete', 'OrderController::delete/$1');
 $routes->get('order/create_order', 'OrderController::create');
+
 
 
 /*
