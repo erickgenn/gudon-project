@@ -59,48 +59,34 @@
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <form method="POST" name="createorder">
+            <form method="POST" action="<?php echo base_url('order/store');?>" name="createorder">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
                                 <div class="col-lg-12">
-                                    <div class="float-right">
-                                        <div class="input-group-append">
-                                            <input type="button" name="add" value="add data" class="btn btn-success" onclick="addRow();">
-                                            </button>
-                                        </div>
-                                    </div>
                                     <div class="form-group">
                                         <br>
                                         <label>Nama Customer</label>
-                                        <input type="text" name="nama" id="nama" class="form-control">
+                                        <input type="text" name="namacust" id="namacust" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Nomor Telepon</label>
+                                        <input type="text" name="notelp" id="notelp" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label>Alamat Tujuan</label>
                                         <input type="text" name="alamat" id="alamat" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <label>Kuantitas</label>
-                                        <input type="number" name="kuantitas" id="kuantitas" class="form-control">
+                                        <label>Tipe Pengiriman</label>
+                                        <select class = 'form-control' style="width:100%;" name="tipe_pengiriman"  id = 'tipe_pengiriman'>
+                                            <option selected disabled>------ Pilih Tipe Pengiriman ------</option>
+                                        <?php for ($i = 0; $i < count ($groupdelivery); $i++) : ?>
+                                            <option value = "<?php echo $groupdelivery[$i]["id"]; ?>"><?php echo $groupdelivery[$i]["name"]; ?></option>
+                                        <?php endfor; ?>
+                                        </select>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label>Daftar Barang</label>
-                                        <div class="input-group">
-                                            <select class="form-control" id="barang" name="barang" data-placeholder="-Pilih-" style="width: 50%;" required>
-                                                <option value="" hidden></option>
-                                                <?php for ($i = 0; $i < sizeOf($groupproduct); $i++) : ?>
-                                                    <option value="<?= $groupproduct[$i]['id'] ?>"><?= $groupproduct[$i]['name'] ?></option>
-                                                <?php endfor; ?>
-                                                <option value="" hidden></option>
-                                            </select>
-                                        </div>
-
-
-                                    </div>
-
-
                                 </div>
                             </div>
                         </div>
@@ -110,22 +96,25 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="col-lg-12">
-                                    <table class="table table-bordered dataTable table-sm" id="cust-table" style="width: 100%">
+                                    <table class="table table-bordered dataTable table-sm" id="product_table" style="width: 100%">
                                         <thead>
                                             <tr>
-                                                <td>Nama</td>
-                                                <td>Alamat</td>
+                                                <td>Nama Produk</td>
+                                                <td>Detail Produk</td>
                                                 <td>Kuantitas</td>
-                                                <td>Barang</td>
-
+                                                <td>Aksi</td>
                                             </tr>
                                         </thead>
                                         <tbody>
-
+                                        <tr id="tambah_produk_button_container">
+                                            <td colspan=4>
+                                            <button type="button" class="btn btn-primary btn-sm col-lg-12" onclick="tambahRowProduk()">Tambah Produk</button>
+                                            </td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                     <div class="float-right">
-                                        <button type="button" class="btn btn-block btn-success" onclick="getCellValues();">submit</button>
+                                        <button type="submit" class="btn btn-block btn-success">Kirim</button>
                                     </div>
                                 </div>
 
@@ -163,6 +152,9 @@
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"></script>
     <script src="<?php echo base_url('adminlte/plugins/jquery/jquery.min.js'); ?>"></script>
+    <!-- Select 2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <!-- Bootstrap 4 -->
     <script src="<?php echo base_url(); ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -170,30 +162,64 @@
     <script src="<?php echo base_url(); ?>/dist/js/adminlte.js"></script>
 
     <script>
-        function tampilDataOrder() {
-            let nama = $('#nama'),
-                val();
-            $.ajax({
-                type: "post",
-                url: "/createorder/tampilDataOrder",
-                data: {
-                    nama1: nama
-                },
-                dataType: "json",
-                beforeSend: function() {
-                    $('.tampilDataOrder').html("<i class='fa fa-spin fa-spinner'></i>")
-                },
-                success: function(response) {
-                    if (response.data) {
-                        $('.tampilDataOrder').html(response.data)
-                    }
-                }
-                error: function(xhr, ajaxOptions, throwError) {
-                    alert(xhr.status + '\n' + thrownError);
-                }
-            });
+    $(document).ready(function() {
+      $('.js-example-basic-single').select2();
+    });
+    var row = 0;
+  </script>
 
+    <script>
+    function tambahRowProduk() {
+      var html = `
+              <tr id = "tambahRowProduk${row}">
+                <td>
+                  <input type ='hidden' name='data_produk[]' value='${row}'>
+                  <select class = 'js-example-basic-single form-control select2-hidden-accessible' style="width:100%;" name = 'id_produk${row}' id = 'get_product${row}' onchange="showHarga(${row})">
+                    <option selected disabled>------ Pilih Produk ------</option>
+                  <?php for ($i = 0; $i < count ($groupproduct); $i++) : ?>
+                    <option value = "<?php echo $groupproduct[$i]["id"]; ?>"><?php echo $groupproduct[$i]["name"]; ?></option>
+                  <?php endfor; ?>
+                  </select>
+                </td>
+                <td>
+                  <table>
+                    <tr>
+                      <td style="border:none;">Harga</td>
+                      <td style="border:none; text-align:right;" id="harga_produk${row}"></td>
+                    </tr>
+                    <tr>
+                      <td style="border:none;">Kuantitas</td>
+                      <td style="border:none; text-align:right;" id = "kuantitas_produk${row}"></td>
+                    </tr>
+                  </table>
+                <td><input type = 'text' class = 'form-control nf-input' name = 'detail_quantity${row}' min="0"></td>
+                <td>
+                  <button type = 'button' class = 'btn btn-danger btn-sm' onclick = 'deleteProdukData(this)'><i class="fa fa-fw fa-trash"></i></button>
+                </td>
+              </tr>
+            `;
+      $("#tambah_produk_button_container").before(html);
+      $('.js-example-basic-single').select2();
+      row++;
+    }
+
+    function deleteProdukData(r) {
+      var i = r.parentNode.parentNode.rowIndex;
+      document.getElementById("product_table").deleteRow(i);
+    }
+
+    function showHarga(row) {
+      var id_produk = $(`#get_product${row}`).val();
+      $.ajax({
+        url: `<?php echo base_url('order/get_price')?>/${id_produk}`,
+        type: "GET",
+        dataType: "JSON",
+        success: function(respond) {
+          $(`#harga_produk${row}`).text("Rp. " + respond['data_price'][0]['price']);
+          $(`#kuantitas_produk${row}`).text(respond['data_price'][0]['quantity']);
         }
+      });
+    }
     </script>
 
     <script>

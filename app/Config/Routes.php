@@ -49,12 +49,12 @@ $routes->get('/warehouse/view_v2/(:num)', 'WarehouseController::view_detail_v2/$
 
 //order
 $routes->get('order/index', 'OrderController::index');
-$routes->get('order/store', 'OrderController::store');
+$routes->post('order/store', 'OrderController::store');
 $routes->get('order/search', 'OrderController::search');
 $routes->get('order/view/(:num)', 'OrderController::view/$1');
 $routes->get('order/(:num)/delete', 'OrderController::delete/$1');
 $routes->get('order/create_order', 'OrderController::create');
-
+$routes->get('order/get_price/(:num)', 'OrderController::get_price/$1');
 
 
 /*

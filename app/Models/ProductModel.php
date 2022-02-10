@@ -15,4 +15,12 @@ class ProductModel extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
+
+    public function get_data_price($id)
+    {
+        $builder = $this->db->table('mst_gudon.mst_product');
+        $builder->select('id, quantity, price');
+        $builder->where('id', $id);
+        return $builder->get();
+    }
 }
