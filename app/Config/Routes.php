@@ -50,10 +50,13 @@ $routes->get('/warehouse/view_product/(:num)', 'WarehouseController::view_produc
 
 //order
 $routes->get('order/index', 'OrderController::index');
+$routes->post('order/store', 'OrderController::store');
 $routes->get('order/search', 'OrderController::search');
 $routes->get('order/view/(:num)', 'OrderController::view/$1');
-$routes->post('order/(:num)/delete', 'OrderController::delete/$1');
 
+$routes->get('order/create_order', 'OrderController::create');
+$routes->get('order/get_price/(:num)', 'OrderController::get_price/$1');
+$routes->post('order/(:num)/delete', 'OrderController::delete/$1');
 
 
 /*

@@ -31,6 +31,22 @@
       <img class="animation__shake" src="<?php echo base_url() ?>/assets/gudon_logo.png" alt="AdminLTELogo" height="60" width="60">
     </div>
 
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="row">
+          <div class="col-12">
+            <div class="card" >
+              <div class="card-header">
+                <h3 class="card-title">Data Order</h3>
+                  <div class="float-right">
+                    <a href="<?php echo base_url('/order/create_order/');?>">  
+                      <button  type="button" class="btn btn-block btn-success">Create Order</button>
+                    </a>
+                  </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive" style="align-content:flex-end">
 
     <!-- /.navbar -->
     <!-- Main Sidebar Container -->
