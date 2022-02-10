@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,6 +38,10 @@
   
   <?php include(APPPATH . "Views/layout/aside.php"); ?>
 
+  <?php if(session()->getFlashdata('msg')):?>
+    <script>window.alert("Silahkan daftarkan produk anda untuk melihat halaman ini");</script>
+  <?php endif;?>
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -65,22 +68,10 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Data Warehouse</h3>
-
-                <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default">
-                        <i class="fas fa-search"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
               </div>
               <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap" id="warehouse-table">
+              <div class="card-body table-responsive">
+                <table id="warehouse-table" class="table table-hover text-nowrap" style="width:100%">
                   <thead>
                     <tr>
                       <th>ID</th>
@@ -91,15 +82,6 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <?php for($i=0;$i<sizeof($warehouse);$i++):?>
-                      <tr>
-                        <td><?php echo $warehouse[$i]['id'];?></td>
-                        <td><?php echo $warehouse[$i]['name'];?></td>
-                        <td><?php echo $warehouse[$i]['address'];?></td>
-                        <td><?php if($warehouse[$i]['is_active']=="1") echo "Active"; else echo "Not Active";?></td>
-                        <td><a href="<?php echo base_url('/warehouse/view/'.$warehouse[$i]['id']);?>" style="background-color:#5cc5e6" class="btn" id="<?php echo $warehouse[$i]['id'];?>"><i class="fas fa-eye"></i></a></td>
-                      </tr>
-                    <?php endfor;?>
                   </tbody>
                 </table>
               </div>
@@ -119,6 +101,8 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+
+<link rel="stylesheet" href="<?php echo base_url('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
 
 <!-- jQuery -->
 <script src="<?php echo base_url();?>/plugins/jquery/jquery.min.js"></script>
@@ -152,6 +136,58 @@
 <script src="<?php echo base_url();?>/dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url();?>/dist/js/demo.js"></script>
+
+<script src="<?php echo base_url();?>/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url();?>/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"></script>
+
+
+
+<script>
+      $(document).ready(function() {
+    $('#warehouse-table').DataTable( {
+        "ajax": {
+            "url": "<?php echo base_url('/warehouse/search'); ?>",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "id" },
+            { "data": "name" },
+            { "data": "address" },
+            {
+              data: null,
+              name: null,
+              sortable: false,
+              render: function (data, type, row, meta) {
+                switch (row.is_active){
+                  case "1":
+                    return `Aktif`;
+                    break;
+                  case "0":
+                    return `Tidak Aktif`;
+                    break;
+                  default:
+                    return `Tidak Aktif`;
+                    break;
+                }
+              }
+            },
+            {
+              data: null,
+              name: null,
+              sortable: false,
+              render: function(data, type, row, meta){
+                return `
+                <a href="<?php echo base_url('/warehouse/view');?>/${row.id}" style="background-color:#5cc5e6;color:white;" class="btn"><i class="fas fa-eye"></i></a>
+                  `;
+                }
+            }
+        ]
+    } );
+} );
+</script>
+
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?php echo base_url();?>/dist/js/pages/dashboard.js"></script>
 </body>
