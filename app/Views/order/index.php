@@ -33,20 +33,7 @@
 
     <!-- /.content-header -->
 
-    <!-- Main content -->
-    <div class="row">
-          <div class="col-12">
-            <div class="card" >
-              <div class="card-header">
-                <h3 class="card-title">Data Order</h3>
-                  <div class="float-right">
-                    <a href="<?php echo base_url('/order/create_order/');?>">  
-                      <button  type="button" class="btn btn-block btn-success">Create Order</button>
-                    </a>
-                  </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body table-responsive" style="align-content:flex-end">
+    
 
     <!-- /.navbar -->
     <!-- Main Sidebar Container -->
@@ -95,16 +82,20 @@
         </div><!-- /.container-fluid -->
       </div>
       <!-- /.content-header -->
-
-      <!-- Main content -->
-      <div class="row">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Data Order</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body table-responsive" style="align-content:flex-end">
+        <!-- Main content -->
+    <div class="row">
+          <div class="col-12">
+            <div class="card" >
+              <div class="card-header">
+                <h3 class="card-title">Data Order</h3>
+                  <div class="float-right">
+                    <a href="<?php echo base_url('/order/create_order/');?>">  
+                      <button  type="button" class="btn btn-block btn-success">Create Order</button>
+                    </a>
+                  </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive" style="align-content:flex-end">
               <table id="order-table" class="table table-striped table-bordered table-sm" style="width:100%">
                 <thead>
                   <tr>
