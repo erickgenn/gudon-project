@@ -137,6 +137,32 @@
     </div>
     <!-- /.content-wrapper -->
 
+    <!-- Modal -->
+    <div id="shelfModal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-body table-responsive">
+            <table id="shelf-table" class="table table-hover text-nowrap">
+              <thead>
+                <th>#</th>
+                <th>Nama Produk</th>
+                <th>Kuantitas Produk</th>
+                <th>Berat Produk</th>
+                <th>Volume Produk</th>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
       <!-- Control sidebar content goes here -->

@@ -52,6 +52,7 @@ $routes->get('/warehouse/view_product/(:num)', 'WarehouseController::view_produc
 $routes->get('order/index', 'OrderController::index');
 $routes->post('order/store', 'OrderController::store');
 $routes->get('order/search', 'OrderController::search');
+$routes->get('order/search/detail/(:num)', 'OrderController::searchDetail/$1');
 $routes->get('order/view/(:num)', 'OrderController::view/$1');
 
 $routes->get('order/create_order', 'OrderController::create');
