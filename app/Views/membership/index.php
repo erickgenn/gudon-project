@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Tempusdominus Bootstrap 4 -->
@@ -46,12 +47,12 @@
         <div class="row mb-2">
           <div class="col-sm-6">
           <a href="<?php echo base_url('/home')?>" style="color:grey;"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
-            <h1 class="m-0">Membership Status</h1>
+            <h1 class="m-0">Status Membership</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard</li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Home</a></li>
+              <li class="breadcrumb-item active">Membership</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -62,6 +63,7 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+        <!-- membership status -->
         <div class="row">
             <div class="card card-default" style="padding:0%; width:100%;">
               <div class="card-body" style="display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-flex-direction: row; -ms-flex-direction: row; flex-direction: row; height: 128px; width: 100%; border-top-left-radius: 8px; border-top-right-radius: 8px; -webkit-align-items: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; padding: 32px 10px 32px 24px; -webkit-box-pack: justify; -webkit-justify-content: space-between; -ms-flex-pack: justify; justify-content: space-between;">
@@ -85,8 +87,8 @@
                   <!-- saldo -->
                   <a href="<?php echo base_url();?>">
                     <div style="display: flex; flex-direction: row; text-align: center; -webkit-box-align: center; align-items: center; justify-content: space-around; cursor: pointer; background: rgb(255, 255, 255); box-shadow: rgb(49 53 59 / 12%) 0px 1px 6px; border-radius: 8px; padding: 12px; margin-right: 12px;">
-                      <div style="position: relative; width: 34px; height: 32px; background-repeat: no-repeat; background-position: center center; background-size: contain; margin-right: 8px;">
-                        <i class="fa-regular fa-wallet"></i>
+                      <div style="position: relative; width: 34px; height: 32px; background-repeat: no-repeat; background-position: center center; background-size: contain; margin: 0 20px 0 10px;">
+                        <i class="fa fa-money fa-3x" style="color: #55c5e6;"></i>
                       </div>
                       <div style="font-size: 14px; font-family: 'Open Sans', sans-serif; line-height: 22px; color: rgba(49, 53, 59, 0.68); position: relative; padding-right: 12px;">
                         Saldo<br>
@@ -97,8 +99,8 @@
                   <!-- produk -->
                   <a href="<?php echo base_url();?>">
                     <div style="display: flex; flex-direction: row; text-align: center; -webkit-box-align: center; align-items: center; justify-content: space-around; cursor: pointer; background: rgb(255, 255, 255); box-shadow: rgb(49 53 59 / 12%) 0px 1px 6px; border-radius: 8px; padding: 12px; margin-right: 12px;">
-                      <div style="position: relative; width: 34px; height: 32px; background-repeat: no-repeat; background-position: center center; background-size: contain; margin-right: 8px;">
-                        <i class="fa-regular fa-wallet"></i>
+                      <div style="position: relative; width: 34px; height: 32px; background-repeat: no-repeat; background-position: center center; background-size: contain; margin: 0 20px 0 10px;">
+                        <i class="	fa fa-shopping-basket fa-3x" style="color: #55c5e6;"></i>
                       </div>
                       <div style="font-size: 14px; font-family: 'Open Sans', sans-serif; line-height: 22px; color: rgba(49, 53, 59, 0.68); position: relative; padding-right: 12px;">
                         Jumlah Produk<br>
@@ -109,8 +111,8 @@
                   <!-- order -->
                   <a href="<?php echo base_url('order/index');?>">
                     <div style="display: flex; flex-direction: row; text-align: center; -webkit-box-align: center; align-items: center; justify-content: space-around; cursor: pointer; background: rgb(255, 255, 255); box-shadow: rgb(49 53 59 / 12%) 0px 1px 6px; border-radius: 8px; padding: 12px; margin-right: 12px;">
-                      <div style="position: relative; width: 34px; height: 32px; background-repeat: no-repeat; background-position: center center; background-size: contain; margin-right: 8px;">
-                        <i class="fa-regular fa-wallet"></i>
+                      <div style="position: relative; width: 34px; height: 32px; background-repeat: no-repeat; background-position: center center; background-size: contain; margin: 0 20px 0 10px;">
+                        <i class="fa fa-cart-arrow-down fa-3x" style="color: #55c5e6;"></i>
                       </div>
                       <div style="font-size: 14px; font-family: 'Open Sans', sans-serif; line-height: 22px; color: rgba(49, 53, 59, 0.68); position: relative; padding-right: 12px;">
                         Jumlah Order<br>
@@ -132,19 +134,42 @@
             </div>
           <!-- ./col -->
         </div>
+        <!-- Membership advantage -->
+        <div class="row">
+            <div class="card card-default" style="padding:0%; width:100%;">
+              <div class="card-body">
+                <div class="inner" style="align-content:center; display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -webkit-justify-content: center; -ms-flex-pack: center; justify-content: center;">
+                  <div>
+                    <p style="font-size: 24px; line-height: 28px; font-family: 'Nunito Sans',sans-serif; -webkit-letter-spacing: -0.2px; -moz-letter-spacing: -0.2px; -ms-letter-spacing: -0.2px; letter-spacing: -0.2px; font-weight: 800; 
+                    color: <?php if ($_SESSION['level'] == "BRONZE") {
+                      echo '#A97142';
+                    } elseif($_SESSION['level'] == "SILVER") {
+                      echo '#989898';
+                    } elseif($_SESSION['level'] == "GOLD") {
+                      echo '#FFD700';
+                    }else {
+                      echo '#FFFFFF';
+                    }
+                    ?>"><?php echo $_SESSION['level'];?></p>
+                  </div>
+                  <!-- Content -->
+                  <div>
+                    <ul>
+                      <li>Gratis packaging berupa wrapping bag</li>
+                    </ul>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          <!-- ./col -->
+        </div>
         <!-- /.row (main row) -->
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.1.0
-    </div>
-  </footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
