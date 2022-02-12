@@ -68,11 +68,11 @@
             <div class="small-box" style="padding:5%">
               <div class="level" style="float:right; padding:3%">
                 <a href="<?php echo base_url('membership/index');?>" style="color: 
-                <?php if ($_SESSION['level'] = "BRONZE") {
+                <?php if ($_SESSION['level'] == "BRONZE") {
                   echo '#A97142';
-                } elseif($_SESSION['level'] = "SILVER") {
-                  echo '#C0C0C0';
-                } elseif($_SESSION['level'] = "GOLD") {
+                } elseif($_SESSION['level'] == "SILVER") {
+                  echo '#989898';
+                } elseif($_SESSION['level'] == "GOLD") {
                   echo '#FFD700';
                 }else {
                   echo '#FFFFFF';

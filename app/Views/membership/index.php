@@ -45,6 +45,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
+          <a href="<?php echo base_url('/home')?>" style="color:grey;"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
             <h1 class="m-0">Membership Status</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
@@ -68,11 +69,11 @@
                   <div>
                     <p style="font-size: 16px; line-height: 22px; font-family: 'Open Sans',sans-serif;">Halo <?php echo $_SESSION['name'];?>, sekarang kamu adalah</p>
                     <p style="font-size: 24px; line-height: 28px; font-family: 'Nunito Sans',sans-serif; -webkit-letter-spacing: -0.2px; -moz-letter-spacing: -0.2px; -ms-letter-spacing: -0.2px; letter-spacing: -0.2px; font-weight: 800; 
-                    color: <?php if ($_SESSION['level'] = "BRONZE") {
+                    color: <?php if ($_SESSION['level'] == "BRONZE") {
                       echo '#A97142';
-                    } elseif($_SESSION['level'] = "SILVER") {
-                      echo '#C0C0C0';
-                    } elseif($_SESSION['level'] = "GOLD") {
+                    } elseif($_SESSION['level'] == "SILVER") {
+                      echo '#989898';
+                    } elseif($_SESSION['level'] == "GOLD") {
                       echo '#FFD700';
                     }else {
                       echo '#FFFFFF';
