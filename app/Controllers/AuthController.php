@@ -1,5 +1,6 @@
 <?php namespace App\Controllers;
 
+use App\Models\MembershipModel;
 
 class AuthController extends BaseController
 {
@@ -57,12 +58,15 @@ class AuthController extends BaseController
 
         $user = $authModel->where('email', $email)->where('password', $password)->first();
         
+        $levelModel = new MembershipModel();
+        $level = $levelModel->where('id',$user['level_id'])->first();
+        
         if(isset($user)){
             $session_data = [
                 'id' => $user['id'],
                 'name' => $user['name'],
                 'email' => $user['email'],
-                'level_id' => $user['level_id'],
+                'level' => $level['name'],
                 'isLoggedIn' => TRUE
             ];
             $session->set($session_data);
