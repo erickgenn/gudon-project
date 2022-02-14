@@ -6,13 +6,13 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
 
-class AuthGuard implements FilterInterface
+class AdminGuard implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        if (!session()->get('isLoggedIn')) {
+        if ($_SESSION['role'] != 'admin') {
             return redirect()
-                ->to('login');
+                ->to('forbidden');
         }
     }
 

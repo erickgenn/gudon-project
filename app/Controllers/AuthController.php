@@ -1,4 +1,6 @@
-<?php namespace App\Controllers;
+<?php
+
+namespace App\Controllers;
 
 
 class AuthController extends BaseController
@@ -11,12 +13,20 @@ class AuthController extends BaseController
         return view('auth/login');
     }
 
-    public function register(){
+    public function loginAdmin()
+    {
+
+        return view('auth/loginadmin');
+    }
+
+    public function register()
+    {
         helper(['form']);
         return view('auth/register');
     }
 
-    public function store(){
+    public function store()
+    {
         helper(['form']);
         $rules = [
             'fullname'          => 'required|min_length[2]|max_length[50]',
@@ -25,8 +35,8 @@ class AuthController extends BaseController
             'phone'         => 'required|min_length[7]|max_length[18]',
             'confirm_password'  => 'required|matches[password]'
         ];
-        
-        if($this->validate($rules)){
+
+        if ($this->validate($rules)) {
             $authModel = new \App\Models\AuthModel();
             $data_post = $this->request->getPost();
 
@@ -39,11 +49,10 @@ class AuthController extends BaseController
             ];
             $authModel->insert($data_insert);
             return view('auth/login');
-        }else{
+        } else {
             $data['validation'] = $this->validator;
             echo view('auth/register', $data);
         }
-
     }
 
     public function loginAuth()
@@ -56,14 +65,15 @@ class AuthController extends BaseController
         $authModel = new \App\Models\AuthModel();
 
         $user = $authModel->where('email', $email)->where('password', $password)->first();
-        
-        if(isset($user)){
+
+        if (isset($user)) {
             $session_data = [
                 'id' => $user['id'],
                 'name' => $user['name'],
                 'email' => $user['email'],
                 'level_id' => $user['level_id'],
-                'isLoggedIn' => TRUE
+                'isLoggedIn' => TRUE,
+                'role' => 'customer'
             ];
             $session->set($session_data);
             return redirect()->to('home');
@@ -71,7 +81,32 @@ class AuthController extends BaseController
             $session->setFlashdata('msg', 'Email or Password is incorrect!');
             return view('auth/login');
         }
+    }
 
+    public function loginAuthAdmin()
+    {
+        $session = session();
+        $data = $this->request->getPost();
+        $email = $data['email'];
+        $password = md5($data['password']);
+
+        $authModel = new \App\Models\AdminModel();
+
+        $user = $authModel->where('email', $email)->where('password', $password)->first();
+
+        if (isset($user)) {
+            $session_data = [
+                'id' => $user['id'],
+                'email' => $user['email'],
+                'isLoggedIn' => TRUE,
+                'role' => 'admin'
+            ];
+            $session->set($session_data);
+            return redirect()->to('admin/index');
+        } else {
+            $session->setFlashdata('msg', 'Email or Password is incorrect!');
+            return view('auth/loginadmin');
+        }
     }
 
     public function logout()
@@ -79,5 +114,4 @@ class AuthController extends BaseController
         session_destroy();
         return redirect()->to(base_url('login'));
     }
-
 }
