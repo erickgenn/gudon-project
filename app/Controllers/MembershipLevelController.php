@@ -78,4 +78,13 @@ class MembershipLevelController extends BaseController
         ];
         return view('membership/index_v2', $cust_data);
     }
+
+    public function upgrade_menu() {
+        return view('membership/upgrade');
+    }
+
+    // public function upgrade($id)
+    // {
+        
+    // }
 }

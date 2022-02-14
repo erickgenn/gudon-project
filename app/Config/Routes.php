@@ -63,6 +63,9 @@ $routes->post('order/(:num)/delete', 'OrderController::delete/$1');
 $routes->get('membership/index', 'MembershipLevelController::index');
 $routes->get('membership/index_v2', 'MembershipLevelController::index_v2');
 
+$routes->get('membership/upgrade', 'MembershipLevelController::upgrade_menu');
+$routes->post('membership/upgrade/(:num)', 'MembershipLevelController::upgrade/$1');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
