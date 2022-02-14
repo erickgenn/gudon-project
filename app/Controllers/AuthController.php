@@ -1,6 +1,7 @@
 <?php namespace App\Controllers;
 
 use App\Models\MembershipModel;
+use App\Models\Subscription;
 
 class AuthController extends BaseController
 {
@@ -58,15 +59,20 @@ class AuthController extends BaseController
 
         $user = $authModel->where('email', $email)->where('password', $password)->first();
         
+        // get user current subs
+        $subsModel = new Subscription();
+        $subs = $subsModel->where('cust_id', $user['id'])->where('is_active', 1)->first();
+
+        // get user membership level name
         $levelModel = new MembershipModel();
-        $level = $levelModel->where('id',$user['level_id'])->first();
+        $level = $levelModel->where('id',$subs['level_id'])->first();
         
         if(isset($user)){
             $session_data = [
                 'id' => $user['id'],
                 'name' => $user['name'],
                 'email' => $user['email'],
-                'level_id' => $user['level_id'],
+                'level_id' => $subs['level_id'],
                 'level' => $level['name'],
                 'isLoggedIn' => TRUE
             ];
