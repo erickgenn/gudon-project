@@ -66,6 +66,7 @@ class AuthController extends BaseController
                 'id' => $user['id'],
                 'name' => $user['name'],
                 'email' => $user['email'],
+                'level_id' => $user['level_id'],
                 'level' => $level['name'],
                 'isLoggedIn' => TRUE
             ];

@@ -136,9 +136,9 @@
         </div>
         <!-- Membership advantage -->
         <div class="row">
-            <div class="card card-default" style="padding:0%; width:100%;">
+            <div class="card card-default" style="width:100%;">
               <div class="card-body">
-                <div class="inner" style="align-content:center; display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -webkit-justify-content: center; -ms-flex-pack: center; justify-content: center;">
+                <div class="inner" style="align-content:center; justify-content: center;">
                   <div>
                     <p style="font-size: 24px; line-height: 28px; font-family: 'Nunito Sans',sans-serif; -webkit-letter-spacing: -0.2px; -moz-letter-spacing: -0.2px; -ms-letter-spacing: -0.2px; letter-spacing: -0.2px; font-weight: 800; 
                     color: <?php if ($_SESSION['level'] == "BRONZE") {
@@ -154,9 +154,27 @@
                   </div>
                   <!-- Content -->
                   <div>
-                    <ul>
-                      <li>Gratis packaging berupa wrapping bag</li>
-                    </ul>
+                    Syarat & Ketentuan
+                    <div style="display: flex; gap:10px;">
+                      <?php for($i=0;$i<sizeof($customer_data['terms']);$i++):?>
+                        <div style="margin:0; text-align: center; -webkit-box-align: center; align-items: center; justify-content: space-around; background: #55c5e6; box-shadow: rgb(49 53 59 / 12%) 0px 1px 6px; border-radius: 8px; padding: 12px;">
+                          <div style="font-size: 14px; font-family: 'Open Sans', sans-serif; line-height: 22px; color:#FFFFFF; position: relative;">
+                            <?php echo $customer_data['terms'][$i]['terms'];?>
+                          </div>
+                        </div>
+                      <?php endfor;?>
+                    </div>
+                      
+                    Keuntungan Member <?php echo $_SESSION['level'];?>
+                    <div style="display: flex; gap:10px;">
+                      <?php for($i=0;$i<sizeof($customer_data['benefit']);$i++):?>
+                        <div style="margin:0; text-align: center; -webkit-box-align: center; align-items: center; justify-content: space-around; background: #55c5e6; box-shadow: rgb(49 53 59 / 12%) 0px 1px 6px; border-radius: 8px; padding: 12px;">
+                          <div style="font-size: 14px; font-family: 'Open Sans', sans-serif; line-height: 22px; color:#FFFFFF; position: relative;">
+                            <?php echo $customer_data['benefit'][$i]['benefit'];?>
+                          </div>
+                        </div>
+                      <?php endfor;?>
+                    </div>
                   </div>
                 </div>
                 
