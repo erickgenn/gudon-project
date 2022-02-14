@@ -77,7 +77,14 @@
               </p>
             </a>
           </li>
-
+          <li class="nav-item">
+            <a href="<?php echo base_url('admin/customer/index'); ?>" id="customer" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Customer
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
@@ -149,8 +156,8 @@
       if (current.includes('/home')) {
         document.getElementById("home").className = "nav-link active";
       }
-      if (current.includes('/warehouse/index')) {
-        document.getElementById("warehouse").className = "nav-link active";
+      if (current.includes('/admin/customer/index')) {
+        document.getElementById("customer").className = "nav-link active";
       }
       if (current.includes('/order/index')) {
         document.getElementById("order").className = "nav-link active";

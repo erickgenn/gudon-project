@@ -43,6 +43,8 @@ $routes->get('forbidden', 'AdminController::forbidden');
 
 // admin pages
 $routes->get('admin/index', 'AdminController::index');
+$routes->get('admin/customer/index', 'CustomerController::index');
+$routes->get('admin/customer/search', 'CustomerController::search');
 
 // admin login
 $routes->get('login/admin', 'AuthController::loginAdmin');

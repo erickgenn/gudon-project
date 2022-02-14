@@ -39,7 +39,9 @@ class Filters extends BaseConfig
                     'login',
                     'register/index',
                     'register',
-                    'login/auth'
+                    'login/auth',
+                    'login/admin',
+                    'login/auth/admin'
                 ],
             ],
             'authAdmin' => [
