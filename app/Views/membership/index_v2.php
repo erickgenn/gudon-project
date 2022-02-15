@@ -121,7 +121,7 @@
                     </div>
                   </a>
                   <!-- upgrade -->
-                  <a href="<?php echo base_url();?>">
+                  <a href="<?php echo base_url('membership/upgrade');?>">
                     <div style="background-color: #55c5e6; display: flex; flex-direction: row; text-align: center; -webkit-box-align: center; align-items: center; justify-content: space-around; cursor: pointer; box-shadow: rgb(49 53 59 / 12%) 0px 1px 6px; border-radius: 8px; padding: 12px; margin-right: 12px;">
                     
                       <div style="font-size: 14px; font-family: 'Open Sans', sans-serif; line-height: 22px; color:#FFFFFF; position: relative;">
@@ -132,9 +132,9 @@
                 </div>
               </div>
               <div class="card-footer">
-                Status Membership (57%)
+                Status Membership (<?php echo $customer_data['time_left'];?> days left)
                 <div class="progress progress-sm">
-                  <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%"></div>
+                  <div class="progress-bar <?php if($customer_data['time_left'] <= 3) echo 'bg-red'; else echo 'bg-green'?>" role="progressbar" aria-valuenow="<?php echo $customer_data['percentage_left'];?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $customer_data['percentage_left'];?>%"></div>
                 </div>
               </div>
             </div>

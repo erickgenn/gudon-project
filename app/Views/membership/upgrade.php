@@ -45,12 +45,13 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
+                            <a href="<?php echo base_url('/membership/index_v2')?>" style="color:grey;"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
                             <h1 class="m-0">Upgrade Membership</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="<?php echo base_url('/membership/index_v2'); ?>">Membership</a></li>
-                                <li class="breadcrumb-item active"><a href="#">Upgrade Membership</a></li>
+                                <li class="breadcrumb-item active">Upgrade Membership</li>
                             </ol>
                         </div><!-- /.col -->
                         </div><!-- /.row -->
@@ -60,184 +61,52 @@
 
                 <!-- Main content -->
                 <form method="POST" action="<?php echo base_url('order/store');?>" name="upgradelevel">
-                    <div class="row">
-                        <div class="card card-default" style=" width: 100%; margin:15px; padding:10px; align-content:center;">
-                        <table align="center" style="text-align:center; display:grid; grid-auto-columns: minmax(0, 4fr); grid-auto-flow: column;">
+                    <div class="row" style="margin: 10px">
+                        <table align="center" style="display:grid; grid-auto-columns: minmax(0, 4fr); grid-auto-flow: column;">
                             <tbody>
                                 <tr>
+                                    <?php for($i=0;$i<sizeof($membership_data);$i++): ?>
                                     <td>
-                                        <div class="card card-default" style="background-image: url('https://i.pinimg.com/736x/2e/2d/ff/2e2dff03032ba2567b01443713cba402--bronze-wallpaper.jpg');">
-                                            
+                                        <div class="card card-default" style="max-width: 500px">
                                             <div class="card-header p-2">
-                                                <div style="margin: 20px; padding:20px 30px; font-size:20px; font-weight:bold; color:white;">
-                                                    Bronze
+                                                <div style="text-align:center; margin: 20px; padding:20px 30px; font-size:20px; font-weight:bold;">
+                                                    <?php echo $membership_data['membership'][$i]['name'];?>
                                                 </div>
                                                 <div>
                                                     <ul class="nav nav-pills">
-                                                        <li class="nav-item"><a class="nav-link active" href="#benefit1" data-toggle="tab">Benefit</a></li>
-                                                        <li class="nav-item"><a class="nav-link" href="#tnc1" data-toggle="tab">Syarat & Ketentuan</a></li>
+                                                        <li class="nav-item"><a class="nav-link active" href="#benefit<?php echo $i?>" data-toggle="tab">Benefit</a></li>
+                                                        <li class="nav-item"><a class="nav-link" href="#tnc<?php echo $i?>" data-toggle="tab">Syarat & Ketentuan</a></li>
                                                     </div>
                                                     <div class="card-body">
                                                         <div class="tab-content">
-                                                            <div class="tab-pane active" id="benefit1">
+                                                            <div class="tab-pane active" id="benefit<?php echo $i?>">
                                                                 <ul>
-                                                                    <li>ini benefit 1 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo magnam quam velit hic harum commodi sit minima ipsam sed culpa.</li>
-                                                                    <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam, rem corrupti aliquid delectus modi minus hic eum praesentium ullam beatae.</li>
+                                                                    <?php for($j=0;$j<sizeof($membership_data['benefit'][$i]);$j++):?>
+                                                                        <li><?php echo $membership_data['benefit'][$i][$j]['benefit'];?></li>
+                                                                    <?php endfor?>
                                                                 </ul>
                                                             </div>
-                                                            <div class="tab-pane" id="tnc1">
+                                                            <div class="tab-pane" id="tnc<?php echo $i?>">
                                                                 <ul>
-                                                                    <li> ini tnc 1 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo magnam quam velit hic harum commodi sit minima ipsam sed culpa.</li>
-                                                                    <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam, rem corrupti aliquid delectus modi minus hic eum praesentium ullam beatae.</li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>                                    
-                                    <td>
-                                        <div class="card card-default" style="background-image: url('https://thumbs.dreamstime.com/b/silver-gradient-background-design-texture-ribbon-frame-banner-abstract-template-metal-shine-steel-plate-metallic-light-chrome-111739945.jpg');">
-                                            
-                                            <div class="card-header p-2">
-                                                <div style="margin: 20px; padding:20px 30px; font-size:20px; font-weight:bold; color:white;">
-                                                    Silver
-                                                </div>
-                                                <div>
-                                                    <ul class="nav nav-pills">
-                                                        <li class="nav-item"><a class="nav-link active" href="#benefit2" data-toggle="tab">Benefit</a></li>
-                                                        <li class="nav-item"><a class="nav-link" href="#tnc2" data-toggle="tab">Syarat & Ketentuan</a></li>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="tab-content">
-                                                            <div class="tab-pane active" id="benefit2">
-                                                                <ul>
-                                                                    <li>ini benefit 2 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo magnam quam velit hic harum commodi sit minima ipsam sed culpa.</li>
-                                                                    <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam, rem corrupti aliquid delectus modi minus hic eum praesentium ullam beatae.</li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="tab-pane" id="tnc2">
-                                                                <ul>
-                                                                    <li> ini tnc 2 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo magnam quam velit hic harum commodi sit minima ipsam sed culpa.</li>
-                                                                    <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam, rem corrupti aliquid delectus modi minus hic eum praesentium ullam beatae.</li>
+                                                                    <?php for($j=0;$j<sizeof($membership_data['terms'][$i]);$j++):?>
+                                                                        <li><?php echo $membership_data['terms'][$i][$j]['terms'];?></li>
+                                                                    <?php endfor?>
                                                                 </ul>
                                                             </div>
                                                         </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>                                    
-                                    <td>
-                                        <div class="card card-default" style="background-image: url('https://wallpaperaccess.com/full/3597992.jpg');">
-                                            
-                                            <div class="card-header p-2">
-                                                <div style="margin: 20px; padding:20px 30px; font-size:20px; font-weight:bold; color:white;">
-                                                    Gold
-                                                </div>
-                                                <div>
-                                                    <ul class="nav nav-pills">
-                                                        <li class="nav-item"><a class="nav-link active" href="#benefit3" data-toggle="tab">Benefit</a></li>
-                                                        <li class="nav-item"><a class="nav-link" href="#tnc3" data-toggle="tab">Syarat & Ketentuan</a></li>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="tab-content">
-                                                            <div class="tab-pane active" id="benefit3">
-                                                                <ul>
-                                                                    <li>ini benefit 3 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo magnam quam velit hic harum commodi sit minima ipsam sed culpa.</li>
-                                                                    <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam, rem corrupti aliquid delectus modi minus hic eum praesentium ullam beatae.</li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="tab-pane" id="tnc3">
-                                                                <ul>
-                                                                    <li> ini tnc 3 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo magnam quam velit hic harum commodi sit minima ipsam sed culpa.</li>
-                                                                    <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam, rem corrupti aliquid delectus modi minus hic eum praesentium ullam beatae.</li>
-                                                                </ul>
-                                                            </div>
+                                                        <div>
+                                                            <a href="<?php echo base_url('membership/upgrade/').$membership_data['membership'][$i]['id']?>" class="btn" style="background-color:#55c5e6; color:white;">Upgrade <?php echo $membership_data['membership'][$i]['name'];?> Sekarang</a>
                                                         </div>
-
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
+                                    <?php endfor;?>     
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                </div>
-                <!-- form -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <br>
-                                        <label>Nama Customer</label>
-                                        <input type="text" name="namacust" id="namacust" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Nomor Telepon</label>
-                                        <input type="text" name="notelp" id="notelp" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Alamat Tujuan</label>
-                                        <input type="text" name="alamat" id="alamat" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Tipe Pengiriman</label>
-                                        <select class = 'form-control' style="width:100%;" name="tipe_pengiriman"  id = 'tipe_pengiriman'>
-                                            <option selected disabled>------ Pilih Tipe Pengiriman ------</option>
-                                        
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="col-lg-12">
-                                    <table class="table table-bordered dataTable table-sm" id="product_table" style="width: 100%">
-                                        <thead>
-                                            <tr>
-                                                <td>Nama Produk</td>
-                                                <td>Detail Produk</td>
-                                                <td>Kuantitas</td>
-                                                <td>Aksi</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr id="tambah_produk_button_container">
-                                            <td colspan=4>
-                                            <button type="button" class="btn btn-primary btn-sm col-lg-12" onclick="tambahRowProduk()">Tambah Produk</button>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="float-right">
-                                        <button type="submit" class="btn btn-block btn-success">Kirim</button>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12 tampilDataOrder">
-
-                        </div>
-                    </div>
-
-                </div>
             </form>
             <!-- /.content -->
         </div>
