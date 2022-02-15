@@ -20,7 +20,11 @@ class Home extends BaseController
         // get order successful rate
         $status_order = $orderModel->where('customer_id', $_SESSION['id'])->where('status', 'SELESAI')->findAll();
         $success_order = count($status_order);
-        $percentage_order = round($success_order / $count_order * 100);
+        if($count_order==0) {
+            $percentage_order = 0;
+        } else {
+            $percentage_order = round($success_order / $count_order * 100);
+        }
 
         // get order sold
         $income = 0;
@@ -45,9 +49,12 @@ class Home extends BaseController
 
         // get level max_weight
         $modelLevel = new MembershipModel();
-        $level = $modelLevel->where('id', $_SESSION['id'])->first();
-        
-        $percentage_weight = round(($total_weight / $level['max_weight']) * 100);
+        $level = $modelLevel->where('id', $_SESSION['level_id'])->first();
+        if($level['max_weight'] == 0) {
+            $percentage_weight = 0;
+        } else {
+            $percentage_weight = round(($total_weight / $level['max_weight']) * 100);
+        }
 
         $cust_data['customer_data'] = [
             'total_product' => $total_product,

@@ -67,7 +67,7 @@
         <div class="row">
             <div class="card card-default" style="padding:0%; width:100%;">
               <div class="card-body" style="display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-flex-direction: row; -ms-flex-direction: row; flex-direction: row; height: 128px; width: 100%; border-top-left-radius: 8px; border-top-right-radius: 8px; -webkit-align-items: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; padding: 32px 10px 32px 24px; -webkit-box-pack: justify; -webkit-justify-content: space-between; -ms-flex-pack: justify; justify-content: space-between;">
-                <div class="inner" style="display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -webkit-justify-content: center; -ms-flex-pack: center; justify-content: center;">
+                <div class="inner" style="display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -webkit-justify-content: center; -ms-flex-pack: center; justify-content: left; min-width:300px">
                   <div>
                     <p style="font-size: 16px; line-height: 22px; font-family: 'Open Sans',sans-serif;">Halo <?php echo ucwords($_SESSION['name']);?>, sekarang kamu adalah</p>
                     <p style="font-size: 24px; line-height: 28px; font-family: 'Nunito Sans',sans-serif; -webkit-letter-spacing: -0.2px; -moz-letter-spacing: -0.2px; -ms-letter-spacing: -0.2px; letter-spacing: -0.2px; font-weight: 800; 
@@ -78,7 +78,7 @@
                     } elseif($_SESSION['level'] == "GOLD") {
                       echo '#FFD700';
                     }else {
-                      echo '#FFFFFF';
+                      echo '#000000';
                     }
                     ?>">Member <?php echo $_SESSION['level'];?></p>
                   </div>
@@ -141,12 +141,13 @@
           <!-- ./col -->
         </div>
         <!-- Membership advantage -->
+        <?php if(!$_SESSION['level'] == "NOT RATED"):?>
         <div class="row">
             <div class="card card-default" style="width:100%;">
               <div class="card-body">
-                <div class="inner" style="align-content:center; justify-content: center;">
+                <div class="inner">
                   <div>
-                    <p style="font-size: 24px; line-height: 28px; font-family: 'Nunito Sans',sans-serif; -webkit-letter-spacing: -0.2px; -moz-letter-spacing: -0.2px; -ms-letter-spacing: -0.2px; letter-spacing: -0.2px; font-weight: 800; 
+                    <p style="padding-left:7px;font-size: 24px; line-height: 28px; font-family: 'Nunito Sans',sans-serif; -webkit-letter-spacing: -0.2px; -moz-letter-spacing: -0.2px; -ms-letter-spacing: -0.2px; letter-spacing: -0.2px; font-weight: 800; 
                     color: <?php if ($_SESSION['level'] == "BRONZE") {
                       echo '#A97142';
                     } elseif($_SESSION['level'] == "SILVER") {
@@ -163,28 +164,26 @@
                   <div>
                     <div class="card-header p-2">
                       <ul class="nav nav-pills">
-                        <li class="nav-item"><a class="nav-link active" href="#tnc" data-toggle="tab">Syarat & Ketentuan</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#benefit" data-toggle="tab">Keuntungan Member</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="#benefit" data-toggle="tab">Keuntungan Member</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#tnc" data-toggle="tab">Syarat & Ketentuan</a></li>
                       </ul>
                     </div>
                     <div class="card-body">
                       <div class="tab-content">
-                        <div class="tab-pane active" id="tnc">
+                        <div class="tab-pane active" id="benefit">
                           <div class="post">
-                          Syarat & Ketentuan
                           <ul>
-                            <?php for($i=0;$i<sizeof($customer_data['terms']);$i++):?>
-                              <li><?php echo $customer_data['terms'][$i]['terms'];?></li>
+                            <?php for($i=0;$i<sizeof($customer_data['benefit']);$i++):?>
+                              <li><?php echo $customer_data['benefit'][$i]['benefit'];?></li>
                             <?php endfor;?>
                           </ul>
                           </div>
                         </div>
-                        <div class="tab-pane" id="benefit">
+                        <div class="tab-pane" id="tnc">
                           <div class="post">
-                          Keuntungan Member
                           <ul>
-                            <?php for($i=0;$i<sizeof($customer_data['benefit']);$i++):?>
-                              <li><?php echo $customer_data['benefit'][$i]['benefit'];?></li>
+                            <?php for($i=0;$i<sizeof($customer_data['terms']);$i++):?>
+                              <li><?php echo $customer_data['terms'][$i]['terms'];?></li>
                             <?php endfor;?>
                           </ul>
                           </div>
@@ -193,11 +192,12 @@
                     </div>
                   </div>
                 </div>
-                
+                <?php endif;?>
               </div>
             </div>
           <!-- ./col -->
         </div>
+
         <!-- /.row (main row) -->
       </div><!-- /.container-fluid -->
     </section>

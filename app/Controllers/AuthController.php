@@ -38,8 +38,7 @@ class AuthController extends BaseController
                 'name' => $data_post['fullname'],
                 'email' => $data_post['email'],
                 'phone' => $data_post['phone'],
-                'password' => md5($data_post['password']),
-                'level_id' => 1
+                'password' => md5($data_post['password'])
             ];
             $authModel->insert($data_insert);
             return view('auth/login');
@@ -64,15 +63,22 @@ class AuthController extends BaseController
         // get user current subs
         $subsModel = new Subscription();
         $subs = $subsModel->where('cust_id', $user['id'])->where('is_active', 1)->first();
-        $subscription_date = $subs['subscription_date'];
-        $date = new DateTime($subscription_date);
-        $date->add(new DateInterval('P30D'));
-        $time_left = round((strtotime($date->format('Y-m-d')) - time()) / (60 * 60 * 24));
-        $percentage_left = round($time_left/30*100);
+        if(!$subs) {
+            $level['name'] = 'NOT RATED';
+            $time_left= 0;
+            $percentage_left = 0;
+            $subs['level_id'] = 0;
+        } else {
+            $subscription_date = $subs['subscription_date'];
+            $date = new DateTime($subscription_date);
+            $date->add(new DateInterval('P30D'));
+            $time_left = round((strtotime($date->format('Y-m-d')) - time()) / (60 * 60 * 24));
+            $percentage_left = round($time_left/30*100);
 
-        // get user membership level name
-        $levelModel = new MembershipModel();
-        $level = $levelModel->where('id',$subs['level_id'])->first();
+            // get user membership level name
+            $levelModel = new MembershipModel();
+            $level = $levelModel->where('id',$subs['level_id'])->first();
+        }
         
         if(isset($user)){
             $session_data = [
