@@ -78,7 +78,7 @@
                     } elseif($_SESSION['level'] == "GOLD") {
                       echo '#FFD700';
                     }else {
-                      echo '#000000';
+                      echo '#5cc5e6';
                     }
                     ?>">Member <?php echo $_SESSION['level'];?></p>
                   </div>

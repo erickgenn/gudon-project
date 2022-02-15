@@ -75,7 +75,7 @@
                 } elseif($_SESSION['level'] == "GOLD") {
                   echo '#FFD700';
                 }else {
-                  echo '#000000';
+                  echo '#5cc5e6';
                 }
                 ?>; font-weight:bold;">
                 <?php echo $_SESSION['level'];?>
@@ -89,7 +89,7 @@
                 <p>Pendapatanmu</p> 
                 <h4>Rp <?php echo number_format($customer_data['income']);?></h4>
               </div>
-              <a href="<?php echo base_url();?>" class="small-box-footer" style="background-color:#5cc5e6">Atur Produkmu</a>
+              <a href="<?php echo base_url();?>" class="btn btn-block" style="background-color:#5cc5e6; color:white; font-weight:bold;">Atur Produkmu</a>
             </div>
           </div>
           <!-- ./col -->
