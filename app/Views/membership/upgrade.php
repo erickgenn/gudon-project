@@ -95,7 +95,7 @@
                                                             </div>
                                                         </div>
                                                         <div style="text-align:center;">
-                                                            <a href="<?php echo base_url('membership/upgrade/').$membership_data['membership'][$i]['id']?>" class="btn btn-block btn-outline-dark" style="color:#55c5e6; border:none; box-shadow: rgb(49 53 59 / 12%) 0px 1px 6px;">Rp <?php echo number_format($membership_data['membership'][$i]['price']);?></a>
+                                                            <a href="<?php echo base_url('membership/upgrade/').$membership_data['membership'][$i]['id']?>" class="btn btn-block btn-outline-dark" style="color:#55c5e6; border:none; box-shadow: rgb(49 53 59 / 12%) 5px 5px 10px 5px;">Rp <?php echo number_format($membership_data['membership'][$i]['price']);?></a>
                                                         </div>
                                                     </div>
                                                 </div>
