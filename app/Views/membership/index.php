@@ -141,7 +141,27 @@
           <!-- ./col -->
         </div>
         <!-- Membership advantage -->
-        <?php if(!$_SESSION['level'] == "NOT RATED"):?>
+        <?php if($_SESSION['level'] == "NOT RATED"):?>
+          <div class="row">
+            <div class="card card-default" style="width:100%;">
+              <div class="card-body">
+                <div class="inner">
+                  <!-- Content -->
+                  Untuk membuka semua fitur, silahkan upgrade membermu sekarang
+                  <a class="btn" href="<?php echo base_url('membership/upgrade');?>">
+                    <div style="background-color: #55c5e6; display: flex; flex-direction: row; text-align: center; -webkit-box-align: center; align-items: center; justify-content: space-around; cursor: pointer; box-shadow: rgb(49 53 59 / 12%) 0px 1px 6px; border-radius: 8px; padding: 12px; margin-right: 12px;">
+                    
+                      <div style="font-size: 14px; font-family: 'Open Sans', sans-serif; line-height: 22px; color:#FFFFFF; position: relative;">
+                        Upgrade
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          <!-- ./col -->
+        </div>
+        <?php else: ?>
         <div class="row">
             <div class="card card-default" style="width:100%;">
               <div class="card-body">
