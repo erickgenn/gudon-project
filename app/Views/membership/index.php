@@ -132,9 +132,9 @@
                 </div>
               </div>
               <div class="card-footer">
-                Status Membership (<?php echo $customer_data['time_left'];?> days left)
+                Status Membership (<?php echo $_SESSION['time_left'];?> hari lagi)
                 <div class="progress progress-sm">
-                  <div class="progress-bar <?php if($customer_data['time_left'] <= 3) echo 'bg-red'; else echo 'bg-green'?>" role="progressbar" aria-valuenow="<?php echo $customer_data['percentage_left'];?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $customer_data['percentage_left'];?>%"></div>
+                  <div class="progress-bar <?php if($_SESSION['time_left'] <= 3) echo 'bg-red'; else echo 'bg-green'?>" role="progressbar" aria-valuenow="<?php echo $_SESSION['percentage_left'];?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $_SESSION['percentage_left'];?>%"></div>
                 </div>
               </div>
             </div>

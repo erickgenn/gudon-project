@@ -38,23 +38,12 @@ class MembershipLevelController extends BaseController
         $terms = $modelLevel->where('level_id', $_SESSION['level_id'])->where('benefit', null, false)->where('is_active', 1)->findAll();
         $benefit = $modelLevel->where('level_id', $_SESSION['level_id'])->where('terms', null, false)->where('is_active', 1)->findAll();
 
-        // get subscription status
-        $modelSubs = new Subscription();
-        $subs = $modelSubs->where('cust_id', $_SESSION['id'])->where('is_active', 1)->first();
-        $subscription_date = $subs['subscription_date'];
-        $date = new DateTime($subscription_date);
-        $date->add(new DateInterval('P30D'));
-        $time_left = round((strtotime($date->format('Y-m-d')) - time()) / (60 * 60 * 24));
-        $percentage_left = round($time_left/30*100);
-
         $cust_data['customer_data'] = [
             'total_product' => $total_product,
             'count_order' => $count_order,
             'user_balance' => $user_balance,
             'terms' => $terms,
-            'benefit' => $benefit,
-            'time_left' => $time_left,
-            'percentage_left' => $percentage_left
+            'benefit' => $benefit
         ];
         return view('membership/index', $cust_data);
     }

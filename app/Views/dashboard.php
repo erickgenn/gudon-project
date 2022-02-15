@@ -86,57 +86,41 @@
                 <h4>Rp <?php echo number_format($customer_data['user_balance']);?></h4>
               </div>
               <div class="inner">
-                <p>Jumlah Barangmu</p> 
-                <h4><?php echo $customer_data['total_product'];?></h4>
+                <p>Pendapatanmu</p> 
+                <h4>Rp <?php echo number_format($customer_data['income']);?></h4>
               </div>
               <a href="<?php echo base_url();?>" class="small-box-footer" style="background-color:#5cc5e6">Atur Produkmu</a>
             </div>
           </div>
           <!-- ./col -->
-
-            <!-- solid sales graph -->
-            <div class="card bg-gradient-info">
-              <div class="card-header border-0">
-                <h3 class="card-title">
-                  <i class="fas fa-th mr-1"></i>
-                  Dashboard
-                </h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer bg-transparent">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box" style="padding:5%">
+            Dashboard
+              <div class="inner">
                 <div class="row">
                   <div class="col-4 text-center">
-                    <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
+                    <input type="text" class="knob" data-readonly="true" value="<?php echo $customer_data['percentage_order']?>" data-width="60" data-height="60"
                            data-fgColor="#39CCCC">
-                    <div class="text-white">Order Berhasil</div>
+                    <div>Order Berhasil</div>
                   </div>
                   <!-- ./col -->
                   <div class="col-4 text-center">
-                    <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
+                    <input type="text" class="knob" data-readonly="true" value="<?php echo $customer_data['total_weight'];?>" data-width="60" data-height="60"
                            data-fgColor="#39CCCC">
-                    <div class="text-white">Online</div>
+                    <div>Storage</div>
                   </div>
                   <!-- ./col -->
                   <div class="col-4 text-center">
-                    <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60"
+                    <input type="text" class="knob" data-readonly="true" value="<?php echo $_SESSION['percentage_left'];?>" data-width="60" data-height="60"
                            data-fgColor="#39CCCC">
-                    <div class="text-white">In-Store</div>
+                    <div>Status Membership</div>
                   </div>
                   <!-- ./col -->
                 </div>
-                <!-- /.row -->
               </div>
-              <!-- /.card-footer -->
             </div>
+          </div>
           <!-- right col -->
         </div>
         <!-- /.row (main row) -->

@@ -2,6 +2,8 @@
 
 use App\Models\MembershipModel;
 use App\Models\Subscription;
+use DateInterval;
+use DateTime;
 
 class AuthController extends BaseController
 {
@@ -62,6 +64,11 @@ class AuthController extends BaseController
         // get user current subs
         $subsModel = new Subscription();
         $subs = $subsModel->where('cust_id', $user['id'])->where('is_active', 1)->first();
+        $subscription_date = $subs['subscription_date'];
+        $date = new DateTime($subscription_date);
+        $date->add(new DateInterval('P30D'));
+        $time_left = round((strtotime($date->format('Y-m-d')) - time()) / (60 * 60 * 24));
+        $percentage_left = round($time_left/30*100);
 
         // get user membership level name
         $levelModel = new MembershipModel();
@@ -74,6 +81,8 @@ class AuthController extends BaseController
                 'email' => $user['email'],
                 'level_id' => $subs['level_id'],
                 'level' => $level['name'],
+                'time_left' => $time_left,
+                'percentage_left' => $percentage_left,
                 'isLoggedIn' => TRUE
             ];
             $session->set($session_data);
