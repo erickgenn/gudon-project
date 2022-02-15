@@ -90,7 +90,7 @@
                         <td><?php echo $shelf[$i]['nama_rak'];?></td>
                         <td><?php echo $shelf[$i]['berat_maks'];?></td>
                         <td><?php echo $shelf[$i]['volume_maks'];?></td>
-                        <td><?php if($shelf[$i]['is_active']=="1") echo "Aktif"; else echo "Non Aktif";?></td>
+                        <td><?php if($shelf[$i]['is_active']=="1") {echo "Aktif";} else {echo "Non Aktif";}?></td>
                         <td><button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(<?php echo $shelf[$i]['id_shelf'];?>)">Lihat Detail</button></td>
                       </tr>
                     <?php endfor;?>

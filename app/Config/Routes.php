@@ -34,7 +34,7 @@ $routes->setAutoRoute(true);
 
 
 $routes->get('home', 'Home::index');
-
+// auth
 $routes->get('login', 'AuthController::login');
 $routes->post('login/auth', 'AuthController::loginAuth');
 $routes->get('logout', 'AuthController::logout');
@@ -68,6 +68,11 @@ $routes->get('order/create_order', 'OrderController::create');
 $routes->get('order/get_price/(:num)', 'OrderController::get_price/$1');
 $routes->post('order/(:num)/delete', 'OrderController::delete/$1');
 
+// membership
+$routes->get('membership/index', 'MembershipLevelController::index');
+
+$routes->get('membership/upgrade', 'MembershipLevelController::upgrade_menu');
+$routes->post('membership/upgrade/(:num)', 'MembershipLevelController::upgrade/$1');
 
 /*
  * --------------------------------------------------------------------
