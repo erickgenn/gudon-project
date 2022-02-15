@@ -64,6 +64,8 @@ class Filters extends BaseConfig
                     'order/create_order',
                     'order/get_price/*',
                     'order/*/delete',
+                    'membership/index',
+                    'membership/upgrade',
                     'home'
                 ]
             ]
