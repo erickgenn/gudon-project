@@ -18,11 +18,12 @@ class Filters extends BaseConfig
      * @var array
      */
     public $aliases = [
-		'csrf'     => \CodeIgniter\Filters\CSRF::class,
-		'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
-		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
-		'authGuard' => \App\Filters\AuthGuard::class,
-	];
+        'csrf'     => \CodeIgniter\Filters\CSRF::class,
+        'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
+        'honeypot' => \CodeIgniter\Filters\Honeypot::class,
+        'authGuard' => \App\Filters\AuthGuard::class,
+        'authAdmin' => \App\Filters\AdminGuard::class,
+    ];
 
     /**
      * List of filter aliases that are always
@@ -32,14 +33,41 @@ class Filters extends BaseConfig
      */
     public $globals = [
         'before' => [
-            'authGuard' => ['except' => 
-                                [
-                                    'login', 
-                                    'register/index', 
-                                    'register', 
-                                    'login/auth'
-                                ]
-                            ],
+            'authGuard' => [
+                'except' =>
+                [
+                    'login',
+                    'register/index',
+                    'register',
+                    'login/auth'
+                ],
+            ],
+            'authAdmin' => [
+                'except' =>
+                [
+                    'login',
+                    'register/index',
+                    'register',
+                    'login/auth',
+                    'forbidden',
+                    'login/admin',
+                    'login/auth/admin',
+                    '/warehouse/index',
+                    '/warehouse/search',
+                    '/warehouse/view/*',
+                    '/warehouse/view_product/*',
+                    'order/index',
+                    'order/search',
+                    'order/store',
+                    'order/search/detail/*',
+                    'order/view/*',
+                    'order/create_order',
+                    'order/get_price/*',
+                    'order/*/delete',
+                    'home'
+                ]
+            ]
+
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',

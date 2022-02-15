@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GudOn | Log in</title>
+  <title>GudOn | Admin Log In</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -22,11 +22,12 @@
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
         <img src="<?php echo base_url() ?>/assets/gudon_logo.png" alt="AdminLTE Logo" style="opacity: .8" width="50%">
+        <h1><b>Gud</b>On Admin</h1>
       </div>
       <div class="card-body">
 
         <p class="login-box-msg"><b>Sign in to start your session</b></p>
-        <form action="<?php echo base_url("login/auth") ?>" method="post">
+        <form action="<?php echo base_url("login/auth/admin") ?>" method="post">
           <div class="input-group mb-3">
             <input type="email" class="form-control" id="email" name="email" placeholder="Email">
             <div class="input-group-append">
@@ -60,14 +61,7 @@
             <!-- /.col -->
           </div>
         </form>
-        <!-- /.social-auth-links -->
 
-        <p class="mb-0">
-          <a href="<?php echo base_url(); ?>/register/index" class="text-center">Register a new membership</a>
-        </p>
-        <p class="mb-0">
-          Are you an admin? <a href="<?php echo base_url(); ?>/login/admin" class="text-center">Log In Here!</a>
-        </p>
       </div>
       <!-- /.card-body -->
     </div>

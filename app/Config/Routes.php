@@ -39,6 +39,15 @@ $routes->get('login', 'AuthController::login');
 $routes->post('login/auth', 'AuthController::loginAuth');
 $routes->get('logout', 'AuthController::logout');
 
+$routes->get('forbidden', 'AdminController::forbidden');
+
+// admin pages
+$routes->get('admin/index', 'AdminController::index');
+
+// admin login
+$routes->get('login/admin', 'AuthController::loginAdmin');
+$routes->post('login/auth/admin', 'AuthController::loginAuthAdmin');
+
 $routes->post('register', 'AuthController::store');
 $routes->get('register/index', 'AuthController::register');
 
