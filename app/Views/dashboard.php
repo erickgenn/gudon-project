@@ -67,7 +67,7 @@
             <!-- small box -->
             <div class="small-box" style="padding:5%">
               <div class="level" style="float:right; padding:3%">
-                <a href="<?php echo base_url('membership/index_v2');?>" style="color: 
+                <a href="<?php echo base_url('membership/index');?>" style="color: 
                 <?php if ($_SESSION['level'] == "BRONZE") {
                   echo '#A97142';
                 } elseif($_SESSION['level'] == "SILVER") {

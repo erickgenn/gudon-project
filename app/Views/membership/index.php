@@ -86,7 +86,7 @@
                 <div style="display: flex; -webkit-box-align: center; align-items: center; color: rgba(49, 53, 59, 0.68); padding: 14px 0px 16px 20%; font-size: 10px; line-height: 14px; justify-content: space-around;">
                   <!-- saldo -->
                   <a href="<?php echo base_url();?>">
-                    <div style="display: flex; flex-direction: row; text-align: center; -webkit-box-align: center; align-items: center; justify-content: space-around; cursor: pointer; background: rgb(255, 255, 255); box-shadow: rgb(49 53 59 / 12%) 1px 2px 8px; border-radius: 8px; padding: 12px; margin-right: 12px;">
+                    <div style="display: flex; flex-direction: row; text-align: center; -webkit-box-align: center; align-items: center; justify-content: space-around; cursor: pointer; background: rgb(255, 255, 255); box-shadow: rgb(49 53 59 / 12%) 0px 1px 6px; border-radius: 8px; padding: 12px; margin-right: 12px;">
                       <div style="position: relative; width: 34px; height: 32px; background-repeat: no-repeat; background-position: center center; background-size: contain; margin: 0 20px 0 10px;">
                         <i class="fa fa-money fa-3x" style="color: #55c5e6;"></i>
                       </div>
@@ -98,7 +98,7 @@
                   </a>
                   <!-- produk -->
                   <a href="<?php echo base_url();?>">
-                    <div style="display: flex; flex-direction: row; text-align: center; -webkit-box-align: center; align-items: center; justify-content: space-around; cursor: pointer; background: rgb(255, 255, 255); box-shadow: rgb(49 53 59 / 12%) 1px 2px 8px; border-radius: 8px; padding: 12px; margin-right: 12px;">
+                    <div style="display: flex; flex-direction: row; text-align: center; -webkit-box-align: center; align-items: center; justify-content: space-around; cursor: pointer; background: rgb(255, 255, 255); box-shadow: rgb(49 53 59 / 12%) 0px 1px 6px; border-radius: 8px; padding: 12px; margin-right: 12px;">
                       <div style="position: relative; width: 34px; height: 32px; background-repeat: no-repeat; background-position: center center; background-size: contain; margin: 0 20px 0 10px;">
                         <i class="	fa fa-shopping-basket fa-3x" style="color: #55c5e6;"></i>
                       </div>
@@ -110,7 +110,7 @@
                   </a>
                   <!-- order -->
                   <a href="<?php echo base_url('order/index');?>">
-                    <div style="display: flex; flex-direction: row; text-align: center; -webkit-box-align: center; align-items: center; justify-content: space-around; cursor: pointer; background: rgb(255, 255, 255); box-shadow: rgb(49 53 59 / 12%) 1px 2px 8px; border-radius: 8px; padding: 12px; margin-right: 12px;">
+                    <div style="display: flex; flex-direction: row; text-align: center; -webkit-box-align: center; align-items: center; justify-content: space-around; cursor: pointer; background: rgb(255, 255, 255); box-shadow: rgb(49 53 59 / 12%) 0px 1px 6px; border-radius: 8px; padding: 12px; margin-right: 12px;">
                       <div style="position: relative; width: 34px; height: 32px; background-repeat: no-repeat; background-position: center center; background-size: contain; margin: 0 20px 0 10px;">
                         <i class="fa fa-cart-arrow-down fa-3x" style="color: #55c5e6;"></i>
                       </div>
@@ -121,14 +121,20 @@
                     </div>
                   </a>
                   <!-- upgrade -->
-                  <a href="<?php echo base_url();?>">
-                    <div style="background-color: #55c5e6; display: flex; flex-direction: row; text-align: center; -webkit-box-align: center; align-items: center; justify-content: space-around; cursor: pointer; box-shadow: rgb(49 53 59 / 12%) 1px 2px 8px; border-radius: 8px; padding: 12px; margin-right: 12px;">
+                  <a href="<?php echo base_url('membership/upgrade');?>">
+                    <div style="background-color: #55c5e6; display: flex; flex-direction: row; text-align: center; -webkit-box-align: center; align-items: center; justify-content: space-around; cursor: pointer; box-shadow: rgb(49 53 59 / 12%) 0px 1px 6px; border-radius: 8px; padding: 12px; margin-right: 12px;">
                     
                       <div style="font-size: 14px; font-family: 'Open Sans', sans-serif; line-height: 22px; color:#FFFFFF; position: relative;">
                         Upgrade
                       </div>
                     </div>
                   </a>
+                </div>
+              </div>
+              <div class="card-footer">
+                Status Membership (<?php echo $customer_data['time_left'];?> days left)
+                <div class="progress progress-sm">
+                  <div class="progress-bar <?php if($customer_data['time_left'] <= 3) echo 'bg-red'; else echo 'bg-green'?>" role="progressbar" aria-valuenow="<?php echo $customer_data['percentage_left'];?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $customer_data['percentage_left'];?>%"></div>
                 </div>
               </div>
             </div>
@@ -152,20 +158,39 @@
                     }
                     ?>"><?php echo $_SESSION['level'];?></p>
                   </div>
+
                   <!-- Content -->
                   <div>
-                    Syarat & Ketentuan
-                    <ul>
-                      <?php for($i=0;$i<sizeof($customer_data['terms']);$i++):?>
-                        <li><?php echo $customer_data['terms'][$i]['terms'];?></li>
-                      <?php endfor;?>
-                    </ul>
-                    Keuntungan Member <?php echo $_SESSION['level'];?>
-                    <ul>
-                      <?php for($i=0;$i<sizeof($customer_data['benefit']);$i++):?>
-                        <li><?php echo $customer_data['benefit'][$i]['benefit'];?></li>
-                      <?php endfor;?>
+                    <div class="card-header p-2">
+                      <ul class="nav nav-pills">
+                        <li class="nav-item"><a class="nav-link active" href="#tnc" data-toggle="tab">Syarat & Ketentuan</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#benefit" data-toggle="tab">Keuntungan Member</a></li>
                       </ul>
+                    </div>
+                    <div class="card-body">
+                      <div class="tab-content">
+                        <div class="tab-pane active" id="tnc">
+                          <div class="post">
+                          Syarat & Ketentuan
+                          <ul>
+                            <?php for($i=0;$i<sizeof($customer_data['terms']);$i++):?>
+                              <li><?php echo $customer_data['terms'][$i]['terms'];?></li>
+                            <?php endfor;?>
+                          </ul>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="benefit">
+                          <div class="post">
+                          Keuntungan Member
+                          <ul>
+                            <?php for($i=0;$i<sizeof($customer_data['benefit']);$i++):?>
+                              <li><?php echo $customer_data['benefit'][$i]['benefit'];?></li>
+                            <?php endfor;?>
+                          </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 

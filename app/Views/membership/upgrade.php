@@ -45,12 +45,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <a href="<?php echo base_url('/membership/index_v2')?>" style="color:grey;"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+                            <a href="<?php echo base_url('/membership/index')?>" style="color:grey;"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
                             <h1 class="m-0">Upgrade Membership</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="<?php echo base_url('/membership/index_v2'); ?>">Membership</a></li>
+                                <li class="breadcrumb-item"><a href="<?php echo base_url('/membership/index'); ?>">Membership</a></li>
                                 <li class="breadcrumb-item active">Upgrade Membership</li>
                             </ol>
                         </div><!-- /.col -->
