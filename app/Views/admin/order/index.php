@@ -32,9 +32,6 @@
     </div>
 
     <!-- /.content-header -->
-
-
-
     <!-- /.navbar -->
     <!-- Main Sidebar Container -->
     <?php include(APPPATH . "Views/layout/aside.php"); ?>
@@ -47,7 +44,7 @@
           icon: 'success',
           title: 'Order Berhasil Dibatalkan!',
           showConfirmButton: false,
-          timer: 1500
+          timer: 1700
         });
       </script>
     <?php endif; ?>
@@ -59,7 +56,31 @@
           icon: 'error',
           title: 'Order Gagal Dibatalkan!',
           showConfirmButton: false,
-          timer: 1500
+          timer: 1700
+        });
+      </script>
+    <?php endif; ?>
+
+    <?php if (session()->getFlashdata('update_success')) : ?>
+      <script>
+        swal({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Order Berhasil Dikonfirmasi!',
+          showConfirmButton: false,
+          timer: 1700
+        });
+      </script>
+    <?php endif; ?>
+
+    <?php if (session()->getFlashdata('update_fail')) : ?>
+      <script>
+        swal({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Order Gagal Dikonfirmasi!',
+          showConfirmButton: false,
+          timer: 1700
         });
       </script>
     <?php endif; ?>
@@ -70,12 +91,12 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Order</h1>
+              <h1 class="m-0">Customer</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Order</li>
+                <li class="breadcrumb-item active">Customer</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -83,20 +104,12 @@
       </div>
       <!-- /.content-header -->
       <!-- Main content -->
-      <div class="row" style="padding:0 10px 0 10px">
+      <div class="row">
         <div class="col-12">
           <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Data Order</h3>
-              <div class="float-right">
-                <a href="<?php echo base_url('/order/create_order/'); ?>">
-                  <button type="button" class="btn btn-block btn-success">Create Order</button>
-                </a>
-              </div>
-            </div>
             <!-- /.card-header -->
-            <div class="card-body table-responsive" style="align-content:flex-end;">
-              <table id="order-table" class="table table-hover text-nowrap table-sm" style="width:100%">
+            <div class="card-body table-responsive" style="align-content:flex-end">
+              <table id="order-table" class="table table-striped table-bordered table-sm" style="width:100%">
                 <thead>
                   <tr>
                     <th>No.</th>
@@ -184,7 +197,7 @@
     $(document).ready(function() {
       $('#order-table').DataTable({
         "ajax": {
-          "url": "<?php echo base_url('order/search'); ?>",
+          "url": "<?php echo base_url('admin/order/search'); ?>",
           "dataSrc": ""
         },
         "columns": [{
@@ -225,7 +238,17 @@
               switch (row.status) {
                 case "SEDANG DIPROSES":
                   return `<button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(${row.id})">Lihat Detail</button>
-                          <form method='POST' action='<?php echo base_url('order') ?>/${row.id}/delete' style='display: unset;'>
+                          <form method='POST' action='<?php echo base_url('admin/order') ?>/confirm/${row.id}' style='display: unset;'>
+                            <button type='submit' class='btn btn-success' onclick="return confirm('Apakah Anda yakin akan menerima order ini?')">TERIMA</button>
+                          </form>
+                          <form method='POST' action='<?php echo base_url('admin/order') ?>/${row.id}/delete' style='display: unset;'>
+                            <button type='submit' class='btn btn-danger' onclick="return confirm('Apakah Anda yakin akan membatalkan order ini?')">BATAL</button>
+                          </form>
+                          `;
+                  break;
+                case "TELAH DIKONFIRMASI":
+                  return `<button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(${row.id})">Lihat Detail</button>
+                          <form method='POST' action='<?php echo base_url('admin/order') ?>/${row.id}/delete' style='display: unset;'>
                             <button type='submit' class='btn btn-danger' onclick="return confirm('Apakah Anda yakin akan membatalkan order ini?')">BATAL</button>
                           </form>
                           `;

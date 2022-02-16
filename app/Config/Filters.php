@@ -48,6 +48,7 @@ class Filters extends BaseConfig
                 'except' =>
                 [
                     'login',
+                    'logout',
                     'register/index',
                     'register',
                     'login/auth',
