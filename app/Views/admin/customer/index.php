@@ -95,7 +95,7 @@
                     <th>Nama Lengkap</th>
                     <th>Email</th>
                     <th>No. Telepon</th>
-                    <th>Tanggal Bergabung</th>
+                    <th>Bergabung Sejak</th>
                     <th>Status</th>
                   </tr>
                 </thead>
@@ -170,10 +170,10 @@
             render: function(data, type, row, meta) {
               switch (row.is_active) {
                 case "1":
-                  return `Aktif`;
+                  return `<button type="button" class="btn btn-block btn-success">Aktif</button>`;
                   break;
                 case "0":
-                  return `Tidak Aktif`;
+                  return `<button type="button" class="btn btn-block btn-danger">Tidak Aktif</button>`;
                   break;
                 default:
                   return `-`;
