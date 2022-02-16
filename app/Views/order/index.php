@@ -231,7 +231,7 @@
                           `;
                   break;
                 default:
-                  return `<a class='btn btn-info' href='<?php echo base_url('order/view') ?>/${row.id}'>DETAIL</a>`;
+                  return `<button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(${row.id})">Lihat Detail</button>`;
                   break;
               }
             }
