@@ -55,22 +55,14 @@
       <!-- /.content-header -->
 
       <!-- Main content -->
-      <div class="row">
-        <div class="col-12">
-          <div class="card">
+      <div class="row" style="gap:30px; padding:0 25px 0 25px;">
+          <div class="card" style="min-width: 610px;">
             <div class="card-header">
               <h3 class="card-title">Data Order</h3>
-
-              <div class="card-tools">
-                <div class="input-group input-group-sm" style="width: 150px;">
-
-
-                </div>
-              </div>
             </div>
             <!-- /.card-header -->
-            <div class="card-body table-responsive">
-              <table id="order-table" class="table table-striped table-bordered" style="width:100%">
+            <div class="card-body table-responsive" style="padding:0">
+              <table id="order-table" class="table table-hover text-nowrap" style="width:100%">
                 <tbody>
                   <tr>
                     <th>No.</th>
@@ -83,23 +75,6 @@
                   <tr>
                     <th>Nama Customer</th>
                     <td><?php echo $order[0]['nama_customer']; ?></td>
-                  </tr>
-                  <tr>
-                    <th>Nama Produk</th>
-                    <td><?php echo $order[0]['nama_produk']; ?></td>
-
-                  </tr>
-                  <tr>
-                    <th>Berat Produk</th>
-                    <td><?php echo $order[0]['berat_produk']; ?></td>
-                  </tr>
-                  <tr>
-                    <th>Volume Produk</th>
-                    <td><?php echo $order[0]['volume_produk']; ?></td>
-                  </tr>
-                  <tr>
-                    <th>Kuantitas Produk</th>
-                    <td><?php echo $order[0]['kuantitas_produk']; ?></td>
                   </tr>
                   <tr>
                     <th>Alamat Tujuan</th>
@@ -131,37 +106,40 @@
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-        </div>
+          <div class="card" style="min-width: 610px;">
+            <div class="card-header">
+              <h3 class="card-title">Data Produk</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive" style="padding-top:0">
+              <table id="shelf-table" class="table table-hover text-nowrap">
+                <thead>
+                  <th>#</th>
+                  <th>Nama Produk</th>
+                  <th>Kuantitas Produk</th>
+                  <th>Berat Produk</th>
+                  <th>Volume Produk</th>
+                </thead>
+                <tbody>
+                  <?php for($i=0;$i<sizeof($order);$i++):?>
+                    <tr>
+                        <td><?php echo $i+1?></td>
+                        <td><?php echo $order[$i]['nama_produk'];?></td>
+                        <td><?php echo $order[$i]['kuantitas_produk'];?></td>
+                        <td><?php echo $order[$i]['berat_produk'];?></td>
+                        <td><?php echo $order[$i]['volume_produk'];?></td>
+                    </tr>
+                  <?php endfor;?>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
       </div>
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
-    <!-- Modal -->
-    <div id="shelfModal" class="modal fade" role="dialog">
-      <div class="modal-dialog modal-lg">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-body table-responsive">
-            <table id="shelf-table" class="table table-hover text-nowrap">
-              <thead>
-                <th>#</th>
-                <th>Nama Produk</th>
-                <th>Kuantitas Produk</th>
-                <th>Berat Produk</th>
-                <th>Volume Produk</th>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
