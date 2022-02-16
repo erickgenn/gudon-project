@@ -64,7 +64,7 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <div class="row">
+    <div class="row" style="padding:0 10px 0 10px">
           <div class="col-12">
             <div class="card">
               <div class="card-header">
