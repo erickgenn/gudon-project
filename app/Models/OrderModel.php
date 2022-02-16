@@ -49,4 +49,24 @@ class OrderModel extends Model
 
         return $builder->get();
     }
+
+    public function updateConfirm($id)
+    {
+        $builder = $this->db->table('mst_gudon.mst_order');
+        $builder->set('status', 'TELAH DIKONFIRMASI');
+        $builder->where('id', $id);
+
+        $builder->update();
+    }
+
+    public function deleteOrder($id)
+    {
+        $builder = $this->db->table('mst_gudon.mst_order');
+        $builder->set('is_active', 0);
+        $builder->set('status', 'BATAL');
+        $builder->set('delivery_status', 'BATAL');
+        $builder->where('id', $id);
+
+        $builder->update();
+    }
 }

@@ -68,7 +68,7 @@
                             <!-- small box -->
                             <div class="small-box bg-info">
                                 <div class="inner">
-                                    <h3><?php echo $count_order; ?></h3>
+                                    <h3>1</h3>
 
                                     <p>New Orders</p>
                                 </div>

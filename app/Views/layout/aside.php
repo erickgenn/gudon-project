@@ -86,6 +86,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="<?php echo base_url('admin/order/index'); ?>" id="order" class="nav-link">
+              <i class="nav-icon fas fa-list"></i>
+              <p>
+                Order
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>

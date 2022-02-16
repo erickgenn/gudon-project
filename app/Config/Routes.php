@@ -17,8 +17,8 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
-$routes->setDefaultMethod('home');
+$routes->setDefaultController('AuthController');
+$routes->setDefaultMethod('login');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 $routes->setAutoRoute(true);
@@ -32,7 +32,7 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-
+$routes->get('/', 'AuthController::login');
 $routes->get('home', 'Home::index');
 // auth
 $routes->get('login', 'AuthController::login');
@@ -43,8 +43,14 @@ $routes->get('forbidden', 'AdminController::forbidden');
 
 // admin pages
 $routes->get('admin/index', 'AdminController::index');
+//admin customer
 $routes->get('admin/customer/index', 'CustomerController::index');
 $routes->get('admin/customer/search', 'CustomerController::search');
+//admin order
+$routes->get('admin/order/index', 'OrderAdminController::index');
+$routes->get('admin/order/search', 'OrderAdminController::search');
+$routes->post('admin/order/(:num)/delete', 'OrderAdminController::delete/$1');
+$routes->post('admin/order/confirm/(:num)', 'OrderAdminController::confirm/$1');
 
 // admin login
 $routes->get('login/admin', 'AuthController::loginAdmin');
