@@ -95,8 +95,8 @@
               </div>
             </div>
             <!-- /.card-header -->
-            <div class="card-body table-responsive" style="align-content:flex-end">
-              <table id="order-table" class="table table-striped table-bordered table-sm" style="width:100%">
+            <div class="card-body table-responsive" style="align-content:flex-end;">
+              <table id="order-table" class="table table-hover text-nowrap table-sm" style="width:100%">
                 <thead>
                   <tr>
                     <th>No.</th>
