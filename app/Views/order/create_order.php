@@ -60,11 +60,11 @@
 
             <!-- Main content -->
             <form method="POST" action="<?php echo base_url('order/store');?>" name="createorder">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
+                <div class="row" style="padding: 0 25px 0 25px">
+                    <div class="col-md-4">
+                        <div class="card" >
                             <div class="card-body">
-                                <div class="col-lg-12">
+                                <div class="col-lg-12" >
                                     <div class="form-group">
                                         <br>
                                         <label>Nama Customer</label>
@@ -92,9 +92,9 @@
                         </div>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-md-8" style="max-height:408px; overflow-y:auto">
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body" style="min-height:407px">
                                 <div class="col-lg-12">
                                     <table class="table table-bordered dataTable table-sm" id="product_table" style="width: 100%">
                                         <thead>
@@ -113,24 +113,19 @@
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <div class="float-right">
-                                        <button type="submit" class="btn btn-block btn-success">Kirim</button>
-                                    </div>
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
                     <div class="row">
                         <div class="col-lg-12 tampilDataOrder">
-
                         </div>
                     </div>
-
                 </div>
             </form>
+                <div class="float-right" style="padding:5px 25px 0 0 ">
+                    <button type="submit" class="btn btn-block btn-success">Kirim</button>
+                </div>
             <!-- /.content -->
         </div>
 
