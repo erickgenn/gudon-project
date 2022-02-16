@@ -49,8 +49,8 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item active"><a href="<?php echo base_url('/order/index'); ?>">Order</a></li>
-                                <li class="breadcrumb-item active"><a href="#">Create Order</a></li>
+                                <li class="breadcrumb-item"><a href="<?php echo base_url('/order/index'); ?>">Order</a></li>
+                                <li class="breadcrumb-item active">Create Order</a></li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -60,7 +60,7 @@
 
             <!-- Main content -->
             <form method="POST" action="<?php echo base_url('order/store');?>" name="createorder">
-                <div class="row" style="padding: 0 25px 0 25px">
+                <div class="row" style="padding: 0 10px 0 10px">
                     <div class="col-md-4">
                         <div class="card" >
                             <div class="card-body">
@@ -108,7 +108,7 @@
                                         <tbody>
                                         <tr id="tambah_produk_button_container">
                                             <td colspan=4>
-                                            <button type="button" class="btn btn-primary btn-sm col-lg-12" onclick="tambahRowProduk()">Tambah Produk</button>
+                                            <button type="button" class="btn btn-sm col-lg-12" style="background-color: #5cc5e6; color:white;" onclick="tambahRowProduk()">Tambah Produk</button>
                                             </td>
                                         </tr>
                                         </tbody>
