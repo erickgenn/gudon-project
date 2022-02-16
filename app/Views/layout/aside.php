@@ -49,7 +49,7 @@
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link" style="background-color:#5cc5e6">
       <img src="<?php echo base_url() ?>/assets/gudon_logo_white.png" alt="GudOn Logo" class="brand-image img-circle elevation-3">
-      <span class="brand-text font-weight-normal">GuDon</span>
+      <span class="brand-text font-weight-bold">Gud<span style="color:white;">On</span></span>
     </a>
 
     <!-- Sidebar -->
@@ -216,7 +216,7 @@
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link" style="background-color:#5cc5e6">
       <img src="<?php echo base_url() ?>/assets/gudon_logo_white.png" alt="GudOn Logo" class="brand-image img-circle elevation-3">
-      <span class="brand-text font-weight-normal">GuDon</span>
+      <span class="brand-text font-weight-bold">Gud<span style="color:white;">On</span></span>
     </a>
 
     <!-- Sidebar -->
