@@ -74,6 +74,7 @@ $routes->get('order/view/(:num)', 'OrderController::view/$1');
 
 // report
 $routes->get('report/index', 'ReportController::index');
+$routes->get('report/view/(:num)', 'ReportController::view/$1');
 $routes->get('report/search', 'ReportController::search');
 
 $routes->get('order/create_order', 'OrderController::create');

@@ -62,8 +62,8 @@ class OrderModel extends Model
     public function getReportStatus($start_date, $end_date, $status)
     {
         $builder = $this->db->table('mst_gudon.mst_order');
-        $builder->where('created_at >=', $start_date);
-        $builder->where('created_at <=', $end_date);
+        $builder->where('created_at >=', $start_date . " 00:00:00.000");
+        $builder->where('created_at <=', $end_date . " 23:59:59.999");
         $builder->where('status', $status);
         $builder->where('customer_id', $_SESSION['id']);
         return $builder->get();
@@ -72,8 +72,8 @@ class OrderModel extends Model
     public function getReportDate($start_date, $end_date)
     {
         $builder = $this->db->table('mst_gudon.mst_order');
-        $builder->where('created_at >=', $start_date);
-        $builder->where('created_at <=', $end_date);
+        $builder->where('created_at >=', $start_date . " 00:00:00.000");
+        $builder->where('created_at <=', $end_date . " 23:59:59.999");
         $builder->where('customer_id', $_SESSION['id']);
         return $builder->get();
     }

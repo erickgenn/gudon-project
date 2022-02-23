@@ -196,18 +196,14 @@
                 render: function(data, type, row, meta) {
                   switch (row.status) {
                     case "SEDANG DIPROSES":
-                      return `<form method='GET' action='<?php echo base_url('order/view') ?>/${row.id}' style='display: unset;'>
-                                <button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(${row.id})">Lihat Detail</button>
+                      return `<a href="<?php echo base_url('order/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;">Lihat Detail</a>
+                              <form method='POST' action='<?php echo base_url('order') ?>/${row.id}/delete' style='display: unset;'>
+                                <button type='submit' class='btn btn-danger' onclick="return confirm('Apakah Anda yakin akan membatalkan order ini?')">BATAL</button>
                               </form>
-                          <form method='POST' action='<?php echo base_url('order') ?>/${row.id}/delete' style='display: unset;'>
-                            <button type='submit' class='btn btn-danger' onclick="return confirm('Apakah Anda yakin akan membatalkan order ini?')">BATAL</button>
-                          </form>
-                          `;
+                              `;
                       break;
                     default:
-                      return `<form method='GET' action='<?php echo base_url('order/view') ?>/${row.id}' style='display: unset;'>
-                                <button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(${row.id})">Lihat Detail</button>
-                              </form>`;
+                      return `<a href="<?php echo base_url('order/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;">Lihat Detail</a>`;
                       break;
                   }
                 }

@@ -56,13 +56,13 @@
             </div>
             <!-- /.content-header -->
             <!-- Main content -->
-            <div class="row">
+            <div class="row" style="margin:0 10px 0 10px">
                 <div class="col-12">
                     <div class="card">
                         <!-- Form -->
                         <div class="card-body">
                             <h4> Filter </h4>
-                            <div class="container">
+                            <div class="container col-12">
                                 <div class="row">
                                     <div class="col-sm">
                                         <label for="start_date">Tanggal Awal</label>
@@ -86,12 +86,14 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div style="margin: 32px 0 0 10px">
+                                        <button onclick="generateTable()" class="btn btn-success fa-pull-right">Cari</button>
+                                        <!-- <button type="submit" class="btn btn-success fa-pull-right">Detail Report</button> -->
+                                    </div>
                                 </div>
+
                             </div>
-                            <div class="card-body">
-                                <button onclick="generateTable()" class="btn btn-success fa-pull-right">Report</button>
-                                <!-- <button type="submit" class="btn btn-success fa-pull-right">Detail Report</button> -->
-                            </div>
+
 
                         </div>
                         <!-- /.card-header -->
@@ -135,82 +137,89 @@
     <script src="<?php echo base_url('adminlte/plugins/jquery/jquery.min.js'); ?>"></script>
     <script src="<?php echo base_url('adminlte/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
     <script src="<?php echo base_url('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
-    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="<?php echo base_url('adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js'); ?>"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="<?php echo base_url(); ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="<?php echo base_url(); ?>/dist/js/adminlte.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script>
         function generateTable() {
-            let tabel = $('#report-table').DataTable();
-            tabel.destroy();
-            $('#report-table').DataTable({
-                "scrollX": true,
-                "ajax": {
-                    "url": `<?php echo base_url('report/search'); ?>`,
-                    "data": {
-                        status: $('#status-select').val(),
-                        start_date: $('#start_date').val(),
-                        end_date: $('#end_date').val()
+            let start_date = Date.parse($('#start_date').val());
+            let end_date = Date.parse($('#end_date').val());
+            if (start_date > end_date) {
+                swal({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Tolong Masukkan Tanggal Dengan Benar!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            } else {
+                let tabel = $('#report-table').DataTable();
+                tabel.destroy();
+                $('#report-table').DataTable({
+                    "scrollX": true,
+                    "ajax": {
+                        "url": `<?php echo base_url('report/search'); ?>`,
+                        "data": {
+                            status: $('#status-select').val(),
+                            start_date: $('#start_date').val(),
+                            end_date: $('#end_date').val()
+                        },
+                        "dataSrc": ""
                     },
-                    "dataSrc": ""
-                },
-                "columns": [{
-                        searchable: false,
-                        data: null,
-                        name: null,
-                        render: function(data, type, row, meta) {
-                            return meta.row + meta.settings._iDisplayStart + 1;
-                        }
-                    },
-                    {
-                        "data": "destination_name"
-                    },
-                    {
-                        "data": "destination_address"
-                    },
-                    {
-                        "data": "total_price"
-                    },
-                    {
-                        "data": "delivery_price"
-                    },
-                    {
-                        "data": "created_at"
-                    },
-                    {
-                        "data": "status"
-                    },
-                    {
-                        "data": "delivery_status"
-                    },
-                    {
-                        data: null,
-                        name: null,
-                        sortable: false,
-                        render: function(data, type, row, meta) {
-                            switch (row.status) {
-                                case "SEDANG DIPROSES":
-                                    return `<form method='GET' action='<?php echo base_url('order/view') ?>/${row.id}' style='display: unset;'>
-                                <button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(${row.id})">Lihat Detail</button>
-                              </form>
-                          <form method='POST' action='<?php echo base_url('order') ?>/${row.id}/delete' style='display: unset;'>
-                            <button type='submit' class='btn btn-danger' onclick="return confirm('Apakah Anda yakin akan membatalkan order ini?')">BATAL</button>
-                          </form>
-                          `;
-                                    break;
-                                default:
-                                    return `<form method='GET' action='<?php echo base_url('order/view') ?>/${row.id}' style='display: unset;'>
-                                <button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(${row.id})">Lihat Detail</button>
-                              </form>`;
-                                    break;
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copy', 'print', 'excel', 'pdf'
+                    ],
+                    "columns": [{
+                            searchable: false,
+                            data: null,
+                            name: null,
+                            render: function(data, type, row, meta) {
+                                return meta.row + meta.settings._iDisplayStart + 1;
                             }
-                        }
-                    },
-                ]
-            });
+                        },
+                        {
+                            "data": "destination_name"
+                        },
+                        {
+                            "data": "destination_address"
+                        },
+                        {
+                            "data": "total_price"
+                        },
+                        {
+                            "data": "delivery_price"
+                        },
+                        {
+                            "data": "created_at"
+                        },
+                        {
+                            "data": "status"
+                        },
+                        {
+                            "data": "delivery_status"
+                        },
+                        {
+                            data: null,
+                            name: null,
+                            sortable: false,
+                            render: function(data, type, row, meta) {
+                                return `<a href="<?php echo base_url('report/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;">Lihat Detail</a>`;
+                            }
+                        },
+                    ]
+                });
+            }
         }
     </script>
 
@@ -221,6 +230,32 @@
                     "url": "<?php echo base_url('order/search'); ?>",
                     "dataSrc": ""
                 },
+                dom: 'Bfrtip',
+                buttons: [{
+                        extend: 'copy',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                        }
+                    },
+                ],
                 "columns": [{
                         searchable: false,
                         sortable: false,
@@ -256,22 +291,7 @@
                         name: null,
                         sortable: false,
                         render: function(data, type, row, meta) {
-                            switch (row.status) {
-                                case "SEDANG DIPROSES":
-                                    return `<form method='GET' action='<?php echo base_url('order/view') ?>/${row.id}' style='display: unset;'>
-                                <button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(${row.id})">Lihat Detail</button>
-                              </form>
-                          <form method='POST' action='<?php echo base_url('order') ?>/${row.id}/delete' style='display: unset;'>
-                            <button type='submit' class='btn btn-danger' onclick="return confirm('Apakah Anda yakin akan membatalkan order ini?')">BATAL</button>
-                          </form>
-                          `;
-                                    break;
-                                default:
-                                    return `<form method='GET' action='<?php echo base_url('order/view') ?>/${row.id}' style='display: unset;'>
-                                <button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(${row.id})">Lihat Detail</button>
-                              </form>`;
-                                    break;
-                            }
+                            return `<a href="<?php echo base_url('report/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;">Lihat Detail</a>`;
                         }
                     },
                 ]

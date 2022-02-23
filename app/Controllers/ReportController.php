@@ -26,6 +26,20 @@ class ReportController extends BaseController
         return view('report/index');
     }
 
+    public function view($id)
+    {
+        $orderModel = new \App\Models\OrderModel();
+
+        $order = $orderModel->get_detail($id)->getResultArray();
+
+        for ($i = 0; $i < count($order); $i++) {
+            $order[$i]['total_harga'] = MoneyFormatController::money_format_rupiah($order[$i]['total_harga']);
+            $order[$i]['ongkos_kirim'] = MoneyFormatController::money_format_rupiah($order[$i]['ongkos_kirim']);
+        }
+
+        return view('report/view', compact('order'));
+    }
+
     public function search()
     {
         $orderModel = new \App\Models\OrderModel();
