@@ -72,6 +72,11 @@ $routes->get('order/search', 'OrderController::search');
 $routes->get('order/search/detail/(:num)', 'OrderController::searchDetail/$1');
 $routes->get('order/view/(:num)', 'OrderController::view/$1');
 
+// report
+$routes->get('report/index', 'ReportController::index');
+$routes->get('report/view/(:num)', 'ReportController::view/$1');
+$routes->get('report/search', 'ReportController::search');
+
 $routes->get('order/create_order', 'OrderController::create');
 $routes->get('order/get_price/(:num)', 'OrderController::get_price/$1');
 $routes->post('order/(:num)/delete', 'OrderController::delete/$1');

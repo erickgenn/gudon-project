@@ -127,239 +127,211 @@
     <div id="shelfModal" class="modal fade" role="dialog">
       <div class="modal-dialog modal-xl modal-dialog-centered">
 
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-body table-responsive">
-            <table id="detail-table" class="table table-hover text-nowrap">
-              <thead>
-                <th>#</th>
-                <th>Nama Warehouse</th>
-                <th>Nama Pengirim</th>
-                <th>Nama Produk</th>
-                <th>Berat Produk</th>
-                <th>Volume Produk</th>
-                <th>Kuantitas Produk</th>
-                <th>Alamat Tujuan</th>
-                <th>Total Harga</th>
-                <th>Status</th>
-                <th>Nama Pengiriman</th>
-                <th>Ongkos Kirim</th>
-                <th>Status Pengiriman</th>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
-          </div>
-        </div>
+
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+          <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
       </div>
-    </div>
+      <!-- ./wrapper -->
+      <link rel="stylesheet" href="<?php echo base_url('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
-  </div>
-  <!-- ./wrapper -->
-  <link rel="stylesheet" href="<?php echo base_url('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
+      <script src="<?php echo base_url('adminlte/plugins/jquery/jquery.min.js'); ?>"></script>
+      <script src="<?php echo base_url('adminlte/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
+      <script src="<?php echo base_url('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
+      <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+      <script src="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"></script>
+      <!-- Bootstrap 4 -->
+      <script src="<?php echo base_url(); ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <!-- AdminLTE App -->
+      <script src="<?php echo base_url(); ?>/dist/js/adminlte.js"></script>
 
-  <script src="<?php echo base_url('adminlte/plugins/jquery/jquery.min.js'); ?>"></script>
-  <script src="<?php echo base_url('adminlte/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
-  <script src="<?php echo base_url('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
-  <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
-  <script src="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"></script>
-  <!-- Bootstrap 4 -->
-  <script src="<?php echo base_url(); ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="<?php echo base_url(); ?>/dist/js/adminlte.js"></script>
+      <script>
 
-  <script>
+      </script>
 
-  </script>
-
-  <script>
-    $(document).ready(function() {
-      $('#order-table').DataTable({
-        "ajax": {
-          "url": "<?php echo base_url('order/search'); ?>",
-          "dataSrc": ""
-        },
-        "columns": [{
-            searchable: false,
-            sortable: false,
-            data: null,
-            name: null,
-            render: function(data, type, row, meta) {
-              return meta.row + meta.settings._iDisplayStart + 1;
-            }
-          },
-          {
-            "data": "destination_name"
-          },
-          {
-            "data": "destination_address"
-          },
-          {
-            "data": "total_price"
-          },
-          {
-            "data": "delivery_price"
-          },
-          {
-            "data": "created_at"
-          },
-          {
-            "data": "status"
-          },
-          {
-            "data": "delivery_status"
-          },
-          {
-            data: null,
-            name: null,
-            sortable: false,
-            render: function(data, type, row, meta) {
-              switch (row.status) {
-                case "SEDANG DIPROSES":
-                  return `<button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(${row.id})">Lihat Detail</button>
-                          <form method='POST' action='<?php echo base_url('order') ?>/${row.id}/delete' style='display: unset;'>
-                            <button type='submit' class='btn btn-danger' onclick="return confirm('Apakah Anda yakin akan membatalkan order ini?')">BATAL</button>
-                          </form>
-                          `;
-                  break;
-                default:
-                  return `<button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(${row.id})">Lihat Detail</button>`;
-                  break;
-              }
-            }
-          },
-        ]
-      });
-    });
-  </script>
-  <script>
-    let tabel;
-    let count = 0;
-
-    function table($id) {
-      count++;
-      if (count === 1) {
-        tabel = $('#detail-table').DataTable({
-          "scrollX": true,
-          "ajax": {
-            "url": `<?php echo base_url('order/search/detail'); ?>/${$id}`,
-            "dataSrc": ""
-          },
-          "columns": [{
-              searchable: false,
-              sortable: false,
-              data: null,
-              name: null,
-              render: function(data, type, row, meta) {
-                return meta.row + meta.settings._iDisplayStart + 1;
-              }
+      <script>
+        $(document).ready(function() {
+          $('#order-table').DataTable({
+            "ajax": {
+              "url": "<?php echo base_url('order/search'); ?>",
+              "dataSrc": ""
             },
-            {
-              "data": "nama_warehouse"
-            },
-            {
-              "data": "nama_customer"
-            },
-            {
-              "data": "nama_produk"
-            },
-            {
-              "data": "berat_produk"
-            },
-            {
-              "data": "volume_produk"
-            },
-            {
-              "data": "kuantitas_produk"
-            },
-            {
-              "data": "alamat_tujuan"
-            },
-            {
-              "data": "total_harga"
-            },
-            {
-              "data": "status_order"
-            },
-            {
-              "data": "nama_pengiriman"
-            },
-            {
-              "data": "ongkos_kirim"
-            },
-            {
-              "data": "status_pengiriman"
-            },
-          ]
+            "columns": [{
+                searchable: false,
+                sortable: false,
+                data: null,
+                name: null,
+                render: function(data, type, row, meta) {
+                  return meta.row + meta.settings._iDisplayStart + 1;
+                }
+              },
+              {
+                "data": "destination_name"
+              },
+              {
+                "data": "destination_address"
+              },
+              {
+                "data": "total_price"
+              },
+              {
+                "data": "delivery_price"
+              },
+              {
+                "data": "created_at"
+              },
+              {
+                "data": "status"
+              },
+              {
+                "data": "delivery_status"
+              },
+              {
+                data: null,
+                name: null,
+                sortable: false,
+                render: function(data, type, row, meta) {
+                  switch (row.status) {
+                    case "SEDANG DIPROSES":
+                      return `<a href="<?php echo base_url('order/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;">Lihat Detail</a>
+                              <form method='POST' action='<?php echo base_url('order') ?>/${row.id}/delete' style='display: unset;'>
+                                <button type='submit' class='btn btn-danger' onclick="return confirm('Apakah Anda yakin akan membatalkan order ini?')">BATAL</button>
+                              </form>
+                              `;
+                      break;
+                    default:
+                      return `<a href="<?php echo base_url('order/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;">Lihat Detail</a>`;
+                      break;
+                  }
+                }
+              },
+            ]
+          });
         });
-      } else {
-        tabel.destroy();
-        tabel = $('#detail-table').DataTable({
-          "scrollX": true,
-          "ajax": {
-            "url": `<?php echo base_url('order/search/detail'); ?>/${$id}`,
-            "dataSrc": ""
-          },
-          "columns": [{
-              searchable: false,
-              sortable: false,
-              data: null,
-              name: null,
-              render: function(data, type, row, meta) {
-                return meta.row + meta.settings._iDisplayStart + 1;
-              }
-            },
-            {
-              "data": "nama_warehouse"
-            },
-            {
-              "data": "nama_customer"
-            },
-            {
-              "data": "nama_produk"
-            },
-            {
-              "data": "berat_produk"
-            },
-            {
-              "data": "volume_produk"
-            },
-            {
-              "data": "kuantitas_produk"
-            },
-            {
-              "data": "alamat_tujuan"
-            },
-            {
-              "data": "total_harga"
-            },
-            {
-              "data": "status_order"
-            },
-            {
-              "data": "nama_pengiriman"
-            },
-            {
-              "data": "ongkos_kirim"
-            },
-            {
-              "data": "status_pengiriman"
-            },
-          ]
-        });
-      }
-    }
-  </script>
-  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <script src="<?php echo base_url(); ?>/dist/js/pages/dashboard.js"></script>
+      </script>
+      <script>
+        let tabel;
+        let count = 0;
+
+        function table($id) {
+          count++;
+          if (count === 1) {
+            tabel = $('#detail-table').DataTable({
+              "scrollX": true,
+              "ajax": {
+                "url": `<?php echo base_url('order/search/detail'); ?>/${$id}`,
+                "dataSrc": ""
+              },
+              "columns": [{
+                  searchable: false,
+                  sortable: false,
+                  data: null,
+                  name: null,
+                  render: function(data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                  }
+                },
+                {
+                  "data": "nama_warehouse"
+                },
+                {
+                  "data": "nama_customer"
+                },
+                {
+                  "data": "nama_produk"
+                },
+                {
+                  "data": "berat_produk"
+                },
+                {
+                  "data": "volume_produk"
+                },
+                {
+                  "data": "kuantitas_produk"
+                },
+                {
+                  "data": "alamat_tujuan"
+                },
+                {
+                  "data": "total_harga"
+                },
+                {
+                  "data": "status_order"
+                },
+                {
+                  "data": "nama_pengiriman"
+                },
+                {
+                  "data": "ongkos_kirim"
+                },
+                {
+                  "data": "status_pengiriman"
+                },
+              ]
+            });
+          } else {
+            tabel.destroy();
+            tabel = $('#detail-table').DataTable({
+              "scrollX": true,
+              "ajax": {
+                "url": `<?php echo base_url('order/search/detail'); ?>/${$id}`,
+                "dataSrc": ""
+              },
+              "columns": [{
+                  searchable: false,
+                  sortable: false,
+                  data: null,
+                  name: null,
+                  render: function(data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                  }
+                },
+                {
+                  "data": "nama_warehouse"
+                },
+                {
+                  "data": "nama_customer"
+                },
+                {
+                  "data": "nama_produk"
+                },
+                {
+                  "data": "berat_produk"
+                },
+                {
+                  "data": "volume_produk"
+                },
+                {
+                  "data": "kuantitas_produk"
+                },
+                {
+                  "data": "alamat_tujuan"
+                },
+                {
+                  "data": "total_harga"
+                },
+                {
+                  "data": "status_order"
+                },
+                {
+                  "data": "nama_pengiriman"
+                },
+                {
+                  "data": "ongkos_kirim"
+                },
+                {
+                  "data": "status_pengiriman"
+                },
+              ]
+            });
+          }
+        }
+      </script>
+      <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+      <script src="<?php echo base_url(); ?>/dist/js/pages/dashboard.js"></script>
 </body>
 
 </html>
