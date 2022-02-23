@@ -59,6 +59,25 @@ class OrderModel extends Model
         $builder->update();
     }
 
+    public function getReportStatus($start_date, $end_date, $status)
+    {
+        $builder = $this->db->table('mst_gudon.mst_order');
+        $builder->where('created_at >=', $start_date);
+        $builder->where('created_at <=', $end_date);
+        $builder->where('status', $status);
+        $builder->where('customer_id', $_SESSION['id']);
+        return $builder->get();
+    }
+
+    public function getReportDate($start_date, $end_date)
+    {
+        $builder = $this->db->table('mst_gudon.mst_order');
+        $builder->where('created_at >=', $start_date);
+        $builder->where('created_at <=', $end_date);
+        $builder->where('customer_id', $_SESSION['id']);
+        return $builder->get();
+    }
+
     public function deleteOrder($id)
     {
         $builder = $this->db->table('mst_gudon.mst_order');

@@ -69,7 +69,9 @@ class Filters extends BaseConfig
                     'order/*/delete',
                     'membership/index',
                     'membership/upgrade',
-                    'home'
+                    'home',
+                    'report/index',
+                    'report/search',
                 ]
             ]
 
