@@ -122,10 +122,11 @@
                         </div>
                     </div>
                 </div>
-            </form>
                 <div class="float-right" style="padding:5px 25px 0 0 ">
                     <button type="submit" class="btn btn-block btn-success">Kirim</button>
                 </div>
+            </form>
+                
             <!-- /.content -->
         </div>
 
