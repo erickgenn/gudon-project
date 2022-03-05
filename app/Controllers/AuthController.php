@@ -29,6 +29,12 @@ class AuthController extends BaseController
         return view('auth/register');
     }
 
+    public function forgot_password()
+    {
+        // helper(['form']);
+        return view('auth/forgot_password');
+    }
+
     public function store()
     {
         helper(['form']);
@@ -140,4 +146,38 @@ class AuthController extends BaseController
         session_destroy();
         return redirect()->to(base_url('login'));
     }
+
+    // if user clicks on the forgot passwordnya
+    if (isset($_POST['forgot-password'])) {
+        $email = $_POST['email'];
+
+        if ($this->validate($rules)) {
+            $authModel = new \App\Models\AuthModel();
+            $data_post = $this->request->getPost();
+
+            $data_insert = [
+                'name' => $data_post['fullname'],
+                'email' => $data_post['email'],
+                'phone' => $data_post['phone'],
+                'password' => md5($data_post['password'])
+            ];
+            $authModel->insert($data_insert);
+            return view('auth/login');
+        } else {
+            $data['validation'] = $this->validator;
+            echo view('auth/register', $data);
+        }
+        
+        if (count($errors) == 0) {
+            
+        }
+
+        $sql 
+
+    // }
+
+
+
+
+
 }

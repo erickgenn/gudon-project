@@ -39,6 +39,7 @@ class Filters extends BaseConfig
                     'login',
                     'register/index',
                     'register',
+                    'forgot_password/index',
                     'login/auth',
                     'login/admin',
                     'login/auth/admin'
@@ -51,6 +52,7 @@ class Filters extends BaseConfig
                     'logout',
                     'register/index',
                     'register',
+                    'forgot_password/index',
                     'login/auth',
                     'forbidden',
                     'login/admin',
