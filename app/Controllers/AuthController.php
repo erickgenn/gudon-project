@@ -174,7 +174,7 @@ class AuthController extends BaseController
 
         $sql 
 
-    // }
+    }
 
 
 

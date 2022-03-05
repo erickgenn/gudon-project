@@ -26,8 +26,11 @@
       <div class="card-body">
 
         <p class="login-box-msg"><b>Recover Your Password</b></p>
-        <p> Please enter your email address you used to sign up on this site 
-            and we will assist you in recovering your password </p>
+        <div class="bg-gray alert alert-info" >
+
+     <center>Please enter your email address you used to sign up on this site 
+            and we will assist you in recovering your password </center> 
+    </div>
 
         <form action="<?php echo base_url("forgot_password/auth") ?>" method="post">
           <div class="input-group mb-3">
