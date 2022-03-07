@@ -42,7 +42,8 @@ class Filters extends BaseConfig
                     'forgot_password/index',
                     'login/auth',
                     'login/admin',
-                    'login/auth/admin'
+                    'login/auth/admin',
+                    'forgot_password/authemail'
                 ],
             ],
             'authAdmin' => [
@@ -75,6 +76,7 @@ class Filters extends BaseConfig
                     'report/index',
                     'report/search',
                     'report/view/*',
+                    'forgot_password/authemail'
                 ]
             ]
 

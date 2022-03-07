@@ -39,7 +39,9 @@ $routes->get('login', 'AuthController::login');
 $routes->post('login/auth', 'AuthController::loginAuth');
 $routes->get('logout', 'AuthController::logout');
 $routes->get('forgot_password/index', 'AuthController::forgot_password');
-$routes->get('forgot_password/auth', 'AuthController::forgot_password');//autentikasi email utk forgot password
+// $routes->get('forgot_password/auth', 'AuthController::forgot_password');//autentikasi email utk forgot password
+$routes->post('forgot_password/authemail', 'AuthController::auth_forgotpass');
+$routes->post('forgot_password/forgot/changepass(:num)', 'AuthController::auth_changepass$1');
 
 
 $routes->get('forbidden', 'AdminController::forbidden');
