@@ -29,7 +29,7 @@
         <div class="bg-gray alert alert-info" >
 
     </div>
-        <form action="<?php echo base_url("forgot_password/forgot/changepass/").$token['email'] ?>" method="post">
+        <form action="<?php echo base_url("forgot_password/forgot/changepass/").$token ?>" method="post">
         <div class="input-group mb-3">
             <input type="email" class="form-control" id="email" name="email" placeholder="Email">
             <div class="input-group-append">
