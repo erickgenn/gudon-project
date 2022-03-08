@@ -42,6 +42,7 @@ $routes->get('forgot_password/index', 'AuthController::forgot_password');
 // $routes->get('forgot_password/auth', 'AuthController::forgot_password');//autentikasi email utk forgot password
 $routes->post('forgot_password/authemail', 'AuthController::auth_forgotpass');
 $routes->get('forgot_password/forgot/changepass/(:any)', 'AuthController::auth_changepass/$1');
+$routes->post('forgot_password/forgot/newpass/(:any)', 'AuthController::new_password/$1');
 
 
 $routes->get('forbidden', 'AdminController::forbidden');

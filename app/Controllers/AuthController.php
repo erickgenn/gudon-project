@@ -40,6 +40,33 @@ class AuthController extends BaseController
         return view('auth/change_password', compact('token'));
     }
 
+    
+    public function new_password($token)
+    {
+        $session=session();
+        $data = $this->request->getPost();
+
+            $encrypted_email = md5($data['email']);
+            if ($token == $encrypted_email) {
+                $data_update = [
+                    'password' => md5($data["password"]),
+                ];
+                $userModel = new \App\Models\AuthModel();
+                $user = $userModel->where('email', $data['email'])->first();
+           
+                $userModel->update($user['id'], $data_update);
+        
+                return redirect()->to('login');
+                
+            }else{
+                $session->setFlashdata('msg', 'Email is incorrect!');
+                return redirect()->to('forgot_password/forgot/changepass/'.$token);           
+            }
+
+ 
+        
+    }
+
     public function auth_forgotpass() {
         $session = session();
         $data = $this->request->getPost();

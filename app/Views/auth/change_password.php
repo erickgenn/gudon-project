@@ -26,12 +26,12 @@
       <div class="card-body">
 
         <p class="login-box-msg"><b>Change Your Password</b></p>
-        <div class="bg-gray alert alert-info" >
+        <div >
 
     </div>
-        <form action="<?php echo base_url("forgot_password/forgot/changepass/").$token ?>" method="post">
+        <form action="<?php echo base_url("forgot_password/forgot/newpass")."/".$token ?>" method="post">
         <div class="input-group mb-3">
-            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
@@ -39,7 +39,7 @@
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" pattern=".{4,50}"  required title="Password must be between 4-50 characters">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
@@ -47,7 +47,7 @@
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirm Password">
+            <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirm Password" pattern=".{4,50}"  required title="Password must be between 4-50 characters">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
@@ -60,6 +60,11 @@
             <?php if (session()->getFlashdata('msg')) : ?>
               <div class="alert alert-warning">
                 <?= session()->getFlashdata('msg') ?>
+              </div>
+            <?php endif; ?>
+            <?php if (session()->getFlashdata('msg_passlimit')) : ?>
+              <div class="alert alert-warning">
+                <?= session()->getFlashdata('msg_passlimit') ?>
               </div>
             <?php endif; ?>
           </div>

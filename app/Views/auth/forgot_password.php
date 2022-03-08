@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GudOn | Recover your Password</title>
+  <title>GudOn | Reset your Password</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -25,11 +25,11 @@
       </div>
       <div class="card-body">
 
-        <p class="login-box-msg"><b>Recover Your Password</b></p>
+        <p class="login-box-msg"><b>Reset Your Password</b></p>
         <div class="bg-gray alert alert-info" >
 
      <center>Please enter your email address you used to sign up on this site 
-            and we will assist you in recovering your password </center> 
+            and we will assist you in reset your password </center> 
     </div>
 
         <form action="<?php echo base_url("forgot_password/authemail") ?>" method="post">
@@ -55,7 +55,7 @@
             </div>
             <!-- /.col -->
             <div class="col-6">
-              <button type="submit" class="btn btn-primary btn-block">Recover Password</button>
+              <button type="submit" class="btn btn-primary btn-block">Reset Password</button>
             </div>
             <!-- /.col -->
           </div>
