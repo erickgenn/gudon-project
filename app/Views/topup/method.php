@@ -44,7 +44,7 @@
                     icon: 'success',
                     title: 'Top Up Successful!',
                     showConfirmButton: false,
-                    timer: 1550
+                    timer: 2000
                 });
             </script>
         <?php endif; ?>
