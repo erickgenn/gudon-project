@@ -73,6 +73,9 @@ class Filters extends BaseConfig
                     'report/index',
                     'report/search',
                     'report/view/*',
+                    'topup/method',
+                    'topup/view/*',
+                    'topup',
                 ]
             ]
 
