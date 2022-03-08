@@ -364,7 +364,7 @@
       if (current.includes('/report/index')) {
         document.getElementById("report").className = "nav-link active";
       }
-      if (current.includes('/topup/index')) {
+      if (current.includes('/topup/method')) {
         document.getElementById("topup").className = "nav-link active";
       }
     });
