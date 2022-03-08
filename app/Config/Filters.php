@@ -47,6 +47,7 @@ class Filters extends BaseConfig
             'authAdmin' => [
                 'except' =>
                 [
+                    '/',
                     'login',
                     'logout',
                     'register/index',
