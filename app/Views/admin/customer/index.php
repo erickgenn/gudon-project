@@ -45,7 +45,7 @@
         swal({
           position: 'top-end',
           icon: 'success',
-          title: 'Order Berhasil Dihapus!',
+          title: 'Order Successfully Deleted!',
           showConfirmButton: false,
           timer: 1500
         });
@@ -57,7 +57,7 @@
         swal({
           position: 'top-end',
           icon: 'error',
-          title: 'Order Gagal Dihapus!',
+          title: 'Failed to Delete Order!',
           showConfirmButton: false,
           timer: 1500
         });
