@@ -70,6 +70,7 @@ class Filters extends BaseConfig
                     'order/*/delete',
                     'membership/index',
                     'membership/upgrade',
+                    'membership/upgrade/*',
                     'home',
                     'report/index',
                     'report/search',
@@ -77,6 +78,7 @@ class Filters extends BaseConfig
                     'topup/method',
                     'topup/view/*',
                     'topup',
+                    'membership/payment',
                 ]
             ]
 
