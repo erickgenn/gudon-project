@@ -90,7 +90,8 @@ $routes->post('order/(:num)/delete', 'OrderController::delete/$1');
 $routes->get('membership/index', 'MembershipLevelController::index');
 
 $routes->get('membership/upgrade', 'MembershipLevelController::upgrade_menu');
-$routes->post('membership/upgrade/(:num)', 'MembershipLevelController::upgrade/$1');
+$routes->get('membership/upgrade/(:num)', 'MembershipLevelController::upgrade/$1');
+$routes->post('membership/payment', 'MembershipLevelController::payment');
 
 /*
  * --------------------------------------------------------------------
