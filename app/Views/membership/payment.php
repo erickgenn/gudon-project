@@ -59,6 +59,18 @@
                 });
             </script>
         <?php endif; ?>
+
+        <?php if (session()->getFlashdata('msg_available_sub')) : ?>
+            <script>
+                swal({
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: 'Please Mind That You Have an Active Membership!',
+                    showConfirmButton: true,
+                    timer: 2700
+                });
+            </script>
+        <?php endif; ?>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
