@@ -67,10 +67,10 @@ $routes->get('/warehouse/view_product/(:num)', 'WarehouseController::view_produc
 
 // product
 $routes->get('/product/index', 'ProductController::index');
-$routes->get('/product/index_v2', 'ProductController::index_v2');
 $routes->get('/product/search', 'ProductController::search');
 $routes->get('/product/add_product', 'ProductController::add_product');
 $routes->get('/product/view/(:num)', 'ProductController::view_detail/$1');
+
 //order
 $routes->get('order/index', 'OrderController::index');
 $routes->post('order/store', 'OrderController::store');

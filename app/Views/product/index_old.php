@@ -40,65 +40,60 @@
 
 
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <div class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">Product</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Product</li>
-                </ol>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </div>
-      <!-- /.content-header -->
-      <div class="row">
-        <div class="col-lg-9 col-md-8 col-12"  style="margin:0 10px 0 10px">
-          <div class="row">
-            <div class="col-12">
-              <div class="row" style="gap:15px;">
-                <?php if ($product): ?>
-                  <?php for($i=0;$i<sizeof($product);$i++):?>
-                    <div class="card col-sm-4" style="padding:20px">
-                      <div class="single-product">
-                        <?php if (!empty($product[$i]['picture'])): ?>
-                          <div>
-                            <a href="<?php echo base_url('/product/view').'/'.$product[$i]['id']?>">
-                              <img src="<?php echo base_url('/uploads/product').'/'.$product[$i]['picture'] ?>" class="img-fluid" width="275" height="400" />
-                            </a>
-                          </div>
-                        <?php else:?>
-                          <div>
-                            <a href="<?php echo base_url('/product/view').'/'.$product[$i]['id']?>">
-                              <img src="<?php echo base_url('/assets/no_image.png');?>" class="img-fluid" width="275" height="400" />
-                            </a>
-                          </div>
-                        <?php endif;?>
-                        <div style="padding:10px">
-                          <h3><a href="<?php echo base_url('/product/view').'/'.$product[$i]['id']?>" style="color:black;"><?php echo $product[$i]['name']?></a></h3>
-                        </div>
-                        <div>
-                          <span>IDR <?= number_format($product[$i]['price']) ?></span>
-                        </div>
-                      </div>
-                    </div>
-                  <?php endfor;?>
-                <?php endif; ?>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Warehouse</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Product</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="row" style="padding:0 10px 0 10px">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Data Product</h3>
               </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive">
+                <table id="warehouse-table" class="table table-hover text-nowrap" style="width:100%">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Quantity</th>
+                      <th>Price</th>
+                      <th>picture</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
             </div>
+            <!-- /.card -->
           </div>
         </div>
-      </div>
-      <!-- Main content -->
-    </div>
-    <!-- /.content-wrapper -->
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
