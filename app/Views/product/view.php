@@ -70,7 +70,7 @@
                 <br><br>
                 <div class="card col-sm-2" >
                   <div class="card-body">
-                    <img src="<?php echo base_url() ?>/assets/gudon_logo.png" width="100%" >
+                    <img src="<?php echo base_url('/uploads/product').'/'.$product['picture'] ?>" width="100%" >
                   </div>
                   
                 </div>    
