@@ -23,4 +23,6 @@ class ProductModel extends Model
         $builder->where('id', $id);
         return $builder->get();
     }
+
+    
 }

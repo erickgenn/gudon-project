@@ -37,4 +37,19 @@ class ProductController extends BaseController
         return view('product/view',compact('product'));
     }
 
+    public function update($id)
+    {   
+        $model = new ProductModel();
+
+        $data = $this->request->getPost();
+        $data = [
+            'name' => $data['name'],
+            'price'  => $data['price'],
+            'description'  => $data['description'],
+        ];  
+        $model->update($id, $data);
+
+        return view('product/index');
+    }
+
 }

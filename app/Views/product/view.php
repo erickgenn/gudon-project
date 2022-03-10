@@ -79,7 +79,7 @@
               
               <div class="card-body table-responsive" style=> 
                 <table class="table table-hover text-nowrap" id="warehouse-table">
-                <form action="<?php echo base_url('product/update');?>" method="POST">
+                <form action="<?php echo base_url('product/update') . "/" . $product['id'];?>" method="POST">
                 <tbody>
                     <tr>
                       <th>ID</th>
@@ -87,7 +87,7 @@
                     </tr>
                     <tr>
                       <th>Name</th>
-                      <td><input type="text" class="form-control" name='product_name' id='product_name' value="<?php echo $product['name'];?>" required> </td>
+                      <td><input type="text" class="form-control" name='name' id='product_name' value="<?php echo $product['name'];?>" required> </td>
                     </tr>
                     <tr>
                       <th>Quantity</th>
@@ -97,12 +97,12 @@
                       <th>Price</th>
                       <td><div class="input-group-append">
                               <span class="input-group-text">Rp</span>
-                          <input type="text" class="form-control" name='product_price' id='product_price' value="<?php echo $product['price'];?>" required></div>
+                          <input type="text" class="form-control" name='price' id='product_price' value="<?php echo $product['price'];?>" required></div>
                       </td>
                     </tr>
                     <tr>
                       <th>Description</th>
-                      <td><textarea  class="form-control" name='product_description' id='product_description'  required><?php echo $product['description'];?></textarea></td>
+                      <td><textarea  class="form-control" name='description' id='product_description'  required><?php echo $product['description'];?></textarea></td>
                     </tr>
                     <tr>
                       <th>Weight</th>
@@ -113,11 +113,11 @@
                       <td><?php echo $product['volume'];?> m³</td>
                     </tr>
                   </tbody>
-                  <div class="float-right" style="padding:5px 25px 0 0 ">
-                    <button type="submit" class="btn btn-block btn-success">Simpan</button>
-                  </div>
-                  </form>
                 </table>
+                <div class="float-right" style="padding:5px 25px 0 0 ">
+                      <button type="submit" class="btn btn-block btn-success">Simpan</button>
+                    </div>
+                </form>
               </div>
               <!-- /.card-body -->
             </div>
