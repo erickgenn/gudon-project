@@ -16,7 +16,7 @@ class ProductController extends BaseController
     public function index()
     {
         $model = new ProductModel;
-        $product['product'] = $model->where('customer_id', $_SESSION['id'])->where('deleted_at', null)->findAll();
+        $product['product'] = $model->where('customer_id', $_SESSION['id'])->where('deleted_at', null)->orderBy('created_at', 'asc')->findAll();
         return view('product/index', $product);
     }
 

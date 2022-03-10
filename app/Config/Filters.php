@@ -78,6 +78,7 @@ class Filters extends BaseConfig
                     'report/index',
                     'report/search',
                     'report/view/*',
+                    '/product/index_v2'
                 ]
             ]
 

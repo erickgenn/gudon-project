@@ -40,60 +40,64 @@
 
 
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Warehouse</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Product</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <div class="row" style="padding:0 10px 0 10px">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Data Product</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body table-responsive">
-                <table id="warehouse-table" class="table table-hover text-nowrap" style="width:100%">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Name</th>
-                      <th>Quantity</th>
-                      <th>Price</th>
-                      <th>picture</th>
-                      <th>Status</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Product</h1>
             </div>
-            <!-- /.card -->
+            <!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Product</li>
+                </ol>
+            </div><!-- /.col -->
           </div>
+          <!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+      <div class="row">
+        <div style="margin-left:auto; padding-right:20px;">
+          <a href="<?php echo base_url('/product/add_product'); ?>">
+            <button type="button" class="btn btn-block btn-success">Add Product</button>
+          </a>
         </div>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
+      </div>
+      <div class="row" style="gap:20px; padding:30px;margin:auto;">
+        <?php if ($product): ?>
+          <?php for($i=0;$i<sizeof($product);$i++):?>
+            <div class="card col-sm-2" style="margin:0;padding:20px;cursor: pointer;" onclick="location.href='<?php echo base_url('/product/view').'/'.$product[$i]['id']?>';">
+              <div>
+                <?php if (!empty($product[$i]['picture'])): ?>
+                  <div>
+                    <img src="<?php echo base_url('/uploads/product').'/'.$product[$i]['picture'] ?>" class="img-fluid" width="275" height="400" />
+                  </div>
+                <?php else:?>
+                  <div>
+                    <img src="<?php echo base_url('/assets/no_image.png');?>" class="img-fluid" width="275" height="400" />
+                  </div>
+                <?php endif;?>
+                <div style="padding:10px 0 0">
+                  <div>
+                    <h3 class="card-title" style="color:black;"><?php echo $product[$i]['name']?></a></h3><br>
+                  </div>
+                  <div>
+                    <span>IDR <?= number_format($product[$i]['price']) ?></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <?php endfor;?>
+        <?php endif; ?>
+      </div>
+      <!-- Main content -->
+    </div>
+    <!-- /.content-wrapper -->
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
