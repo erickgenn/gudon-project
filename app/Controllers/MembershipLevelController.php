@@ -84,8 +84,22 @@ class MembershipLevelController extends BaseController
 
     public function upgrade($id)
     {
+        date_default_timezone_set('Asia/Jakarta');
+        $session = session();
+
         $membershipService = new MembershipModel();
         $modelDetailLevel = new LevelDetailModel();
+        $subscriptionModel = new Subscription();
+
+        $subs = $subscriptionModel->where('cust_id', $_SESSION['id'])->where('is_active', 1)->first();
+        $subscription_date = $subs['subscription_date'];
+        $date = new DateTime($subscription_date);
+        $date_end = $date->add(new DateInterval('P30D'));
+        $now = new DateTime();
+
+        if ($now < $date_end) {
+            $session->setFlashdata('msg_available_sub', '!');
+        }
 
         $membership = $membershipService->where('id', $id)->first();
         $detail_level = $modelDetailLevel->where('level_id', $id)->where('terms !=', null)->findColumn('terms');
