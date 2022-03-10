@@ -67,18 +67,26 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Product Name: <strong><?php echo $product['name'];?></strong></h3>
+                <br><br>
+                <div class="card col-sm-2" >
+                  <div class="card-body">
+                    <img src="<?php echo base_url() ?>/assets/gudon_logo.png" width="100%" >
+                  </div>
+                  
+                </div>    
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive" style="padding:0;">
                 <table class="table table-hover text-nowrap" id="warehouse-table">
+                <form action="<?php echo base_url('product/update') . "/" . $product['id'];?>" method="POST">
                 <tbody>
                     <tr>
                       <th>ID</th>
-                      <td><?php echo $product['id'];?></td>
+                      <td><?php echo $product['id'];?> </td>
                     </tr>
                     <tr>
                       <th>Name</th>
-                      <td><?php echo $product['name'];?></td>
+                      <td><input type="text" class="form-control" name='name' id='product_name' value="<?php echo $product['name'];?>" required> </td>
                     </tr>
                     <tr>
                       <th>Quantity</th>
@@ -86,15 +94,14 @@
                     </tr>
                     <tr>
                       <th>Price</th>
-                      <td>Rp. <?php echo number_format($product['price']) ;?></td>
-                    </tr>
-                    <tr>
-                      <th>Picture</th>
-                      <td><?php echo $product['picture'];?></td>
+                      <td><div class="input-group-append">
+                              <span class="input-group-text">Rp</span>
+                          <input type="text" class="form-control" name='price' id='product_price' value="<?php echo $product['price'];?>" required></div>
+                      </td>
                     </tr>
                     <tr>
                       <th>Description</th>
-                      <td><?php echo $product['description'];?></td>
+                      <td><textarea  class="form-control" name='description' id='product_description'  required><?php echo $product['description'];?></textarea></td>
                     </tr>
                     <tr>
                       <th>Weight</th>
@@ -105,8 +112,11 @@
                       <td><?php echo $product['volume'];?> m³</td>
                     </tr>
                   </tbody>
-                  
                 </table>
+                <div class="float-right" style="padding:5px 25px 0 0 ">
+                      <button type="submit" class="btn btn-block btn-success">Simpan</button>
+                    </div>
+                </form>
               </div>
               <!-- /.card-body -->
             </div>
