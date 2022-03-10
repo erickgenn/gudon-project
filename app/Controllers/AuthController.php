@@ -46,6 +46,15 @@ class AuthController extends BaseController
         $session=session();
         $data = $this->request->getPost();
 
+        helper(['form']);
+        $rules = [
+       
+          
+            'password'      => 'required|min_length[4]|max_length[50]',
+            'confirm_password'  => 'required|matches[password]'
+        ];
+
+        if ($this->validate($rules)) {
             $encrypted_email = md5($data['email']);
             if ($token == $encrypted_email) {
                 $data_update = [
@@ -62,8 +71,11 @@ class AuthController extends BaseController
                 $session->setFlashdata('msg', 'Email is incorrect!');
                 return redirect()->to('forgot_password/forgot/changepass/'.$token);           
             }
-
- 
+           
+        } else {
+            $session->setFlashdata('msg', 'Password and Confirm Password do not match!');
+            return redirect()->to('forgot_password/forgot/changepass/'.$token);  
+        }
         
     }
 
