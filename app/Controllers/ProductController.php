@@ -20,6 +20,13 @@ class ProductController extends BaseController
         return view('product/index', $product);
     }
 
+    public function index_v2()
+    {
+        $model = new ProductModel;
+        $product['product'] = $model->where('customer_id', $_SESSION['id'])->where('deleted_at', null)->findAll();
+        return view('product/index_v2', $product);
+    }
+
     public function search(){
         $model = new ProductModel;
 

@@ -69,7 +69,7 @@
                 <h3 class="card-title">Product Name: <strong><?php echo $product['name'];?></strong></h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body table-responsive">
+              <div class="card-body table-responsive" style="padding:0;">
                 <table class="table table-hover text-nowrap" id="warehouse-table">
                 <tbody>
                     <tr>
