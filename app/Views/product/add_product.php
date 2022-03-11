@@ -45,12 +45,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Create Order</h1>
+                            <h1 class="m-0">Add Product</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="<?php echo base_url('/order/index'); ?>">Order</a></li>
-                                <li class="breadcrumb-item active">Create Order</a></li>
+                                <li class="breadcrumb-item"><a href="<?php echo base_url('/product/index'); ?>">Product</a></li>
+                                <li class="breadcrumb-item active">Add Product</a></li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -59,65 +59,47 @@
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <form method="POST" action="<?php echo base_url('order/store');?>" name="createorder">
-                <div class="row" style="padding: 0 10px 0 10px">
-                    <div class="col-md-4">
-                        <div class="card" >
-                            <div class="card-body">
-                                <div class="col-lg-12" >
-                                    <div class="form-group">
-                                        <br>
-                                        <label>Nama Customer</label>
-                                        <input type="text" name="namacust" id="namacust" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Nomor Telepon</label>
-                                        <input type="text" name="notelp" id="notelp" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Alamat Tujuan</label>
-                                        <input type="text" name="alamat" id="alamat" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                       
-                                    </div>
+            <form method="POST" action="<?php echo base_url('product/store');?>" name="createorder" enctype="multipart/form-data">
+                <div class="card" style="margin: 0 10px 10px; padding:0 10px 10px">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Product Name</label>
+                            <input type="text" name="productname" id="productname" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Quantity</label>
+                            <input type="number" name="productquantity" id="productquantity" class="form-control" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Price</label>
+                            <input type="number" name="productprice" id="productprice" class="form-control" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Picture</label>
+                            <div class="col">
+                                <input type="file" name="productpicture" id="productpicture" class="custom-file-input <?php ($validation->hasError('customFile')) ? 'is-invalid' : ''; ?>" id="customFile" name="customFile">
+                                <div class="invalid-feedback">
+                                    <?php $validation->getError('customFile');?>
                                 </div>
+                                <label class="custom-file-label" for="customFile">Choose File</label>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-md-8" style="max-height:408px; overflow-y:auto">
-                        <div class="card">
-                            <div class="card-body" style="min-height:407px">
-                                <div class="col-lg-12">
-                                    <table class="table table-bordered dataTable table-sm" id="product_table" style="width: 100%">
-                                        <thead>
-                                            <tr>
-                                                <td>Nama Produk</td>
-                                                <td>Detail Produk</td>
-                                                <td>Kuantitas</td>
-                                                <td>Aksi</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr id="tambah_produk_button_container">
-                                            <td colspan=4>
-                                            <button type="button" class="btn btn-sm col-lg-12" style="background-color: #5cc5e6; color:white;" onclick="tambahRowProduk()">Tambah Produk</button>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea type="text" name="productdesc" id="productdesc" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Weight</label>
+                            <input type="text" name="productweight" id="productweight" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Volume</label>
+                            <input type="text" name="productvolume" id="productvolume" class="form-control">
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12 tampilDataOrder">
-                        </div>
+                    <div class="float-right" style="padding:5px 25px 0 0">
+                        <button type="submit" class="btn btn-block btn-success" style="width:10%;float:right;">Submit</button>
                     </div>
-                </div>
-                <div class="float-right" style="padding:5px 25px 0 0 ">
-                    <button type="submit" class="btn btn-block btn-success">Kirim</button>
                 </div>
             </form>
                 

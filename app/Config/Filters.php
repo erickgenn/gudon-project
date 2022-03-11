@@ -64,6 +64,7 @@ class Filters extends BaseConfig
                     '/product/search',
                     '/product/view/*',
                     'product/update/*',
+                    'product/store',
                     'order/index',
                     'order/search',
                     'order/store',
