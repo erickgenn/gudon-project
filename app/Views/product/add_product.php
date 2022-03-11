@@ -38,6 +38,20 @@
         <!-- Main Sidebar Container -->
         <?php include(APPPATH . "Views/layout/aside.php"); ?>
 
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <?php if (session()->getFlashdata('insertProductFailed')) : ?>
+        <script>
+            swal({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Failed to Insert New Product!',
+            showConfirmButton: false,
+            timer: 2500
+            });
+        </script>
+        <?php endif; ?>
+
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -64,37 +78,35 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label>Product Name</label>
-                            <input type="text" name="productname" id="productname" class="form-control">
+                            <input type="text" name="productname" id="productname" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>Quantity</label>
-                            <input type="number" name="productquantity" id="productquantity" class="form-control" min="0">
+                            <input type="number" name="productquantity" id="productquantity" class="form-control" required min="0">
                         </div>
                         <div class="form-group">
                             <label>Price</label>
-                            <input type="number" name="productprice" id="productprice" class="form-control" min="0">
+                            <input type="number" name="productprice" id="productprice" class="form-control" required min="0">
                         </div>
                         <div class="form-group">
                             <label>Picture</label>
                             <div class="col">
-                                <input type="file" name="productpicture" id="productpicture" class="custom-file-input <?php ($validation->hasError('customFile')) ? 'is-invalid' : ''; ?>" id="customFile" name="customFile">
-                                <div class="invalid-feedback">
-                                    <?php $validation->getError('customFile');?>
-                                </div>
-                                <label class="custom-file-label" for="customFile">Choose File</label>
+                                <input type="file" name="productpicture" id="productpicture" class="custom-file-input">
+                                
+                                <label class="custom-file-label" for="productpicture">Choose File</label>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Description</label>
-                            <textarea type="text" name="productdesc" id="productdesc" class="form-control"></textarea>
+                            <textarea type="text" name="productdesc" id="productdesc" class="form-control" required></textarea>
                         </div>
                         <div class="form-group">
                             <label>Weight</label>
-                            <input type="text" name="productweight" id="productweight" class="form-control">
+                            <input type="text" name="productweight" id="productweight" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>Volume</label>
-                            <input type="text" name="productvolume" id="productvolume" class="form-control">
+                            <input type="text" name="productvolume" id="productvolume" class="form-control" required>
                         </div>
                     </div>
                     <div class="float-right" style="padding:5px 25px 0 0">

@@ -38,7 +38,19 @@
   
   <?php include(APPPATH . "Views/layout/aside.php"); ?>
 
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+  <?php if (session()->getFlashdata('insertProductSuccess')) : ?>
+  <script>
+      swal({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Insert New Product Successful!',
+      showConfirmButton: false,
+      timer: 2500
+      });
+  </script>
+  <?php endif; ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -74,7 +86,7 @@
             <div class="card col-sm-2" style="margin:0;padding:20px;cursor: pointer;" onclick="location.href='<?php echo base_url('/product/view').'/'.$product[$i]['id']?>';">
               <div>
                 <?php if (!empty($product[$i]['picture'])): ?>
-                  <div>
+                  <div style="display:block; height: 400; width:275; margin:auto;">
                     <img src="<?php echo base_url('/uploads/product').'/'.$product[$i]['picture'] ?>" class="img-fluid" width="275" height="400" />
                   </div>
                 <?php else:?>

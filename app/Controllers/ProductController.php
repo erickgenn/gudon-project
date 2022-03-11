@@ -40,70 +40,79 @@ class ProductController extends BaseController
 
     public function store()
     {
+        $session = session();
         $productModel = new ProductModel();
 
             $data = $this->request->getPost();
 
-            if(!$this->validate([
-                'customFile' => [
-                    'rules' => 'uploaded[customFile]|max_size[customFile,1024]|is_image[customFile]|mime_in[customFile,image/jpg,image/jpeg,image/png]',
-                    'errors' => [
-                        'uploaded' => 'Please upload a picture',
-                        'max_size' => 'Picture is too large, please try another file',
-                        'is_image' => 'This file is not a picture, please try another file',
-                        'mime_in' => 'This file is not a picture, please try another file'
-                    ]
-                ]
-            ])) {
-                $data['validation'] = $this->validator;
-                return view('product/add_product', $data);
-            }
+            // upload image
+            $file = $this->request->getFile('productpicture');
 
-            $file = $this->request->getFile('customFile');
-            dd($file);die();            
-
-            $target_dir = base_url("uploads/product");
-            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-            dd($target_file);die();
+            $target_dir = "uploads/product/";
+            $target_file = $target_dir .'/'. basename($file->getName());
             $uploadOk = 1;
-            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));  
 
             // Check if image file is a actual image or fake image
-            if(isset($_POST["submit"])) {
-            $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+            if(isset($file)) {
+                $check = getimagesize($file->getTempName());
                 if($check !== false) {
-                    echo "File is an image - " . $check["mime"] . ".";
+                    // echo "File is an image - " . $check["mime"] . ".";
                     $uploadOk = 1;
                 } else {
-                    echo "File is not an image.";
+                    // echo "File is not an image.";
                     $uploadOk = 0;
                 }
             }
+            
+            // Check if file already exists
+            if (file_exists($target_file)) {
+                // echo "Sorry, file already exists.";
+                $uploadOk = 0;
+            }
 
             // Check file size
-            if ($_FILES["fileToUpload"]["size"] > 5000000) {
-                echo "Sorry, your file is too large.";
+            if ($file->getSize() > 5000000) {
+                // echo "Sorry, your file is too large.";
                 $uploadOk = 0;
             }
 
             // Allow certain file formats
             if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
-                echo "Sorry, only JPG, JPEG & PNG files are allowed.";
+                // echo "Sorry, only JPG, JPEG & PNG files are allowed.";
                 $uploadOk = 0;
             }
 
             // Check if $uploadOk is set to 0 by an error
             if ($uploadOk == 0) {
-                echo "Sorry, your file was not uploaded.";
+                // echo "Sorry, your file was not uploaded.";
                 // if everything is ok, try to upload file
             } else {
-                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                    echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+                if (move_uploaded_file($file->getTempName(),$target_dir.$file->getName())) {
+                    // upload to db
+                    $data_product = [
+                        'name' => $data['productname'],
+                        'quantity' => $data['productquantity'],
+                        'price' => $data['productprice'],
+                        'picture' => $file->getName(),
+                        'description' => $data['productdesc'],
+                        'weight' => $data['productweight'],
+                        'volume' => $data['productvolume'],
+                        'customer_id' => $_SESSION['id']
+                    ];
+        
+                    $product_insert = $productModel->insert($data_product); //insert mst_order
+                    if ($product_insert) {
+                        $session->setFlashdata('insertProductSuccess', '');
+                    } else {
+                        $session->setFlashdata('insertProductFailed', '');
+                        redirect()->to(base_url('product/add_product'));
+                    }
                 } else {
-                    echo "Sorry, there was an error uploading your file.";
+                    // echo "Sorry, there was an error uploading your file.";
                 }
             }
-        // return redirect()->to(base_url('order/index'));
+        return redirect()->to(base_url('product/index'));
     }
 
     public function update($id)
