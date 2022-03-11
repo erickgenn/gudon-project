@@ -107,6 +107,9 @@ class AuthController extends BaseController
                 <style type="text/css">
                 body,table,td{font-family:Helvetica,Arial,sans-serif !important}.ExternalClass{width:100%}.ExternalClass,.ExternalClass p,.ExternalClass span,.ExternalClass font,.ExternalClass td,.ExternalClass div{line-height:150%}a{text-decoration:none}*{color:inherit}a[x-apple-data-detectors],u+#body a,#MessageViewBody a{color:inherit;text-decoration:none;font-size:inherit;font-family:inherit;font-weight:inherit;line-height:inherit}img{-ms-interpolation-mode:bicubic}table:not([class^=s-]){font-family:Helvetica,Arial,sans-serif;mso-table-lspace:0pt;mso-table-rspace:0pt;border-spacing:0px;border-collapse:collapse}table:not([class^=s-]) td{border-spacing:0px;border-collapse:collapse}@media screen and (max-width: 600px){.w-full,.w-full>tbody>tr>td{width:100% !important}.p-4:not(table),.p-4:not(.btn)>tbody>tr>td,.p-4.btn td a{padding:16px !important}*[class*=s-lg-]>tbody>tr>td{font-size:0 !important;line-height:0 !important;height:0 !important}.s-2>tbody>tr>td{font-size:8px !important;line-height:8px !important;height:8px !important}.s-5>tbody>tr>td{font-size:20px !important;line-height:20px !important;height:20px !important}}
                 </style>
+                <link rel="preconnect" href="https://fonts.googleapis.com">
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
             </head>
             <body class="bg-light" style="outline: 0; width: 100%; min-width: 100%; height: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: Helvetica, Arial, sans-serif; line-height: 24px; font-weight: normal; font-size: 16px; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; color: #000000; margin: 0; padding: 0; border-width: 0;" bgcolor="#f7fafc">
                 <table class="bg-light body" valign="top" role="presentation" border="0" cellpadding="0" cellspacing="0" style="outline: 0; width: 100%; min-width: 100%; height: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: Helvetica, Arial, sans-serif; line-height: 24px; font-weight: normal; font-size: 16px; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; color: #000000; margin: 0; padding: 0; border-width: 0;" bgcolor="#f7fafc">
@@ -140,9 +143,9 @@ class AuthController extends BaseController
                                                     <tbody>
                                                         <tr>
                                                         <div style="display: flex;">
-                                                            <img class="img-fluid" src="https://drive.google.com/uc?export=view&id=1MhwB2pLXtUv4oejYg30KB7_vmo7X3CPy" allow="autoplay" alt="GuDon" style="width: 5vw; height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; max-width: 100%; border-style: none; border-width: 0;" width="100%">
-                                                            <div style="margin: 22px 0 0 15px;">
-                                                            <h2 style="font-weight: bold; font-size: 2.5vw; padding-top: 0; padding-bottom: 0; vertical-align: center; line-height: 38.4px; margin: 0;" align="LEFT">GUDON</h2>
+                                                            <img class="img-fluid" src="https://drive.google.com/uc?export=view&id=1MhwB2pLXtUv4oejYg30KB7_vmo7X3CPy" allow="autoplay" alt="GuDon" style="display: block; width: auto; height: 100px; max-width: 100%; max-height: 90%; line-height: 100%; outline: none; text-decoration: none; display: block; border-style: none; border-width: 0;">
+                                                            <div style="margin: auto 0; width: 50%; padding:25px">
+                                                            <h2 style="font-weight: bold; font-size: 4vmin; padding-top: 0; padding-bottom: 0; vertical-align: center; line-height: 38.4px; margin: 0;" align="LEFT">GUDON</h2>
                                                             </div>
                                                         </div>
                                                         </tr>
@@ -151,11 +154,11 @@ class AuthController extends BaseController
                                                 </div>
                                                 </div>
                                                 <table class="p-4" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                                <tbody>
+                                                <tbody style="font-family: Roboto, sans-serif;">
                                                     <tr>
                                                     <td style="line-height: 24px; font-size: 16px; margin: 0; padding: 16px;" align="left">
                                                         <div class="">
-                                                        <h5 class="text-muted" style="font-size: 2vw; color: #718096; padding-top: 0; padding-bottom: 0; font-weight: 500; vertical-align: baseline; line-height: 24px; margin: 0;" align="left">Reset Password</h5>
+                                                        <h5 class="text-muted" style="font-size: 2vmin; color: #718096; padding-top: 0; padding-bottom: 0; font-weight: 500; vertical-align: baseline; line-height: 24px; margin: 0;" align="left">Reset Password</h5>
                                                         <table class="s-2 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
                                                             <tbody>
                                                             <tr>
@@ -165,14 +168,14 @@ class AuthController extends BaseController
                                                             </tr>
                                                             </tbody>
                                                         </table>
-                                                        <p style="font-size: 1.2vw; line-height: 24px; width: 100%; margin: 0;" align="left">Hello '.$user['name'].', Your GuDon account has just requested a password change, please click the button below to continue</p>
+                                                        <p style="font-size: 1.8vmin; line-height: 24px; width: 100%; margin: 0;" align="left">Hello '.ucwords($user['name']).', Your GuDon account has just requested a password change, please click the button below to continue</p>
                                                         <br>
                                                         <table class="btn" role="presentation" border="0" cellpadding="0" cellspacing="0" style="border-radius: 6px; border-collapse: separate !important;">
                                                             <tbody>
                                                             <tr>
                                                                 <td style="line-height: 24px; font-size: 16px; border-radius: 6px; margin: 0;" align="center">
                                                                 <a href="'.$url_changepass.'" style="font-size: 2vh; background-color: #5cc5e6; color: #FFFFFF; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 6px; line-height: 20px; display: block; font-weight: normal; white-space: nowrap; padding: 8px 12px; border: 1px solid transparent;">
-                                                                    Reset Password Anda
+                                                                    Reset Your Password
                                                                 </a>
                                                                 </td>
                                                             </tr>
