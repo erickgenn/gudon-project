@@ -83,7 +83,7 @@ class Filters extends BaseConfig
                     'report/view/*',
                     'forgot_password/authemail',
                     'forgot_password/forgot/changepass/*',
-                    'forgot_password/forgot/newpass/*'
+                    'forgot_password/forgot/newpass/*',
                     'topup/method',
                     'topup/view/*',
                     'topup',
