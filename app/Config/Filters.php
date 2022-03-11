@@ -39,9 +39,13 @@ class Filters extends BaseConfig
                     'login',
                     'register/index',
                     'register',
+                    'forgot_password/index',
                     'login/auth',
                     'login/admin',
-                    'login/auth/admin'
+                    'login/auth/admin',
+                    'forgot_password/authemail',
+                    'forgot_password/forgot/changepass/*',
+                    'forgot_password/forgot/newpass/*'
                 ],
             ],
             'authAdmin' => [
@@ -52,6 +56,7 @@ class Filters extends BaseConfig
                     'logout',
                     'register/index',
                     'register',
+                    'forgot_password/index',
                     'login/auth',
                     'forbidden',
                     'login/admin',
@@ -71,14 +76,17 @@ class Filters extends BaseConfig
                     'membership/index',
                     'membership/upgrade',
                     'membership/upgrade/*',
+                    'membership/payment',
                     'home',
                     'report/index',
                     'report/search',
                     'report/view/*',
+                    'forgot_password/authemail',
+                    'forgot_password/forgot/changepass/*',
+                    'forgot_password/forgot/newpass/*'
                     'topup/method',
                     'topup/view/*',
                     'topup',
-                    'membership/payment',
                 ]
             ]
 
