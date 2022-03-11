@@ -83,6 +83,11 @@ $routes->get('report/index', 'ReportController::index');
 $routes->get('report/view/(:num)', 'ReportController::view/$1');
 $routes->get('report/search', 'ReportController::search');
 
+// payment
+$routes->get('topup/method', 'PaymentController::method');
+$routes->get('topup/view/(:any)', 'PaymentController::view/$1');
+$routes->post('topup', 'PaymentController::store');
+
 $routes->get('order/create_order', 'OrderController::create');
 $routes->get('order/get_price/(:num)', 'OrderController::get_price/$1');
 $routes->post('order/(:num)/delete', 'OrderController::delete/$1');
@@ -91,7 +96,8 @@ $routes->post('order/(:num)/delete', 'OrderController::delete/$1');
 $routes->get('membership/index', 'MembershipLevelController::index');
 
 $routes->get('membership/upgrade', 'MembershipLevelController::upgrade_menu');
-$routes->post('membership/upgrade/(:num)', 'MembershipLevelController::upgrade/$1');
+$routes->get('membership/upgrade/(:num)', 'MembershipLevelController::upgrade/$1');
+$routes->post('membership/payment', 'MembershipLevelController::payment');
 
 /*
  * --------------------------------------------------------------------

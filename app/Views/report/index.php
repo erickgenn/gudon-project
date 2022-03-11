@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GudOn | Order</title>
+    <title>GudOn | Order Report</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -177,8 +177,30 @@
                         "dataSrc": ""
                     },
                     dom: 'Bfrtip',
-                    buttons: [
-                        'copy', 'print', 'excel', 'pdf'
+                    buttons: [{
+                            extend: 'copy',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                            }
+                        },
+                        {
+                            extend: 'excel',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                            }
+                        },
+                        {
+                            extend: 'pdf',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                            }
+                        },
+                        {
+                            extend: 'print',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                            }
+                        },
                     ],
                     "columns": [{
                             searchable: false,

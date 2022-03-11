@@ -42,7 +42,7 @@
         swal({
           position: 'top-end',
           icon: 'success',
-          title: 'Order Berhasil Dibatalkan!',
+          title: 'Order Canceled Successfully!',
           showConfirmButton: false,
           timer: 1700
         });
@@ -54,7 +54,7 @@
         swal({
           position: 'top-end',
           icon: 'error',
-          title: 'Order Gagal Dibatalkan!',
+          title: 'Failed to Cancel Order!',
           showConfirmButton: false,
           timer: 1700
         });
@@ -66,7 +66,7 @@
         swal({
           position: 'top-end',
           icon: 'success',
-          title: 'Order Berhasil Dikonfirmasi!',
+          title: 'Order Confirmed!',
           showConfirmButton: false,
           timer: 1700
         });

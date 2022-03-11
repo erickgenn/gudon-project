@@ -277,6 +277,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="<?php echo base_url('topup/method'); ?>" id="topup" class="nav-link">
+              <i class="nav-icon fas fa-money-bill"></i>
+              <p>
+                Top Up
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
@@ -355,6 +363,9 @@
       }
       if (current.includes('/report/index')) {
         document.getElementById("report").className = "nav-link active";
+      }
+      if (current.includes('/topup/method')) {
+        document.getElementById("topup").className = "nav-link active";
       }
     });
   </script>

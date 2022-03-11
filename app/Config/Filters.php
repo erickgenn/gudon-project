@@ -51,6 +51,7 @@ class Filters extends BaseConfig
             'authAdmin' => [
                 'except' =>
                 [
+                    '/',
                     'login',
                     'logout',
                     'register/index',
@@ -74,6 +75,8 @@ class Filters extends BaseConfig
                     'order/*/delete',
                     'membership/index',
                     'membership/upgrade',
+                    'membership/upgrade/*',
+                    'membership/payment',
                     'home',
                     'report/index',
                     'report/search',
@@ -81,6 +84,9 @@ class Filters extends BaseConfig
                     'forgot_password/authemail',
                     'forgot_password/forgot/changepass/*',
                     'forgot_password/forgot/newpass/*'
+                    'topup/method',
+                    'topup/view/*',
+                    'topup',
                 ]
             ]
 
