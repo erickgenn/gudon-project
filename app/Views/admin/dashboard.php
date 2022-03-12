@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/summernote/summernote-bs4.min.css">
 </head>
 
-<body class="hold-transition sidebar-mini layout-navbar-fixed">
+<body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed">
     <div class="wrapper">
 
         <!-- Preloader -->
