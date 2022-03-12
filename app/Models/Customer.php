@@ -21,4 +21,14 @@ class Customer extends Model
         $builder->where('id', $id);
         return $builder->get();
     }
+
+    public function updateConfirm($id, $username, $picture)
+    {
+        $builder = $this->db->table('mst_gudon.mst_customer');
+        $builder->set('name', $username);
+        $builder->set('picture', $picture);
+        $builder->where('id', $id);
+
+        $builder->update();
+    }
 }

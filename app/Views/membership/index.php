@@ -52,6 +52,31 @@
         });
       </script>
     <?php endif; ?>
+
+    <?php if (session()->getFlashdata('custUpdateSuccess')) : ?>
+        <script>
+            swal({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Profile Updated!',
+            showConfirmButton: false,
+            timer: 2500
+            });
+        </script>
+    <?php endif; ?>
+
+    <?php if (session()->getFlashdata('custUpdateFailed')) : ?>
+        <script>
+            swal({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Failed to Update Profile!',
+            showConfirmButton: false,
+            timer: 2500
+            });
+        </script>
+    <?php endif; ?>
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
@@ -60,7 +85,7 @@
           <div class="row mb-2">
             <div class="col-sm-6">
               <a href="<?php echo base_url('/home') ?>" style="color:grey;"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
-              <h1 class="m-0">Membership Status</h1>
+              <h1 class="m-0">Profile</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -78,6 +103,62 @@
         <div class="container-fluid">
           <!-- membership status -->
           <div class="row">
+            <div style="padding:15px 0;width:100%">
+              <div class="text-center">
+                <img class="profile-user-img img-fluid img-circle" style="width:15%;" src="<?php echo base_url() ?>/dist/img/user4-128x128.jpg" alt="User profile picture">
+                <div class="info" style="padding:10px 0 0;">
+                  <?php echo ucwords($_SESSION['name']);?>
+                </div>
+                <div class="info" style="padding:5px 0;">
+                  <a class="btn" style="font-weight:550;color:#5cc5e6;" data-toggle="modal" data-target="#shelfModal">Edit Profile</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal -->
+            <div id="shelfModal" class="modal fade" role="dialog">
+              <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <h3 class="modal-title">Edit Profile</h3>  
+                    </div>
+                    <div class="modal-body">
+                      <table id="profile-table" style="border: none;">
+                        <tbody>
+                        <form action="POST" action="<?php echo base_url('profile/update'); ?>" name="createorder" enctype="multipart/form-data">
+                          <tr>
+                            <td>
+                              <img class="profile-user-img img-fluid img-circle" style="width:50%; margin:0 0 15px;" src="<?php echo base_url() ?>/dist/img/user4-128x128.jpg" alt="User profile picture">
+                              <div class="form-group">
+                                <div class="col">
+                                  <input type="file" name="profilepicture" id="profilepicture" class="custom-file-input">
+                                  <label class="custom-file-label" for="profilepicture">Choose File</label>
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <div>
+                                <div class="form-group">
+                                  <label>Username</label>
+                                  <input type="text" name="username" id="username" class="form-control" placeholder="<?php echo $_SESSION['name'];?>" required>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
             <div class="card card-default" style="padding:0%; width:100%;">
               <div class="card-body" style="display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-flex-direction: row; -ms-flex-direction: row; flex-direction: row; height: 128px; width: 100%; border-top-left-radius: 8px; border-top-right-radius: 8px; -webkit-align-items: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; padding: 32px 10px 32px 24px; -webkit-box-pack: justify; -webkit-justify-content: space-between; -ms-flex-pack: justify; justify-content: space-between;">
                 <div class="inner" style="display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -webkit-justify-content: center; -ms-flex-pack: center; justify-content: left; min-width:300px">

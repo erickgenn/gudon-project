@@ -70,7 +70,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="card card-primary card-outline">
+                            <div class="card">
                                 <div class="card-header">
                                     <h3>
                                         <i class="fas fa-money-bill-wave"></i>
@@ -81,7 +81,7 @@
                                     <div class="col-lg-12">
                                         <div class="col-lg-3">
                                             <center>
-                                                <div class="alert alert-info bg-primary">
+                                                <div class="alert" style="background-color: #5cc5e6; color:white;">
                                                     <h4><i class="icon fas fa-info"></i>Your Balance:</h4>
                                                     <h3><?php echo $balance; ?></h3>
                                                 </div>
