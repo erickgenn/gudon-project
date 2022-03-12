@@ -9,7 +9,7 @@ class Customer extends Model
     protected $table      = 'mst_customer';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['name', 'email', 'phone', 'password', 'is_active', 'level_id', 'balance'];
+    protected $allowedFields = ['name', 'email', 'phone', 'password', 'is_active', 'level_id', 'balance', 'picture'];
 
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -17,17 +17,17 @@ class Customer extends Model
 
     public function get_balance($id) {
         $builder = $this->db->table('mst_gudon.mst_customer');
-        $builder->select('balance');
+        $builder->select('balance, picture');
         $builder->where('id', $id);
         return $builder->get();
     }
 
-    public function updateConfirm($id, $username, $picture)
+    public function updateProfile($username, $picture)
     {
         $builder = $this->db->table('mst_gudon.mst_customer');
         $builder->set('name', $username);
         $builder->set('picture', $picture);
-        $builder->where('id', $id);
+        $builder->where('id', $_SESSION['id']);
 
         $builder->update();
     }

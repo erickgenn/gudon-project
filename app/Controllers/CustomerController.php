@@ -30,7 +30,6 @@ class CustomerController extends BaseController
         $customerModel = new Customer();
         try {
             $data = $this->request->getPost();
-            dd($data);die();
 
             // upload image
             $file = $this->request->getFile('profilepicture');
@@ -75,22 +74,25 @@ class CustomerController extends BaseController
                 // echo "Sorry, your file was not uploaded.";
                 // if everything is ok, try to upload file
             } else {
-                if (move_uploaded_file($file->getTempName(),$target_dir.$file->getName())) {
+                if (move_uploaded_file($file->getTempName(),$target_dir.'/'.$file->getName())) {
                     // upload to db
-                    $cust_update = $customerModel->updateProfile($_SESSION['name'], $data['name'], $file->getName());
-                    if ($cust_update) {
-                        $session->setFlashdata('custUpdateSuccess', '');
-                    } else {
-                        $session->setFlashdata('custUpdateFailed', '');
-                        redirect()->to(base_url('membership/index'));
-                    }
+                    $customerModel->updateProfile($data['username'], $file->getName());
+                    $session_data = [
+                        'name' => $data['username'],
+                        'picture' => $file->getName()
+                    ];
+                    $session->set($session_data);
+                    $session->setFlashdata('custUpdateSuccess', '');
+                    return redirect()->to(base_url('membership/index'));
                 } else {
                     // echo "Sorry, there was an error uploading your file.";
+                    return redirect()->to(base_url('membership/index'));
                 }
             }
         } catch (Exception $e) {
-            $session->setFlashdata('update_fail', 'Order Gagal Dikonfirmasi!');
+            $session->setFlashdata('custUpdateFailed', '');
+            return redirect()->to(base_url('membership/index'));
         }
-        return redirect()->to('membership/index');
+        return redirect()->to(base_url('membership/index'));
     }
 }

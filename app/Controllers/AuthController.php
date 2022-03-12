@@ -231,54 +231,6 @@ class AuthController extends BaseController
                 $session->setFlashdata('msg', 'Email failed to be sent, Please try again later!');
                 return view('auth/login');
             }
-
-
-            // $headers[] = 'MIME-Version: 1.0';
-            // $headers[] = 'Content-type: text/html; charset=iso-8859-1';
-
-            // // Additional headers
-            // $headers[] = 'From: GuDon Admin <admin@gudon.com>';
-
-            // $url_changepass = base_url('forgot/changepass').$encrypted_token;
-            // $to = $user['email'];
-            // $subject = 'Reset Passsword GuDon';
-            // $message = '
-            // <html>
-            //     <head>
-            //     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-            //     <style>
-            //         /* Add custom classes and styles that you want inlined here */
-            //     </style>
-            //     </head>
-            //     <body class="bg-light">
-            //     <div class="container-fluid">
-            //         <div class="card my-5">
-            //         <div class="card-body">
-            //             <div style="background-color:#5cc5e6;padding: 20px 0px 20px 20px; color:#FFFFFF;">
-            //             <div class="row">
-            //                 <div style="display:flex">
-            //                 <img class="img-fluid" src="https://drive.google.com/thumbnail?id=1MhwB2pLXtUv4oejYg30KB7_vmo7X3CPy" 
-            //                 alt="GuDon" style="width:75;"/>
-            //                 <div style="margin:22px 0 0 15px"><h2 style="font-weight:bold; font-size:5vw">GUDON</h2></div>
-            //                 </div>
-            //             </div>
-            //             </div>
-            //             <div class="p-4">
-            //                 <h5 class="text-muted mb-2" style="font-size:3.5vw">Reset Password</h5>
-            //                 <p style="font-size: 2.5vh">Halo '.$user['name'].', akun GuDon anda baru saja mengajukan perubahan password, silahkan klik tombol dibawah ini untuk melanjutkan</p>
-            //                 <br>
-            //             <a href="'.$url_changepass.'" class="btn" style="font-size: 2vh;background-color:#5cc5e6;color:#FFFFFF">
-            //             Reset Password Anda
-            //                 </a>
-            //             </div>
-            //                 <h5 class="text-muted mb-2 text-center" style="font-size:1.5vh">© GuDon</h5>
-            //         </div>
-            //         </div>
-            //     </div>
-            //     </body>
-            // </html>
-            // ';
-            // mail($to, $subject, $message, implode("\r\n", $headers));
             $session->setFlashdata('msg', 'Please check your Email!');
             return view('auth/login');
         }
@@ -355,7 +307,8 @@ class AuthController extends BaseController
                 'time_left' => $time_left,
                 'percentage_left' => $percentage_left,
                 'isLoggedIn' => TRUE,
-                'role' => 'customer'
+                'role' => 'customer',
+                'picture' => $user['picture']
             ];
             $session->set($session_data);
             return redirect()->to('home');

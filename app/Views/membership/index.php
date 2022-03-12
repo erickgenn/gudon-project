@@ -105,39 +105,56 @@
           <div class="row">
             <div style="padding:15px 0;width:100%">
               <div class="text-center">
-                <img class="profile-user-img img-fluid img-circle" style="width:15%;" src="<?php echo base_url() ?>/dist/img/user4-128x128.jpg" alt="User profile picture">
-                <div class="info" style="padding:10px 0 0;">
+                <?php if (!empty($_SESSION['picture'])): ?>
+                  <div class="card-body" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; margin: auto; padding:0;">
+                    <img class="profile-user-img img-fluid img-circle" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px;width:100%;object-fit:cover;" src="<?php echo base_url('/uploads/profile/customer').'/'.$_SESSION['picture'] ?>" alt="User profile picture" />
+                  </div>
+                <?php else:?>
+                  <div>
+                    <img src="<?php echo base_url('/dist/img/avatar5.png');?>" class="profile-user-img img-fluid img-circle" style="width:15%;" alt="User profile picture" />
+                  </div>
+                <?php endif;?>
+                <div class="info" style="padding:10px 0 0;font-weight:500;font-size:larger;">
                   <?php echo ucwords($_SESSION['name']);?>
                 </div>
                 <div class="info" style="padding:5px 0;">
-                  <a class="btn" style="font-weight:550;color:#5cc5e6;" data-toggle="modal" data-target="#shelfModal">Edit Profile</a>
+                  <a class="btn" style="font-weight:550;color:#5cc5e6;" data-toggle="modal" data-target="#profileModal">Edit Profile</a>
                 </div>
               </div>
             </div>
 
             <!-- Modal -->
-            <div id="shelfModal" class="modal fade" role="dialog">
-              <div class="modal-dialog modal-lg">
+            <div id="profileModal" class="modal fade" role="dialog">
+              <div class="modal-dialog modal-md">
 
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
                       <h3 class="modal-title">Edit Profile</h3>  
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body" style="text-align: center; margin:auto;">
                       <table id="profile-table" style="border: none;">
                         <tbody>
-                        <form action="POST" action="<?php echo base_url('profile/update'); ?>" name="createorder" enctype="multipart/form-data">
+                        <form method="POST" action="<?php echo base_url('profile/update'); ?>" name="createorder" enctype="multipart/form-data">
                           <tr>
                             <td>
-                              <img class="profile-user-img img-fluid img-circle" style="width:50%; margin:0 0 15px;" src="<?php echo base_url() ?>/dist/img/user4-128x128.jpg" alt="User profile picture">
-                              <div class="form-group">
-                                <div class="col">
-                                  <input type="file" name="profilepicture" id="profilepicture" class="custom-file-input">
-                                  <label class="custom-file-label" for="profilepicture">Choose File</label>
+                              <?php if (!empty($_SESSION['picture'])): ?>
+                                <div class="card-body" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; margin: auto; padding:0 0 25px;">
+                                  <img class="profile-user-img img-fluid img-circle" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px;width:100%;object-fit:cover;" src="<?php echo base_url('/uploads/profile/customer').'/'.$_SESSION['picture'] ?>" alt="User profile picture" />
                                 </div>
-                              </div>
+                              <?php else:?>
+                                <div>
+                                  <img src="<?php echo base_url('/dist/img/avatar5.png');?>" class="profile-user-img img-fluid img-circle" style="width:15%;" alt="User profile picture" />
+                                </div>
+                              <?php endif;?>
+                                <div class="form-group">
+                                  <div class="col" style="margin-top: 10px;">
+                                    <input type="file" name="profilepicture" id="profilepicture">
+                                  </div>
+                                </div>
                             </td>
+                            </tr>
+                            <tr>  
                             <td>
                               <div>
                                 <div class="form-group">
