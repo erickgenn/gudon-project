@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/summernote/summernote-bs4.min.css">
 </head>
 
-<body class="hold-transition sidebar-mini layout-navbar-fixed">
+<body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed">
   <div class="wrapper">
 
     <!-- Preloader -->
@@ -71,6 +71,18 @@
             position: 'top-end',
             icon: 'error',
             title: 'Failed to Update Profile!',
+            showConfirmButton: false,
+            timer: 2500
+            });
+        </script>
+    <?php endif; ?>
+
+    <?php if (session()->getFlashdata('ImageFailed')) : ?>
+        <script>
+            swal({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Please Try Another Image',
             showConfirmButton: false,
             timer: 2500
             });

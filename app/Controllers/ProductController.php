@@ -127,7 +127,7 @@ class ProductController extends BaseController
         ];  
         $model->update($id, $data);
 
-        return view('product/index');
+        return redirect()->to(base_url('product/index'));
     }
 
 }

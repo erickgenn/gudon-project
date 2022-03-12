@@ -43,34 +43,30 @@ class CustomerController extends BaseController
             if(isset($file)) {
                 $check = getimagesize($file->getTempName());
                 if($check !== false) {
-                    // echo "File is an image - " . $check["mime"] . ".";
                     $uploadOk = 1;
                 } else {
-                    // echo "File is not an image.";
                     $uploadOk = 0;
                 }
             }
             
             // Check if file already exists
             if (file_exists($target_file)) {
-                // echo "Sorry, file already exists.";
                 $uploadOk = 0;
             }
 
             // Check file size
             if ($file->getSize() > 5000000) {
-                // echo "Sorry, your file is too large.";
                 $uploadOk = 0;
             }
 
             // Allow certain file formats
             if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
-                // echo "Sorry, only JPG, JPEG & PNG files are allowed.";
                 $uploadOk = 0;
             }
 
             // Check if $uploadOk is set to 0 by an error
             if ($uploadOk == 0) {
+                $session->setFlashdata('ImageFailed', 'Please Try Another Image');
                 // echo "Sorry, your file was not uploaded.";
                 // if everything is ok, try to upload file
             } else {
@@ -82,15 +78,15 @@ class CustomerController extends BaseController
                         'picture' => $file->getName()
                     ];
                     $session->set($session_data);
-                    $session->setFlashdata('custUpdateSuccess', '');
+                    $session->setFlashdata('custUpdateSuccess', 'abc');
                     return redirect()->to(base_url('membership/index'));
                 } else {
-                    // echo "Sorry, there was an error uploading your file.";
+                    $session->setFlashdata('custUpdateFailed', 'Upload Failed, Please Try Again');
                     return redirect()->to(base_url('membership/index'));
                 }
             }
         } catch (Exception $e) {
-            $session->setFlashdata('custUpdateFailed', '');
+            $session->setFlashdata('custUpdateFailed', 'Upload Failed, Please Try Again');
             return redirect()->to(base_url('membership/index'));
         }
         return redirect()->to(base_url('membership/index'));

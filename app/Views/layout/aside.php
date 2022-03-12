@@ -32,7 +32,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <center>
-            <h4 class="modal-title">Apakah Anda Ingin Log Out?</h4>
+            <h4 class="modal-title">Are You Sure You Want To Logout?</h4>
           </center>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>

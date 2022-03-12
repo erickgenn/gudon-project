@@ -27,7 +27,7 @@
   <!-- summernote -->
   <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/summernote/summernote-bs4.min.css">
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed">
 <div class="wrapper">
 
   <!-- Preloader -->
@@ -70,54 +70,63 @@
                 <br><br>
                 <div class="card col-sm-2" >
                   <div class="card-body">
-                    <img src="<?php echo base_url('/uploads/product').'/'.$product['picture'] ?>" width="100%" >
+                    <?php if (!empty($product['picture'])): ?>
+                      <div class="card-body" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; margin: auto; padding:0;">
+                        <img src="<?php echo base_url('/uploads/product').'/'.$product['picture'] ?>" class="img-fluid" style="width:100%;height:100%;" />
+                      </div>
+                    <?php else:?>
+                      <div>
+                        <img src="<?php echo base_url('/assets/no_image.png');?>" class="img-fluid" width="275" height="400" />
+                      </div>
+                    <?php endif;?>
                   </div>
                   
                 </div>    
               </div>
               <!-- /.card-header -->
-              <div class="card-body table-responsive" style="padding:0;">
-                <table class="table table-hover text-nowrap" id="warehouse-table">
-                <form action="<?php echo base_url('product/update') . "/" . $product['id'];?>" method="POST">
-                <tbody>
-                    <tr>
-                      <th>ID</th>
-                      <td><?php echo $product['id'];?> </td>
-                    </tr>
-                    <tr>
-                      <th>Name</th>
-                      <td><input type="text" class="form-control" name='name' id='product_name' value="<?php echo $product['name'];?>" required> </td>
-                    </tr>
-                    <tr>
-                      <th>Quantity</th>
-                      <td><?php echo $product['quantity'];?></td>
-                    </tr>
-                    <tr>
-                      <th>Price</th>
-                      <td><div class="input-group-append">
-                              <span class="input-group-text">Rp</span>
-                          <input type="text" class="form-control" name='price' id='product_price' value="<?php echo $product['price'];?>" required></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Description</th>
-                      <td><textarea  class="form-control" name='description' id='product_description'  required><?php echo $product['description'];?></textarea></td>
-                    </tr>
-                    <tr>
-                      <th>Weight</th>
-                      <td><?php echo $product['weight'];?> gr</td>
-                    </tr>
-                    <tr>
-                      <th>Volume</th>
-                      <td><?php echo $product['volume'];?> m³</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div class="float-right" style="padding:10px 25px 10  px 0 ">
-                      <button type="submit" class="btn btn-block btn-success">Save</button>
-                    </div>
-                </form>
-              </div>
+              
+              <form action="<?php echo base_url('product/update') . "/" . $product['id'];?>" method="POST">
+                <div class="card-body table-responsive" style="padding:0;">
+                  <table class="table table-hover text-nowrap" id="warehouse-table">
+                  <tbody>
+                      <tr>
+                        <th>ID</th>
+                        <td><?php echo $product['id'];?> </td>
+                      </tr>
+                      <tr>
+                        <th>Name</th>
+                        <td><input type="text" class="form-control" name='name' id='product_name' value="<?php echo $product['name'];?>" required> </td>
+                      </tr>
+                      <tr>
+                        <th>Quantity</th>
+                        <td><?php echo $product['quantity'];?></td>
+                      </tr>
+                      <tr>
+                        <th>Price</th>
+                        <td><div class="input-group-append">
+                                <span class="input-group-text">Rp</span>
+                            <input type="text" class="form-control" name='price' id='product_price' value="<?php echo $product['price'];?>" required></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>Description</th>
+                        <td><textarea  class="form-control" name='description' id='product_description'  required><?php echo $product['description'];?></textarea></td>
+                      </tr>
+                      <tr>
+                        <th>Weight</th>
+                        <td><?php echo $product['weight'];?> gr</td>
+                      </tr>
+                      <tr>
+                        <th>Volume</th>
+                        <td><?php echo $product['volume'];?> m³</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="float-right" style="padding:10px 25px 10px 0 ">
+                  <button type="submit" class="btn btn-block btn-success">Save</button>
+                </div>
+              </form>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
