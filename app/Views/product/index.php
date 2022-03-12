@@ -25,6 +25,18 @@
   <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/summernote/summernote-bs4.min.css">
+  <style>
+    .card:hover {
+      animation-name:cardhover; 
+      animation-duration:0.5s;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes cardhover {
+      0% {}
+      100% {transform: scale(1.05); box-shadow:0 10px 16px 0 rgba(0,0,0,0.2); }
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -83,11 +95,11 @@
       <div class="row" style="gap:20px; padding:30px;margin:auto;">
         <?php if ($product): ?>
           <?php for($i=0;$i<sizeof($product);$i++):?>
-            <div class="card col-sm-2" style="margin:0;padding:20px;cursor: pointer;" onclick="location.href='<?php echo base_url('/product/view').'/'.$product[$i]['id']?>';">
+            <div class="card col-sm-2" style="margin:0; padding:20px; cursor:pointer;" onclick="location.href='<?php echo base_url('/product/view').'/'.$product[$i]['id']?>';">
               <div>
                 <?php if (!empty($product[$i]['picture'])): ?>
-                  <div style="display:block; height: 400; width:275; margin:auto;">
-                    <img src="<?php echo base_url('/uploads/product').'/'.$product[$i]['picture'] ?>" class="img-fluid" width="275" height="400" />
+                  <div class="card-body" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; margin: auto; padding:0;">
+                    <img src="<?php echo base_url('/uploads/product').'/'.$product[$i]['picture'] ?>" class="img-fluid" style="width:100%;height:100%;" />
                   </div>
                 <?php else:?>
                   <div>

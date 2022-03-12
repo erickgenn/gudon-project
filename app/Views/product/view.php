@@ -113,8 +113,8 @@
                     </tr>
                   </tbody>
                 </table>
-                <div class="float-right" style="padding:5px 25px 0 0 ">
-                      <button type="submit" class="btn btn-block btn-success">Simpan</button>
+                <div class="float-right" style="padding:10px 25px 10  px 0 ">
+                      <button type="submit" class="btn btn-block btn-success">Save</button>
                     </div>
                 </form>
               </div>
