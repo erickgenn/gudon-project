@@ -38,6 +38,12 @@ $routes->get('home', 'Home::index');
 $routes->get('login', 'AuthController::login');
 $routes->post('login/auth', 'AuthController::loginAuth');
 $routes->get('logout', 'AuthController::logout');
+$routes->get('forgot_password/index', 'AuthController::forgot_password');
+// $routes->get('forgot_password/auth', 'AuthController::forgot_password');//autentikasi email utk forgot password
+$routes->post('forgot_password/authemail', 'AuthController::auth_forgotpass');
+$routes->get('forgot_password/forgot/changepass/(:any)', 'AuthController::auth_changepass/$1');
+$routes->post('forgot_password/forgot/newpass/(:any)', 'AuthController::new_password/$1');
+
 
 $routes->get('forbidden', 'AdminController::forbidden');
 
@@ -85,6 +91,11 @@ $routes->get('report/index', 'ReportController::index');
 $routes->get('report/view/(:num)', 'ReportController::view/$1');
 $routes->get('report/search', 'ReportController::search');
 
+// payment
+$routes->get('topup/method', 'PaymentController::method');
+$routes->get('topup/view/(:any)', 'PaymentController::view/$1');
+$routes->post('topup', 'PaymentController::store');
+
 $routes->get('order/create_order', 'OrderController::create');
 $routes->get('order/get_price/(:num)', 'OrderController::get_price/$1');
 $routes->post('order/(:num)/delete', 'OrderController::delete/$1');
@@ -93,7 +104,8 @@ $routes->post('order/(:num)/delete', 'OrderController::delete/$1');
 $routes->get('membership/index', 'MembershipLevelController::index');
 
 $routes->get('membership/upgrade', 'MembershipLevelController::upgrade_menu');
-$routes->post('membership/upgrade/(:num)', 'MembershipLevelController::upgrade/$1');
+$routes->get('membership/upgrade/(:num)', 'MembershipLevelController::upgrade/$1');
+$routes->post('membership/payment', 'MembershipLevelController::payment');
 
 /*
  * --------------------------------------------------------------------

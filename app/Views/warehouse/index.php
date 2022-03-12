@@ -26,7 +26,7 @@
   <!-- summernote -->
   <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/summernote/summernote-bs4.min.css">
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed">
 <div class="wrapper">
 
   <!-- Preloader -->
@@ -67,7 +67,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Data Warehouse</h3>
+                <h3 class="card-title">Warehouse</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive">
@@ -75,10 +75,10 @@
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Nama</th>
-                      <th>Alamat</th>
+                      <th>Name</th>
+                      <th>Address</th>
                       <th>Status</th>
-                      <th>Aksi</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -162,13 +162,13 @@
               render: function (data, type, row, meta) {
                 switch (row.is_active){
                   case "1":
-                    return `Aktif`;
+                    return `Active`;
                     break;
                   case "0":
-                    return `Tidak Aktif`;
+                    return `Not Active`;
                     break;
                   default:
-                    return `Tidak Aktif`;
+                    return `Not Active`;
                     break;
                 }
               }

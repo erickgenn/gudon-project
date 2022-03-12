@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GudOn | Order</title>
+    <title>GudOn | Order Report</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -23,7 +23,7 @@
 
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed">
     <div class="wrapper">
 
         <!-- Preloader -->
@@ -65,12 +65,12 @@
                             <div class="container col-12">
                                 <div class="row">
                                     <div class="col-sm">
-                                        <label for="start_date">Tanggal Awal</label>
+                                        <label for="start_date">Initial Date</label>
                                         <input type="date" class="form-control" name='start_date' id='start_date' required>
 
                                     </div>
                                     <div class="col-sm">
-                                        <label for="end_date">Tanggal Akhir</label>
+                                        <label for="end_date">End Date</label>
                                         <input type="date" class="form-control" name='end_date' id='end_date' required>
 
                                     </div>
@@ -78,7 +78,7 @@
                                         <label for="end_date">Status</label>
                                         <div class="input-group">
                                             <select class="form-control" id="status-select" style="width: 100%;">
-                                                <option selected value="0">SEMUA</option>
+                                                <option selected value="0">ALL</option>
                                                 <option value="SELESAI">SELESAI</option>
                                                 <option value="BATAL">BATAL</option>
                                                 <option value="SEDANG DIPROSES">SEDANG DIPROSES</option>
@@ -87,8 +87,7 @@
                                         </div>
                                     </div>
                                     <div style="margin: 32px 0 0 10px">
-                                        <button onclick="generateTable()" class="btn btn-success fa-pull-right">Cari</button>
-                                        <!-- <button type="submit" class="btn btn-success fa-pull-right">Detail Report</button> -->
+                                        <button onclick="generateTable()" class="btn btn-success fa-pull-right">Find</button>
                                     </div>
                                 </div>
 
@@ -102,14 +101,14 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Nama Customer</th>
-                                        <th>Alamat Tujuan</th>
-                                        <th>Total Harga</th>
-                                        <th>Ongkos Kirim</th>
-                                        <th>Tanggal dan Waktu</th>
-                                        <th>Status</th>
-                                        <th>Status Pengantaran</th>
-                                        <th>Aksi</th>
+                                        <th>Customer Name</th>
+                                        <th>Destination Address</th>
+                                        <th>Total Price</th>
+                                        <th>Shipping Cost</th>
+                                        <th>Date Time</th>
+                                        <th>Order Status</th>
+                                        <th>Shipping Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -236,7 +235,7 @@
                             name: null,
                             sortable: false,
                             render: function(data, type, row, meta) {
-                                return `<a href="<?php echo base_url('report/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;">Lihat Detail</a>`;
+                                return `<a href="<?php echo base_url('report/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;"><i class="fas fa-eye"></i></a>`;
                             }
                         },
                     ]
@@ -313,7 +312,7 @@
                         name: null,
                         sortable: false,
                         render: function(data, type, row, meta) {
-                            return `<a href="<?php echo base_url('report/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;">Lihat Detail</a>`;
+                            return `<a href="<?php echo base_url('report/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;"><i class="fas fa-eye"></i></a>`;
                         }
                     },
                 ]

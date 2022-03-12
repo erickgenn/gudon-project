@@ -24,7 +24,7 @@
 
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-navbar-fixed">
     <div class="wrapper">
 
         <!-- Preloader -->
@@ -45,7 +45,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <a href="<?php echo base_url('/membership/index')?>" style="color:grey;"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+                            <a href="<?php echo base_url('/membership/index') ?>" style="color:grey;"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
                             <h1 class="m-0">Upgrade Membership</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
@@ -54,70 +54,81 @@
                                 <li class="breadcrumb-item active">Upgrade Membership</li>
                             </ol>
                         </div><!-- /.col -->
-                        </div><!-- /.row -->
-                    </div><!-- /.container-fluid -->
-                </div>
-                <!-- /.content-header -->
+                    </div><!-- /.row -->
+                    <br>
 
-                <!-- Main content -->
-                <form method="POST" action="<?php echo base_url('order/store');?>" name="upgradelevel">
-                    <div class="row" style="margin: 10px">
-                        <table align="center" style="display:grid; grid-auto-columns: minmax(0, 4fr); grid-auto-flow: column;">
-                            <tbody>
-                                <tr>
-                                    <?php for($i=0;$i<sizeof($membership_data);$i++): ?>
+                </div><!-- /.container-fluid -->
+                <div class="col-lg-12">
+                    <div class="col-lg-3">
+                        <center>
+                            <div class="alert alert-info bg-primary">
+                                <h4><i class="icon fas fa-info"></i>Your Balance:</h4>
+                                <h3><?php echo $balance['balance']; ?></h3>
+                            </div>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <form method="POST" action="<?php echo base_url('order/store'); ?>" name="upgradelevel">
+                <div class="row" style="margin: 10px">
+                    <table align="center" style="display:grid; grid-auto-columns: minmax(0, 4fr); grid-auto-flow: column;">
+                        <tbody>
+                            <tr>
+                                <?php for ($i = 0; $i < sizeof($membership_data); $i++) : ?>
                                     <td>
                                         <div class="card card-default" style="max-width: 500px">
                                             <div class="card-header p-2">
                                                 <div style="text-align:center; margin: 20px; padding:20px 30px; font-size:20px; font-weight:bold;">
-                                                    <?php echo $membership_data['membership'][$i]['name'];?>
+                                                    <?php echo $membership_data['membership'][$i]['name']; ?>
                                                 </div>
                                                 <div>
                                                     <ul class="nav nav-pills">
-                                                        <li class="nav-item"><a class="nav-link active" href="#benefit<?php echo $i?>" data-toggle="tab">Benefit</a></li>
-                                                        <li class="nav-item"><a class="nav-link" href="#tnc<?php echo $i?>" data-toggle="tab">Syarat & Ketentuan</a></li>
+                                                        <li class="nav-item"><a class="nav-link active" href="#benefit<?php echo $i ?>" data-toggle="tab">Benefit</a></li>
+                                                        <li class="nav-item"><a class="nav-link" href="#tnc<?php echo $i ?>" data-toggle="tab">Terms & Condition</a></li>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="tab-content">
+                                                        <div class="tab-pane active" id="benefit<?php echo $i ?>">
+                                                            <ul>
+                                                                <?php for ($j = 0; $j < sizeof($membership_data['benefit'][$i]); $j++) : ?>
+                                                                    <li><?php echo $membership_data['benefit'][$i][$j]['benefit']; ?></li>
+                                                                <?php endfor ?>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="tab-pane" id="tnc<?php echo $i ?>">
+                                                            <ul>
+                                                                <?php for ($j = 0; $j < sizeof($membership_data['terms'][$i]); $j++) : ?>
+                                                                    <li><?php echo $membership_data['terms'][$i][$j]['terms']; ?></li>
+                                                                <?php endfor ?>
+                                                            </ul>
+                                                        </div>
                                                     </div>
-                                                    <div class="card-body">
-                                                        <div class="tab-content">
-                                                            <div class="tab-pane active" id="benefit<?php echo $i?>">
-                                                                <ul>
-                                                                    <?php for($j=0;$j<sizeof($membership_data['benefit'][$i]);$j++):?>
-                                                                        <li><?php echo $membership_data['benefit'][$i][$j]['benefit'];?></li>
-                                                                    <?php endfor?>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="tab-pane" id="tnc<?php echo $i?>">
-                                                                <ul>
-                                                                    <?php for($j=0;$j<sizeof($membership_data['terms'][$i]);$j++):?>
-                                                                        <li><?php echo $membership_data['terms'][$i][$j]['terms'];?></li>
-                                                                    <?php endfor?>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <div style="text-align:center;">
-                                                            <a href="<?php echo base_url('membership/upgrade/').$membership_data['membership'][$i]['id']?>" class="btn btn-block btn-outline-dark" style="color:#55c5e6; border:none; box-shadow: rgb(49 53 59 / 12%) 5px 5px 10px 5px;">Rp <?php echo number_format($membership_data['membership'][$i]['price']);?></a>
-                                                        </div>
+                                                    <div style="text-align:center;">
+                                                        <a href="<?php echo base_url('membership/upgrade') . '/' . $membership_data['membership'][$i]['id'] ?>" class="btn btn-block btn-outline-dark" style="color:#55c5e6; border:none; box-shadow: rgb(49 53 59 / 12%) 5px 5px 10px 5px;">Rp <?php echo number_format($membership_data['membership'][$i]['price']); ?></a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </td>
-                                    <?php endfor;?>     
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-            </form>
-            <!-- /.content -->
+                </div>
+            <?php endfor; ?>
+            </tr>
+            </tbody>
+            </table>
         </div>
+        </form>
+        <!-- /.content -->
+    </div>
 
-        <!-- /.content-wrapper -->
+    <!-- /.content-wrapper -->
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
     <link rel="stylesheet" href="<?php echo base_url('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
@@ -139,15 +150,15 @@
     <script src="<?php echo base_url(); ?>/dist/js/adminlte.js"></script>
 
     <script>
-    $(document).ready(function() {
-      $('.js-example-basic-single').select2();
-    });
-    var row = 0;
-  </script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+        var row = 0;
+    </script>
 
     <script>
-    function tambahRowProduk() {
-      var html = `
+        function tambahRowProduk() {
+            var html = `
               <tr id = "tambahRowProduk${row}">
                 <td>
                   <input type ='hidden' name='data_produk[]' value='${row}'>
@@ -173,28 +184,28 @@
                 </td>
               </tr>
             `;
-      $("#tambah_produk_button_container").before(html);
-      $('.js-example-basic-single').select2();
-      row++;
-    }
-
-    function deleteProdukData(r) {
-      var i = r.parentNode.parentNode.rowIndex;
-      document.getElementById("product_table").deleteRow(i);
-    }
-
-    function showHarga(row) {
-      var id_produk = $(`#get_product${row}`).val();
-      $.ajax({
-        url: `<?php echo base_url('order/get_price')?>/${id_produk}`,
-        type: "GET",
-        dataType: "JSON",
-        success: function(respond) {
-          $(`#harga_produk${row}`).text("Rp. " + respond['data_price'][0]['price']);
-          $(`#kuantitas_produk${row}`).text(respond['data_price'][0]['quantity']);
+            $("#tambah_produk_button_container").before(html);
+            $('.js-example-basic-single').select2();
+            row++;
         }
-      });
-    }
+
+        function deleteProdukData(r) {
+            var i = r.parentNode.parentNode.rowIndex;
+            document.getElementById("product_table").deleteRow(i);
+        }
+
+        function showHarga(row) {
+            var id_produk = $(`#get_product${row}`).val();
+            $.ajax({
+                url: `<?php echo base_url('order/get_price') ?>/${id_produk}`,
+                type: "GET",
+                dataType: "JSON",
+                success: function(respond) {
+                    $(`#harga_produk${row}`).text("Rp. " + respond['data_price'][0]['price']);
+                    $(`#kuantitas_produk${row}`).text(respond['data_price'][0]['quantity']);
+                }
+            });
+        }
     </script>
 
     <script>

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GudOn | Log in</title>
+  <title>GudOn | Recover your Password</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -25,10 +25,13 @@
       </div>
       <div class="card-body">
 
-        <p class="login-box-msg"><b>Sign in to start your session</b></p>
-        <form action="<?php echo base_url("login/auth") ?>" method="post">
-          <div class="input-group mb-3">
-            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+        <p class="login-box-msg"><b>Change Your Password</b></p>
+        <div >
+
+    </div>
+        <form action="<?php echo base_url("forgot_password/forgot/newpass")."/".$token ?>" method="post">
+        <div class="input-group mb-3">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
@@ -36,17 +39,32 @@
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" pattern=".{4,50}"  required title="Password must be between 4-50 characters">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
               </div>
             </div>
           </div>
+          <div class="input-group mb-3">
+            <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirm Password" pattern=".{4,50}"  required title="Password must be between 4-50 characters">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+        
+
           <div>
             <?php if (session()->getFlashdata('msg')) : ?>
               <div class="alert alert-warning">
                 <?= session()->getFlashdata('msg') ?>
+              </div>
+            <?php endif; ?>
+            <?php if (session()->getFlashdata('msg_passlimit')) : ?>
+              <div class="alert alert-warning">
+                <?= session()->getFlashdata('msg_passlimit') ?>
               </div>
             <?php endif; ?>
           </div>
@@ -55,23 +73,18 @@
             </div>
             <!-- /.col -->
             <div class="col-6">
-              <button type="submit" class="btn btn-primary btn-block">Login</button>
+              <button type="submit" class="btn btn-primary btn-block">Change Password</button>
             </div>
             <!-- /.col -->
           </div>
         </form>
         <!-- /.social-auth-links -->
 
+       
         <p class="mb-0">
-          <a href="<?php echo base_url(); ?>/register/index" class="text-center">Register a new membership</a>
+          <a href="<?php echo base_url(); ?>/login" class="text-center">Back to Login Page</a>
         </p>
-        <p class="mb-0">
-          Are you an admin? <a href="<?php echo base_url(); ?>/login/admin" class="text-center">Log In Here!</a>
-        </p>
-        <p class="mb-0" style="font-size: 0.8em">
-           <a href="<?php echo base_url(); ?>/forgot_password/index" class="text-center">Forgot password?</a>
-        </p>
-
+ 
       </div>
       <!-- /.card-body -->
     </div>

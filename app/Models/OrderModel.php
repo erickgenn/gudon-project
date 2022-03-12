@@ -23,6 +23,7 @@ class OrderModel extends Model
         $builder = $this->db->table('mst_gudon.mst_order');
         $builder->select(
             '
+            mst_order.id as order_id,
             mst_warehouse.name as nama_warehouse,
             mst_customer.name as nama_customer,
             mst_product.name as nama_produk,

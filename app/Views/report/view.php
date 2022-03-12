@@ -19,7 +19,7 @@
 
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed">
   <div class="wrapper">
 
     <!-- Preloader -->
@@ -41,7 +41,7 @@
           <div class="row mb-2">
             <div class="col-sm-6">
               <a href="<?php echo base_url('report/index') ?>" style="color:grey;"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
-              <h1 class="m-0">Order Report</h1>
+              <h1 class="m-0">Order Report #<?php echo $order[0]['order_id']; ?></h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -65,39 +65,35 @@
             <table id="order-table" class="table table-hover text-nowrap" style="width:100%">
               <tbody>
                 <tr>
-                  <th>No.</th>
-                  <td>1</td>
-                </tr>
-                <tr>
-                  <th>Nama Warehouse</th>
+                  <th>Warehouse</th>
                   <td><?php echo $order[0]['nama_warehouse']; ?></td>
                 </tr>
                 <tr>
-                  <th>Nama Customer</th>
+                  <th>Customer Name</th>
                   <td><?php echo $order[0]['nama_customer']; ?></td>
                 </tr>
                 <tr>
-                  <th>Alamat Tujuan</th>
+                  <th>Destination Address</th>
                   <td><?php echo $order[0]['alamat_tujuan']; ?></td>
                 </tr>
                 <tr>
-                  <th>Total Harga</th>
+                  <th>Total Price</th>
                   <td><?php echo $order[0]['total_harga']; ?></td>
                 </tr>
                 <tr>
-                  <th>Status</th>
+                  <th>Order Status</th>
                   <td><?php echo $order[0]['status_order']; ?></td>
                 </tr>
                 <tr>
-                  <th>Nama Pengiriman</th>
+                  <th>Shipment</th>
                   <td><?php echo $order[0]['nama_pengiriman']; ?></td>
                 </tr>
                 <tr>
-                  <th>Ongkos Kirim</th>
+                  <th>Shipping Cost</th>
                   <td><?php echo $order[0]['ongkos_kirim']; ?></td>
                 </tr>
                 <tr>
-                  <th>Status Pengiriman</th>
+                  <th>Shipping Status</th>
                   <td><?php echo $order[0]['status_pengiriman']; ?></td>
                 </tr>
               </tbody>
@@ -108,17 +104,17 @@
         <!-- /.card -->
         <div class="card" style="min-width: 610px;">
           <div class="card-header">
-            <h3 class="card-title">Data Produk</h3>
+            <h3 class="card-title">Product Data</h3>
           </div>
           <!-- /.card-header -->
           <div class="card-body table-responsive" style="padding-top:0">
             <table id="shelf-table" class="table table-hover text-nowrap">
               <thead>
                 <th>#</th>
-                <th>Nama Produk</th>
-                <th>Kuantitas Produk</th>
-                <th>Berat Produk</th>
-                <th>Volume Produk</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Weight</th>
+                <th>Volume</th>
               </thead>
               <tbody>
                 <?php for ($i = 0; $i < sizeof($order); $i++) : ?>

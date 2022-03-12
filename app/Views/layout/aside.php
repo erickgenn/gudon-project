@@ -232,10 +232,12 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="<?php echo base_url() ?>/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <a href="<?php echo base_url('membership/index');?>" class="d-block">
+            <img src="<?php echo base_url() ?>/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          </a>
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?php echo ucwords($_SESSION['name']); ?></a>
+          <a href="<?php echo base_url('membership/index');?>" class="d-block"><?php echo ucwords($_SESSION['name']); ?></a>
         </div>
       </div>
 
@@ -281,6 +283,14 @@
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Order Report
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo base_url('topup/method'); ?>" id="topup" class="nav-link">
+              <i class="nav-icon fas fa-money-bill"></i>
+              <p>
+                Top Up
               </p>
             </a>
           </li>
@@ -363,6 +373,9 @@
       }
       if (current.includes('/report/index')) {
         document.getElementById("report").className = "nav-link active";
+      }
+      if (current.includes('/topup/method')) {
+        document.getElementById("topup").className = "nav-link active";
       }
     });
   </script>
