@@ -323,8 +323,11 @@ class AuthController extends BaseController
         $authModel = new \App\Models\AuthModel();
 
         $user = $authModel->where('email', $email)->where('password', $password)->first();
+      
         
-        // get user current subs
+        
+        if(isset($user)){
+            // get user current subs
         $subsModel = new Subscription();
         $subs = $subsModel->where('cust_id', $user['id'])->where('is_active', 1)->first();
         if(!$subs) {
@@ -343,8 +346,6 @@ class AuthController extends BaseController
             $levelModel = new MembershipModel();
             $level = $levelModel->where('id',$subs['level_id'])->first();
         }
-        
-        if(isset($user)){
             $session_data = [
                 'id' => $user['id'],
                 'name' => $user['name'],

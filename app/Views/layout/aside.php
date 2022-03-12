@@ -255,6 +255,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="<?php echo base_url('product/index'); ?>" id="report" class="nav-link">
+              <i class="nav-icon fas fa-box"></i>
+              <p>
+                Product
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="<?php echo base_url('warehouse/index'); ?>" id="warehouse" class="nav-link">
               <i class="nav-icon fas fa-building"></i>
               <p>
