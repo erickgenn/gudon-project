@@ -27,7 +27,7 @@
   <!-- summernote -->
   <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/summernote/summernote-bs4.min.css">
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-navbar-fixed">
 <div class="wrapper">
 
   <!-- Preloader -->
@@ -68,7 +68,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Detail Rak: <strong><?php echo $shelf[0]['nama_warehouse'];?></strong></h3>
+                <h3 class="card-title">Warehouse: <strong><?php echo $shelf[0]['nama_warehouse'];?></strong></h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive">
@@ -76,11 +76,11 @@
                 <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Nomor Rak</th>
-                      <th>Berat Maksimal</th>
-                      <th>Volume Maksimal</th>
+                      <th>Shelf</th>
+                      <th>Max Weight</th>
+                      <th>Max Volume</th>
                       <th>Status</th>
-                      <th>Aksi</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -90,8 +90,8 @@
                         <td><?php echo $shelf[$i]['nama_rak'];?></td>
                         <td><?php echo $shelf[$i]['berat_maks'];?></td>
                         <td><?php echo $shelf[$i]['volume_maks'];?></td>
-                        <td><?php if($shelf[$i]['is_active']=="1") {echo "Aktif";} else {echo "Non Aktif";}?></td>
-                        <td><button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(<?php echo $shelf[$i]['id_shelf'];?>)">Lihat Detail</button></td>
+                        <td><?php if($shelf[$i]['is_active']=="1") {echo "Active";} else {echo "Not Active";}?></td>
+                        <td><button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(<?php echo $shelf[$i]['id_shelf'];?>)">Detail View</button></td>
                       </tr>
                     <?php endfor;?>
                   </tbody>
@@ -116,17 +116,17 @@
           <table id="shelf-table" class="table table-hover text-nowrap">
             <thead>
               <th>#</th>
-              <th>Nama Produk</th>
-              <th>Kuantitas Produk</th>
-              <th>Berat Produk</th>
-              <th>Volume Produk</th>
+              <th>Product Name</th>
+              <th>Quantity</th>
+              <th>Weight</th>
+              <th>Volume</th>
             </thead>
             <tbody>
             </tbody>
           </table>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>

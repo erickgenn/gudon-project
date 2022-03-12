@@ -23,7 +23,7 @@
 
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-navbar-fixed">
   <div class="wrapper">
 
     <!-- Preloader -->
@@ -45,7 +45,7 @@
         swal({
           position: 'top-end',
           icon: 'success',
-          title: 'Order Berhasil Dibatalkan!',
+          title: 'Order Canceled Successfully!',
           showConfirmButton: false,
           timer: 1500
         });
@@ -57,7 +57,7 @@
         swal({
           position: 'top-end',
           icon: 'error',
-          title: 'Order Gagal Dibatalkan!',
+          title: 'Order Cancelation Failed!',
           showConfirmButton: false,
           timer: 1500
         });
@@ -87,7 +87,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Data Order</h3>
+              <h3 class="card-title">Order</h3>
               <div class="float-right">
                 <a href="<?php echo base_url('/order/create_order/'); ?>">
                   <button type="button" class="btn btn-block btn-success">Create Order</button>
@@ -100,14 +100,14 @@
                 <thead>
                   <tr>
                     <th>No.</th>
-                    <th>Nama Penerima</th>
-                    <th>Alamat Tujuan</th>
-                    <th>Total Harga</th>
-                    <th>Ongkos Kirim</th>
-                    <th>Tanggal dan Waktu</th>
+                    <th>Customer Name</th>
+                    <th>Destination Address</th>
+                    <th>Total Price</th>
+                    <th>Shipping Cost</th>
+                    <th>Date Time</th>
                     <th>Status</th>
-                    <th>Status Pengantaran</th>
-                    <th>Aksi</th>
+                    <th>Shipping Status</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -196,14 +196,14 @@
                 render: function(data, type, row, meta) {
                   switch (row.status) {
                     case "SEDANG DIPROSES":
-                      return `<a href="<?php echo base_url('order/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;">Lihat Detail</a>
+                      return `<a href="<?php echo base_url('order/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;"><i class="fas fa-eye"></i></a>
                               <form method='POST' action='<?php echo base_url('order') ?>/${row.id}/delete' style='display: unset;'>
-                                <button type='submit' class='btn btn-danger' onclick="return confirm('Apakah Anda yakin akan membatalkan order ini?')">BATAL</button>
+                                <button type='submit' class='btn btn-danger' onclick="return confirm('Are you sure you want to cancel this order?')">CANCEL</button>
                               </form>
                               `;
                       break;
                     default:
-                      return `<a href="<?php echo base_url('order/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;">Lihat Detail</a>`;
+                      return `<a href="<?php echo base_url('order/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;"><i class="fas fa-eye"></i></a>`;
                       break;
                   }
                 }

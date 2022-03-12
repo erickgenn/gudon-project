@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/summernote/summernote-bs4.min.css">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-navbar-fixed">
   <div class="wrapper">
 
     <!-- Preloader -->
@@ -60,7 +60,7 @@
           <div class="row mb-2">
             <div class="col-sm-6">
               <a href="<?php echo base_url('/home') ?>" style="color:grey;"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
-              <h1 class="m-0">Status Membership</h1>
+              <h1 class="m-0">Membership Status</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -82,7 +82,7 @@
               <div class="card-body" style="display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-flex-direction: row; -ms-flex-direction: row; flex-direction: row; height: 128px; width: 100%; border-top-left-radius: 8px; border-top-right-radius: 8px; -webkit-align-items: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; padding: 32px 10px 32px 24px; -webkit-box-pack: justify; -webkit-justify-content: space-between; -ms-flex-pack: justify; justify-content: space-between;">
                 <div class="inner" style="display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -webkit-justify-content: center; -ms-flex-pack: center; justify-content: left; min-width:300px">
                   <div>
-                    <p style="font-size: 16px; line-height: 22px; font-family: 'Open Sans',sans-serif;">Halo <?php echo ucwords($_SESSION['name']); ?>, sekarang kamu adalah</p>
+                    <p style="font-size: 16px; line-height: 22px; font-family: 'Open Sans',sans-serif;">Hello <?php echo ucwords($_SESSION['name']); ?>, you are now</p>
                     <p style="font-size: 24px; line-height: 28px; font-family: 'Nunito Sans',sans-serif; -webkit-letter-spacing: -0.2px; -moz-letter-spacing: -0.2px; -ms-letter-spacing: -0.2px; letter-spacing: -0.2px; font-weight: 800; 
                     color: <?php if ($_SESSION['level'] == "BRONZE") {
                               echo '#A97142';
@@ -93,7 +93,7 @@
                             } else {
                               echo '#5cc5e6';
                             }
-                            ?>">Member <?php echo $_SESSION['level']; ?></p>
+                            ?>"><?php echo $_SESSION['level']; ?> Member</p>
                   </div>
                 </div>
                 <div style="display: flex; -webkit-box-align: center; align-items: center; color: rgba(49, 53, 59, 0.68); padding: 14px 0px 16px 20%; font-size: 10px; line-height: 14px; justify-content: space-around;">
@@ -104,7 +104,7 @@
                         <i class="fa fa-money fa-3x" style="color: #55c5e6;"></i>
                       </div>
                       <div style="font-size: 14px; font-family: 'Open Sans', sans-serif; line-height: 22px; color: rgba(49, 53, 59, 0.68); position: relative; padding-right: 12px;">
-                        Saldo<br>
+                        Balance<br>
                         Rp <?php echo number_format($customer_data['user_balance']); ?>
                       </div>
                     </div>
@@ -116,7 +116,7 @@
                         <i class="	fa fa-shopping-basket fa-3x" style="color: #55c5e6;"></i>
                       </div>
                       <div style="font-size: 14px; font-family: 'Open Sans', sans-serif; line-height: 22px; color: rgba(49, 53, 59, 0.68); position: relative; padding-right: 12px;">
-                        Jumlah Produk<br>
+                        Product<br>
                         <?php echo number_format($customer_data['total_product']); ?>
                       </div>
                     </div>
@@ -128,7 +128,7 @@
                         <i class="fa fa-cart-arrow-down fa-3x" style="color: #55c5e6;"></i>
                       </div>
                       <div style="font-size: 14px; font-family: 'Open Sans', sans-serif; line-height: 22px; color: rgba(49, 53, 59, 0.68); position: relative; padding-right: 12px;">
-                        Jumlah Order<br>
+                        Order<br>
                         <?php echo number_format($customer_data['count_order']); ?>
                       </div>
                     </div>
@@ -145,7 +145,7 @@
                 </div>
               </div>
               <div class="card-footer">
-                Status Membership (<?php echo $_SESSION['time_left']; ?> hari lagi)
+                Membership Status (<?php echo $_SESSION['time_left']; ?> days remaining)
                 <div class="progress progress-sm">
                   <div class="progress-bar <?php if ($_SESSION['time_left'] <= 3) echo 'bg-red';
                                             else echo 'bg-green' ?>" role="progressbar" aria-valuenow="<?php echo $_SESSION['percentage_left']; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $_SESSION['percentage_left']; ?>%"></div>
@@ -161,7 +161,7 @@
                 <div class="card-body">
                   <div class="inner">
                     <!-- Content -->
-                    Untuk membuka semua fitur, silahkan upgrade membermu sekarang
+                    To unlock all features, please upgrade your membership here
                     <a class="btn" href="<?php echo base_url('membership/upgrade'); ?>">
                       <div style="background-color: #55c5e6; display: flex; flex-direction: row; text-align: center; -webkit-box-align: center; align-items: center; justify-content: space-around; cursor: pointer; box-shadow: rgb(49 53 59 / 12%) 0px 1px 6px; border-radius: 8px; padding: 12px; margin-right: 12px;">
 
@@ -198,8 +198,8 @@
                     <div>
                       <div class="card-header p-2">
                         <ul class="nav nav-pills">
-                          <li class="nav-item"><a class="nav-link active" href="#benefit" data-toggle="tab">Keuntungan Member</a></li>
-                          <li class="nav-item"><a class="nav-link" href="#tnc" data-toggle="tab">Syarat & Ketentuan</a></li>
+                          <li class="nav-item"><a class="nav-link active" href="#benefit" data-toggle="tab">Benefits</a></li>
+                          <li class="nav-item"><a class="nav-link" href="#tnc" data-toggle="tab">Terms & Condition</a></li>
                         </ul>
                       </div>
                       <div class="card-body">

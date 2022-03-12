@@ -31,7 +31,7 @@ class MembershipLevelController extends BaseController
         $total_product = 0;
         $product = $modelProduct->where('customer_id', $_SESSION['id'])->findAll();
         for ($i = 0; $i < sizeOf($product); $i++) {
-            $total_product += $product[$i]['quantity'];
+            $total_product++;
         }
 
         // get membership detail

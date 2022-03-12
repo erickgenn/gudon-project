@@ -27,7 +27,7 @@
   <!-- summernote -->
   <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/summernote/summernote-bs4.min.css">
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-navbar-fixed">
 <div class="wrapper">
 
   <!-- Preloader -->
@@ -45,7 +45,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Halo, <?php echo ucwords($_SESSION['name']);?></h1>
+            <h1 class="m-0">Hello, <?php echo ucwords($_SESSION['name']);?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -82,14 +82,14 @@
               </a>
               </div>
               <div class="inner">
-                <p>Saldomu</p> 
+                <p>Balance</p> 
                 <h4>Rp <?php echo number_format($customer_data['user_balance']);?></h4>
               </div>
               <div class="inner">
-                <p>Pendapatanmu</p> 
+                <p>Revenue</p> 
                 <h4>Rp <?php echo number_format($customer_data['income']);?></h4>
               </div>
-              <a href="<?php echo base_url();?>" class="btn btn-block" style="background-color:#5cc5e6; color:white; font-weight:bold;">Atur Produkmu</a>
+              <a href="<?php echo base_url('product/index');?>" class="btn btn-block" style="background-color:#5cc5e6; color:white; font-weight:bold;">Manage Products</a>
             </div>
           </div>
           <!-- ./col -->
@@ -102,7 +102,7 @@
                   <div class="col-4 text-center">
                     <input type="text" class="knob" data-readonly="true" value="<?php echo $customer_data['percentage_order']?>" data-width="60" data-height="60"
                            data-fgColor="#39CCCC">
-                    <div>Order Berhasil</div>
+                    <div>Successful Order</div>
                   </div>
                   <!-- ./col -->
                   <div class="col-4 text-center">
@@ -114,7 +114,7 @@
                   <div class="col-4 text-center">
                     <input type="text" class="knob" data-readonly="true" value="<?php echo $_SESSION['percentage_left'];?>" data-width="60" data-height="60"
                            data-fgColor="#39CCCC">
-                    <div>Status Membership</div>
+                    <div>Membership Status</div>
                   </div>
                   <!-- ./col -->
                 </div>

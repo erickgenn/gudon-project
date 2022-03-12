@@ -24,7 +24,7 @@
 
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-navbar-fixed">
     <div class="wrapper">
 
         <!-- Preloader -->
@@ -87,7 +87,7 @@
                                                 <div>
                                                     <ul class="nav nav-pills">
                                                         <li class="nav-item"><a class="nav-link active" href="#benefit<?php echo $i ?>" data-toggle="tab">Benefit</a></li>
-                                                        <li class="nav-item"><a class="nav-link" href="#tnc<?php echo $i ?>" data-toggle="tab">Syarat & Ketentuan</a></li>
+                                                        <li class="nav-item"><a class="nav-link" href="#tnc<?php echo $i ?>" data-toggle="tab">Terms & Condition</a></li>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="tab-content">

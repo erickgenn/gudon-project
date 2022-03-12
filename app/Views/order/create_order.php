@@ -24,7 +24,7 @@
 
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-navbar-fixed">
     <div class="wrapper">
 
         <!-- Preloader -->
@@ -67,21 +67,21 @@
                                 <div class="col-lg-12" >
                                     <div class="form-group">
                                         <br>
-                                        <label>Nama Customer</label>
-                                        <input type="text" name="namacust" id="namacust" class="form-control">
+                                        <label>Customer Name</label>
+                                        <input type="text" name="namacust" id="namacust" class="form-control" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Nomor Telepon</label>
-                                        <input type="text" name="notelp" id="notelp" class="form-control">
+                                        <label>Customer Phone Number</label>
+                                        <input type="text" name="notelp" id="notelp" class="form-control" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Alamat Tujuan</label>
-                                        <input type="text" name="alamat" id="alamat" class="form-control">
+                                        <label>Destination Address</label>
+                                        <input type="text" name="alamat" id="alamat" class="form-control" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Tipe Pengiriman</label>
-                                        <select class = 'form-control' style="width:100%;" name="tipe_pengiriman"  id = 'tipe_pengiriman'>
-                                            <option selected disabled>------ Pilih Tipe Pengiriman ------</option>
+                                        <label>Shipment Type</label>
+                                        <select class = 'form-control' style="width:100%;" name="tipe_pengiriman" id = 'tipe_pengiriman'>
+                                            <option selected disabled>------ Choose Shipment Type ------</option>
                                         <?php for ($i = 0; $i < count ($groupdelivery); $i++) : ?>
                                             <option value = "<?php echo $groupdelivery[$i]["id"]; ?>"><?php echo $groupdelivery[$i]["name"]; ?></option>
                                         <?php endfor; ?>
@@ -99,16 +99,16 @@
                                     <table class="table table-bordered dataTable table-sm" id="product_table" style="width: 100%">
                                         <thead>
                                             <tr>
-                                                <td>Nama Produk</td>
-                                                <td>Detail Produk</td>
-                                                <td>Kuantitas</td>
-                                                <td>Aksi</td>
+                                                <td>Product name</td>
+                                                <td>Product Information</td>
+                                                <td>Quantity</td>
+                                                <td>Action</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         <tr id="tambah_produk_button_container">
                                             <td colspan=4>
-                                            <button type="button" class="btn btn-sm col-lg-12" style="background-color: #5cc5e6; color:white;" onclick="tambahRowProduk()">Tambah Produk</button>
+                                            <button type="button" class="btn btn-sm col-lg-12" style="background-color: #5cc5e6; color:white;" onclick="tambahRowProduk()">Add Product</button>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -123,7 +123,7 @@
                     </div>
                 </div>
                 <div class="float-right" style="padding:5px 25px 0 0 ">
-                    <button type="submit" class="btn btn-block btn-success">Kirim</button>
+                    <button type="submit" class="btn btn-block btn-success">Order</button>
                 </div>
             </form>
                 
@@ -171,7 +171,7 @@
                 <td>
                   <input type ='hidden' name='data_produk[]' value='${row}'>
                   <select class = 'js-example-basic-single form-control select2-hidden-accessible' style="width:100%;" name = 'id_produk${row}' id = 'get_product${row}' onchange="showHarga(${row})">
-                    <option selected disabled>------ Pilih Produk ------</option>
+                    <option selected disabled>------ Choose Product ------</option>
                   <?php for ($i = 0; $i < count ($groupproduct); $i++) : ?>
                     <option value = "<?php echo $groupproduct[$i]["id"]; ?>"><?php echo $groupproduct[$i]["name"]; ?></option>
                   <?php endfor; ?>
@@ -180,15 +180,15 @@
                 <td>
                   <table>
                     <tr>
-                      <td style="border:none;">Harga</td>
+                      <td style="border:none;">Price</td>
                       <td style="border:none; text-align:right;" id="harga_produk${row}"></td>
                     </tr>
                     <tr>
-                      <td style="border:none;">Kuantitas</td>
+                      <td style="border:none;">Quantity</td>
                       <td style="border:none; text-align:right;" id = "kuantitas_produk${row}"></td>
                     </tr>
                   </table>
-                <td><input type = 'text' class = 'form-control nf-input' name = 'detail_quantity${row}' min="0"></td>
+                <td><input type = 'number' class = 'form-control nf-input' name = 'detail_quantity${row}' min="0" required></td>
                 <td>
                   <button type = 'button' class = 'btn btn-danger btn-sm' onclick = 'deleteProdukData(this)'><i class="fa fa-fw fa-trash"></i></button>
                 </td>
@@ -238,38 +238,6 @@
             $('#list_customer_ids').val(arr_table); //ini kirim ke input hidden dalam form supaya bisa disend dalam form submit method post
         }
     </script>
-
-
-
-    <!-- <script type="text/javascript">
-    function addRow()
-    {
-        
-        var nama=document.createorder.nama.value;
-        var alamat=document.createorder.alamat.value;
-        var kuantitas=document.createorder.kuantitas.value;
-        var barang = $( "#barang option:selected" ).text();
-       
-        // var barang=document.createorder.barang.id;
-        alert(warehouse);
-        var tr =  document.createElement('tr');
-
-        var td1 =  tr.appendChild(document.createElement('td'));
-        var td2 =  tr.appendChild(document.createElement('td'));
-        var td3 =  tr.appendChild(document.createElement('td'));
-        var td4 =  tr.appendChild(document.createElement('td'));
-        
-
-        td1.innerHTML=nama;
-        td2.innerHTML=alamat;
-        td3.innerHTML=kuantitas;
-        td4.innerHTML=barang;
-       
-
-        document.getElementById("cust-table").appendChild(tr);
-    }
-</script> -->
-
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="<?php echo base_url(); ?>/dist/js/pages/dashboard.js"></script>
 </body>
