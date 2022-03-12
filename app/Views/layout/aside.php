@@ -233,7 +233,13 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <a href="<?php echo base_url('membership/index');?>" class="d-block">
-            <img src="<?php echo base_url() ?>/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            <?php if (!$_SESSION['picture'] == null): ?>
+              <img src="<?php echo base_url('/uploads/profile/customer').'/'.$_SESSION['picture'] ?>" class="img-circle elevation-2" style="min-width:30px; min-height:30px; max-width:30px; max-height:30px;width:100%;object-fit:cover;" alt="User Image" />
+            <?php else:?>
+              <div>
+                <img src="<?php echo base_url('/dist/img/avatar5.png');?>" class="img-circle elevation-2" alt="User Image" />
+              </div>
+            <?php endif;?>
           </a>
         </div>
         <div class="info">

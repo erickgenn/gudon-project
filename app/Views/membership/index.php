@@ -52,6 +52,31 @@
         });
       </script>
     <?php endif; ?>
+
+    <?php if (session()->getFlashdata('custUpdateSuccess')) : ?>
+        <script>
+            swal({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Profile Updated!',
+            showConfirmButton: false,
+            timer: 2500
+            });
+        </script>
+    <?php endif; ?>
+
+    <?php if (session()->getFlashdata('custUpdateFailed')) : ?>
+        <script>
+            swal({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Failed to Update Profile!',
+            showConfirmButton: false,
+            timer: 2500
+            });
+        </script>
+    <?php endif; ?>
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
@@ -60,7 +85,7 @@
           <div class="row mb-2">
             <div class="col-sm-6">
               <a href="<?php echo base_url('/home') ?>" style="color:grey;"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
-              <h1 class="m-0">Membership Status</h1>
+              <h1 class="m-0">Profile</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -78,6 +103,79 @@
         <div class="container-fluid">
           <!-- membership status -->
           <div class="row">
+            <div style="padding:15px 0;width:100%">
+              <div class="text-center">
+                <?php if (!empty($_SESSION['picture'])): ?>
+                  <div class="card-body" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; margin: auto; padding:0;">
+                    <img class="profile-user-img img-fluid img-circle" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px;width:100%;object-fit:cover;" src="<?php echo base_url('/uploads/profile/customer').'/'.$_SESSION['picture'] ?>" alt="User profile picture" />
+                  </div>
+                <?php else:?>
+                  <div>
+                    <img src="<?php echo base_url('/dist/img/avatar5.png');?>" class="profile-user-img img-fluid img-circle" style="width:15%;" alt="User profile picture" />
+                  </div>
+                <?php endif;?>
+                <div class="info" style="padding:10px 0 0;font-weight:500;font-size:larger;">
+                  <?php echo ucwords($_SESSION['name']);?>
+                </div>
+                <div class="info" style="padding:5px 0;">
+                  <a class="btn" style="font-weight:550;color:#5cc5e6;" data-toggle="modal" data-target="#profileModal">Edit Profile</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal -->
+            <div id="profileModal" class="modal fade" role="dialog">
+              <div class="modal-dialog modal-md">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <h3 class="modal-title">Edit Profile</h3>  
+                    </div>
+                    <div class="modal-body" style="text-align: center; margin:auto;">
+                      <table id="profile-table" style="border: none;">
+                        <tbody>
+                        <form method="POST" action="<?php echo base_url('profile/update'); ?>" name="createorder" enctype="multipart/form-data">
+                          <tr>
+                            <td>
+                              <?php if (!empty($_SESSION['picture'])): ?>
+                                <div class="card-body" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; margin: auto; padding:0 0 25px;">
+                                  <img class="profile-user-img img-fluid img-circle" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px;width:100%;object-fit:cover;" src="<?php echo base_url('/uploads/profile/customer').'/'.$_SESSION['picture'] ?>" alt="User profile picture" />
+                                </div>
+                              <?php else:?>
+                                <div>
+                                  <img src="<?php echo base_url('/dist/img/avatar5.png');?>" class="profile-user-img img-fluid img-circle" style="width:15%;" alt="User profile picture" />
+                                </div>
+                              <?php endif;?>
+                                <div class="form-group">
+                                  <div class="col" style="margin-top: 10px;">
+                                    <input type="file" name="profilepicture" id="profilepicture">
+                                  </div>
+                                </div>
+                            </td>
+                            </tr>
+                            <tr>  
+                            <td>
+                              <div>
+                                <div class="form-group">
+                                  <label>Username</label>
+                                  <input type="text" name="username" id="username" class="form-control" placeholder="<?php echo $_SESSION['name'];?>" required>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
             <div class="card card-default" style="padding:0%; width:100%;">
               <div class="card-body" style="display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-flex-direction: row; -ms-flex-direction: row; flex-direction: row; height: 128px; width: 100%; border-top-left-radius: 8px; border-top-right-radius: 8px; -webkit-align-items: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; padding: 32px 10px 32px 24px; -webkit-box-pack: justify; -webkit-justify-content: space-between; -ms-flex-pack: justify; justify-content: space-between;">
                 <div class="inner" style="display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -webkit-justify-content: center; -ms-flex-pack: center; justify-content: left; min-width:300px">

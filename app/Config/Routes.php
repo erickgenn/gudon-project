@@ -34,24 +34,27 @@ $routes->setAutoRoute(true);
 
 $routes->get('/', 'AuthController::login');
 $routes->get('home', 'Home::index');
+
 // auth
 $routes->get('login', 'AuthController::login');
 $routes->post('login/auth', 'AuthController::loginAuth');
 $routes->get('logout', 'AuthController::logout');
 $routes->get('forgot_password/index', 'AuthController::forgot_password');
+
 // $routes->get('forgot_password/auth', 'AuthController::forgot_password');//autentikasi email utk forgot password
 $routes->post('forgot_password/authemail', 'AuthController::auth_forgotpass');
 $routes->get('forgot_password/forgot/changepass/(:any)', 'AuthController::auth_changepass/$1');
 $routes->post('forgot_password/forgot/newpass/(:any)', 'AuthController::new_password/$1');
 
-
 $routes->get('forbidden', 'AdminController::forbidden');
 
 // admin pages
 $routes->get('admin/index', 'AdminController::index');
+
 //admin customer
 $routes->get('admin/customer/index', 'CustomerController::index');
 $routes->get('admin/customer/search', 'CustomerController::search');
+
 //admin order
 $routes->get('admin/order/index', 'OrderAdminController::index');
 $routes->get('admin/order/search', 'OrderAdminController::search');
@@ -102,11 +105,12 @@ $routes->post('order/(:num)/delete', 'OrderController::delete/$1');
 
 // membership
 $routes->get('membership/index', 'MembershipLevelController::index');
-
 $routes->get('membership/upgrade', 'MembershipLevelController::upgrade_menu');
 $routes->get('membership/upgrade/(:num)', 'MembershipLevelController::upgrade/$1');
 $routes->post('membership/payment', 'MembershipLevelController::payment');
 
+// profile
+$routes->post('profile/update', 'CustomerController::update_profile');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

@@ -60,7 +60,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="card card-primary card-outline">
+                                <div class="card">
                                     <div class="card-header">
                                         <?php if ($method == "OVO") : ?>
                                             <img src="<?php echo base_url() ?>/assets/logo-ovo.png" width=20% alt="OVO" class="brand-image">

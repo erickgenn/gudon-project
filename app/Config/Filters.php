@@ -45,7 +45,7 @@ class Filters extends BaseConfig
                     'login/auth/admin',
                     'forgot_password/authemail',
                     'forgot_password/forgot/changepass/*',
-                    'forgot_password/forgot/newpass/*'
+                    'forgot_password/forgot/newpass/*',
                 ],
             ],
             'authAdmin' => [
@@ -93,6 +93,7 @@ class Filters extends BaseConfig
                     'topup/method',
                     'topup/view/*',
                     'topup',
+                    'profile/update',
                 ]
             ]
 
