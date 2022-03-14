@@ -48,11 +48,6 @@ class CustomerController extends BaseController
                     $uploadOk = 0;
                 }
             }
-            
-            // Check if file already exists
-            if (file_exists($target_file)) {
-                $uploadOk = 0;
-            }
 
             // Check file size
             if ($file->getSize() > 5000000) {
