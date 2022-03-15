@@ -79,6 +79,16 @@ class OrderModel extends Model
         return $builder->get();
     }
 
+    public function countOrderDate($date)
+    {
+        $builder = $this->db->table('mst_gudon.mst_order');
+        $builder->where('created_at >=', $date . " 00:00:00.000");
+        $builder->where('created_at <=', $date . " 23:59:59.999");
+        $builder->where('customer_id', $_SESSION['id']);
+        $builder->where('status', "SELESAI");
+        return $builder->get();
+    }
+
     public function deleteOrder($id)
     {
         $builder = $this->db->table('mst_gudon.mst_order');
