@@ -40,16 +40,16 @@ class AuthController extends BaseController
         return view('auth/change_password', compact('token'));
     }
 
-    
+
     public function new_password($token)
     {
-        $session=session();
+        $session = session();
         $data = $this->request->getPost();
 
         helper(['form']);
         $rules = [
-       
-          
+
+
             'password'      => 'required|min_length[4]|max_length[50]',
             'confirm_password'  => 'required|matches[password]'
         ];
@@ -62,35 +62,33 @@ class AuthController extends BaseController
                 ];
                 $userModel = new \App\Models\AuthModel();
                 $user = $userModel->where('email', $data['email'])->first();
-           
+
                 $userModel->update($user['id'], $data_update);
-        
+
                 return redirect()->to('login');
-                
-            }else{
+            } else {
                 $session->setFlashdata('msg', 'Email is incorrect!');
-                return redirect()->to('forgot_password/forgot/changepass/'.$token);           
+                return redirect()->to('forgot_password/forgot/changepass/' . $token);
             }
-           
         } else {
             $session->setFlashdata('msg', 'Password and Confirm Password do not match!');
-            return redirect()->to('forgot_password/forgot/changepass/'.$token);  
+            return redirect()->to('forgot_password/forgot/changepass/' . $token);
         }
-        
     }
 
-    public function auth_forgotpass() {
+    public function auth_forgotpass()
+    {
         $session = session();
         $data = $this->request->getPost();
         $email = $data['email'];
         $authModel = new \App\Models\AuthModel();
         $user = $authModel->where('email', $email)->first();
-        if($user == null) {
+        if ($user == null) {
             $session->setFlashdata('msg', 'User Not Found!');
             return view('auth/login');
-        } else { 
+        } else {
             $encrypted_token = md5($user['email']);
-            $url_changepass = base_url('forgot_password/forgot/changepass')."/".$encrypted_token;
+            $url_changepass = base_url('forgot_password/forgot/changepass') . "/" . $encrypted_token;
             $email = \Config\Services::email();
             $email->setFrom('gudon.adm@gmail.com', "GuDon Admin");
             $email->setTo($user['email']);
@@ -168,13 +166,13 @@ class AuthController extends BaseController
                                                             </tr>
                                                             </tbody>
                                                         </table>
-                                                        <p style="font-size: 1.8vmin; line-height: 24px; width: 100%; margin: 0;" align="left">Hello '.ucwords($user['name']).', Your GuDon account has just requested a password change, please click the button below to continue</p>
+                                                        <p style="font-size: 1.8vmin; line-height: 24px; width: 100%; margin: 0;" align="left">Hello ' . ucwords($user['name']) . ', Your GuDon account has just requested a password change, please click the button below to continue</p>
                                                         <br>
                                                         <table class="btn" role="presentation" border="0" cellpadding="0" cellspacing="0" style="border-radius: 6px; border-collapse: separate !important;">
                                                             <tbody>
                                                             <tr>
                                                                 <td style="line-height: 24px; font-size: 16px; border-radius: 6px; margin: 0;" align="center">
-                                                                <a href="'.$url_changepass.'" style="font-size: 2vh; background-color: #5cc5e6; color: #FFFFFF; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 6px; line-height: 20px; display: block; font-weight: normal; white-space: nowrap; padding: 8px 12px; border: 1px solid transparent;">
+                                                                <a href="' . $url_changepass . '" style="font-size: 2vh; background-color: #5cc5e6; color: #FFFFFF; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 6px; line-height: 20px; display: block; font-weight: normal; white-space: nowrap; padding: 8px 12px; border: 1px solid transparent;">
                                                                     Reset Your Password
                                                                 </a>
                                                                 </td>
@@ -224,7 +222,7 @@ class AuthController extends BaseController
             </body>
             </html>
             ');
-            if($email->send()) {
+            if ($email->send()) {
                 $session->setFlashdata('msg', 'Please check your Email!');
                 return view('auth/login');
             } else {
@@ -275,29 +273,29 @@ class AuthController extends BaseController
         $authModel = new \App\Models\AuthModel();
 
         $user = $authModel->where('email', $email)->where('password', $password)->first();
-      
-        
-        
-        if(isset($user)){
-            // get user current subs
-        $subsModel = new Subscription();
-        $subs = $subsModel->where('cust_id', $user['id'])->where('is_active', 1)->first();
-        if(!$subs) {
-            $level['name'] = 'NOT RATED';
-            $time_left= 0;
-            $percentage_left = 0;
-            $subs['level_id'] = 0;
-        } else {
-            $subscription_date = $subs['subscription_date'];
-            $date = new DateTime($subscription_date);
-            $date->add(new DateInterval('P30D'));
-            $time_left = round((strtotime($date->format('Y-m-d')) - time()) / (60 * 60 * 24));
-            $percentage_left = round($time_left/30*100);
 
-            // get user membership level name
-            $levelModel = new MembershipModel();
-            $level = $levelModel->where('id',$subs['level_id'])->first();
-        }
+
+
+        if (isset($user)) {
+            // get user current subs
+            $subsModel = new Subscription();
+            $subs = $subsModel->where('cust_id', $user['id'])->where('is_active', 1)->first();
+            if (!$subs) {
+                $level['name'] = 'NOT RATED';
+                $time_left = 0;
+                $percentage_left = 0;
+                $subs['level_id'] = 0;
+            } else {
+                $subscription_date = $subs['subscription_date'];
+                $date = new DateTime($subscription_date);
+                $date->add(new DateInterval('P30D'));
+                $time_left = round((strtotime($date->format('Y-m-d')) - time()) / (60 * 60 * 24)) + 1;
+                $percentage_left = round($time_left / 30 * 100);
+
+                // get user membership level name
+                $levelModel = new MembershipModel();
+                $level = $levelModel->where('id', $subs['level_id'])->first();
+            }
             $session_data = [
                 'id' => $user['id'],
                 'name' => $user['name'],
@@ -350,7 +348,7 @@ class AuthController extends BaseController
         return redirect()->to(base_url('login'));
     }
 
-    
+
 
     // if user clicks on the forgot passwordnya
     // if (isset($_POST['forgot-password'])) {
@@ -372,9 +370,9 @@ class AuthController extends BaseController
     //         $data['validation'] = $this->validator;
     //         echo view('auth/register', $data);
     //     }
-        
+
     //     if (count($errors) == 0) {
-            
+
     //     }
 
     //     $sql 

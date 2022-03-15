@@ -54,39 +54,39 @@
     <?php endif; ?>
 
     <?php if (session()->getFlashdata('custUpdateSuccess')) : ?>
-        <script>
-            swal({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Profile Updated!',
-            showConfirmButton: false,
-            timer: 2500
-            });
-        </script>
+      <script>
+        swal({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Profile Updated!',
+          showConfirmButton: false,
+          timer: 2500
+        });
+      </script>
     <?php endif; ?>
 
     <?php if (session()->getFlashdata('custUpdateFailed')) : ?>
-        <script>
-            swal({
-            position: 'top-end',
-            icon: 'error',
-            title: 'Failed to Update Profile!',
-            showConfirmButton: false,
-            timer: 2500
-            });
-        </script>
+      <script>
+        swal({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Failed to Update Profile!',
+          showConfirmButton: false,
+          timer: 2500
+        });
+      </script>
     <?php endif; ?>
 
     <?php if (session()->getFlashdata('ImageFailed')) : ?>
-        <script>
-            swal({
-            position: 'top-end',
-            icon: 'error',
-            title: 'Please Try Another Image',
-            showConfirmButton: false,
-            timer: 2500
-            });
-        </script>
+      <script>
+        swal({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Please Try Another Image',
+          showConfirmButton: false,
+          timer: 2500
+        });
+      </script>
     <?php endif; ?>
 
     <!-- Content Wrapper. Contains page content -->
@@ -117,17 +117,17 @@
           <div class="row">
             <div style="padding:15px 0;width:100%">
               <div class="text-center">
-                <?php if (!empty($_SESSION['picture'])): ?>
+                <?php if (!empty($_SESSION['picture'])) : ?>
                   <div class="card-body" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; margin: auto; padding:0;">
-                    <img class="profile-user-img img-fluid img-circle" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px;width:100%;object-fit:cover;" src="<?php echo base_url('/uploads/profile/customer').'/'.$_SESSION['picture'] ?>" alt="User profile picture" />
+                    <img class="profile-user-img img-fluid img-circle" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px;width:100%;object-fit:cover;" src="<?php echo base_url('/uploads/profile/customer') . '/' . $_SESSION['picture'] ?>" alt="User profile picture" />
                   </div>
-                <?php else:?>
+                <?php else : ?>
                   <div>
-                    <img src="<?php echo base_url('/dist/img/avatar5.png');?>" class="profile-user-img img-fluid img-circle" style="width:15%;" alt="User profile picture" />
+                    <img src="<?php echo base_url('/dist/img/avatar5.png'); ?>" class="profile-user-img img-fluid img-circle" style="width:15%;" alt="User profile picture" />
                   </div>
-                <?php endif;?>
+                <?php endif; ?>
                 <div class="info" style="padding:10px 0 0;font-weight:500;font-size:larger;">
-                  <?php echo ucwords($_SESSION['name']);?>
+                  <?php echo ucwords($_SESSION['name']); ?>
                 </div>
                 <div class="info" style="padding:5px 0;">
                   <a class="btn" style="font-weight:550;color:#5cc5e6;" data-toggle="modal" data-target="#profileModal">Edit Profile</a>
@@ -141,48 +141,48 @@
 
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <div class="modal-header">
-                      <h3 class="modal-title">Edit Profile</h3>  
-                    </div>
-                    <div class="modal-body" style="text-align: center; margin:auto;">
-                      <table id="profile-table" style="border: none;">
-                        <tbody>
+                  <div class="modal-header">
+                    <h3 class="modal-title">Edit Profile</h3>
+                  </div>
+                  <div class="modal-body" style="text-align: center; margin:auto;">
+                    <table id="profile-table" style="border: none;">
+                      <tbody>
                         <form method="POST" action="<?php echo base_url('profile/update'); ?>" name="createorder" enctype="multipart/form-data">
                           <tr>
                             <td>
-                              <?php if (!empty($_SESSION['picture'])): ?>
+                              <?php if (!empty($_SESSION['picture'])) : ?>
                                 <div class="card-body" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; margin: auto; padding:0 0 25px;">
-                                  <img class="profile-user-img img-fluid img-circle" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px;width:100%;object-fit:cover;" src="<?php echo base_url('/uploads/profile/customer').'/'.$_SESSION['picture'] ?>" alt="User profile picture" />
+                                  <img class="profile-user-img img-fluid img-circle" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px;width:100%;object-fit:cover;" src="<?php echo base_url('/uploads/profile/customer') . '/' . $_SESSION['picture'] ?>" alt="User profile picture" />
                                 </div>
-                              <?php else:?>
+                              <?php else : ?>
                                 <div>
-                                  <img src="<?php echo base_url('/dist/img/avatar5.png');?>" class="profile-user-img img-fluid img-circle" style="width:15%;" alt="User profile picture" />
+                                  <img src="<?php echo base_url('/dist/img/avatar5.png'); ?>" class="profile-user-img img-fluid img-circle" style="width:15%;" alt="User profile picture" />
                                 </div>
-                              <?php endif;?>
-                                <div class="form-group">
-                                  <div class="col" style="margin-top: 10px;">
-                                    <input type="file" name="profilepicture" id="profilepicture">
-                                  </div>
-                                </div>
-                            </td>
-                            </tr>
-                            <tr>  
-                            <td>
-                              <div>
-                                <div class="form-group">
-                                  <label>Username</label>
-                                  <input type="text" name="username" id="username" class="form-control" placeholder="<?php echo $_SESSION['name'];?>" required>
+                              <?php endif; ?>
+                              <div class="form-group">
+                                <div class="col" style="margin-top: 10px;">
+                                  <input type="file" name="profilepicture" id="profilepicture">
                                 </div>
                               </div>
                             </td>
                           </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-success">Save</button>
-                    </div>
+                          <tr>
+                            <td>
+                              <div>
+                                <div class="form-group">
+                                  <label>Username</label>
+                                  <input type="text" name="username" id="username" class="form-control" placeholder="<?php echo $_SESSION['name']; ?>" required>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Save</button>
+                  </div>
                   </form>
                 </div>
               </div>

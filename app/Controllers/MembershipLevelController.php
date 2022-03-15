@@ -156,7 +156,7 @@ class MembershipLevelController extends BaseController
                 $subscription_date = $subs['subscription_date'];
                 $date = new DateTime($subscription_date);
                 $date->add(new DateInterval('P30D'));
-                $time_left = round((strtotime($date->format('Y-m-d')) - time()) / (60 * 60 * 24));
+                $time_left = round((strtotime($date->format('Y-m-d')) - time()) / (60 * 60 * 24) + 1);
                 $percentage_left = round($time_left / 30 * 100);
 
                 // get user membership level name
