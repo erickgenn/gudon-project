@@ -141,7 +141,7 @@
 
               <div class="card">
                 <div class="card-header" style="background-color:#5cc5e6">
-                  <h3 class="card-title" style="color:white">This Week's Orders Chart</h3>
+                  <h3 class="card-title" style="color:white"><i class="fas fa-chart-line"></i> This Week's Orders Chart</h3>
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                       <i class="fas fa-minus" style="color:white"></i>
@@ -166,7 +166,7 @@
             <div class="col-md-6">
               <div class="card">
                 <div class="card-header" style="background-color:#5cc5e6">
-                  <h3 class="card-title" style="color:white">Your Best Selling Products</h3>
+                  <h3 class="card-title" style="color:white"><i class="fas fa-award"></i> Your Best Selling Products</h3>
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                       <i class="fas fa-minus" style="color:white"></i>
@@ -266,30 +266,26 @@
     });
   </script>
   <script>
-    const labels = [
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-      'Sunday',
-    ];
-
-    const data = {
-      labels: labels,
-      datasets: [{
-        label: 'Orders',
-        backgroundColor: '#1C6DD0',
-        borderColor: '#1C6DD0',
-        data: [<?php echo $count_order[0] ?>, <?php echo $count_order[1] ?>, <?php echo $count_order[2] ?>, <?php echo $count_order[3] ?>, <?php echo $count_order[4] ?>, <?php echo $count_order[5] ?>, <?php echo $count_order[6] ?>],
-      }]
-    };
-
-    const config = {
+    var ctx = document.getElementById('orderChart').getContext('2d');
+    var orderChart = new Chart(ctx, {
       type: 'line',
-      data: data,
-
+      data: {
+        labels: [
+          'Monday',
+          'Tuesday',
+          'Wednesday',
+          'Thursday',
+          'Friday',
+          'Saturday',
+          'Sunday',
+        ],
+        datasets: [{
+          label: 'Orders',
+          backgroundColor: '#1C6DD0',
+          borderColor: '#1C6DD0',
+          data: [<?php echo $count_order[0] ?>, <?php echo $count_order[1] ?>, <?php echo $count_order[2] ?>, <?php echo $count_order[3] ?>, <?php echo $count_order[4] ?>, <?php echo $count_order[5] ?>, <?php echo $count_order[6] ?>],
+        }]
+      },
       options: {
         responsive: true,
         plugins: {
@@ -317,7 +313,7 @@
           }
         },
       }
-    };
+    });
   </script>
   <script>
     const myChart = new Chart(
