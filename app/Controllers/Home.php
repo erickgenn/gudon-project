@@ -20,7 +20,7 @@ class Home extends BaseController
         // get order successful rate
         $status_order = $orderModel->where('customer_id', $_SESSION['id'])->where('status', 'SELESAI')->findAll();
         $success_order = count($status_order);
-        if($count_order==0) {
+        if ($count_order == 0) {
             $percentage_order = 0;
         } else {
             $percentage_order = round($success_order / $count_order * 100);
@@ -28,7 +28,7 @@ class Home extends BaseController
 
         // get order sold
         $income = 0;
-        for($i=0;$i<sizeOf($status_order);$i++) {
+        for ($i = 0; $i < sizeOf($status_order); $i++) {
             $income += $status_order[$i]['total_price'];
         }
 
@@ -42,7 +42,7 @@ class Home extends BaseController
         $total_product = 0;
         $total_weight = 0;
         $product = $modelProduct->where('customer_id', $_SESSION['id'])->findAll();
-        for($i=0;$i<sizeOf($product);$i++) {
+        for ($i = 0; $i < sizeOf($product); $i++) {
             $total_product += $product[$i]['quantity'];
             $total_weight += $product[$i]['weight'] * $product[$i]['quantity'];
         }
@@ -50,7 +50,7 @@ class Home extends BaseController
         // get level max_weight
         $modelLevel = new MembershipModel();
         $level = $modelLevel->where('id', $_SESSION['level_id'])->first();
-        if($level['max_weight'] == 0) {
+        if ($level['max_weight'] == 0) {
             $percentage_weight = 0;
         } else {
             $percentage_weight = round(($total_weight / $level['max_weight']) * 100);
@@ -64,6 +64,25 @@ class Home extends BaseController
             'total_weight' => $percentage_weight,
             'percentage_order' => $percentage_order
         ];
+        $date_monday = date("Y-m-d", strtotime("Monday This Week"));
+        $date_tuesday = date("Y-m-d", strtotime("Tuesday This Week"));
+        $date_wednesday = date("Y-m-d", strtotime("Wednesday This Week"));
+        $date_thursday = date("Y-m-d", strtotime("Thurday This Week"));
+        $date_friday = date("Y-m-d", strtotime("Friday This Week"));
+        $date_saturday = date("Y-m-d", strtotime("Saturday This Week"));
+        $date_sunday = date("Y-m-d", strtotime("Sunday This Week"));
+
+        $monday = $orderModel->countOrderDate($date_monday)->getResultArray();
+        $tuesday = $orderModel->countOrderDate($date_tuesday)->getResultArray();
+        $wednesday = $orderModel->countOrderDate($date_wednesday)->getResultArray();
+        $thursday = $orderModel->countOrderDate($date_thursday)->getResultArray();
+        $friday = $orderModel->countOrderDate($date_friday)->getResultArray();
+        $saturday = $orderModel->countOrderDate($date_saturday)->getResultArray();
+        $sunday = $orderModel->countOrderDate($date_sunday)->getResultArray();
+
+        $cust_data['count_order'] = [count($monday), count($tuesday), count($wednesday), count($thursday), count($friday), count($saturday), count($sunday)];
+
+
         return view('dashboard', $cust_data);
     }
 }
