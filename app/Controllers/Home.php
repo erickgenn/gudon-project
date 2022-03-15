@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\ProductModel;
 use App\Models\Customer;
+use App\Models\DetailOrderModel;
 use App\Models\MembershipModel;
 use App\Models\OrderModel;
 
@@ -16,7 +17,6 @@ class Home extends BaseController
         $orderModel = new OrderModel();
         $order = $orderModel->where('customer_id', $_SESSION['id'])->findAll();
         $count_order = count($order);
-
         // get order successful rate
         $status_order = $orderModel->where('customer_id', $_SESSION['id'])->where('status', 'SELESAI')->findAll();
         $success_order = count($status_order);
@@ -82,7 +82,13 @@ class Home extends BaseController
 
         $cust_data['count_order'] = [count($monday), count($tuesday), count($wednesday), count($thursday), count($friday), count($saturday), count($sunday)];
 
-
         return view('dashboard', $cust_data);
+    }
+
+    public function searchBestProducts()
+    {
+        $detailOrderModel = new DetailOrderModel();
+        $result = $detailOrderModel->getMostSoldProduct()->getResultArray();
+        return json_encode($result);
     }
 }

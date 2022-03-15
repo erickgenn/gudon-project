@@ -94,6 +94,7 @@ class Filters extends BaseConfig
                     'topup/view/*',
                     'topup',
                     'profile/update',
+                    'home/bestproducts',
                 ]
             ]
 
