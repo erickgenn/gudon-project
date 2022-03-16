@@ -136,13 +136,13 @@
             <div class="col-lg-3 col-6">
               <div class="small-box" style="padding:2.5rem 1.5rem 2.5rem 1.5rem">
                 <div class="inner">
-                  <h3>120</h3>
-                  <p>New Orders</p>
+                  <h3><?php echo $ongoing_order; ?></h3>
+                  <p>On Going Orders</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-bag"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="<?php echo base_url('order/index'); ?>" style="background-color:#5cc5e6; color:white; font-weight:bold;" class="small-box-footer">See Your Orders Here <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
           </div>

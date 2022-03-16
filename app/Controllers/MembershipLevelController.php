@@ -133,7 +133,12 @@ class MembershipLevelController extends BaseController
                 // Update Membership
                 $subscribe = $subscriptionModel->where('cust_id', $_SESSION['id'])->where('is_active', 1)->first();
                 if (isset($subscribe) || !isset($subscribe)) {
-                    $subscriptionModel->where('cust_id', $_SESSION['id'])->where('is_active', 1)->delete();
+                    $data_update_isactive = [
+                        'is_active' => 0
+                    ];
+                    $subscriptionModel->update($_SESSION['id'], $data_update_isactive);
+
+                    $subscriptionModel->where('cust_id', $_SESSION['id'])->where('is_active', 0)->delete();
                     $data_subscription = [
                         'cust_id' => $_SESSION['id'],
                         'level_id'    => $data['level_id'],
