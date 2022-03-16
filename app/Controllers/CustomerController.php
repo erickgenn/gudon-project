@@ -74,16 +74,16 @@ class CustomerController extends BaseController
                     ];
                     $session->set($session_data);
                     $session->setFlashdata('custUpdateSuccess', 'abc');
-                    return redirect()->to(base_url('membership/index'));
+                    return redirect()->to(base_url('profile/index'));
                 } else {
                     $session->setFlashdata('custUpdateFailed', 'Upload Failed, Please Try Again');
-                    return redirect()->to(base_url('membership/index'));
+                    return redirect()->to(base_url('profile/index'));
                 }
             }
         } catch (Exception $e) {
             $session->setFlashdata('custUpdateFailed', 'Upload Failed, Please Try Again');
-            return redirect()->to(base_url('membership/index'));
+            return redirect()->to(base_url('profile/index'));
         }
-        return redirect()->to(base_url('membership/index'));
+        return redirect()->to(base_url('profile/index'));
     }
 }
