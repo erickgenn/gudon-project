@@ -40,6 +40,11 @@ class AuthController extends BaseController
         return view('auth/change_password', compact('token'));
     }
 
+    public function expired_membership()
+    {
+        return view('expired_membership');
+    }
+
 
     public function new_password($token)
     {
@@ -289,7 +294,7 @@ class AuthController extends BaseController
                 $subscription_date = $subs['subscription_date'];
                 $date = new DateTime($subscription_date);
                 $date->add(new DateInterval('P30D'));
-                $time_left = round((strtotime($date->format('Y-m-d')) - time()) / (60 * 60 * 24)) + 1;
+                $time_left = round((strtotime($date->format('Y-m-d')) - time()) / (60 * 60 * 24));
                 $percentage_left = round($time_left / 30 * 100);
 
                 // get user membership level name
