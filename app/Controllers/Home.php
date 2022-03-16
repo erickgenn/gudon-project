@@ -49,7 +49,6 @@ class Home extends BaseController
             $total_product += $product[$i]['quantity'];
             $total_weight += $product[$i]['weight'] * $product[$i]['quantity'];
         }
-
         // get level max_weight
         $modelLevel = new MembershipModel();
         $level = $modelLevel->where('id', $_SESSION['level_id'])->first();
@@ -85,6 +84,7 @@ class Home extends BaseController
 
         $cust_data['count_order'] = [count($monday), count($tuesday), count($wednesday), count($thursday), count($friday), count($saturday), count($sunday)];
         $cust_data['ongoing_order'] = $count_ongoing_order;
+        $cust_data['product'] = $product;
         return view('dashboard', $cust_data);
     }
 
