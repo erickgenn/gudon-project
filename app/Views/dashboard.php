@@ -133,7 +133,16 @@
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
+            <div class="col-lg-3 col-5">
+              <div class="small-box" style="padding:5%">
+                <h4>Items</h4>
+                <div class="inner">
+                  <canvas id="chart_item" width="100" height="100"></canvas>
+                </div>  
+              </div>
+            </div>
           </div>
+          
           <!-- /.row (main row) -->
           <!-- Second row -->
           <div class="row">
@@ -238,6 +247,7 @@
   <script src="<?php echo base_url('adminlte/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
   <script src="<?php echo base_url('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.2/Chart.bundle.js"></script>
   <script>
     $(document).ready(function() {
       $('#product-table').DataTable({
@@ -320,6 +330,34 @@
       document.getElementById('orderChart'),
       config
     );
+  </script>
+  <script>
+    var chart_item = document.getElementById('chart_item');
+    var data_chart_item = [];
+    var label_chart_item = [];
+
+    <?php for($i=0;$i<sizeOf($customer_data['product']);$i++):?>
+      data_chart_item.push(<?= $customer_data['data_per_item'][$i]['jumlah'] ?>);
+      label_chart_item.push(<?= $customer_data['data_per_item'][$i]['nama'] ?>);
+    <?php endfor ?>
+    console.log(data_chart_item);
+    console.log(label_chart_item);
+    var data_chart_per_item = {
+      datasets: [{
+        data : data_chart_item,
+        backgroundColor:[
+          'rgba(255,99,132,0.8)',
+          'rgba(54,162,235,0.8)',
+          'rgba(255,206,86,0.8)',
+        ],
+      }],
+      labels: label_chart_item,
+    }
+
+    var isi_chart_item = new Chart(chart_item,{
+      type: 'doughnut',
+      data: data_chart_per_item
+    });
   </script>
 </body>
 

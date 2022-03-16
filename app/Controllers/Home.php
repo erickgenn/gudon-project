@@ -56,14 +56,23 @@ class Home extends BaseController
             $percentage_weight = round(($total_weight / $level['max_weight']) * 100);
         }
 
+        $data_per_item = $modelProduct->select('COUNT(id) AS jumlah, name AS nama')->where('customer_id', $_SESSION['id'])
+                        ->groupby('id')->findAll();
+        
+      
+
         $cust_data['customer_data'] = [
             'total_product' => $total_product,
             'count_order' => $count_order,
             'user_balance' => $user_balance,
             'income' => $income,
             'total_weight' => $percentage_weight,
-            'percentage_order' => $percentage_order
+            'percentage_order' => $percentage_order,
+            'data_per_item'=> $data_per_item,
+            'product'=> $product
         ];
+       
+
         $date_monday = date("Y-m-d", strtotime("Monday This Week"));
         $date_tuesday = date("Y-m-d", strtotime("Tuesday This Week"));
         $date_wednesday = date("Y-m-d", strtotime("Wednesday This Week"));
@@ -82,6 +91,8 @@ class Home extends BaseController
 
         $cust_data['count_order'] = [count($monday), count($tuesday), count($wednesday), count($thursday), count($friday), count($saturday), count($sunday)];
 
+        
+      
         return view('dashboard', $cust_data);
     }
 
