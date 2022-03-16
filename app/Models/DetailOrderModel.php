@@ -25,4 +25,25 @@ class DetailOrderModel extends Model
 
         $builder->update();
     }
+
+    public function getMostSoldProduct()
+    {
+        $builder = $this->db->table('mst_gudon.mst_product');
+        $builder->select(
+            '
+            mst_product.name as nama_produk,
+            mst_product.id as id_produk,
+            count(mst_product.id) as total,
+            '
+        );
+        $builder->join('mst_gudon.mst_detail_order', 'mst_detail_order.product_id = mst_product.id');
+        $builder->join('mst_gudon.mst_order', 'mst_detail_order.order_id = mst_order.id');
+        $builder->where('mst_order.status', 'SELESAI');
+        $builder->where('mst_order.customer_id', $_SESSION['id']);
+        $builder->groupBy("mst_product.id");
+        $builder->orderBy('total', 'DESC');
+        $builder->limit(5);
+
+        return $builder->get();
+    }
 }

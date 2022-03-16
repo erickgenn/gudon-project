@@ -141,7 +141,7 @@
 
               <div class="card">
                 <div class="card-header" style="background-color:#5cc5e6">
-                  <h3 class="card-title" style="color:white">Successful Orders Chart</h3>
+                  <h3 class="card-title" style="color:white"><i class="fas fa-chart-line"></i> This Week's Orders Chart</h3>
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                       <i class="fas fa-minus" style="color:white"></i>
@@ -164,27 +164,27 @@
               </div>
             </div>
             <div class="col-md-6">
-              <div class="card card-info">
-                <div class="card-header">
-                  <h3 class="card-title">Line Chart</h3>
+              <div class="card">
+                <div class="card-header" style="background-color:#5cc5e6">
+                  <h3 class="card-title" style="color:white"><i class="fas fa-award"></i> Your Best Selling Products</h3>
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                      <i class="fas fa-minus"></i>
+                      <i class="fas fa-minus" style="color:white"></i>
                     </button>
                   </div>
                 </div>
                 <div class="card-body">
-                  <div class="chart">
-                    <div class="chartjs-size-monitor">
-                      <div class="chartjs-size-monitor-expand">
-                        <div class=""></div>
-                      </div>
-                      <div class="chartjs-size-monitor-shrink">
-                        <div class=""></div>
-                      </div>
-                    </div>
-                    <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block;" width="798" height="500" class="chartjs-render-monitor"></canvas>
-                  </div>
+                  <table id="product-table" class="table" style="width:100%">
+                    <thead>
+                      <tr>
+                        <th>No.</th>
+                        <th>Product Name</th>
+                        <th>Total Sold</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -235,32 +235,57 @@
   <script src="<?php echo base_url() ?>/dist/js/adminlte.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="<?php echo base_url() ?>/dist/js/pages/dashboard.js"></script>
+  <script src="<?php echo base_url('adminlte/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
+  <script src="<?php echo base_url('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    const labels = [
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-      'Sunday',
-    ];
-
-    const data = {
-      labels: labels,
-      datasets: [{
-        label: 'Orders',
-        backgroundColor: '#1C6DD0',
-        borderColor: '#1C6DD0',
-        data: [<?php echo $count_order[0] ?>, <?php echo $count_order[1] ?>, <?php echo $count_order[2] ?>, <?php echo $count_order[3] ?>, <?php echo $count_order[4] ?>, <?php echo $count_order[5] ?>, <?php echo $count_order[6] ?>],
-      }]
-    };
-
-    const config = {
+    $(document).ready(function() {
+      $('#product-table').DataTable({
+        "ajax": {
+          "url": "<?php echo base_url('home/bestproducts'); ?>",
+          "dataSrc": ""
+        },
+        dom: 'lrtip',
+        "paging": false,
+        "bInfo": false,
+        "columns": [{
+            data: null,
+            name: null,
+            render: function(data, type, row, meta) {
+              return meta.row + meta.settings._iDisplayStart + 1;
+            }
+          },
+          {
+            "data": "nama_produk"
+          },
+          {
+            "data": "total"
+          }
+        ]
+      });
+    });
+  </script>
+  <script>
+    var ctx = document.getElementById('orderChart').getContext('2d');
+    var orderChart = new Chart(ctx, {
       type: 'line',
-      data: data,
-
+      data: {
+        labels: [
+          'Monday',
+          'Tuesday',
+          'Wednesday',
+          'Thursday',
+          'Friday',
+          'Saturday',
+          'Sunday',
+        ],
+        datasets: [{
+          label: 'Orders',
+          backgroundColor: '#1C6DD0',
+          borderColor: '#1C6DD0',
+          data: [<?php echo $count_order[0] ?>, <?php echo $count_order[1] ?>, <?php echo $count_order[2] ?>, <?php echo $count_order[3] ?>, <?php echo $count_order[4] ?>, <?php echo $count_order[5] ?>, <?php echo $count_order[6] ?>],
+        }]
+      },
       options: {
         responsive: true,
         plugins: {
@@ -288,7 +313,7 @@
           }
         },
       }
-    };
+    });
   </script>
   <script>
     const myChart = new Chart(
