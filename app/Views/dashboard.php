@@ -134,7 +134,7 @@
             </div>
             <!-- right col -->
             <div class="col-lg-2 col-2">
-              <div class="small-box" style="padding:2.85rem 1rem 2.8rem 1rem; background-color:white">
+              <div class="small-box" style="padding:4.67rem 1rem 1rem 1rem; background-color:white">
                 <div class="inner">
                   <h3><?php echo $ongoing_order; ?></h3>
                   <p>On Going Orders</p>
@@ -156,7 +156,7 @@
                     </button>
                   </div>
                 </div>
-                <div class="card-body" style="height: 215px; overflow: auto;">
+                <div class="card-body" style="height: 216px; overflow: auto;">
                   <table id="product-table" class="table" style="width:100%">
                     <thead>
                       <tr>
