@@ -270,6 +270,7 @@ class AuthController extends BaseController
 
     public function loginAuth()
     {
+        date_default_timezone_set('Asia/Jakarta');
         $session = session();
         $data = $this->request->getPost();
         $email = $data['email'];
