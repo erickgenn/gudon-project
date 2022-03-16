@@ -255,7 +255,11 @@
                 </div>
               </div>
               <div class="card-footer">
-                Membership Status (<?php echo $_SESSION['time_left']; ?> days remaining)
+                <?php if ($_SESSION['time_left'] <= 0) : ?>
+                  <p style="color:red">Membership Status Expired</p>
+                <?php else : ?>
+                  Membership Status (<?php echo $_SESSION['time_left']; ?> days remaining)
+                <?php endif; ?>
                 <div class="progress progress-sm">
                   <div class="progress-bar <?php if ($_SESSION['time_left'] <= 3) echo 'bg-red';
                                             else echo 'bg-green' ?>" role="progressbar" aria-valuenow="<?php echo $_SESSION['percentage_left']; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $_SESSION['percentage_left']; ?>%"></div>

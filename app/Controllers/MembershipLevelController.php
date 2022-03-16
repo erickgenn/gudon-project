@@ -226,7 +226,8 @@ class MembershipLevelController extends BaseController
                 // Update Membership
                 $subscribe = $subscriptionModel->where('cust_id', $_SESSION['id'])->where('is_active', 1)->first();
                 if (isset($subscribe) || !isset($subscribe)) {
-                    $subscriptionModel->where('cust_id', $_SESSION['id'])->where('is_active', 1)->delete();
+                    $subscriptionModel->deleteSubs();
+                    $subscriptionModel->where('cust_id', $_SESSION['id'])->where('is_active', 0)->delete();
                     $data_subscription = [
                         'cust_id' => $_SESSION['id'],
                         'level_id'    => $data['level_id'],
@@ -249,7 +250,7 @@ class MembershipLevelController extends BaseController
                 $subscription_date = $subs['subscription_date'];
                 $date = new DateTime($subscription_date);
                 $date->add(new DateInterval('P30D'));
-                $time_left = round((strtotime($date->format('Y-m-d')) - time()) / (60 * 60 * 24) + 1);
+                $time_left = round((strtotime($date->format('Y-m-d')) - time()) / (60 * 60 * 24));
                 $percentage_left = round($time_left / 30 * 100);
 
                 // get user membership level name
@@ -271,7 +272,7 @@ class MembershipLevelController extends BaseController
                 }
 
                 $session->setFlashdata('payment_success', 'Payment Successful!');
-                return redirect()->to('membership/index');
+                return redirect()->to('profile/index');
             }
         } else {
             $session->setFlashdata('msg_password_fail', 'Password is incorrect!');

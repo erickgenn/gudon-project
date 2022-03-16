@@ -23,6 +23,7 @@ class Filters extends BaseConfig
         'honeypot' => \CodeIgniter\Filters\Honeypot::class,
         'authGuard' => \App\Filters\AuthGuard::class,
         'authAdmin' => \App\Filters\AdminGuard::class,
+        'expGuard' => \App\Filters\ExpiredMembershipGuard::class,
     ];
 
     /**
@@ -99,8 +100,38 @@ class Filters extends BaseConfig
                     'notification/index',
                     'notification/update/*/*',
                     'notification/delete/*',
+                    'expiredmembership',
                 ]
-            ]
+            ],
+            'expGuard' => [
+                'except' =>
+                [
+                    '/',
+                    'login',
+                    'logout',
+                    'register/index',
+                    'register',
+                    'forgot_password/index',
+                    'login/auth',
+                    'forbidden',
+                    'login/admin',
+                    'login/auth/admin',
+                    'profile/index',
+                    'membership/upgrade',
+                    'membership/upgrade/*',
+                    'membership/payment',
+                    'profile/update',
+                    'home',
+                    'forgot_password/authemail',
+                    'forgot_password/forgot/changepass/*',
+                    'forgot_password/forgot/newpass/*',
+                    'topup/method',
+                    'topup/view/*',
+                    'topup',
+                    'home/bestproducts',
+                    'expiredmembership',
+                ]
+            ],
 
             // 'honeypot',
             // 'csrf',

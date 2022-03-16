@@ -217,7 +217,7 @@ class OrderController extends BaseController
                     array_push($warehouse_id_arr, $warehouse_id);
                 }
             }
-            $data['warehouse_id'] = implode(",", $warehouse_id_arr);
+            $data['warehouse_id'] = implode(",", array_filter($warehouse_id_arr));
 
             $data_order = [
                 'customer_id' => $_SESSION['id'],

@@ -48,6 +48,7 @@ $routes->get('forgot_password/forgot/changepass/(:any)', 'AuthController::auth_c
 $routes->post('forgot_password/forgot/newpass/(:any)', 'AuthController::new_password/$1');
 
 $routes->get('forbidden', 'AdminController::forbidden');
+$routes->get('expiredmembership', 'AuthController::expired_membership');
 
 // admin pages
 $routes->get('admin/index', 'AdminController::index');

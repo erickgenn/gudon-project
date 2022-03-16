@@ -59,12 +59,12 @@
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <form method="POST" action="<?php echo base_url('order/store');?>" name="createorder">
+            <form method="POST" action="<?php echo base_url('order/store'); ?>" name="createorder">
                 <div class="row" style="padding: 0 10px 0 10px">
                     <div class="col-md-4">
-                        <div class="card" >
+                        <div class="card">
                             <div class="card-body">
-                                <div class="col-lg-12" >
+                                <div class="col-lg-12">
                                     <div class="form-group">
                                         <br>
                                         <label>Customer Name</label>
@@ -72,7 +72,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Customer Phone Number</label>
-                                        <input type="text" name="notelp" id="notelp" class="form-control" required>
+                                        <input type="number" name="notelp" id="notelp" class="form-control" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Destination Address</label>
@@ -80,7 +80,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Shipment Type</label>
-                                        <select class = 'form-control' style="width:100%;" name="tipe_pengiriman" id = 'tipe_pengiriman'>
+                                        <select class='form-control' style="width:100%;" name="tipe_pengiriman" id='tipe_pengiriman'>
                                             <option selected disabled>------ Choose Shipment Type ------</option>
                                         <?php for ($i = 0; $i < count ($customer_data['data']['groupdelivery']); $i++) : ?>
                                             <option value = "<?php echo $customer_data['data']['groupdelivery'][$i]["id"]; ?>"><?php echo $customer_data['data']['groupdelivery'][$i]["name"]; ?></option>
@@ -106,11 +106,11 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <tr id="tambah_produk_button_container">
-                                            <td colspan=4>
-                                            <button type="button" class="btn btn-sm col-lg-12" style="background-color: #5cc5e6; color:white;" onclick="tambahRowProduk()">Add Product</button>
-                                            </td>
-                                        </tr>
+                                            <tr id="tambah_produk_button_container">
+                                                <td colspan=4>
+                                                    <button type="button" class="btn btn-sm col-lg-12" style="background-color: #5cc5e6; color:white;" onclick="tambahRowProduk()">Add Product</button>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -126,7 +126,7 @@
                     <button type="submit" class="btn btn-block btn-success">Order</button>
                 </div>
             </form>
-                
+
             <!-- /.content -->
         </div>
 
@@ -158,15 +158,15 @@
     <script src="<?php echo base_url(); ?>/dist/js/adminlte.js"></script>
 
     <script>
-    $(document).ready(function() {
-      $('.js-example-basic-single').select2();
-    });
-    var row = 0;
-  </script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+        var row = 0;
+    </script>
 
     <script>
-    function tambahRowProduk() {
-      var html = `
+        function tambahRowProduk() {
+            var html = `
               <tr id = "tambahRowProduk${row}">
                 <td>
                   <input type ='hidden' name='data_produk[]' value='${row}'>
@@ -194,28 +194,28 @@
                 </td>
               </tr>
             `;
-      $("#tambah_produk_button_container").before(html);
-      $('.js-example-basic-single').select2();
-      row++;
-    }
-
-    function deleteProdukData(r) {
-      var i = r.parentNode.parentNode.rowIndex;
-      document.getElementById("product_table").deleteRow(i);
-    }
-
-    function showHarga(row) {
-      var id_produk = $(`#get_product${row}`).val();
-      $.ajax({
-        url: `<?php echo base_url('order/get_price')?>/${id_produk}`,
-        type: "GET",
-        dataType: "JSON",
-        success: function(respond) {
-          $(`#harga_produk${row}`).text("Rp. " + respond['data_price'][0]['price']);
-          $(`#kuantitas_produk${row}`).text(respond['data_price'][0]['quantity']);
+            $("#tambah_produk_button_container").before(html);
+            $('.js-example-basic-single').select2();
+            row++;
         }
-      });
-    }
+
+        function deleteProdukData(r) {
+            var i = r.parentNode.parentNode.rowIndex;
+            document.getElementById("product_table").deleteRow(i);
+        }
+
+        function showHarga(row) {
+            var id_produk = $(`#get_product${row}`).val();
+            $.ajax({
+                url: `<?php echo base_url('order/get_price') ?>/${id_produk}`,
+                type: "GET",
+                dataType: "JSON",
+                success: function(respond) {
+                    $(`#harga_produk${row}`).text("Rp. " + respond['data_price'][0]['price']);
+                    $(`#kuantitas_produk${row}`).text(respond['data_price'][0]['quantity']);
+                }
+            });
+        }
     </script>
 
     <script>
