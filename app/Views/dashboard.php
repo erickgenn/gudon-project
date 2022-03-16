@@ -66,7 +66,7 @@
           <div class="row">
             <div class="col-lg-3 col-6">
               <!-- small box -->
-              <div class="small-box" style="padding:5%">
+              <div class="small-box" style="padding:5%; background-color:white">
                 <div class="level" style="float:right; padding:3%">
                   <?php if ($_SESSION['time_left'] <= 0) : ?>
                     <a href="<?php echo base_url('profile/index'); ?>" style="color:red; font-weight:bold;">Membership Expired</a>
@@ -108,7 +108,7 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
               <!-- small box -->
-              <div class="small-box" style="padding:5%">
+              <div class="small-box" style="padding:1.5rem 1rem 2.85rem 1rem ;background-color:white">
                 <h4>Dashboard</h4>
                 <div class="inner">
                   <br>
@@ -133,8 +133,8 @@
               </div>
             </div>
             <!-- right col -->
-            <div class="col-lg-3 col-6">
-              <div class="small-box" style="padding:2.5rem 1.5rem 2.5rem 1.5rem">
+            <div class="col-lg-2 col-2">
+              <div class="small-box" style="padding:2.85rem 1rem 2.8rem 1rem; background-color:white">
                 <div class="inner">
                   <h3><?php echo $ongoing_order; ?></h3>
                   <p>On Going Orders</p>
@@ -142,7 +142,33 @@
                 <div class="icon">
                   <i class="ion ion-bag"></i>
                 </div>
-                <a href="<?php echo base_url('order/index'); ?>" style="background-color:#5cc5e6; color:white; font-weight:bold;" class="small-box-footer">See Your Orders Here <i class="fas fa-arrow-circle-right"></i></a>
+                <br>
+                <a href="<?php echo base_url('order/index'); ?>" style="background-color:#5cc5e6; color:white; font-weight:bold;" class="btn btn-block">See Your Orders Here</a>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card">
+                <div class=" card-header" style="background-color:#5cc5e6">
+                  <h3 class="card-title" style="color:white"><i class="fas fa-award"></i> Your Best Selling Products</h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus" style="color:white"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body" style="height: 215px; overflow: auto;">
+                  <table id="product-table" class="table" style="width:100%">
+                    <thead>
+                      <tr>
+                        <th>No.</th>
+                        <th>Product Name</th>
+                        <th>Total Sold</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
@@ -150,7 +176,6 @@
           <!-- Second row -->
           <div class="row">
             <div class="col-md-6">
-
               <div class="card">
                 <div class="card-header" style="background-color:#5cc5e6">
                   <h3 class="card-title" style="color:white"><i class="fas fa-chart-line"></i> This Week's Orders Chart</h3>
@@ -178,7 +203,7 @@
             <div class="col-md-6">
               <div class="card">
                 <div class="card-header" style="background-color:#5cc5e6">
-                  <h3 class="card-title" style="color:white"><i class="fas fa-award"></i> Your Best Selling Products</h3>
+                  <h3 class="card-title" style="color:white"><i class="fas fa-chart-line"></i> Your Products</h3>
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                       <i class="fas fa-minus" style="color:white"></i>
@@ -186,17 +211,17 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <table id="product-table" class="table" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th>No.</th>
-                        <th>Product Name</th>
-                        <th>Total Sold</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                  </table>
+                  <div class="chart">
+                    <div class="chartjs-size-monitor">
+                      <div class="chartjs-size-monitor-expand">
+                        <div class=""></div>
+                      </div>
+                      <div class="chartjs-size-monitor-shrink">
+                        <div class=""></div>
+                      </div>
+                    </div>
+                    <canvas id="productsChart" class="chartjs-render-monitor"></canvas>
+                  </div>
                 </div>
               </div>
             </div>
@@ -328,8 +353,48 @@
     });
   </script>
   <script>
+    const labels = [
+      <?php for ($i = 0; $i < count($product); $i++) : ?> '<?php echo $product[$i]['name']; ?>',
+      <?php endfor; ?>
+    ];
+
+    var coloR = [];
+    var dynamicColors = function() {
+      var r = Math.floor(Math.random() * 255);
+      var g = Math.floor(Math.random() * 255);
+      var b = Math.floor(Math.random() * 255);
+      return "rgb(" + r + "," + g + "," + b + ")";
+    };
+
+    <?php for ($j = 0; $j < count($product); $j++) : ?>
+      coloR.push(dynamicColors());
+    <?php endfor; ?>
+
+    const data = {
+      labels: labels,
+      datasets: [{
+        label: 'My First dataset',
+        backgroundColor: coloR,
+        data: [
+          <?php for ($i = 0; $i < count($product); $i++) : ?> '<?php echo $product[$i]['quantity']; ?>',
+          <?php endfor; ?>
+        ],
+      }]
+    };
+
+    const config = {
+      type: 'pie',
+      data: data,
+      options: {
+        responsive: true,
+        legend: {
+          display: false
+        },
+      }
+    };
+
     const myChart = new Chart(
-      document.getElementById('orderChart'),
+      document.getElementById('productsChart'),
       config
     );
   </script>
