@@ -232,7 +232,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <a href="<?php echo base_url('membership/index');?>" class="d-block">
+          <a href="<?php echo base_url('profile/index');?>" class="d-block">
             <?php if (!$_SESSION['picture'] == null): ?>
               <img src="<?php echo base_url('/uploads/profile/customer').'/'.$_SESSION['picture'] ?>" class="img-circle elevation-2" style="min-width:30px; min-height:30px; max-width:30px; max-height:30px;width:100%;object-fit:cover;" alt="User Image" />
             <?php else:?>
@@ -243,7 +243,7 @@
           </a>
         </div>
         <div class="info">
-          <a href="<?php echo base_url('membership/index');?>" class="d-block"><?php echo ucwords($_SESSION['name']); ?></a>
+          <a href="<?php echo base_url('profile/index');?>" class="d-block"><?php echo ucwords($_SESSION['name']); ?></a>
         </div>
       </div>
 
@@ -261,7 +261,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url('product/index'); ?>" id="report" class="nav-link">
+            <a href="<?php echo base_url('product/index'); ?>" id="product" class="nav-link">
               <i class="nav-icon fas fa-box"></i>
               <p>
                 Product
@@ -373,6 +373,9 @@
       }
       if (current.includes('/warehouse/index')) {
         document.getElementById("warehouse").className = "nav-link active";
+      }
+      if (current.includes('/product/index')) {
+        document.getElementById("product").className = "nav-link active";
       }
       if (current.includes('/order/index')) {
         document.getElementById("order").className = "nav-link active";
