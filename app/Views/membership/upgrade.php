@@ -61,7 +61,7 @@
                 <div class="col-lg-12">
                     <div class="col-lg-3">
                         <center>
-                            <div class="alert alert-info bg-primary">
+                            <div class="alert" style="background-color: #55c5e6;color:white;">
                                 <h4><i class="icon fas fa-info"></i>Your Balance:</h4>
                                 <h3><?php echo $balance['balance']; ?></h3>
                             </div>

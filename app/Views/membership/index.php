@@ -119,11 +119,11 @@
               <div class="text-center">
                 <?php if (!empty($_SESSION['picture'])) : ?>
                   <div class="card-body" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; margin: auto; padding:0;">
-                    <img class="profile-user-img img-fluid img-circle" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px;width:100%;object-fit:cover;" src="<?php echo base_url('/uploads/profile/customer') . '/' . $_SESSION['picture'] ?>" alt="User profile picture" />
+                    <img src="<?php echo base_url('/uploads/profile/customer') . '/' . $_SESSION['picture'] ?>" class="profile-user-img img-fluid img-circle" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px;width:100%;object-fit:cover;" alt="User profile picture" />
                   </div>
                 <?php else : ?>
-                  <div>
-                    <img src="<?php echo base_url('/dist/img/avatar5.png'); ?>" class="profile-user-img img-fluid img-circle" style="width:15%;" alt="User profile picture" />
+                  <div class="card-body" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; margin: auto; padding:0;">
+                    <img src="<?php echo base_url('/dist/img/avatar5.png'); ?>" class="profile-user-img img-fluid img-circle" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px;width:100%;object-fit:cover;" alt="User profile picture" />
                   </div>
                 <?php endif; ?>
                 <div class="info" style="padding:10px 0 0;font-weight:500;font-size:larger;">
@@ -152,16 +152,16 @@
                             <td>
                               <?php if (!empty($_SESSION['picture'])) : ?>
                                 <div class="card-body" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; margin: auto; padding:0 0 25px;">
-                                  <img class="profile-user-img img-fluid img-circle" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px;width:100%;object-fit:cover;" src="<?php echo base_url('/uploads/profile/customer') . '/' . $_SESSION['picture'] ?>" alt="User profile picture" />
+                                  <img id="profile" src="<?php echo base_url('/uploads/profile/customer') . '/' . $_SESSION['picture'] ?>" class="profile-user-img img-fluid img-circle" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px;width:100%;object-fit:cover;" alt="User profile picture" />
                                 </div>
                               <?php else : ?>
-                                <div>
-                                  <img src="<?php echo base_url('/dist/img/avatar5.png'); ?>" class="profile-user-img img-fluid img-circle" style="width:15%;" alt="User profile picture" />
+                                <div class="card-body" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; margin: auto; padding:0 0 25px;">
+                                  <img id="profile" src="<?php echo base_url('/dist/img/avatar5.png'); ?>" class="profile-user-img img-fluid img-circle" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px;width:100%;object-fit:cover;" alt="User profile picture" />
                                 </div>
                               <?php endif; ?>
                               <div class="form-group">
                                 <div class="col" style="margin-top: 10px;">
-                                  <input type="file" name="profilepicture" id="profilepicture">
+                                  <input type="file" name="profilepicture" id="profilepicture" onchange="onFileSelected(event)">
                                 </div>
                               </div>
                             </td>
@@ -208,7 +208,7 @@
                 </div>
                 <div style="display: flex; -webkit-box-align: center; align-items: center; color: rgba(49, 53, 59, 0.68); padding: 14px 0px 16px 20%; font-size: 10px; line-height: 14px; justify-content: space-around;">
                   <!-- saldo -->
-                  <a href="<?php echo base_url(); ?>">
+                  <a href="<?php echo base_url('topup/method'); ?>">
                     <div style="display: flex; flex-direction: row; text-align: center; -webkit-box-align: center; align-items: center; justify-content: space-around; cursor: pointer; background: rgb(255, 255, 255); box-shadow: rgb(49 53 59 / 12%) 0px 1px 6px; border-radius: 8px; padding: 12px; margin-right: 12px;">
                       <div style="position: relative; width: 34px; height: 32px; background-repeat: no-repeat; background-position: center center; background-size: contain; margin: 0 20px 0 10px;">
                         <i class="fa fa-money fa-3x" style="color: #55c5e6;"></i>
@@ -220,7 +220,7 @@
                     </div>
                   </a>
                   <!-- produk -->
-                  <a href="<?php echo base_url(); ?>">
+                  <a href="<?php echo base_url('product/index'); ?>">
                     <div style="display: flex; flex-direction: row; text-align: center; -webkit-box-align: center; align-items: center; justify-content: space-around; cursor: pointer; background: rgb(255, 255, 255); box-shadow: rgb(49 53 59 / 12%) 0px 1px 6px; border-radius: 8px; padding: 12px; margin-right: 12px;">
                       <div style="position: relative; width: 34px; height: 32px; background-repeat: no-repeat; background-position: center center; background-size: contain; margin: 0 20px 0 10px;">
                         <i class="	fa fa-shopping-basket fa-3x" style="color: #55c5e6;"></i>
@@ -390,5 +390,20 @@
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="<?php echo base_url() ?>/dist/js/pages/dashboard.js"></script>
 </body>
+<script>
+  function onFileSelected(event) {
+    var selectedFile = event.target.files[0];
+    var reader = new FileReader();
+
+    var imgtag = document.getElementById("profile");
+    imgtag.title = selectedFile.name;
+
+    reader.onload = function(event) {
+      imgtag.src = event.target.result;
+    };
+
+    reader.readAsDataURL(selectedFile);
+  }
+</script>
 
 </html>
