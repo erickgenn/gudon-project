@@ -79,10 +79,11 @@ class Filters extends BaseConfig
                     'order/create_order',
                     'order/get_price/*',
                     'order/*/delete',
-                    'membership/index',
+                    'profile/index',
                     'membership/upgrade',
                     'membership/upgrade/*',
                     'membership/payment',
+                    'profile/update',
                     'home',
                     'report/index',
                     'report/search',
@@ -95,6 +96,7 @@ class Filters extends BaseConfig
                     'topup',
                     'profile/update',
                     'home/bestproducts',
+
                 ]
             ]
 
