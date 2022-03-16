@@ -10,7 +10,7 @@ class OrderModel extends Model
     protected $primaryKey = 'id';
 
 
-    protected $allowedFields = ['customer_id', 'warehouse_id', 'destination_name', 'destination_address', 'destination_phone', 'total_price', 'delivery_price', 'delivery_id', 'status', 'delivery_status', 'is_active'];
+    protected $allowedFields = ['customer_id', 'warehouse_id', 'destination_name', 'destination_address', 'destination_phone', 'total_price', 'delivery_price', 'delivery_id', 'status', 'delivery_status', 'is_active', 'notified'];
     protected $useSoftDeletes = true;
 
 
@@ -46,7 +46,6 @@ class OrderModel extends Model
         $builder->join('mst_gudon.mst_delivery', 'mst_delivery.id = mst_order.delivery_id');
         $builder->where('mst_detail_order.order_id', $id);
         $builder->where('mst_order.id', $id);
-        $builder->orderBy('mst_order.id', 'ASC');
 
         return $builder->get();
     }
@@ -55,6 +54,15 @@ class OrderModel extends Model
     {
         $builder = $this->db->table('mst_gudon.mst_order');
         $builder->set('status', 'TELAH DIKONFIRMASI');
+        $builder->where('id', $id);
+
+        $builder->update();
+    }
+
+    public function updateNotif($id)
+    {
+        $builder = $this->db->table('mst_gudon.mst_order');
+        $builder->set('notified', 0);
         $builder->where('id', $id);
 
         $builder->update();

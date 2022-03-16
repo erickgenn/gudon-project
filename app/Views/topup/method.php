@@ -83,7 +83,7 @@
                                             <center>
                                                 <div class="alert" style="background-color: #5cc5e6; color:white;">
                                                     <h4><i class="icon fas fa-info"></i>Your Balance:</h4>
-                                                    <h3><?php echo $balance; ?></h3>
+                                                    <h3><?php echo $customer_data['balance']; ?></h3>
                                                 </div>
                                             </center>
                                         </div>

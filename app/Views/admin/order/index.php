@@ -206,7 +206,14 @@
             data: null,
             name: null,
             render: function(data, type, row, meta) {
-              return meta.row + meta.settings._iDisplayStart + 1;
+              var notif ="";
+              if ( row.notified == 1 ) {
+                notif = "●";
+              }
+              else {
+                notif = "";
+              }
+              return meta.row + meta.settings._iDisplayStart + 1 + `<span id="notif${row.id}" style="color:#FFCC00">${notif}</span>`;
             }
           },
           {

@@ -3,6 +3,11 @@
 namespace App\Controllers;
 use \App\Models\Warehouse;
 use \App\Models\Shelf;
+use \App\Models\NotificationModel;
+
+use DateTime;
+
+date_default_timezone_set("Asia/Jakarta");
 
 class WarehouseController extends BaseController
 {
@@ -10,7 +15,34 @@ class WarehouseController extends BaseController
     {
         $model = new Warehouse;
         $warehouse['warehouse'] = $model->findAll();
-        return view('warehouse/index', $warehouse);
+        
+        // get notification
+        $modelNotif = new NotificationModel();
+        $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active',1)->orderBy('created_at', 'desc')->findAll();
+        for ($i = 0; $i < count($notif); $i++) {
+            $now = new DateTime('NOW');
+            $notif_time = new DateTime($notif[$i]['created_at']);
+            $interval = $now->diff($notif_time);
+            if(strcmp($interval->format("%d"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%d day(s) ago");
+            }
+            else if(strcmp($interval->format("%h"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%h hour(s) ago");
+            }
+            else if(strcmp($interval->format("%i"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%i minute(s) ago");
+            }
+            else if(strcmp($interval->format("%s"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%s second(s) ago");
+            }
+        }
+
+        $cust_data['customer_data'] = [
+            'notification' => $notif,
+            'warehouse' => $warehouse
+        ];
+
+        return view('warehouse/index', $cust_data);
     }
 
     public function search(){
@@ -31,8 +63,34 @@ class WarehouseController extends BaseController
             $session->setFlashdata('msg', 'Silahkan daftarkan produk anda untuk melihat halaman ini');
             return view('warehouse/index');
         } else {
-            $shelf['shelf'] = $model->get_shelf($id)->getResultArray();
-            return view('warehouse/view', $shelf);
+            $shelf = $model->get_shelf($id)->getResultArray();
+            
+            // get notification
+            $modelNotif = new NotificationModel();
+            $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active',1)->orderBy('created_at', 'desc')->findAll();
+            for ($i = 0; $i < count($notif); $i++) {
+                $now = new DateTime('NOW');
+                $notif_time = new DateTime($notif[$i]['created_at']);
+                $interval = $now->diff($notif_time);
+                if(strcmp($interval->format("%d"), "0") == 1) {
+                    $notif[$i]['created_at'] = $interval->format("%d day(s) ago");
+                }
+                else if(strcmp($interval->format("%h"), "0") == 1) {
+                    $notif[$i]['created_at'] = $interval->format("%h hour(s) ago");
+                }
+                else if(strcmp($interval->format("%i"), "0") == 1) {
+                    $notif[$i]['created_at'] = $interval->format("%i minute(s) ago");
+                }
+                else if(strcmp($interval->format("%s"), "0") == 1) {
+                    $notif[$i]['created_at'] = $interval->format("%s second(s) ago");
+                }
+            }
+
+            $cust_data['customer_data'] = [
+                'notification' => $notif,
+                'shelf' => $shelf
+            ];
+            return view('warehouse/view', $cust_data);
         }
     }
 

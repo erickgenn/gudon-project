@@ -66,13 +66,13 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Product Name: <strong><?php echo $product['name'];?></strong></h3>
+                <h3 class="card-title">Product Name: <strong><?php echo $customer_data['product']['name'];?></strong></h3>
                 <br><br>
                 <div class="card col-sm-2" >
                   <div class="card-body">
-                    <?php if (!empty($product['picture'])): ?>
+                    <?php if (!empty($customer_data['product']['picture'])): ?>
                       <div class="card-body" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; margin: auto; padding:0;">
-                        <img src="<?php echo base_url('/uploads/product').'/'.$product['picture'] ?>" class="img-fluid" style="width:100%;height:100%;" />
+                        <img src="<?php echo base_url('/uploads/product').'/'.$customer_data['product']['picture'] ?>" class="img-fluid" style="width:100%;height:100%;" />
                       </div>
                     <?php else:?>
                       <div>
@@ -85,40 +85,40 @@
               </div>
               <!-- /.card-header -->
               
-              <form action="<?php echo base_url('product/update') . "/" . $product['id'];?>" method="POST">
+              <form action="<?php echo base_url('product/update') . "/" . $customer_data['product']['id'];?>" method="POST">
                 <div class="card-body table-responsive" style="padding:0;">
                   <table class="table table-hover text-nowrap" id="warehouse-table">
                   <tbody>
                       <tr>
                         <th>ID</th>
-                        <td><?php echo $product['id'];?> </td>
+                        <td><?php echo $customer_data['product']['id'];?> </td>
                       </tr>
                       <tr>
                         <th>Name</th>
-                        <td><input type="text" class="form-control" name='name' id='product_name' value="<?php echo $product['name'];?>" required> </td>
+                        <td><input type="text" class="form-control" name='name' id='product_name' value="<?php echo $customer_data['product']['name'];?>" required> </td>
                       </tr>
                       <tr>
                         <th>Quantity</th>
-                        <td><?php echo $product['quantity'];?></td>
+                        <td><?php echo $customer_data['product']['quantity'];?></td>
                       </tr>
                       <tr>
                         <th>Price</th>
                         <td><div class="input-group-append">
                                 <span class="input-group-text">Rp</span>
-                            <input type="text" class="form-control" name='price' id='product_price' value="<?php echo $product['price'];?>" required></div>
+                            <input type="text" class="form-control" name='price' id='product_price' value="<?php echo $customer_data['product']['price'];?>" required></div>
                         </td>
                       </tr>
                       <tr>
                         <th>Description</th>
-                        <td><textarea  class="form-control" name='description' id='product_description'  required><?php echo $product['description'];?></textarea></td>
+                        <td><textarea  class="form-control" name='description' id='product_description'  required><?php echo $customer_data['product']['description'];?></textarea></td>
                       </tr>
                       <tr>
                         <th>Weight</th>
-                        <td><?php echo $product['weight'];?> gr</td>
+                        <td><?php echo $customer_data['product']['weight'];?> gr</td>
                       </tr>
                       <tr>
                         <th>Volume</th>
-                        <td><?php echo $product['volume'];?> m³</td>
+                        <td><?php echo $customer_data['product']['volume'];?> m³</td>
                       </tr>
                     </tbody>
                   </table>
