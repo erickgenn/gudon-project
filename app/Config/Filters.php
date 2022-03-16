@@ -96,7 +96,9 @@ class Filters extends BaseConfig
                     'topup',
                     'profile/update',
                     'home/bestproducts',
-
+                    'notification/index',
+                    'notification/update/*/*',
+                    'notification/delete/*',
                 ]
             ]
 

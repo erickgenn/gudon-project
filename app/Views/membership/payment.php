@@ -98,13 +98,13 @@
                     <div class="card card-secondary">
                         <div class="card-header">
                             <h3 style="color:white">
-                                <?php echo $membership['name']; ?>
+                                <?php echo $customer_data['membership']['name']; ?>
                             </h3>
                         </div>
                         <form method="POST" action="<?php echo base_url('membership/payment'); ?>" id="paymentForm" name="payment">
                             <div class="card-body">
                                 <div class="callout callout-warning">
-                                    <h4>You are about to purchase <?php echo $membership['name']; ?> membership level</h4>
+                                    <h4>You are about to purchase <?php echo $customer_data['membership']['name']; ?> membership level</h4>
                                     <h5>Please insert your password below as a confirmation</h5>
                                 </div>
                                 <div class="card-body" style="padding:0 30px 0 30px">
@@ -116,7 +116,7 @@
                                         <input type="checkbox" class="form-check-input" id="checkbox" required>
                                         <label class="form-check-label" for="checkbox">I Agree to <a data-toggle="modal" data-target="#termsModal" href="#termsModal">The Terms and Conditions</a></label>
                                     </div>
-                                    <input type="hidden" name="level_id" value="<?php echo $id; ?>">
+                                    <input type="hidden" name="level_id" value="<?php echo $customer_data['id']; ?>">
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -139,13 +139,13 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3>Terms and Conditions <?php echo $membership['name']; ?> Membership Level</h3>
+                        <h3>Terms and Conditions <?php echo $customer_data['membership']['name']; ?> Membership Level</h3>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
                         <ul>
-                            <?php for ($i = 0; $i < count($detail_level); $i++) : ?>
-                                <li><?php echo $detail_level[$i]; ?></li>
+                            <?php for ($i = 0; $i < count($customer_data['detail_level']); $i++) : ?>
+                                <li><?php echo $customer_data['detail_level'][$i]; ?></li>
                             <?php endfor ?>
                         </ul>
                     </div>

@@ -22,7 +22,13 @@ class ProductController extends BaseController
             $now = new DateTime('NOW');
             $notif_time = new DateTime($notif[$i]['created_at']);
             $interval = $now->diff($notif_time);
-            if(strcmp($interval->format("%d"), "0") == 1) {
+            if(strcmp($interval->format("%y"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%y year(s) ago");
+            }
+            else if(strcmp($interval->format("%m"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%m month(s) ago");
+            }
+            else if(strcmp($interval->format("%d"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%d day(s) ago");
             }
             else if(strcmp($interval->format("%h"), "0") == 1) {
@@ -53,7 +59,13 @@ class ProductController extends BaseController
             $now = new DateTime('NOW');
             $notif_time = new DateTime($notif[$i]['created_at']);
             $interval = $now->diff($notif_time);
-            if(strcmp($interval->format("%d"), "0") == 1) {
+            if(strcmp($interval->format("%y"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%y year(s) ago");
+            }
+            else if(strcmp($interval->format("%m"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%m month(s) ago");
+            }
+            else if(strcmp($interval->format("%d"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%d day(s) ago");
             }
             else if(strcmp($interval->format("%h"), "0") == 1) {
@@ -93,7 +105,13 @@ class ProductController extends BaseController
             $now = new DateTime('NOW');
             $notif_time = new DateTime($notif[$i]['created_at']);
             $interval = $now->diff($notif_time);
-            if(strcmp($interval->format("%d"), "0") == 1) {
+            if(strcmp($interval->format("%y"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%y year(s) ago");
+            }
+            else if(strcmp($interval->format("%m"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%m month(s) ago");
+            }
+            else if(strcmp($interval->format("%d"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%d day(s) ago");
             }
             else if(strcmp($interval->format("%h"), "0") == 1) {

@@ -14,4 +14,23 @@ class NotificationModel extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
+    protected $useSoftDeletes = true;
+
+    public function readAll() {
+        $builder = $this->db->table('mst_gudon.mst_notification');
+        $builder->set('is_active', 0);
+        $builder->where('is_active', 1);
+
+        $builder->update();
+    }
+
+    public function deleteNotif($id)
+    {
+        $builder = $this->db->table('mst_gudon.mst_notification');
+
+        $builder->set('is_active', 0);
+        $builder->where('id', $id);
+
+        $builder->update();
+    }
 }
