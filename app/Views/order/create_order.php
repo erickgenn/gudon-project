@@ -82,9 +82,9 @@
                                         <label>Shipment Type</label>
                                         <select class='form-control' style="width:100%;" name="tipe_pengiriman" id='tipe_pengiriman'>
                                             <option selected disabled>------ Choose Shipment Type ------</option>
-                                            <?php for ($i = 0; $i < count($groupdelivery); $i++) : ?>
-                                                <option value="<?php echo $groupdelivery[$i]["id"]; ?>"><?php echo $groupdelivery[$i]["name"]; ?></option>
-                                            <?php endfor; ?>
+                                        <?php for ($i = 0; $i < count ($customer_data['data']['groupdelivery']); $i++) : ?>
+                                            <option value = "<?php echo $customer_data['data']['groupdelivery'][$i]["id"]; ?>"><?php echo $customer_data['data']['groupdelivery'][$i]["name"]; ?></option>
+                                        <?php endfor; ?>
                                         </select>
                                     </div>
                                 </div>
@@ -172,8 +172,8 @@
                   <input type ='hidden' name='data_produk[]' value='${row}'>
                   <select class = 'js-example-basic-single form-control select2-hidden-accessible' style="width:100%;" name = 'id_produk${row}' id = 'get_product${row}' onchange="showHarga(${row})">
                     <option selected disabled>------ Choose Product ------</option>
-                  <?php for ($i = 0; $i < count($groupproduct); $i++) : ?>
-                    <option value = "<?php echo $groupproduct[$i]["id"]; ?>"><?php echo $groupproduct[$i]["name"]; ?></option>
+                  <?php for ($i = 0; $i < count ($customer_data['data']['groupproduct']); $i++) : ?>
+                    <option value = "<?php echo $customer_data['data']['groupproduct'][$i]["id"]; ?>"><?php echo $customer_data['data']['groupproduct'][$i]["name"]; ?></option>
                   <?php endfor; ?>
                   </select>
                 </td>

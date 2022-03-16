@@ -6,7 +6,11 @@ use App\Models\ProductModel;
 use App\Models\Customer;
 use App\Models\DetailOrderModel;
 use App\Models\MembershipModel;
+use App\Models\NotificationModel;
 use App\Models\OrderModel;
+use DateTime;
+
+date_default_timezone_set("Asia/Jakarta");
 
 class Home extends BaseController
 {
@@ -59,13 +63,41 @@ class Home extends BaseController
             $percentage_weight = round(($total_weight / $level['max_weight']) * 100);
         }
 
+        // get notification
+        $modelNotif = new NotificationModel();
+        $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active',1)->orderBy('created_at', 'desc')->findAll();
+        for ($i = 0; $i < count($notif); $i++) {
+            $now = new DateTime('NOW');
+            $notif_time = new DateTime($notif[$i]['created_at']);
+            $interval = $now->diff($notif_time);
+            if(strcmp($interval->format("%y"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%y year(s) ago");
+            }
+            else if(strcmp($interval->format("%m"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%m month(s) ago");
+            }
+            else if(strcmp($interval->format("%d"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%d day(s) ago");
+            }
+            else if(strcmp($interval->format("%h"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%h hour(s) ago");
+            }
+            else if(strcmp($interval->format("%i"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%i minute(s) ago");
+            }
+            else if(strcmp($interval->format("%s"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%s second(s) ago");
+            }
+        }
+
         $cust_data['customer_data'] = [
             'total_product' => $total_product,
             'count_order' => $count_order,
             'user_balance' => $user_balance,
             'income' => $income,
             'total_weight' => $percentage_weight,
-            'percentage_order' => $percentage_order
+            'percentage_order' => $percentage_order,
+            'notification' => $notif
         ];
         $date_monday = date("Y-m-d", strtotime("Monday This Week"));
         $date_tuesday = date("Y-m-d", strtotime("Tuesday This Week"));

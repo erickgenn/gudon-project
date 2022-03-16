@@ -68,7 +68,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Warehouse: <strong><?php echo $shelf[0]['nama_warehouse'];?></strong></h3>
+                <h3 class="card-title">Warehouse: <strong><?php echo $customer_data['shelf'][0]['nama_warehouse'];?></strong></h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive">
@@ -84,14 +84,14 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <?php for($i=0;$i<sizeof($shelf);$i++):?>
+                    <?php for($i=0;$i<sizeof($customer_data['shelf']);$i++):?>
                       <tr>
-                        <td><?php echo $shelf[$i]['id_shelf'];?></td>
-                        <td><?php echo $shelf[$i]['nama_rak'];?></td>
-                        <td><?php echo $shelf[$i]['berat_maks'];?></td>
-                        <td><?php echo $shelf[$i]['volume_maks'];?></td>
-                        <td><?php if($shelf[$i]['is_active']=="1") {echo "Active";} else {echo "Not Active";}?></td>
-                        <td><button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(<?php echo $shelf[$i]['id_shelf'];?>)"><i class="fas fa-eye"></i></button></td>
+                        <td><?php echo $customer_data['shelf'][$i]['id_shelf'];?></td>
+                        <td><?php echo $customer_data['shelf'][$i]['nama_rak'];?></td>
+                        <td><?php echo $customer_data['shelf'][$i]['berat_maks'];?></td>
+                        <td><?php echo $customer_data['shelf'][$i]['volume_maks'];?></td>
+                        <td><?php if($customer_data['shelf'][$i]['is_active']=="1") {echo "Active";} else {echo "Not Active";}?></td>
+                        <td><button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(<?php echo $customer_data['shelf'][$i]['id_shelf'];?>)"><i class="fas fa-eye"></i></button></td>
                       </tr>
                     <?php endfor;?>
                   </tbody>

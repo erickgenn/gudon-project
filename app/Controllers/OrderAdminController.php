@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use Exception;
 
+date_default_timezone_set("Asia/Jakarta");
+
 class OrderAdminController extends BaseController
 {
 
@@ -16,12 +18,13 @@ class OrderAdminController extends BaseController
     {
         $orderModel = new \App\Models\OrderModel();
 
-        $order = $orderModel
+        $order = $orderModel->where('is_active', 1)->orderBy('created_at', 'desc')
             ->findAll();
 
         for ($i = 0; $i < count($order); $i++) {
             $order[$i]['total_price'] = MoneyFormatController::money_format_rupiah($order[$i]['total_price']);
             $order[$i]['delivery_price'] = MoneyFormatController::money_format_rupiah($order[$i]['delivery_price']);
+            $order[$i]['created_at'] = date_format(date_create($order[$i]['created_at']), 'Y/m/d H:i');
         }
 
         return json_encode($order);
@@ -32,7 +35,8 @@ class OrderAdminController extends BaseController
         $session = session();
         $orderModel = new \App\Models\OrderModel();
         try {
-            $order = $orderModel->updateConfirm($order_id);
+            $orderModel->updateNotif($order_id);
+            $orderModel->updateConfirm($order_id);
             $session->setFlashdata('update_success', 'Order Telah Dikonfirmasi!');
         } catch (Exception $e) {
             $session->setFlashdata('update_fail', 'Order Gagal Dikonfirmasi!');
@@ -46,7 +50,7 @@ class OrderAdminController extends BaseController
         $orderModel = new \App\Models\OrderModel();
         $detailOrderModel = new \App\Models\DetailOrderModel();
         try {
-
+            $orderModel->updateNotif($id);
             $detailOrderModel->detailDelete($id);
 
             $orderModel->deleteOrder($id);

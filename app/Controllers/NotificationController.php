@@ -8,16 +8,9 @@ use DateTime;
 
 date_default_timezone_set("Asia/Jakarta");
 
-class PaymentController extends BaseController
+class NotificationController extends BaseController
 {
-
-
-    public function method()
-    {
-        $authModel = new \App\Models\AuthModel();
-
-        $user = $authModel->where('id', $_SESSION['id'])->first();
-        $balance = MoneyFormatController::money_format_rupiah($user['balance']);
+    public function index() {
         // get notification
         $modelNotif = new NotificationModel();
         $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active',1)->orderBy('created_at', 'desc')->findAll();
@@ -45,33 +38,11 @@ class PaymentController extends BaseController
             }
         }
 
-        $cust_data['customer_data'] = [
-            'notification' => $notif,
-            'balance' => $balance
-        ];
-        return view('topup/method', $cust_data);
-    }
-
-    public function view($method)
-    {
-        if ($method == 'ovo') {
-            $method = "OVO";
-        }
-        if ($method == 'gopay') {
-            $method = "GoPay";
-        }
-        if ($method == 'mbca') {
-            $method = "M-BCA";
-        }
-        if ($method == 'qris') {
-            $method = "QRIS";
-        }
-        // get notification
-        $modelNotif = new NotificationModel();
-        $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active',1)->orderBy('created_at', 'desc')->findAll();
-        for ($i = 0; $i < count($notif); $i++) {
+        // get all notification
+        $notif_all = $modelNotif->where('cust_id', $_SESSION['id'])->where('deleted_at', null)->orderBy('created_at', 'desc')->findAll();
+        for ($i = 0; $i < count($notif_all); $i++) {
             $now = new DateTime('NOW');
-            $notif_time = new DateTime($notif[$i]['created_at']);
+            $notif_time = new DateTime($notif_all[$i]['created_at']);
             $interval = $now->diff($notif_time);
             if(strcmp($interval->format("%y"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%y year(s) ago");
@@ -83,52 +54,41 @@ class PaymentController extends BaseController
                 $notif[$i]['created_at'] = $interval->format("%d day(s) ago");
             }
             else if(strcmp($interval->format("%h"), "0") == 1) {
-                $notif[$i]['created_at'] = $interval->format("%h hour(s) ago");
+                $notif_all[$i]['created_at'] = $interval->format("%h hour(s) ago");
             }
             else if(strcmp($interval->format("%i"), "0") == 1) {
-                $notif[$i]['created_at'] = $interval->format("%i minute(s) ago");
+                $notif_all[$i]['created_at'] = $interval->format("%i minute(s) ago");
             }
             else if(strcmp($interval->format("%s"), "0") == 1) {
-                $notif[$i]['created_at'] = $interval->format("%s second(s) ago");
+                $notif_all[$i]['created_at'] = $interval->format("%s second(s) ago");
             }
         }
 
         $cust_data['customer_data'] = [
             'notification' => $notif,
-            'method' => $method
+            'all_notif' => $notif_all
         ];
+        
+        // deactivate all new notification after opening page
+        $modelNotif->readAll();
 
-        return view('topup/payment', $cust_data);
+        return view('notification/index', $cust_data);
     }
 
-    public function store()
+    public static function updateNotification($id, $group, $href)
     {
-        $session = session();
-        $authModel = new \App\Models\AuthModel();
-
-        $user = $authModel->where('id', $_SESSION['id'])->first();
-        $data = $this->request->getPost();
-
-        $new_balance = (int) $user['balance'] + (int)$data['amount'];
-
+        $modelNotif = new NotificationModel();
         $data = [
-            'balance' => $new_balance,
+            'is_active' => 0
         ];
-        $authModel->update($_SESSION['id'], $data);
+        $modelNotif->update($id, $data);
+        return redirect()->to($group.'/'.$href);
+    }
 
-        $user = $authModel->where('id', $_SESSION['id'])->first();
-        $balance = $user['balance'];
-
-        // notify
+    public static function delete($id)
+    {
         $modelNotif = new NotificationModel();
-        $data_notif = [
-            'title' => 'Topup Successfully',
-            'message' => 'Hey '.$_SESSION["name"].', your topup was successful. Use your balance wisely 💰',
-            'cust_id' => $_SESSION['id'],
-            'link' => 'topup/method'
-        ];
-        $modelNotif->insert($data_notif);
-        $session->setFlashdata('msg_success_topup', '!');
-        return redirect()->to('topup/method');
+        $modelNotif->where('id', $id)->delete();
+        return redirect()->to('notification/index');
     }
 }

@@ -93,13 +93,13 @@
         </div>
       </div>
       <div class="row" style="gap:20px; padding:30px;margin:auto;">
-        <?php if ($product): ?>
-          <?php for($i=0;$i<sizeof($product);$i++):?>
-            <div class="card col-sm-2" style="margin:0; padding:20px; cursor:pointer;" onclick="location.href='<?php echo base_url('/product/view').'/'.$product[$i]['id']?>';">
+        <?php if ($customer_data['product']): ?>
+          <?php for($i=0;$i<sizeof($customer_data['product']);$i++):?>
+            <div class="card col-sm-2" style="margin:0; padding:20px; cursor:pointer;" onclick="location.href='<?php echo base_url('/product/view').'/'.$customer_data['product'][$i]['id']?>';">
               <div>
-                <?php if (!empty($product[$i]['picture'])): ?>
+                <?php if (!empty($customer_data['product'][$i]['picture'])): ?>
                   <div class="card-body" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; margin: auto; padding:0;">
-                    <img src="<?php echo base_url('/uploads/product').'/'.$product[$i]['picture'] ?>" class="img-fluid" style="width:100%;height:100%;" />
+                    <img src="<?php echo base_url('/uploads/product').'/'.$customer_data['product'][$i]['picture'] ?>" class="img-fluid" style="width:100%;height:100%;" />
                   </div>
                 <?php else:?>
                   <div>
@@ -108,10 +108,10 @@
                 <?php endif;?>
                 <div style="padding:10px 0 0">
                   <div>
-                    <h3 class="card-title" style="color:black;"><?php echo $product[$i]['name']?></a></h3><br>
+                    <h3 class="card-title" style="color:black;"><?php echo $customer_data['product'][$i]['name']?></a></h3><br>
                   </div>
                   <div>
-                    <span>IDR <?= number_format($product[$i]['price']) ?></span>
+                    <span>IDR <?= number_format($customer_data['product'][$i]['price']) ?></span>
                   </div>
                 </div>
               </div>

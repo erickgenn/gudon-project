@@ -8,8 +8,12 @@ use App\Models\OrderModel;
 use App\Models\LevelDetailModel;
 use App\Models\MembershipModel;
 use App\Models\Subscription;
+use App\Models\NotificationModel;
+
 use DateInterval;
 use DateTime;
+
+date_default_timezone_set("Asia/Jakarta");
 
 class MembershipLevelController extends BaseController
 {
@@ -38,12 +42,40 @@ class MembershipLevelController extends BaseController
         $terms = $modelLevel->where('level_id', $_SESSION['level_id'])->where('benefit', null, false)->where('is_active', 1)->findAll();
         $benefit = $modelLevel->where('level_id', $_SESSION['level_id'])->where('terms', null, false)->where('is_active', 1)->findAll();
 
+        // get notification
+        $modelNotif = new NotificationModel();
+        $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active',1)->orderBy('created_at', 'desc')->findAll();
+        for ($i = 0; $i < count($notif); $i++) {
+            $now = new DateTime('NOW');
+            $notif_time = new DateTime($notif[$i]['created_at']);
+            $interval = $now->diff($notif_time);
+            if(strcmp($interval->format("%y"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%y year(s) ago");
+            }
+            else if(strcmp($interval->format("%m"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%m month(s) ago");
+            }
+            else if(strcmp($interval->format("%d"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%d day(s) ago");
+            }
+            else if(strcmp($interval->format("%h"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%h hour(s) ago");
+            }
+            else if(strcmp($interval->format("%i"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%i minute(s) ago");
+            }
+            else if(strcmp($interval->format("%s"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%s second(s) ago");
+            }
+        }
+
         $cust_data['customer_data'] = [
             'total_product' => $total_product,
             'count_order' => $count_order,
             'user_balance' => $user_balance,
             'terms' => $terms,
-            'benefit' => $benefit
+            'benefit' => $benefit,
+            'notification' => $notif
         ];
         return view('membership/index', $cust_data);
     }
@@ -68,17 +100,44 @@ class MembershipLevelController extends BaseController
         $user = $authModel->where('id', $_SESSION['id'])->first();
         $balance = MoneyFormatController::money_format_rupiah($user['balance']);
 
-        $membership_data['membership_data'] = [
-            'membership' => $membership_level,
-            'terms' => $terms,
-            'benefit' => $benefit
+        // get notification
+        $modelNotif = new NotificationModel();
+        $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active',1)->orderBy('created_at', 'desc')->findAll();
+        for ($i = 0; $i < count($notif); $i++) {
+            $now = new DateTime('NOW');
+            $notif_time = new DateTime($notif[$i]['created_at']);
+            $interval = $now->diff($notif_time);
+            if(strcmp($interval->format("%y"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%y year(s) ago");
+            }
+            else if(strcmp($interval->format("%m"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%m month(s) ago");
+            }
+            else if(strcmp($interval->format("%d"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%d day(s) ago");
+            }
+            else if(strcmp($interval->format("%h"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%h hour(s) ago");
+            }
+            else if(strcmp($interval->format("%i"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%i minute(s) ago");
+            }
+            else if(strcmp($interval->format("%s"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%s second(s) ago");
+            }
+        }
+
+        $cust_data['customer_data'] = [
+            'membership_data' => [
+                'membership' => $membership_level,
+                'terms' => $terms,
+                'benefit' => $benefit
+            ],
+            'balance' => $balance,
+            'notification' => $notif
         ];
 
-        $membership_data['balance'] = [
-            'balance' => $balance
-        ];
-
-        return view('membership/upgrade', $membership_data);
+        return view('membership/upgrade', $cust_data);
     }
 
     public function upgrade($id)
@@ -103,7 +162,41 @@ class MembershipLevelController extends BaseController
         $membership = $membershipService->where('id', $id)->first();
         $detail_level = $modelDetailLevel->where('level_id', $id)->where('terms !=', null)->findColumn('terms');
 
-        return view('membership/payment', compact('id', 'membership', 'detail_level'));
+        // get notification
+        $modelNotif = new NotificationModel();
+        $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active',1)->orderBy('created_at', 'desc')->findAll();
+        for ($i = 0; $i < count($notif); $i++) {
+            $now = new DateTime('NOW');
+            $notif_time = new DateTime($notif[$i]['created_at']);
+            $interval = $now->diff($notif_time);
+            if(strcmp($interval->format("%y"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%y year(s) ago");
+            }
+            else if(strcmp($interval->format("%m"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%m month(s) ago");
+            }
+            else if(strcmp($interval->format("%d"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%d day(s) ago");
+            }
+            else if(strcmp($interval->format("%h"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%h hour(s) ago");
+            }
+            else if(strcmp($interval->format("%i"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%i minute(s) ago");
+            }
+            else if(strcmp($interval->format("%s"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%s second(s) ago");
+            }
+        }
+
+        $cust_data['customer_data'] = [
+            'id' => $id,
+            'membership' => $membership,
+            'detail_level' => $detail_level,
+            'notification' => $notif
+        ];
+
+        return view('membership/payment', $cust_data);
     }
 
     public function payment()

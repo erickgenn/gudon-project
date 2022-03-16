@@ -6,11 +6,15 @@ use \App\Models\OrderModel;
 use \App\Models\CreateOrderTemp;
 use App\Models\Delivery;
 use App\Models\DetailOrderModel;
+use App\Models\NotificationModel;
 use \App\Models\ProductModel;
 use App\Models\StorageModel;
 use \App\Models\Warehouse;
 
+use DateTime;
 use Exception;
+
+date_default_timezone_set("Asia/Jakarta");
 
 class OrderController extends BaseController
 {
@@ -24,7 +28,37 @@ class OrderController extends BaseController
 
     public function index()
     {
-        return view('order/index');
+        // get notification
+        $modelNotif = new NotificationModel();
+        $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active',1)->orderBy('created_at', 'desc')->findAll();
+        for ($i = 0; $i < count($notif); $i++) {
+            $now = new DateTime('NOW');
+            $notif_time = new DateTime($notif[$i]['created_at']);
+            $interval = $now->diff($notif_time);
+            if(strcmp($interval->format("%y"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%y year(s) ago");
+            }
+            else if(strcmp($interval->format("%m"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%m month(s) ago");
+            }
+            else if(strcmp($interval->format("%d"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%d day(s) ago");
+            }
+            else if(strcmp($interval->format("%h"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%h hour(s) ago");
+            }
+            else if(strcmp($interval->format("%i"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%i minute(s) ago");
+            }
+            else if(strcmp($interval->format("%s"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%s second(s) ago");
+            }
+        }
+
+        $cust_data['customer_data'] = [
+            'notification' => $notif
+        ];
+        return view('order/index', $cust_data);
     }
 
     public function view($id)
@@ -37,20 +71,52 @@ class OrderController extends BaseController
             $order[$i]['total_harga'] = MoneyFormatController::money_format_rupiah($order[$i]['total_harga']);
             $order[$i]['ongkos_kirim'] = MoneyFormatController::money_format_rupiah($order[$i]['ongkos_kirim']);
         }
+        // get notification
+        $modelNotif = new NotificationModel();
+        $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active',1)->orderBy('created_at', 'desc')->findAll();
+        for ($i = 0; $i < count($notif); $i++) {
+            $now = new DateTime('NOW');
+            $notif_time = new DateTime($notif[$i]['created_at']);
+            $interval = $now->diff($notif_time);
+            if(strcmp($interval->format("%y"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%y year(s) ago");
+            }
+            else if(strcmp($interval->format("%m"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%m month(s) ago");
+            }
+            else if(strcmp($interval->format("%d"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%d day(s) ago");
+            }
+            else if(strcmp($interval->format("%h"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%h hour(s) ago");
+            }
+            else if(strcmp($interval->format("%i"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%i minute(s) ago");
+            }
+            else if(strcmp($interval->format("%s"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%s second(s) ago");
+            }
+        }
 
-        return view('order/view', compact('order'));
+        $cust_data['customer_data'] = [
+            'notification' => $notif,
+            'order' => $order
+        ];
+
+        return view('order/view', $cust_data);
     }
 
     public function search()
     {
         $orderModel = new \App\Models\OrderModel();
 
-        $order = $orderModel->where('customer_id', $_SESSION['id'])
+        $order = $orderModel->where('customer_id', $_SESSION['id'])->orderBy('created_at', 'desc')
             ->findAll();
 
         for ($i = 0; $i < count($order); $i++) {
             $order[$i]['total_price'] = MoneyFormatController::money_format_rupiah($order[$i]['total_price']);
             $order[$i]['delivery_price'] = MoneyFormatController::money_format_rupiah($order[$i]['delivery_price']);
+            $order[$i]['created_at'] = date_format(date_create($order[$i]['created_at']), 'Y/m/d H:i');
         }
 
         return json_encode($order);
@@ -77,7 +143,39 @@ class OrderController extends BaseController
         $data['groupproduct'] = $orderModel->where('customer_id', $_SESSION["id"])->findAll();
         $data['groupwarehouse'] = $orderModel1->get_warehouse_id()->getResultArray();
         $data['groupdelivery'] = $orderModel2->findAll();
-        return view('order/create_order', $data);
+
+        // get notification
+        $modelNotif = new NotificationModel();
+        $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active',1)->orderBy('created_at', 'desc')->findAll();
+        for ($i = 0; $i < count($notif); $i++) {
+            $now = new DateTime('NOW');
+            $notif_time = new DateTime($notif[$i]['created_at']);
+            $interval = $now->diff($notif_time);
+            if(strcmp($interval->format("%y"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%y year(s) ago");
+            }
+            else if(strcmp($interval->format("%m"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%m month(s) ago");
+            }
+            else if(strcmp($interval->format("%d"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%d day(s) ago");
+            }
+            else if(strcmp($interval->format("%h"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%h hour(s) ago");
+            }
+            else if(strcmp($interval->format("%i"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%i minute(s) ago");
+            }
+            else if(strcmp($interval->format("%s"), "0") == 1) {
+                $notif[$i]['created_at'] = $interval->format("%s second(s) ago");
+            }
+        }
+
+        $cust_data['customer_data'] = [
+            'notification' => $notif,
+            'data' => $data
+        ];
+        return view('order/create_order', $cust_data);
     }
 
     public function store()
@@ -146,6 +244,16 @@ class OrderController extends BaseController
                 ];
                 $detailOrderModel->insert($data_detail);
             }
+
+            // notify
+            $modelNotif = new NotificationModel();
+            $data_notif = [
+                'title' => 'Order Successfully Created',
+                'message' => 'Hey '.$_SESSION["id"].', your order was successfully created. Please wait until your order is confirmed 😊',
+                'cust_id' => $_SESSION['id'],
+                'link' => 'order/index'
+            ];
+            $modelNotif->insert($data_notif);
         } catch (Exception $e) {
         }
         return redirect()->to(base_url('order/index'));

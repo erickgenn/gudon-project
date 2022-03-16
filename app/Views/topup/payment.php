@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GudOn | Top Up <?php echo $method; ?></title>
+    <title>GudOn | Top Up <?php echo $customer_data['method']; ?></title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -47,7 +47,7 @@
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="<?php echo base_url("topup/method"); ?>">Top Up Method</a></li>
-                                <li class="breadcrumb-item active">Top Up <?php echo $method; ?></li>
+                                <li class="breadcrumb-item active">Top Up <?php echo $customer_data['method']; ?></li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -55,23 +55,23 @@
             </div>
             <!-- /.content-header -->
             <!-- Main content -->
-            <?php if ($method == "OVO" || $method == "GoPay" || $method == "M-BCA" || $method == "QRIS") : ?>
+            <?php if ($customer_data['method'] == "OVO" || $customer_data['method'] == "GoPay" || $customer_data['method'] == "M-BCA" || $customer_data['method'] == "QRIS") : ?>
                 <section class="content">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <?php if ($method == "OVO") : ?>
+                                        <?php if ($customer_data['method'] == "OVO") : ?>
                                             <img src="<?php echo base_url() ?>/assets/logo-ovo.png" width=20% alt="OVO" class="brand-image">
                                         <?php endif; ?>
-                                        <?php if ($method == "GoPay") : ?>
+                                        <?php if ($customer_data['method'] == "GoPay") : ?>
                                             <img src="<?php echo base_url() ?>/assets/gopay.png" width=20% alt="GOPAY" class="brand-image">
                                         <?php endif; ?>
-                                        <?php if ($method == "M-BCA") : ?>
+                                        <?php if ($customer_data['method'] == "M-BCA") : ?>
                                             <img src="<?php echo base_url() ?>/assets/mbca.png" width=9% alt="M-BCA" class="brand-image">
                                         <?php endif; ?>
-                                        <?php if ($method == "QRIS") : ?>
+                                        <?php if ($customer_data['method'] == "QRIS") : ?>
                                             <img src="<?php echo base_url() ?>/assets/qris.png" width=12% alt="QRIS" class="brand-image">
                                         <?php endif; ?>
                                     </div>
@@ -144,16 +144,16 @@
                                     <div class="col-12">
                                         <h4>
                                             <img src="<?php echo base_url() ?>/assets/gudon_logo_white.png" width=10% alt="GudOn Logo" class="brand-image img-circle">
-                                            <?php if ($method == "OVO") : ?>
+                                            <?php if ($customer_data['method'] == "OVO") : ?>
                                                 <img src="<?php echo base_url() ?>/assets/logo-ovo.png" width=15% alt="OVO" class="brand-image">
                                             <?php endif; ?>
-                                            <?php if ($method == "GoPay") : ?>
+                                            <?php if ($customer_data['method'] == "GoPay") : ?>
                                                 <img src="<?php echo base_url() ?>/assets/gopay.png" width=15% alt="GoPay" class="brand-image">
                                             <?php endif; ?>
-                                            <?php if ($method == "M-BCA") : ?>
+                                            <?php if ($customer_data['method'] == "M-BCA") : ?>
                                                 <img src="<?php echo base_url() ?>/assets/mbca.png" width=7% alt="M-BCA" class="brand-image">
                                             <?php endif; ?>
-                                            <?php if ($method == "QRIS") : ?>
+                                            <?php if ($customer_data['method'] == "QRIS") : ?>
                                                 <img src="<?php echo base_url() ?>/assets/qris.png" width=12% alt="QRIS" class="brand-image">
                                             <?php endif; ?>
                                             <small class="float-right">Date: <?php echo date("d-m-Y"); ?></small>
@@ -171,10 +171,10 @@
                                                         <th style="width:50%">Top Up Amount</th>
                                                         <td id="show_amount"></td>
                                                     </tr>
-                                                    <?php if ($method == "OVO" || $method == "GoPay") : ?>
+                                                    <?php if ($customer_data['method'] == "OVO" || $customer_data['method'] == "GoPay") : ?>
                                                         <tr>
                                                             <th>
-                                                                <h5>Insert Your Active <?php echo $method; ?> Phone Number</h5>
+                                                                <h5>Insert Your Active <?php echo $customer_data['method']; ?> Phone Number</h5>
                                                             </th>
                                                             <td>
                                                                 <div class="input-group mb-3">
@@ -194,7 +194,7 @@
                                                     <?php endif; ?>
                                                 </tbody>
                                             </table>
-                                            <?php if ($method == "M-BCA") : ?>
+                                            <?php if ($customer_data['method'] == "M-BCA") : ?>
                                                 <div class="col-12" id="accordion">
                                                     <div class="card card-primary card-outline">
                                                         <a class="d-block w-100" data-toggle="collapse" href="#collapseOne">
@@ -217,7 +217,7 @@
                                                     <input type="hidden" id="amount_bank" name="amount">
                                                 </div>
                                             <?php endif; ?>
-                                            <?php if ($method == "QRIS") : ?>
+                                            <?php if ($customer_data['method'] == "QRIS") : ?>
                                                 <div class="col-12" id="accordion">
                                                     <div class="card card-primary card-outline">
                                                         <a class="d-block w-100" data-toggle="collapse" href="#collapseOne">
@@ -243,10 +243,10 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <?php if ($method == "M-BCA" || $method == "QRIS") : ?>
+                            <?php if ($customer_data['method'] == "M-BCA" || $customer_data['method'] == "QRIS") : ?>
                                 <button type="submit" onclick="loadingScreen()" class="btn btn-success">Top Up</button>
                             <?php endif; ?>
-                            <?php if ($method == "OVO" || $method == "GoPay") : ?>
+                            <?php if ($customer_data['method'] == "OVO" || $customer_data['method'] == "GoPay") : ?>
                                 <button type="submit" class="btn btn-success">Top Up</button>
                             <?php endif; ?>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -277,16 +277,16 @@
                                     <div class="col-12">
                                         <h4>
                                             <img src="<?php echo base_url() ?>/assets/gudon_logo_white.png" width=10% alt="GudOn Logo" class="brand-image img-circle">
-                                            <?php if ($method == "OVO") : ?>
+                                            <?php if ($customer_data['method'] == "OVO") : ?>
                                                 <img src="<?php echo base_url() ?>/assets/logo-ovo.png" width=15% alt="OVO" class="brand-image">
                                             <?php endif; ?>
-                                            <?php if ($method == "GoPay") : ?>
+                                            <?php if ($customer_data['method'] == "GoPay") : ?>
                                                 <img src="<?php echo base_url() ?>/assets/gopay.png" width=15% alt="GoPay" class="brand-image">
                                             <?php endif; ?>
-                                            <?php if ($method == "M-BCA") : ?>
+                                            <?php if ($customer_data['method'] == "M-BCA") : ?>
                                                 <img src="<?php echo base_url() ?>/assets/mbca.png" width=7% alt="M-BCA" class="brand-image">
                                             <?php endif; ?>
-                                            <?php if ($method == "QRIS") : ?>
+                                            <?php if ($customer_data['method'] == "QRIS") : ?>
                                                 <img src="<?php echo base_url() ?>/assets/qris.png" width=12% alt="QRIS" class="brand-image">
                                             <?php endif; ?>
                                             <small class="float-right">Date: <?php echo date("d-m-Y"); ?></small>
@@ -306,9 +306,9 @@
                                                     <tr>
                                                         <th>
                                                             <h5>Insert Amount</h5>
-                                                            <?php if ($method == "OVO" || $method == "GoPay") : ?>
+                                                            <?php if ($customer_data['method'] == "OVO" || $customer_data['method'] == "GoPay") : ?>
                                                                 <br>
-                                                                <h5>Insert Your Active <?php echo $method; ?> Phone Number</h5>
+                                                                <h5>Insert Your Active <?php echo $customer_data['method']; ?> Phone Number</h5>
                                                             <?php endif; ?>
                                                         </th>
                                                         <td>
@@ -318,7 +318,7 @@
                                                                 </div>
                                                                 <input type="number" class="form-control" id="amount_custom" name="amount" min="10000" max="10000000" required>
                                                             </div>
-                                                            <?php if ($method == "OVO" || $method == "GoPay") : ?>
+                                                            <?php if ($customer_data['method'] == "OVO" || $customer_data['method'] == "GoPay") : ?>
                                                                 <div class="input-group mb-3">
                                                                     <input type="tel" class="form-control" id="phone_custom" name="phone" pattern="[0][0-9]{8,15}" required onkeypress="checkPhoneCustom()">
                                                                     <div class="input-group-append">
@@ -333,7 +333,7 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <?php if ($method == "M-BCA") : ?>
+                                            <?php if ($customer_data['method'] == "M-BCA") : ?>
                                                 <div class="col-12" id="accordion">
                                                     <div class="card card-primary card-outline">
                                                         <a class="d-block w-100" data-toggle="collapse" href="#collapseOne">
@@ -355,7 +355,7 @@
                                                     </div>
                                                 </div>
                                             <?php endif; ?>
-                                            <?php if ($method == "QRIS") : ?>
+                                            <?php if ($customer_data['method'] == "QRIS") : ?>
                                                 <div class="col-12" id="accordion">
                                                     <div class="card card-primary card-outline">
                                                         <a class="d-block w-100" data-toggle="collapse" href="#collapseOne">
@@ -380,10 +380,10 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <?php if ($method == "M-BCA" || $method == "QRIS") : ?>
+                            <?php if ($customer_data['method'] == "M-BCA" || $customer_data['method'] == "QRIS") : ?>
                                 <button type="submit" onclick="loadingScreenCustom()" class="btn btn-success">Top Up</button>
                             <?php endif; ?>
-                            <?php if ($method == "OVO" || $method == "GoPay") : ?>
+                            <?php if ($customer_data['method'] == "OVO" || $customer_data['method'] == "GoPay") : ?>
                                 <button type="submit" class="btn btn-success">Top Up</button>
                             <?php endif; ?>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -421,7 +421,7 @@
 
 <script>
     function generateModal(amount) {
-        <?php if ($method == "M-BCA" || $method == "QRIS") : ?>
+        <?php if ($customer_data['method'] == "M-BCA" || $customer_data['method'] == "QRIS") : ?>
             if (amount === "50000") {
                 document.getElementById("show_amount").innerHTML = "Rp 50.000";
                 document.getElementById("amount_bank").value = "50000";
@@ -435,7 +435,7 @@
                 document.getElementById("amount_bank").value = "200000";
             }
         <?php endif; ?>
-        <?php if ($method == "OVO" || $method == "GoPay") : ?>
+        <?php if ($customer_data['method'] == "OVO" || $customer_data['method'] == "GoPay") : ?>
             if (amount === "50000") {
                 document.getElementById("show_amount").innerHTML = "Rp 50.000";
                 document.getElementById("amount").value = "50000";

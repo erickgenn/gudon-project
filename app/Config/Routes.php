@@ -113,6 +113,12 @@ $routes->post('membership/payment', 'MembershipLevelController::payment');
 
 // profile
 $routes->post('profile/update', 'CustomerController::update_profile');
+
+// notification
+$routes->get('notification/index', 'NotificationController::index');
+$routes->post('notification/update/(:num)/(:any)/(:any)', 'NotificationController::updateNotification/$1/$2/$3');
+$routes->post('notification/delete/(:num)', 'NotificationController::delete/$1');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
