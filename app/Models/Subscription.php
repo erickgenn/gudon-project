@@ -13,4 +13,13 @@ class Subscription extends Model
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
     protected $useSoftDeletes = true;
+
+    public function deleteSubs()
+    {
+        $builder = $this->db->table('mst_gudon.mst_subscription');
+
+        $builder->set('is_active', 0);
+        $builder->where('cust_id', $_SESSION['id']);
+        $builder->update();
+    }
 }
