@@ -104,7 +104,7 @@ $routes->get('order/get_price/(:num)', 'OrderController::get_price/$1');
 $routes->post('order/(:num)/delete', 'OrderController::delete/$1');
 
 // membership
-$routes->get('membership/index', 'MembershipLevelController::index');
+$routes->get('profile/index', 'MembershipLevelController::index');
 $routes->get('membership/upgrade', 'MembershipLevelController::upgrade_menu');
 $routes->get('membership/upgrade/(:num)', 'MembershipLevelController::upgrade/$1');
 $routes->post('membership/payment', 'MembershipLevelController::payment');
