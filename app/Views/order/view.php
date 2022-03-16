@@ -113,8 +113,8 @@
                   <th>#</th>
                   <th>Product Name</th>
                   <th>Quantity</th>
-                  <th>Weight</th>
-                  <th>Volume</th>
+                  <th>Weight (gr)</th>
+                  <th>Volume (m³)</th>
                 </thead>
                 <tbody>
                   <?php for($i=0;$i<sizeof($order);$i++):?>

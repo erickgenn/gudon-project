@@ -77,8 +77,8 @@
                     <tr>
                       <th>ID</th>
                       <th>Shelf</th>
-                      <th>Max Weight</th>
-                      <th>Max Volume</th>
+                      <th>Max Weight (gr)</th>
+                      <th>Max Volume (m³)</th>
                       <th>Status</th>
                       <th>Action</th>
                     </tr>
@@ -91,7 +91,7 @@
                         <td><?php echo $shelf[$i]['berat_maks'];?></td>
                         <td><?php echo $shelf[$i]['volume_maks'];?></td>
                         <td><?php if($shelf[$i]['is_active']=="1") {echo "Active";} else {echo "Not Active";}?></td>
-                        <td><button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(<?php echo $shelf[$i]['id_shelf'];?>)">Detail View</button></td>
+                        <td><button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(<?php echo $shelf[$i]['id_shelf'];?>)"><i class="fas fa-eye"></i></button></td>
                       </tr>
                     <?php endfor;?>
                   </tbody>
@@ -118,8 +118,8 @@
               <th>#</th>
               <th>Product Name</th>
               <th>Quantity</th>
-              <th>Weight</th>
-              <th>Volume</th>
+              <th>Weight (gr)</th>
+              <th>Volume (m³)</th>
             </thead>
             <tbody>
             </tbody>
