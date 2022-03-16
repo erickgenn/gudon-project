@@ -17,6 +17,9 @@ class Home extends BaseController
         $orderModel = new OrderModel();
         $order = $orderModel->where('customer_id', $_SESSION['id'])->findAll();
         $count_order = count($order);
+
+        $ongoing_order = $orderModel->where('customer_id', $_SESSION['id'])->where('status !=', 'SELESAI')->where('status !=', 'BATAL')->findAll();
+        $count_ongoing_order = count($ongoing_order);
         // get order successful rate
         $status_order = $orderModel->where('customer_id', $_SESSION['id'])->where('status', 'SELESAI')->findAll();
         $success_order = count($status_order);
@@ -81,7 +84,7 @@ class Home extends BaseController
         $sunday = $orderModel->countOrderDate($date_sunday)->getResultArray();
 
         $cust_data['count_order'] = [count($monday), count($tuesday), count($wednesday), count($thursday), count($friday), count($saturday), count($sunday)];
-
+        $cust_data['ongoing_order'] = $count_ongoing_order;
         return view('dashboard', $cust_data);
     }
 

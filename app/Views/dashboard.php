@@ -68,19 +68,23 @@
               <!-- small box -->
               <div class="small-box" style="padding:5%">
                 <div class="level" style="float:right; padding:3%">
-                  <a href="<?php echo base_url('profile/index'); ?>" style="color: 
-                <?php if ($_SESSION['level'] == "BRONZE") {
-                  echo '#A97142';
-                } elseif ($_SESSION['level'] == "SILVER") {
-                  echo '#989898';
-                } elseif ($_SESSION['level'] == "GOLD") {
-                  echo '#FFD700';
-                } else {
-                  echo '#5cc5e6';
-                }
-                ?>; font-weight:bold;">
-                    <?php echo $_SESSION['level']; ?>
-                  </a>
+                  <?php if ($_SESSION['time_left'] <= 0) : ?>
+                    <a href="<?php echo base_url('profile/index'); ?>" style="color:red; font-weight:bold;">Membership Expired</a>
+                  <?php else : ?>
+                    <a href="<?php echo base_url('profile/index'); ?>" style="color: 
+                    <?php if ($_SESSION['level'] == "BRONZE") {
+                      echo '#A97142';
+                    } elseif ($_SESSION['level'] == "SILVER") {
+                      echo '#989898';
+                    } elseif ($_SESSION['level'] == "GOLD") {
+                      echo '#FFD700';
+                    } else {
+                      echo '#5cc5e6';
+                    }
+                    ?>; font-weight:bold;">
+                      <?php echo $_SESSION['level']; ?>
+                    </a>
+                  <?php endif; ?>
                 </div>
                 <div class="inner">
                   <p>Balance</p>
@@ -90,6 +94,14 @@
                   <p>Revenue</p>
                   <h4>Rp <?php echo number_format($customer_data['income']); ?></h4>
                 </div>
+                <?php if ($_SESSION['time_left'] <= 5 && $_SESSION['time_left'] > 0) : ?>
+                  <div class="inner">
+                    <div class="alert alert-warning">
+                      <h5><i class="icon fas fa-exclamation-triangle"></i>Warning!</h5>
+                      Your Membership is Expiring Soon!
+                    </div>
+                  </div>
+                <?php endif; ?>
                 <a href="<?php echo base_url('product/index'); ?>" class="btn btn-block" style="background-color:#5cc5e6; color:white; font-weight:bold;">Manage Products</a>
               </div>
             </div>
@@ -124,13 +136,13 @@
             <div class="col-lg-3 col-6">
               <div class="small-box" style="padding:2.5rem 1.5rem 2.5rem 1.5rem">
                 <div class="inner">
-                  <h3>120</h3>
-                  <p>New Orders</p>
+                  <h3><?php echo $ongoing_order; ?></h3>
+                  <p>On Going Orders</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-bag"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="<?php echo base_url('order/index'); ?>" style="background-color:#5cc5e6; color:white; font-weight:bold;" class="small-box-footer">See Your Orders Here <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
           </div>
