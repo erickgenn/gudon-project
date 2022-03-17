@@ -92,10 +92,10 @@
                 <thead>
                   <tr>
                     <th>No.</th>
-                    <th>Nama Lengkap</th>
+                    <th>Full Name</th>
                     <th>Email</th>
-                    <th>No. Telepon</th>
-                    <th>Bergabung Sejak</th>
+                    <th>Telephone</th>
+                    <th>Joined Since</th>
                     <th>Status</th>
                   </tr>
                 </thead>

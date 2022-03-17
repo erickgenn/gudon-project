@@ -130,6 +130,14 @@ class Filters extends BaseConfig
                     'topup',
                     'home/bestproducts',
                     'expiredmembership',
+                    'admin/index',
+                    'admin/customer/index',
+                    'admin/customer/search',
+                    'admin/order/index',
+                    'admin/order/search',
+                    'admin/order/*/delete',
+                    'admin/order/confirm/*',
+                    'order/view/*'
                 ]
             ],
 

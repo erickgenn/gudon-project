@@ -64,57 +64,107 @@
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
                     <div class="row">
-                        <div class="col-lg-3 col-6">
+                        <div class="col-lg-6 col-6">
                             <!-- small box -->
-                            <div class="small-box bg-info">
-                                <div class="inner">
-                                    <h3>1</h3>
+                            <div class="card card-primary card-tabs">
+                                <div class="card-header p-0 pt-1">
+                                    <ul class="nav nav-tabs" id="custom-tabs-two-tab" role="tablist">
+                                        <li class="pt-2 px-3">
+                                            <h3 class="card-title">Orders <i class="ion ion-bag"></i></h3>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="custom-tabs-two-home-tab" data-toggle="pill" href="#custom-tabs-two-home" role="tab" aria-controls="custom-tabs-two-home" aria-selected="true">Need Confirmation</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="custom-tabs-two-profile-tab" data-toggle="pill" href="#custom-tabs-two-profile" role="tab" aria-controls="custom-tabs-two-profile" aria-selected="false">Total</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="custom-tabs-two-messages-tab" data-toggle="pill" href="#custom-tabs-two-messages" role="tab" aria-controls="custom-tabs-two-messages" aria-selected="false">Successful</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="custom-tabs-two-settings-tab" data-toggle="pill" href="#custom-tabs-two-settings" role="tab" aria-controls="custom-tabs-two-settings" aria-selected="false">Cancelled</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-body">
+                                    <div class="tab-content" id="custom-tabs-two-tabContent">
+                                        <div class="tab-pane fade show active" id="custom-tabs-two-home" role="tabpanel" aria-labelledby="custom-tabs-two-home-tab">
+                                            <!-- small box -->
+                                            <div class="small-box bg-white">
+                                                <div class="inner">
+                                                    <h3><?php echo $count_order_confirm ?></h3>
+                                                    <p>Orders Need Confirmation</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="icon fas fa-exclamation-triangle"></i>
+                                                </div>
+                                                <a href="<?php echo base_url('admin/order/index'); ?>" class="small-box-footer">See All Orders <i class="fas fa-arrow-circle-right"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="custom-tabs-two-profile" role="tabpanel" aria-labelledby="custom-tabs-two-profile-tab">
+                                            <!-- small box -->
+                                            <div class="small-box bg-white">
+                                                <div class="inner">
+                                                    <h3><?php echo $count_order ?></h3>
+                                                    <p>Total Orders</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="icon fas fa-file-invoice-dollar"></i>
+                                                </div>
+                                                <a href="<?php echo base_url('admin/order/index'); ?>" class="small-box-footer">See All Orders <i class="fas fa-arrow-circle-right"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="custom-tabs-two-messages" role="tabpanel" aria-labelledby="custom-tabs-two-messages-tab">
+                                            <!-- small box -->
+                                            <div class="small-box bg-white">
+                                                <div class="inner">
+                                                    <h3><?php echo $count_order_success ?></h3>
+                                                    <p>Successful Orders</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="icon fas fa-list-check"></i>
+                                                </div>
+                                                <a href="<?php echo base_url('admin/order/index'); ?>" class="small-box-footer">See All Orders <i class="fas fa-arrow-circle-right"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="custom-tabs-two-settings" role="tabpanel" aria-labelledby="custom-tabs-two-settings-tab">
+                                            <!-- small box -->
+                                            <div class="small-box bg-white">
+                                                <div class="inner">
+                                                    <h3><?php echo $count_order_cancel ?></h3>
+                                                    <p>Cancelled Orders</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class=" fa-solid fa-square-xmark"></i>
+                                                </div>
+                                                <a href="<?php echo base_url('admin/order/index'); ?>" class="small-box-footer">See All Orders <i class="fas fa-arrow-circle-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                    <p>New Orders</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-bag"></i>
-                                </div>
-                                <a href="<?php echo base_url('order/index'); ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <!-- ./col -->
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
-                            <div class="small-box bg-success">
+                            <div class="small-box bg-info" style="padding: 5.15rem 1rem 1.5rem 1rem">
                                 <div class="inner">
-                                    <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                                    <p>Bounce Rate</p>
+                                    <h3><?php echo $count_partners ?></h3>
+                                    <p>Total Partners</p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-stats-bars"></i>
+                                    <i class="fa-solid fa-user-group"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="<?php echo base_url('admin/customer/index'); ?>" class="small-box-footer">See All Partners <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <!-- ./col -->
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
-                            <div class="small-box bg-warning">
-                                <div class="inner">
-                                    <h3>44</h3>
-
-                                    <p>User Registrations</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-person-add"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-danger">
+                            <div class="small-box bg-danger" style="padding: 5.15rem 1rem 1.5rem 1rem">
                                 <div class="inner">
                                     <h3>65</h3>
-
                                     <p>Unique Visitors</p>
                                 </div>
                                 <div class="icon">
@@ -656,6 +706,7 @@
     </div>
     <!-- ./wrapper -->
 
+    <script src="https://kit.fontawesome.com/6938e8f442.js" crossorigin="anonymous"></script>
     <!-- jQuery -->
     <script src="<?php echo base_url() ?>/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
