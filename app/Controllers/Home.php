@@ -59,7 +59,7 @@ class Home extends BaseController
         $data_per_item = $modelProduct->select('COUNT(id) AS jumlah, name AS nama')->where('customer_id', $_SESSION['id'])
                         ->groupby('id')->findAll();
         
-      
+        
 
         $cust_data['customer_data'] = [
             'total_product' => $total_product,
