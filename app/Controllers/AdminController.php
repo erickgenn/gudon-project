@@ -97,7 +97,7 @@ class AdminController extends BaseController
         }
 
         // get all notification
-        $notif_all = $modelNotif->orderBy('created_at', 'desc')->findAll();
+        $notif_all = $modelNotif->where('adm_message !=', NULL)->orderBy('created_at', 'desc')->findAll();
         for ($i = 0; $i < count($notif_all); $i++) {
             $now = new DateTime('NOW');
             $notif_time = new DateTime($notif_all[$i]['created_at']);
