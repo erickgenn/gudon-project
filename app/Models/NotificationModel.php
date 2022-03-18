@@ -24,6 +24,14 @@ class NotificationModel extends Model
         $builder->update();
     }
 
+    public function adminReadAll() {
+        $builder = $this->db->table('mst_gudon.mst_notification');
+        $builder->set('adm_notified', 0);
+        $builder->where('adm_notified', 1);
+
+        $builder->update();
+    }
+
     public function deleteNotif($id)
     {
         $builder = $this->db->table('mst_gudon.mst_notification');

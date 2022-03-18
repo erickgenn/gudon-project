@@ -92,7 +92,7 @@
                                             <!-- small box -->
                                             <div class="small-box bg-white">
                                                 <div class="inner">
-                                                    <h3><?php echo $count_order_confirm ?></h3>
+                                                    <h3><?php echo $admin_data['count_order_confirm'] ?></h3>
                                                     <p>Orders Need Confirmation</p>
                                                 </div>
                                                 <div class="icon">
@@ -105,7 +105,7 @@
                                             <!-- small box -->
                                             <div class="small-box bg-white">
                                                 <div class="inner">
-                                                    <h3><?php echo $count_order ?></h3>
+                                                    <h3><?php echo $admin_data['count_order'] ?></h3>
                                                     <p>Total Orders</p>
                                                 </div>
                                                 <div class="icon">
@@ -118,7 +118,7 @@
                                             <!-- small box -->
                                             <div class="small-box bg-white">
                                                 <div class="inner">
-                                                    <h3><?php echo $count_order_success ?></h3>
+                                                    <h3><?php echo $admin_data['count_order_success'] ?></h3>
                                                     <p>Successful Orders</p>
                                                 </div>
                                                 <div class="icon">
@@ -131,7 +131,7 @@
                                             <!-- small box -->
                                             <div class="small-box bg-white">
                                                 <div class="inner">
-                                                    <h3><?php echo $count_order_cancel ?></h3>
+                                                    <h3><?php echo $admin_data['count_order_cancel'] ?></h3>
                                                     <p>Cancelled Orders</p>
                                                 </div>
                                                 <div class="icon">
@@ -150,7 +150,7 @@
                             <!-- small box -->
                             <div class="small-box bg-info" style="padding: 5.15rem 1rem 1.5rem 1rem">
                                 <div class="inner">
-                                    <h3><?php echo $count_partners ?></h3>
+                                    <h3><?php echo $admin_data['count_partners'] ?></h3>
                                     <p>Total Partners</p>
                                 </div>
                                 <div class="icon">

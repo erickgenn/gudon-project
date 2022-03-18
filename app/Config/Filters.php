@@ -98,7 +98,7 @@ class Filters extends BaseConfig
                     'profile/update',
                     'home/bestproducts',
                     'notification/index',
-                    'notification/update/*/*',
+                    'notification/update/*/*/*',
                     'notification/delete/*',
                     'expiredmembership',
                 ]
@@ -137,7 +137,9 @@ class Filters extends BaseConfig
                     'admin/order/search',
                     'admin/order/*/delete',
                     'admin/order/confirm/*',
-                    'order/view/*'
+                    'order/view/*',
+                    'notification/admin/update/*/*/*',
+                    'admin/notification/index',
                 ]
             ],
 

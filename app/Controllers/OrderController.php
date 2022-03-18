@@ -251,7 +251,9 @@ class OrderController extends BaseController
                 'title' => 'Order Successfully Created',
                 'message' => 'Hey '.$_SESSION["name"].', your order was successfully created. Please wait until your order is confirmed 😊',
                 'cust_id' => $_SESSION['id'],
-                'link' => 'order/index'
+                'link' => 'order/index',
+                'adm_notified' => 1,
+                'adm_message' => $_SESSION['name'].' recently made new order, please confirm the order with number #'.$order_id
             ];
             $modelNotif->insert($data_notif);
         } catch (Exception $e) {
@@ -277,6 +279,18 @@ class OrderController extends BaseController
             $detailOrderModel->detailDelete($id);
 
             $orderModel->deleteOrder($id);
+
+            // notify
+            $modelNotif = new NotificationModel();
+            $data_notif = [
+                'title' => 'Order Cancelled',
+                'message' => 'Hey '.$_SESSION["name"].', your order was recently cancelled. We will notify Warehouse admin soon. Maybe another order 😞',
+                'cust_id' => $_SESSION['id'],
+                'link' => 'order/index',
+                'adm_notified' => 1,
+                'adm_message' => $_SESSION['name'].' recently just cancelled order with number #'.$id
+            ];
+            $modelNotif->insert($data_notif);
 
             $session->setFlashdata('msg_success', 'Order Telah Dihapus!');
         } catch (Exception $e) {

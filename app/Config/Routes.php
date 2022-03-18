@@ -118,6 +118,8 @@ $routes->post('profile/update', 'CustomerController::update_profile');
 $routes->get('notification/index', 'NotificationController::index');
 $routes->post('notification/update/(:num)/(:any)/(:any)', 'NotificationController::updateNotification/$1/$2/$3');
 $routes->post('notification/delete/(:num)', 'NotificationController::delete/$1');
+$routes->post('notification/admin/update/(:num)/(:any)/(:any)', 'AdminController::updateAdminNotification/$1/$2/$3');
+$routes->get('admin/notification/index', 'AdminController::notification_index');
 
 /*
  * --------------------------------------------------------------------

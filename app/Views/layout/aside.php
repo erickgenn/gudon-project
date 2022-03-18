@@ -12,6 +12,30 @@
     <ul class="navbar-nav ml-auto">
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="true">
+          <i class="far fa-bell"></i>
+          <?php if($admin_data['notification']):?>
+            <span class="badge badge-warning navbar-badge"><?php echo count($admin_data['notification']);?></span>
+          <?php endif;?>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+          <span class="dropdown-item dropdown-header"><?php echo count($admin_data['notification']);?> Notifications</span>
+          <?php if(isset($admin_data['notification'])):?>
+            <?php for($i=0;$i<sizeof($admin_data['notification']);$i++) :?>
+              <div class="dropdown-divider"></div>
+              <form method="POST" action="<?php echo base_url('notification/admin/update')."/". $admin_data['notification'][$i]['id']."/".$admin_data['notification'][$i]['link'];?>" >
+                <button type="submit" class="dropdown-item">
+                  <h6 style="font-weight: bold; font-size:small;"><?php echo $admin_data['notification'][$i]['title'];?><span class="float-right text-muted text-sm" ><?php echo $admin_data['notification'][$i]['created_at'];?></span> </h6>
+                  <p class="text-sm" align="left"><?php echo $admin_data['notification'][$i]['adm_message'];?></p>
+                </button>
+              </form>
+            <?php endfor;?>
+          <?php endif;?>
+          <div class="dropdown-divider"></div>
+          <a href="<?php echo base_url('admin/notification/index')?>" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="modal" data-target="#myModal" href="#" aria-expanded="false">
           <i class="fas fa-sign-out-alt"></i>
         </a>

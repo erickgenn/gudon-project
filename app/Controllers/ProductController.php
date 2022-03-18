@@ -192,13 +192,16 @@ class ProductController extends BaseController
         
                     $product_insert = $productModel->insert($data_product); //insert mst_order
                     if ($product_insert) {
+                        $product_id = $productModel->getInsertID();
                         // notify
                         $modelNotif = new NotificationModel();
                         $data_notif = [
                             'title' => 'New Product Added',
                             'message' => 'Hey '.$_SESSION["name"].', your product was successfully added. Dont forget to take your products to our nearest warehouse 💃',
                             'cust_id' => $_SESSION['id'],
-                            'link' => 'product/index'
+                            'link' => 'product/index',
+                            'adm_notified' => 1,
+                            'adm_message' => $_SESSION['name'].' recently inserted new product #'.$product_id.'. Please wait or contact partners to proceed this new product.'
                         ];
                         $modelNotif->insert($data_notif);
                         $session->setFlashdata('insertProductSuccess', '');
@@ -230,7 +233,9 @@ class ProductController extends BaseController
             'title' => 'Product Updated',
             'message' => 'Hey '.$_SESSION["name"].', your product '.$data['name'].' was recently updated. Sometimes we just need a little update, right 😎',
             'cust_id' => $_SESSION['id'],
-            'link' => 'product/index'
+            'link' => 'product/index',
+            'adm_notified' => 1,
+            'adm_message' => $_SESSION['name'].' recently updated product #'.$id.'. Please check carefully'
         ];
         $modelNotif->insert($data_notif);
 
