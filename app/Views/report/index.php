@@ -153,11 +153,11 @@
         function generateTable() {
             let start_date = Date.parse($('#start_date').val());
             let end_date = Date.parse($('#end_date').val());
-            if (start_date > end_date) {
+            if (start_date > end_date || $('#start_date').val() === "" || $('#end_date').val() === "") {
                 swal({
                     position: 'top-end',
                     icon: 'error',
-                    title: 'Tolong Masukkan Tanggal Dengan Benar!',
+                    title: 'Please Insert Date Correctly!',
                     showConfirmButton: false,
                     timer: 1500
                 });
