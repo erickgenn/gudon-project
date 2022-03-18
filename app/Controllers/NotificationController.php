@@ -45,13 +45,13 @@ class NotificationController extends BaseController
             $notif_time = new DateTime($notif_all[$i]['created_at']);
             $interval = $now->diff($notif_time);
             if(strcmp($interval->format("%y"), "0") == 1) {
-                $notif[$i]['created_at'] = $interval->format("%y year(s) ago");
+                $notif_all[$i]['created_at'] = $interval->format("%y year(s) ago");
             }
             else if(strcmp($interval->format("%m"), "0") == 1) {
-                $notif[$i]['created_at'] = $interval->format("%m month(s) ago");
+                $notif_all[$i]['created_at'] = $interval->format("%m month(s) ago");
             }
             else if(strcmp($interval->format("%d"), "0") == 1) {
-                $notif[$i]['created_at'] = $interval->format("%d day(s) ago");
+                $notif_all[$i]['created_at'] = $interval->format("%d day(s) ago");
             }
             else if(strcmp($interval->format("%h"), "0") == 1) {
                 $notif_all[$i]['created_at'] = $interval->format("%h hour(s) ago");

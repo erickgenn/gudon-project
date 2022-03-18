@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GudOn | Membership</title>
+  <title>GudOn | Notification</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -51,55 +51,6 @@
 
     <!-- Main Sidebar Container -->
     <?php include(APPPATH . "Views/layout/aside.php"); ?>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-    <?php if (session()->getFlashdata('payment_success')) : ?>
-      <script>
-        swal({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Payment Successful!',
-          showConfirmButton: false,
-          timer: 2800
-        });
-      </script>
-    <?php endif; ?>
-
-    <?php if (session()->getFlashdata('custUpdateSuccess')) : ?>
-      <script>
-        swal({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Profile Updated!',
-          showConfirmButton: false,
-          timer: 2500
-        });
-      </script>
-    <?php endif; ?>
-
-    <?php if (session()->getFlashdata('custUpdateFailed')) : ?>
-      <script>
-        swal({
-          position: 'top-end',
-          icon: 'error',
-          title: 'Failed to Update Profile!',
-          showConfirmButton: false,
-          timer: 2500
-        });
-      </script>
-    <?php endif; ?>
-
-    <?php if (session()->getFlashdata('ImageFailed')) : ?>
-      <script>
-        swal({
-          position: 'top-end',
-          icon: 'error',
-          title: 'Please Try Another Image',
-          showConfirmButton: false,
-          timer: 2500
-        });
-      </script>
-    <?php endif; ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">

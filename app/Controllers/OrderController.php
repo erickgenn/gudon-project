@@ -249,7 +249,7 @@ class OrderController extends BaseController
             $modelNotif = new NotificationModel();
             $data_notif = [
                 'title' => 'Order Successfully Created',
-                'message' => 'Hey '.$_SESSION["id"].', your order was successfully created. Please wait until your order is confirmed 😊',
+                'message' => 'Hey '.$_SESSION["name"].', your order was successfully created. Please wait until your order is confirmed 😊',
                 'cust_id' => $_SESSION['id'],
                 'link' => 'order/index'
             ];

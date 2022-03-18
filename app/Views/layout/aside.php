@@ -195,7 +195,7 @@
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
           <span class="dropdown-item dropdown-header"><?php echo count($customer_data['notification']);?> Notifications</span>
-          <?php if($customer_data['notification']):?>
+          <?php if(isset($customer_data['notification'])):?>
             <?php for($i=0;$i<sizeof($customer_data['notification']);$i++) :?>
               <div class="dropdown-divider"></div>
               <form method="POST" action="<?php echo base_url('notification/update')."/". $customer_data['notification'][$i]['id']."/".$customer_data['notification'][$i]['link'];?>" >
@@ -205,9 +205,6 @@
                 </button>
               </form>
             <?php endfor;?>
-          <?php else :?>
-            <div class="dropdown-divider"></div>
-            <h6 style="font-weight: bold; font-size:small; text-align:center; padding:7px 0 0;"><span class="text-muted text-sm" >No new notification</span> </h6>
           <?php endif;?>
           <div class="dropdown-divider"></div>
           <a href="<?php echo base_url('notification/index')?>" class="dropdown-item dropdown-footer">See All Notifications</a>
