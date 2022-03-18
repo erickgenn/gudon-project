@@ -33,7 +33,7 @@ class DetailOrderModel extends Model
             '
             mst_product.name as nama_produk,
             mst_product.id as id_produk,
-            count(mst_product.id) as total,
+            sum(mst_detail_order.quantity) as total,
             '
         );
         $builder->join('mst_gudon.mst_detail_order', 'mst_detail_order.product_id = mst_product.id');
