@@ -40,7 +40,6 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <a href="<?php echo base_url('order/index') ?>" style="color:grey;"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
               <h1 class="m-0">Order Detail #<?php echo $customer_data['order'][0]['order_id']; ?></h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
@@ -56,82 +55,82 @@
 
       <!-- Main content -->
       <div class="row" style="gap:30px; padding:0 25px 0 25px;">
-          <div class="card" style="min-width: 610px;">
-            <div class="card-header">
-              <h3 class="card-title">Order Data</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body table-responsive" style="padding:0">
-              <table id="order-table" class="table table-hover text-nowrap" style="width:100%">
-                <tbody>
-                  <tr>
-                    <th>Warehouse</th>
-                    <td><?php echo $customer_data['order'][0]['nama_warehouse']; ?></td>
-                  </tr>
-                  <tr>
-                    <th>Customer Name</th>
-                    <td><?php echo $customer_data['order'][0]['nama_customer']; ?></td>
-                  </tr>
-                  <tr>
-                    <th>Destination Address</th>
-                    <td><?php echo $customer_data['order'][0]['alamat_tujuan']; ?></td>
-                  </tr>
-                  <tr>
-                    <th>Total Price</th>
-                    <td><?php echo $customer_data['order'][0]['total_harga']; ?></td>
-                  </tr>
-                  <tr>
-                    <th>Order Status</th>
-                    <td><?php echo $customer_data['order'][0]['status_order']; ?></td>
-                  </tr>
-                  <tr>
-                    <th>Shipment</th>
-                    <td><?php echo $customer_data['order'][0]['nama_pengiriman']; ?></td>
-                  </tr>
-                  <tr>
-                    <th>Shipping Cost</th>
-                    <td><?php echo $customer_data['order'][0]['ongkos_kirim']; ?></td>
-                  </tr>
-                  <tr>
-                    <th>Shipping Status</th>
-                    <td><?php echo $customer_data['order'][0]['status_pengiriman']; ?></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <!-- /.card-body -->
+        <div class="card" style="min-width: 610px;">
+          <div class="card-header">
+            <h3 class="card-title">Order Data</h3>
           </div>
-          <!-- /.card -->
-          <div class="card" style="min-width: 610px;">
-            <div class="card-header">
-              <h3 class="card-title">Product Data</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body table-responsive" style="padding-top:0">
-              <table id="shelf-table" class="table table-hover text-nowrap">
-                <thead>
-                  <th>#</th>
-                  <th>Product Name</th>
-                  <th>Quantity</th>
-                  <th>Weight (gr)</th>
-                  <th>Volume (m³)</th>
-                </thead>
-                <tbody>
-                  <?php for($i=0;$i<sizeof($customer_data['order']);$i++):?>
-                    <tr>
-                        <td><?php echo $i+1?></td>
-                        <td><?php echo $customer_data['order'][$i]['nama_produk'];?></td>
-                        <td><?php echo $customer_data['order'][$i]['kuantitas_produk'];?></td>
-                        <td><?php echo $customer_data['order'][$i]['berat_produk'];?></td>
-                        <td><?php echo $customer_data['order'][$i]['volume_produk'];?></td>
-                    </tr>
-                  <?php endfor;?>
-                </tbody>
-              </table>
-            </div>
-            <!-- /.card-body -->
+          <!-- /.card-header -->
+          <div class="card-body table-responsive" style="padding:0">
+            <table id="order-table" class="table table-hover text-nowrap" style="width:100%">
+              <tbody>
+                <tr>
+                  <th>Warehouse</th>
+                  <td><?php echo $customer_data['order'][0]['nama_warehouse']; ?></td>
+                </tr>
+                <tr>
+                  <th>Customer Name</th>
+                  <td><?php echo $customer_data['order'][0]['nama_customer']; ?></td>
+                </tr>
+                <tr>
+                  <th>Destination Address</th>
+                  <td><?php echo $customer_data['order'][0]['alamat_tujuan']; ?></td>
+                </tr>
+                <tr>
+                  <th>Total Price</th>
+                  <td><?php echo $customer_data['order'][0]['total_harga']; ?></td>
+                </tr>
+                <tr>
+                  <th>Order Status</th>
+                  <td><?php echo $customer_data['order'][0]['status_order']; ?></td>
+                </tr>
+                <tr>
+                  <th>Shipment</th>
+                  <td><?php echo $customer_data['order'][0]['nama_pengiriman']; ?></td>
+                </tr>
+                <tr>
+                  <th>Shipping Cost</th>
+                  <td><?php echo $customer_data['order'][0]['ongkos_kirim']; ?></td>
+                </tr>
+                <tr>
+                  <th>Shipping Status</th>
+                  <td><?php echo $customer_data['order'][0]['status_pengiriman']; ?></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <!-- /.card -->
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+        <div class="card" style="min-width: 610px;">
+          <div class="card-header">
+            <h3 class="card-title">Product Data</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body table-responsive" style="padding-top:0">
+            <table id="shelf-table" class="table table-hover text-nowrap">
+              <thead>
+                <th>#</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Weight (gr)</th>
+                <th>Volume (m³)</th>
+              </thead>
+              <tbody>
+                <?php for ($i = 0; $i < sizeof($customer_data['order']); $i++) : ?>
+                  <tr>
+                    <td><?php echo $i + 1 ?></td>
+                    <td><?php echo $customer_data['order'][$i]['nama_produk']; ?></td>
+                    <td><?php echo $customer_data['order'][$i]['kuantitas_produk']; ?></td>
+                    <td><?php echo $customer_data['order'][$i]['berat_produk']; ?></td>
+                    <td><?php echo $customer_data['order'][$i]['volume_produk']; ?></td>
+                  </tr>
+                <?php endfor; ?>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
       </div>
       <!-- /.content -->
     </div>

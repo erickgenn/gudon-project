@@ -113,14 +113,14 @@
                 <thead>
                   <tr>
                     <th>No.</th>
-                    <th>Nama Penerima</th>
-                    <th>Alamat Tujuan</th>
-                    <th>Total Harga</th>
-                    <th>Ongkos Kirim</th>
-                    <th>Tanggal dan Waktu</th>
+                    <th>Customer Name</th>
+                    <th>Destination Address</th>
+                    <th>Total Price</th>
+                    <th>Shipping Cost</th>
+                    <th>Date Time</th>
                     <th>Status</th>
-                    <th>Status Pengantaran</th>
-                    <th>Aksi</th>
+                    <th>Shipping Status</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -135,40 +135,6 @@
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
-    <!-- Modal -->
-    <div id="shelfModal" class="modal fade" role="dialog">
-      <div class="modal-dialog modal-xl modal-dialog-centered">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-body table-responsive">
-            <table id="detail-table" class="table table-hover text-nowrap">
-              <thead>
-                <th>#</th>
-                <th>Nama Warehouse</th>
-                <th>Nama Pengirim</th>
-                <th>Nama Produk</th>
-                <th>Berat Produk</th>
-                <th>Volume Produk</th>
-                <th>Kuantitas Produk</th>
-                <th>Alamat Tujuan</th>
-                <th>Total Harga</th>
-                <th>Status</th>
-                <th>Nama Pengiriman</th>
-                <th>Ongkos Kirim</th>
-                <th>Status Pengiriman</th>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -206,11 +172,10 @@
             data: null,
             name: null,
             render: function(data, type, row, meta) {
-              var notif ="";
-              if ( row.notified == 1 ) {
+              var notif = "";
+              if (row.notified == 1) {
                 notif = "●";
-              }
-              else {
+              } else {
                 notif = "";
               }
               return meta.row + meta.settings._iDisplayStart + 1 + `<span id="notif${row.id}" style="color:#FFCC00">${notif}</span>`;
@@ -244,24 +209,24 @@
             render: function(data, type, row, meta) {
               switch (row.status) {
                 case "SEDANG DIPROSES":
-                  return `<button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(${row.id})">Lihat Detail</button>
+                  return `<a href="<?php echo base_url('order/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;"><i class="fas fa-eye"></i></a>
                           <form method='POST' action='<?php echo base_url('admin/order') ?>/confirm/${row.id}' style='display: unset;'>
-                            <button type='submit' class='btn btn-success' onclick="return confirm('Apakah Anda yakin akan menerima order ini?')">TERIMA</button>
+                            <button type='submit' class='btn btn-success' onclick="return confirm('Are You Sure You Want To Confirm This Order?')">CONFIRM</button>
                           </form>
                           <form method='POST' action='<?php echo base_url('admin/order') ?>/${row.id}/delete' style='display: unset;'>
-                            <button type='submit' class='btn btn-danger' onclick="return confirm('Apakah Anda yakin akan membatalkan order ini?')">BATAL</button>
+                            <button type='submit' class='btn btn-danger' onclick="return confirm('Are You Sure You Want To Cancel This Order?')">CANCEL</button>
                           </form>
                           `;
                   break;
                 case "TELAH DIKONFIRMASI":
-                  return `<button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(${row.id})">Lihat Detail</button>
+                  return `<a href="<?php echo base_url('order/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;"><i class="fas fa-eye"></i></a>
                           <form method='POST' action='<?php echo base_url('admin/order') ?>/${row.id}/delete' style='display: unset;'>
-                            <button type='submit' class='btn btn-danger' onclick="return confirm('Apakah Anda yakin akan membatalkan order ini?')">BATAL</button>
+                            <button type='submit' class='btn btn-danger' onclick="return confirm('Are You Sure You Want To Cancel This Order?')">CANCEL</button>
                           </form>
                           `;
                   break;
                 default:
-                  return `<button type="button" class="btn" style="background-color:#5cc5e6; color:white;" data-toggle="modal" data-target="#shelfModal" onclick="table(${row.id})">Lihat Detail</button>`;
+                  return `<a href="<?php echo base_url('order/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;"><i class="fas fa-eye"></i></a>`;
                   break;
               }
             }
