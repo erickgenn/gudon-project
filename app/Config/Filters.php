@@ -147,6 +147,11 @@ class Filters extends BaseConfig
                     'admin/warehouse/view_product/*',
                     'admin/warehouse/create',
                     'admin/warehouse/store',
+                    'admin/product/index',
+                    'admin/product/search',
+                    'admin/product/view/*',
+                    'admin/product/update/*',
+                    'admin/product/search/not_assigned',
                 ]
             ],
 

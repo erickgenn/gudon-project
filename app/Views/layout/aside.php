@@ -118,8 +118,16 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="<?php echo base_url('admin/product/index'); ?>" id="product" class="nav-link">
+              <i class="nav-icon fas fa-building"></i>
+              <p>
+                Products
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="<?php echo base_url('admin/warehouse/index'); ?>" id="warehouse" class="nav-link">
-              <i class="nav-icon fas fa-list"></i>
+              <i class="nav-icon fas fa-building"></i>
               <p>
                 Warehouse
               </p>
@@ -201,6 +209,9 @@
       }
       if (current.includes('/order/index')) {
         document.getElementById("order").className = "nav-link active";
+      }
+      if (current.includes('/product/index')) {
+        document.getElementById("product").className = "nav-link active";
       }
       if (current.includes('/warehouse/index')) {
         document.getElementById("warehouse").className = "nav-link active";

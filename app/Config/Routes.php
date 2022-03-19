@@ -72,6 +72,13 @@ $routes->post('admin/warehouse/store', 'WarehouseAdminController::store');
 $routes->get('admin/warehouse/view/(:num)', 'WarehouseAdminController::view_shelf/$1');
 $routes->get('admin/warehouse/view_product/(:num)', 'WarehouseAdminController::view_product/$1');
 
+//admin product
+$routes->get('admin/product/index', 'ProductAdminController::index');
+$routes->get('admin/product/search', 'ProductAdminController::search');
+$routes->get('admin/product/search/not_assigned', 'ProductAdminController::search_not_assigned');
+$routes->get('admin/product/view/(:num)', 'ProductAdminController::view_detail/$1');
+$routes->post('admin/product/update/(:num)', 'ProductAdminController::update/$1');
+
 // admin login
 $routes->get('login/admin', 'AuthController::loginAdmin');
 $routes->post('login/auth/admin', 'AuthController::loginAuthAdmin');
