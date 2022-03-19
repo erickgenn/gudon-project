@@ -119,9 +119,9 @@
           </li>
           <li class="nav-item">
             <a href="<?php echo base_url('admin/product/index'); ?>" id="product" class="nav-link">
-              <i class="nav-icon fas fa-building"></i>
+              <i class="nav-icon fas fa-box"></i>
               <p>
-                Products
+                Product
               </p>
             </a>
           </li>
