@@ -141,6 +141,12 @@ class Filters extends BaseConfig
                     'notification/admin/update/*/*/*',
                     'admin/notification/index',
                     'admin/order/view/*',
+                    'admin/warehouse/index',
+                    'admin/warehouse/search',
+                    'admin/warehouse/view/*',
+                    'admin/warehouse/view_product/*',
+                    'admin/warehouse/create',
+                    'admin/warehouse/store',
                 ]
             ],
 

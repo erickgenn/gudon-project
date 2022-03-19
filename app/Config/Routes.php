@@ -64,6 +64,14 @@ $routes->post('admin/order/(:num)/delete', 'OrderAdminController::delete/$1');
 $routes->post('admin/order/confirm/(:num)', 'OrderAdminController::confirm/$1');
 $routes->get('admin/order/view/(:num)', 'OrderAdminController::view/$1');
 
+//admin warehouse
+$routes->get('admin/warehouse/index', 'WarehouseAdminController::index');
+$routes->get('admin/warehouse/search', 'WarehouseAdminController::search');
+$routes->get('admin/warehouse/create', 'WarehouseAdminController::create');
+$routes->post('admin/warehouse/store', 'WarehouseAdminController::store');
+$routes->get('admin/warehouse/view/(:num)', 'WarehouseAdminController::view_shelf/$1');
+$routes->get('admin/warehouse/view_product/(:num)', 'WarehouseAdminController::view_product/$1');
+
 // admin login
 $routes->get('login/admin', 'AuthController::loginAdmin');
 $routes->post('login/auth/admin', 'AuthController::loginAuthAdmin');
