@@ -9,7 +9,7 @@ class NotificationModel extends Model
     protected $table      = 'mst_notification';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['title', 'message', 'cust_id', 'is_active', 'link'];
+    protected $allowedFields = ['title', 'message', 'cust_id', 'is_active', 'link', 'adm_notified', 'adm_message'];
 
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

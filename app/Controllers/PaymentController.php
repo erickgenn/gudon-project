@@ -125,7 +125,9 @@ class PaymentController extends BaseController
             'title' => 'Topup Successfully',
             'message' => 'Hey '.$_SESSION["name"].', your topup was successful. Use your balance wisely 💰',
             'cust_id' => $_SESSION['id'],
-            'link' => 'topup/method'
+            'link' => 'topup/method',
+            'adm_notified' => 1,
+            'adm_message' => $_SESSION["name"].'#'.$_SESSION['id'].'recently just top up their account. Please if check payment was received'
         ];
         $modelNotif->insert($data_notif);
         $session->setFlashdata('msg_success_topup', '!');

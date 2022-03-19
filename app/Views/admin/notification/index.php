@@ -81,7 +81,7 @@
             <div style="padding:15px 0;width:100%">
               <div>
                 <?php for($i=0;$i<count($admin_data['all_notif']);$i++):?>
-                  <a href="<?php echo base_url($admin_data['all_notif'][$i]['link'])?>" style="color:black;">
+                  <a href="<?php echo base_url('admin/'.$admin_data['all_notif'][$i]['link'])?>" style="color:black;">
                     <div class="card card-default" width="100%" id="<?php if($admin_data['all_notif'][$i]['adm_notified'] == 1){echo "selected";}?>">
                       <div class="card-title" style="padding:15px 0 0 20px">
                         <?php echo $admin_data['all_notif'][$i]['title'];?>

@@ -209,7 +209,7 @@
             render: function(data, type, row, meta) {
               switch (row.status) {
                 case "SEDANG DIPROSES":
-                  return `<a href="<?php echo base_url('order/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;"><i class="fas fa-eye"></i></a>
+                  return `<a href="<?php echo base_url('admin/order/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;"><i class="fas fa-eye"></i></a>
                           <form method='POST' action='<?php echo base_url('admin/order') ?>/confirm/${row.id}' style='display: unset;'>
                             <button type='submit' class='btn btn-success' onclick="return confirm('Are You Sure You Want To Confirm This Order?')">CONFIRM</button>
                           </form>
@@ -219,14 +219,14 @@
                           `;
                   break;
                 case "TELAH DIKONFIRMASI":
-                  return `<a href="<?php echo base_url('order/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;"><i class="fas fa-eye"></i></a>
+                  return `<a href="<?php echo base_url('admin/order/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;"><i class="fas fa-eye"></i></a>
                           <form method='POST' action='<?php echo base_url('admin/order') ?>/${row.id}/delete' style='display: unset;'>
                             <button type='submit' class='btn btn-danger' onclick="return confirm('Are You Sure You Want To Cancel This Order?')">CANCEL</button>
                           </form>
                           `;
                   break;
                 default:
-                  return `<a href="<?php echo base_url('order/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;"><i class="fas fa-eye"></i></a>`;
+                  return `<a href="<?php echo base_url('admin/order/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;"><i class="fas fa-eye"></i></a>`;
                   break;
               }
             }

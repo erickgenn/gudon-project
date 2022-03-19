@@ -62,6 +62,7 @@ $routes->get('admin/order/index', 'OrderAdminController::index');
 $routes->get('admin/order/search', 'OrderAdminController::search');
 $routes->post('admin/order/(:num)/delete', 'OrderAdminController::delete/$1');
 $routes->post('admin/order/confirm/(:num)', 'OrderAdminController::confirm/$1');
+$routes->get('admin/order/view/(:num)', 'OrderAdminController::view/$1');
 
 // admin login
 $routes->get('login/admin', 'AuthController::loginAdmin');

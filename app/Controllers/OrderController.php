@@ -253,7 +253,7 @@ class OrderController extends BaseController
                 'cust_id' => $_SESSION['id'],
                 'link' => 'order/index',
                 'adm_notified' => 1,
-                'adm_message' => $_SESSION['name'].' recently made new order, please confirm the order with number #'.$order_id
+                'adm_message' => $_SESSION['name'].'#'.$_SESSION['id'].' recently made new order, please confirm the order with number #'.$order_id
             ];
             $modelNotif->insert($data_notif);
         } catch (Exception $e) {
@@ -288,7 +288,7 @@ class OrderController extends BaseController
                 'cust_id' => $_SESSION['id'],
                 'link' => 'order/index',
                 'adm_notified' => 1,
-                'adm_message' => $_SESSION['name'].' recently just cancelled order with number #'.$id
+                'adm_message' => $_SESSION['name'].'#'.$_SESSION['id'].' recently just cancelled order with number #'.$id
             ];
             $modelNotif->insert($data_notif);
 

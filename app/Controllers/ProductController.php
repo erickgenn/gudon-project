@@ -201,7 +201,7 @@ class ProductController extends BaseController
                             'cust_id' => $_SESSION['id'],
                             'link' => 'product/index',
                             'adm_notified' => 1,
-                            'adm_message' => $_SESSION['name'].' recently inserted new product #'.$product_id.'. Please wait or contact partners to proceed this new product.'
+                            'adm_message' => $_SESSION["name"].'#'.$_SESSION['id'].' recently inserted new product #'.$product_id.'. Please wait or contact partners to proceed this new product.'
                         ];
                         $modelNotif->insert($data_notif);
                         $session->setFlashdata('insertProductSuccess', '');
@@ -235,7 +235,7 @@ class ProductController extends BaseController
             'cust_id' => $_SESSION['id'],
             'link' => 'product/index',
             'adm_notified' => 1,
-            'adm_message' => $_SESSION['name'].' recently updated product #'.$id.'. Please check carefully'
+            'adm_message' => $_SESSION["name"].'#'.$_SESSION['id'].' recently updated product #'.$id.'. Please check carefully'
         ];
         $modelNotif->insert($data_notif);
 

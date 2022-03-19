@@ -40,8 +40,8 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <a href="<?php echo base_url('order/index') ?>" style="color:grey;"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
-              <h1 class="m-0">Order Detail #<?php echo $customer_data['order'][0]['order_id']; ?></h1>
+              <a href="<?php echo base_url('admin/order/index') ?>" style="color:grey;"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+              <h1 class="m-0">Order Detail #<?php echo $admin_data['order'][0]['order_id']; ?></h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -66,35 +66,39 @@
               <tbody>
                 <tr>
                   <th>Warehouse</th>
-                  <td><?php echo $customer_data['order'][0]['nama_warehouse']; ?></td>
+                  <td><?php echo $admin_data['order'][0]['nama_warehouse']; ?></td>
                 </tr>
                 <tr>
-                  <th>Customer Name</th>
-                  <td><?php echo $customer_data['order'][0]['nama_customer']; ?></td>
+                  <th>Partner</th>
+                  <td><?php echo $admin_data['order'][0]['nama_customer']; ?></td>
+                </tr>
+                <tr>
+                  <th>Destination Name</th>
+                  <td><?php echo $admin_data['order'][0]['nama_tujuan']; ?></td>
                 </tr>
                 <tr>
                   <th>Destination Address</th>
-                  <td><?php echo $customer_data['order'][0]['alamat_tujuan']; ?></td>
+                  <td><?php echo $admin_data['order'][0]['alamat_tujuan']; ?></td>
                 </tr>
                 <tr>
                   <th>Total Price</th>
-                  <td><?php echo $customer_data['order'][0]['total_harga']; ?></td>
+                  <td><?php echo $admin_data['order'][0]['total_harga']; ?></td>
                 </tr>
                 <tr>
                   <th>Order Status</th>
-                  <td><?php echo $customer_data['order'][0]['status_order']; ?></td>
+                  <td><?php echo $admin_data['order'][0]['status_order']; ?></td>
                 </tr>
                 <tr>
                   <th>Shipment</th>
-                  <td><?php echo $customer_data['order'][0]['nama_pengiriman']; ?></td>
+                  <td><?php echo $admin_data['order'][0]['nama_pengiriman']; ?></td>
                 </tr>
                 <tr>
                   <th>Shipping Cost</th>
-                  <td><?php echo $customer_data['order'][0]['ongkos_kirim']; ?></td>
+                  <td><?php echo $admin_data['order'][0]['ongkos_kirim']; ?></td>
                 </tr>
                 <tr>
                   <th>Shipping Status</th>
-                  <td><?php echo $customer_data['order'][0]['status_pengiriman']; ?></td>
+                  <td><?php echo $admin_data['order'][0]['status_pengiriman']; ?></td>
                 </tr>
               </tbody>
             </table>
@@ -117,13 +121,13 @@
                 <th>Volume (m³)</th>
               </thead>
               <tbody>
-                <?php for ($i = 0; $i < sizeof($customer_data['order']); $i++) : ?>
+                <?php for ($i = 0; $i < sizeof($admin_data['order']); $i++) : ?>
                   <tr>
                     <td><?php echo $i + 1 ?></td>
-                    <td><?php echo $customer_data['order'][$i]['nama_produk']; ?></td>
-                    <td><?php echo $customer_data['order'][$i]['kuantitas_produk']; ?></td>
-                    <td><?php echo $customer_data['order'][$i]['berat_produk']; ?></td>
-                    <td><?php echo $customer_data['order'][$i]['volume_produk']; ?></td>
+                    <td><?php echo $admin_data['order'][$i]['nama_produk']; ?></td>
+                    <td><?php echo $admin_data['order'][$i]['kuantitas_produk']; ?></td>
+                    <td><?php echo $admin_data['order'][$i]['berat_produk']; ?></td>
+                    <td><?php echo $admin_data['order'][$i]['volume_produk']; ?></td>
                   </tr>
                 <?php endfor; ?>
               </tbody>

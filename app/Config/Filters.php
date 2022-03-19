@@ -140,6 +140,7 @@ class Filters extends BaseConfig
                     'order/view/*',
                     'notification/admin/update/*/*/*',
                     'admin/notification/index',
+                    'admin/order/view/*',
                 ]
             ],
 
