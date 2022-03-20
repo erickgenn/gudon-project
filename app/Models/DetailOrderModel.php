@@ -10,11 +10,12 @@ class DetailOrderModel extends Model
     protected $primaryKey = 'id';
 
     protected $allowedFields = ['order_id', 'product_id', 'quantity', 'is_active'];
-    protected $useSoftDeletes = true;
 
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
+
+    protected $useSoftDeletes = true;
 
     public function detailDelete($order_id)
     {

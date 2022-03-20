@@ -78,6 +78,7 @@ $routes->get('admin/product/search', 'ProductAdminController::search');
 $routes->get('admin/product/search/not_assigned', 'ProductAdminController::search_not_assigned');
 $routes->get('admin/product/view/(:num)', 'ProductAdminController::view_detail/$1');
 $routes->post('admin/product/update/(:num)', 'ProductAdminController::update/$1');
+$routes->get('admin/product/get_shelf/(:num)', 'ProductAdminController::get_shelf/$1');
 
 // admin login
 $routes->get('login/admin', 'AuthController::loginAdmin');
