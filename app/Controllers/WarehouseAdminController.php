@@ -17,7 +17,7 @@ class WarehouseAdminController extends BaseController
     {
         // get notification
         $modelNotif = new NotificationModel();
-        $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active',1)->orderBy('created_at', 'desc')->findAll();
+        $notif = $modelNotif->where('adm_notified', 1)->orderBy('created_at', 'desc')->findAll();
         for ($i = 0; $i < count($notif); $i++) {
             $now = new DateTime('NOW');
             $notif_time = new DateTime($notif[$i]['created_at']);
@@ -65,7 +65,7 @@ class WarehouseAdminController extends BaseController
             
         // get notification
         $modelNotif = new NotificationModel();
-        $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active',1)->orderBy('created_at', 'desc')->findAll();
+        $notif = $modelNotif->where('adm_notified', 1)->orderBy('created_at', 'desc')->findAll();
         for ($i = 0; $i < count($notif); $i++) {
             $now = new DateTime('NOW');
             $notif_time = new DateTime($notif[$i]['created_at']);
@@ -108,7 +108,7 @@ class WarehouseAdminController extends BaseController
     {
         // get notification
         $modelNotif = new NotificationModel();
-        $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active',1)->orderBy('created_at', 'desc')->findAll();
+        $notif = $modelNotif->where('adm_notified', 1)->orderBy('created_at', 'desc')->findAll();
         for ($i = 0; $i < count($notif); $i++) {
             $now = new DateTime('NOW');
             $notif_time = new DateTime($notif[$i]['created_at']);
