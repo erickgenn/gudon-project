@@ -69,7 +69,12 @@ class ProductAdminController extends BaseController
     public function view_detail($id)
     {
         $modelProduct= new ProductModel;
-        $product = $modelProduct->get_product_storage($id);
+        $valid = $modelProduct->where('id',$id)->where('storage_id is NULL', NULL, FALSE)->first();
+        if($valid) {
+            $product[] = $modelProduct->where('id', $id)->first();
+            $product[0]['warehouse_id'] = 1;
+        }
+        else {$product = $modelProduct->get_product_storage($id);}
 
         $modelWarehouse = new Warehouse();
         $warehouse = $modelWarehouse->where('deleted_at is NULL', NULL, FALSE)->findAll();
