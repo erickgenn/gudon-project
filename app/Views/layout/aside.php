@@ -14,25 +14,25 @@
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="true">
           <i class="far fa-bell"></i>
-          <?php if($admin_data['notification']):?>
-            <span class="badge badge-warning navbar-badge"><?php echo count($admin_data['notification']);?></span>
-          <?php endif;?>
+          <?php if ($admin_data['notification']) : ?>
+            <span class="badge badge-warning navbar-badge"><?php echo count($admin_data['notification']); ?></span>
+          <?php endif; ?>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
-          <span class="dropdown-item dropdown-header"><?php echo count($admin_data['notification']);?> Notifications</span>
-          <?php if(isset($admin_data['notification'])):?>
-            <?php for($i=0;$i<sizeof($admin_data['notification']);$i++) :?>
+          <span class="dropdown-item dropdown-header"><?php echo count($admin_data['notification']); ?> Notifications</span>
+          <?php if (isset($admin_data['notification'])) : ?>
+            <?php for ($i = 0; $i < sizeof($admin_data['notification']); $i++) : ?>
               <div class="dropdown-divider"></div>
-              <form method="POST" action="<?php echo base_url('notification/admin/update')."/". $admin_data['notification'][$i]['id']."/".$admin_data['notification'][$i]['link'];?>" >
+              <form method="POST" action="<?php echo base_url('notification/admin/update') . "/" . $admin_data['notification'][$i]['id'] . "/" . $admin_data['notification'][$i]['link']; ?>">
                 <button type="submit" class="dropdown-item">
-                  <h6 style="font-weight: bold; font-size:small;"><?php echo $admin_data['notification'][$i]['title'];?><span class="float-right text-muted text-sm" ><?php echo $admin_data['notification'][$i]['created_at'];?></span> </h6>
-                  <p class="text-sm" align="left"><?php echo $admin_data['notification'][$i]['adm_message'];?></p>
+                  <h6 style="font-weight: bold; font-size:small;"><?php echo $admin_data['notification'][$i]['title']; ?><span class="float-right text-muted text-sm"><?php echo $admin_data['notification'][$i]['created_at']; ?></span> </h6>
+                  <p class="text-sm" align="left"><?php echo $admin_data['notification'][$i]['adm_message']; ?></p>
                 </button>
               </form>
-            <?php endfor;?>
-          <?php endif;?>
+            <?php endfor; ?>
+          <?php endif; ?>
           <div class="dropdown-divider"></div>
-          <a href="<?php echo base_url('admin/notification/index')?>" class="dropdown-item dropdown-footer">See All Notifications</a>
+          <a href="<?php echo base_url('admin/notification/index') ?>" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -105,7 +105,7 @@
             <a href="<?php echo base_url('admin/customer/index'); ?>" id="customer" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                Customer
+                Partners
               </p>
             </a>
           </li>
@@ -130,6 +130,14 @@
               <i class="nav-icon fas fa-building"></i>
               <p>
                 Warehouse
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo base_url('admin/report/index'); ?>" id="report" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Order Report
               </p>
             </a>
           </li>
@@ -216,6 +224,9 @@
       if (current.includes('/warehouse/index')) {
         document.getElementById("warehouse").className = "nav-link active";
       }
+      if (current.includes('admin/report/index')) {
+        document.getElementById("report").className = "nav-link active";
+      }
     });
   </script>
 
@@ -235,25 +246,25 @@
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="true">
           <i class="far fa-bell"></i>
-          <?php if($customer_data['notification']):?>
-            <span class="badge badge-warning navbar-badge"><?php echo count($customer_data['notification']);?></span>
-          <?php endif;?>
+          <?php if ($customer_data['notification']) : ?>
+            <span class="badge badge-warning navbar-badge"><?php echo count($customer_data['notification']); ?></span>
+          <?php endif; ?>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
-          <span class="dropdown-item dropdown-header"><?php echo count($customer_data['notification']);?> Notifications</span>
-          <?php if(isset($customer_data['notification'])):?>
-            <?php for($i=0;$i<sizeof($customer_data['notification']);$i++) :?>
+          <span class="dropdown-item dropdown-header"><?php echo count($customer_data['notification']); ?> Notifications</span>
+          <?php if (isset($customer_data['notification'])) : ?>
+            <?php for ($i = 0; $i < sizeof($customer_data['notification']); $i++) : ?>
               <div class="dropdown-divider"></div>
-              <form method="POST" action="<?php echo base_url('notification/update')."/". $customer_data['notification'][$i]['id']."/".$customer_data['notification'][$i]['link'];?>" >
+              <form method="POST" action="<?php echo base_url('notification/update') . "/" . $customer_data['notification'][$i]['id'] . "/" . $customer_data['notification'][$i]['link']; ?>">
                 <button type="submit" class="dropdown-item">
-                  <h6 style="font-weight: bold; font-size:small;"><?php echo $customer_data['notification'][$i]['title'];?><span class="float-right text-muted text-sm" ><?php echo $customer_data['notification'][$i]['created_at'];?></span> </h6>
-                  <p class="text-sm" align="left"><?php echo $customer_data['notification'][$i]['message'];?></p>
+                  <h6 style="font-weight: bold; font-size:small;"><?php echo $customer_data['notification'][$i]['title']; ?><span class="float-right text-muted text-sm"><?php echo $customer_data['notification'][$i]['created_at']; ?></span> </h6>
+                  <p class="text-sm" align="left"><?php echo $customer_data['notification'][$i]['message']; ?></p>
                 </button>
               </form>
-            <?php endfor;?>
-          <?php endif;?>
+            <?php endfor; ?>
+          <?php endif; ?>
           <div class="dropdown-divider"></div>
-          <a href="<?php echo base_url('notification/index')?>" class="dropdown-item dropdown-footer">See All Notifications</a>
+          <a href="<?php echo base_url('notification/index') ?>" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -302,18 +313,18 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <a href="<?php echo base_url('profile/index');?>" class="d-block">
-            <?php if (!$_SESSION['picture'] == null): ?>
-              <img src="<?php echo base_url('/uploads/profile/customer').'/'.$_SESSION['picture'] ?>" class="img-circle elevation-2" style="min-width:30px; min-height:30px; max-width:30px; max-height:30px;width:100%;object-fit:cover;" alt="User Image" />
-            <?php else:?>
+          <a href="<?php echo base_url('profile/index'); ?>" class="d-block">
+            <?php if (!$_SESSION['picture'] == null) : ?>
+              <img src="<?php echo base_url('/uploads/profile/customer') . '/' . $_SESSION['picture'] ?>" class="img-circle elevation-2" style="min-width:30px; min-height:30px; max-width:30px; max-height:30px;width:100%;object-fit:cover;" alt="User Image" />
+            <?php else : ?>
               <div>
-                <img src="<?php echo base_url('/dist/img/avatar5.png');?>" class="img-circle elevation-2" alt="User Image" />
+                <img src="<?php echo base_url('/dist/img/avatar5.png'); ?>" class="img-circle elevation-2" alt="User Image" />
               </div>
-            <?php endif;?>
+            <?php endif; ?>
           </a>
         </div>
         <div class="info">
-          <a href="<?php echo base_url('profile/index');?>" class="d-block"><?php echo ucwords($_SESSION['name']); ?></a>
+          <a href="<?php echo base_url('profile/index'); ?>" class="d-block"><?php echo ucwords($_SESSION['name']); ?></a>
         </div>
       </div>
 

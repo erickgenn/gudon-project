@@ -152,6 +152,11 @@ class Filters extends BaseConfig
                     'admin/product/view/*',
                     'admin/product/update/*',
                     'admin/product/search/not_assigned',
+                    'admin/report/index',
+                    'admin/report/search',
+                    'admin/report/searchAll',
+                    'admin/report/searchCust',
+                    'admin/report/view/*'
                 ]
             ],
 

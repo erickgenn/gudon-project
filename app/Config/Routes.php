@@ -83,6 +83,13 @@ $routes->post('admin/product/update/(:num)', 'ProductAdminController::update/$1'
 $routes->get('login/admin', 'AuthController::loginAdmin');
 $routes->post('login/auth/admin', 'AuthController::loginAuthAdmin');
 
+//admin report
+$routes->get('admin/report/index', 'AdminReportController::index');
+$routes->get('admin/report/search', 'AdminReportController::search');
+$routes->get('admin/report/searchAll', 'AdminReportController::searchAll');
+$routes->get('admin/report/searchCust', 'AdminReportController::searchCustomer');
+$routes->get('admin/report/view/(:num)', 'AdminReportController::view/$1');
+
 $routes->post('register', 'AuthController::store');
 $routes->get('register/index', 'AuthController::register');
 
