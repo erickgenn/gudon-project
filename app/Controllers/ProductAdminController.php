@@ -73,6 +73,7 @@ class ProductAdminController extends BaseController
         if($valid) {
             $product[] = $modelProduct->where('id', $id)->first();
             $product[0]['warehouse_id'] = 1;
+            $product[0]['shelf_id'] = 1;
         }
         else {$product = $modelProduct->get_product_storage($id);}
 
@@ -211,9 +212,16 @@ class ProductAdminController extends BaseController
 
     public function update($id)
     {   
-        $model = new ProductModel();
+        $modelProduct = new ProductModel();
+
+        $modelStorage = new StorageModel();
 
         $data = $this->request->getPost();
+        $storage_id = NULL;
+        if($data['warehouse'] && $data['shelf']) {
+            $storage_id = $modelStorage->where('warehouse_id', $data['warehouse'])->where('shelf_id', $data['shelf'])->first();
+        }
+
         $modified_data = [
             'name' => $data['name'],
             'quantity' => $data['quantity'],
@@ -221,8 +229,9 @@ class ProductAdminController extends BaseController
             'description'  => $data['description'],
             'weight' => $data['weight'],
             'volume' => $data['volume'],
+            'storage_id' => $storage_id['id']
         ];  
-        $model->update($id, $modified_data);
+        $modelProduct->update($id, $modified_data);
         // notify
         $modelNotif = new NotificationModel();
         $data_notif = [
