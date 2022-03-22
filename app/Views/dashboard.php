@@ -225,7 +225,43 @@
                 </div>
               </div>
             </div>
+            <div class="col-md-4">
+              <div class="card">
+                  <div class=" card-header" style="background-color:#5cc5e6">
+                    <h3 class="card-title" style="color:white"><i class="fas fa-award"></i> Your Low-stock Product</h3>
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus" style="color:white"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body" style="height: 216px; overflow: auto;">
+                    <table id="product-table" class="table" style="width:100%">
+                      <thead>
+                        <tr>
+                          <th>No.</th>
+                          <th>Product Name</th>
+                          <th>Quantity</th>
+                        </tr>  
+                      </thead>
+                      <tbody>
+                        <?php for($i=0; $i<count($low_product); $i++): ?>
+                          <tr>
+                            <th><?php echo $i+1; ?></th>
+                            <th><?php echo $low_product[$i]['name']; ?></th>
+                            <th><?php echo $low_product[$i]['quantity']; ?></th>
+                          </tr>
+                        <?php endfor;?>
+                      </tbody>
+                    </table>
+                  </div>
+              </div>
+            </div>
           </div>
+
+                  
+            
+          
         </div><!-- /.container-fluid -->
       </section>
       <!-- /.content -->
