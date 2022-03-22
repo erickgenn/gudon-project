@@ -16,6 +16,7 @@ class AdminController extends BaseController
 
     public function index()
     {
+
         $orderModel = new OrderModel();
         $order = $orderModel->findAll();
         $order_confirm = $orderModel->where('status', 'SEDANG DIPROSES')->findAll();
@@ -29,13 +30,13 @@ class AdminController extends BaseController
         $count_order_confirm = count($order_confirm);
         $count_order_success = count($order_success);
         $count_order_cancel = count($order_cancel);
-        
-        $subsModel = new Subscription();
-        $countSubs = $subsModel->where('is_active','1')->findAll();
 
-        $active_cust = count($partners)-count($countSubs);
-        $nonactive_cust = count($partners)-$active_cust;
-    
+        $subsModel = new Subscription();
+        $countSubs = $subsModel->where('is_active', '1')->findAll();
+
+        $active_cust = count($partners) - count($countSubs);
+        $nonactive_cust = count($partners) - $active_cust;
+
         // get notification
         $modelNotif = new NotificationModel();
         $notif = $modelNotif->where('adm_notified', 1)->orderBy('created_at', 'desc')->findAll();
@@ -43,29 +44,24 @@ class AdminController extends BaseController
             $now = new DateTime('NOW');
             $notif_time = new DateTime($notif[$i]['created_at']);
             $interval = $now->diff($notif_time);
-            if(strcmp($interval->format("%y"), "0") == 1) {
+            if (strcmp($interval->format("%y"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%y year(s) ago");
-            }
-            else if(strcmp($interval->format("%m"), "0") == 1) {
+            } else if (strcmp($interval->format("%m"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%m month(s) ago");
-            }
-            else if(strcmp($interval->format("%d"), "0") == 1) {
+            } else if (strcmp($interval->format("%d"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%d day(s) ago");
-            }
-            else if(strcmp($interval->format("%h"), "0") == 1) {
+            } else if (strcmp($interval->format("%h"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%h hour(s) ago");
-            }
-            else if(strcmp($interval->format("%i"), "0") == 1) {
+            } else if (strcmp($interval->format("%i"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%i minute(s) ago");
-            }
-            else if(strcmp($interval->format("%s"), "0") == 1) {
+            } else if (strcmp($interval->format("%s"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%s second(s) ago");
             }
         }
-        
+
         $adm_data['active_cust'] = $active_cust;
         $adm_data['nonactive_cust'] = $nonactive_cust;
-        
+
         $adm_data['admin_data'] = [
             'count_order' => $count_order,
             'count_order_confirm' => $count_order_confirm,
@@ -78,7 +74,8 @@ class AdminController extends BaseController
         return view('admin/dashboard', $adm_data);
     }
 
-    public function notification_index() {
+    public function notification_index()
+    {
         // get notification
         $modelNotif = new NotificationModel();
         $notif = $modelNotif->where('adm_notified', 1)->orderBy('created_at', 'desc')->findAll();
@@ -86,22 +83,17 @@ class AdminController extends BaseController
             $now = new DateTime('NOW');
             $notif_time = new DateTime($notif[$i]['created_at']);
             $interval = $now->diff($notif_time);
-            if(strcmp($interval->format("%y"), "0") == 1) {
+            if (strcmp($interval->format("%y"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%y year(s) ago");
-            }
-            else if(strcmp($interval->format("%m"), "0") == 1) {
+            } else if (strcmp($interval->format("%m"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%m month(s) ago");
-            }
-            else if(strcmp($interval->format("%d"), "0") == 1) {
+            } else if (strcmp($interval->format("%d"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%d day(s) ago");
-            }
-            else if(strcmp($interval->format("%h"), "0") == 1) {
+            } else if (strcmp($interval->format("%h"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%h hour(s) ago");
-            }
-            else if(strcmp($interval->format("%i"), "0") == 1) {
+            } else if (strcmp($interval->format("%i"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%i minute(s) ago");
-            }
-            else if(strcmp($interval->format("%s"), "0") == 1) {
+            } else if (strcmp($interval->format("%s"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%s second(s) ago");
             }
         }
@@ -112,22 +104,17 @@ class AdminController extends BaseController
             $now = new DateTime('NOW');
             $notif_time = new DateTime($notif_all[$i]['created_at']);
             $interval = $now->diff($notif_time);
-            if(strcmp($interval->format("%y"), "0") == 1) {
+            if (strcmp($interval->format("%y"), "0") == 1) {
                 $notif_all[$i]['created_at'] = $interval->format("%y year(s) ago");
-            }
-            else if(strcmp($interval->format("%m"), "0") == 1) {
+            } else if (strcmp($interval->format("%m"), "0") == 1) {
                 $notif_all[$i]['created_at'] = $interval->format("%m month(s) ago");
-            }
-            else if(strcmp($interval->format("%d"), "0") == 1) {
+            } else if (strcmp($interval->format("%d"), "0") == 1) {
                 $notif_all[$i]['created_at'] = $interval->format("%d day(s) ago");
-            }
-            else if(strcmp($interval->format("%h"), "0") == 1) {
+            } else if (strcmp($interval->format("%h"), "0") == 1) {
                 $notif_all[$i]['created_at'] = $interval->format("%h hour(s) ago");
-            }
-            else if(strcmp($interval->format("%i"), "0") == 1) {
+            } else if (strcmp($interval->format("%i"), "0") == 1) {
                 $notif_all[$i]['created_at'] = $interval->format("%i minute(s) ago");
-            }
-            else if(strcmp($interval->format("%s"), "0") == 1) {
+            } else if (strcmp($interval->format("%s"), "0") == 1) {
                 $notif_all[$i]['created_at'] = $interval->format("%s second(s) ago");
             }
         }
@@ -136,7 +123,7 @@ class AdminController extends BaseController
             'notification' => $notif,
             'all_notif' => $notif_all
         ];
-        
+
         // deactivate all new notification after opening page
         $modelNotif->adminReadAll();
 
@@ -150,7 +137,7 @@ class AdminController extends BaseController
             'adm_notified' => 0
         ];
         $modelNotif->update($id, $data);
-        return redirect()->to('admin/'.$group.'/'.$href);
+        return redirect()->to('admin/' . $group . '/' . $href);
     }
 
 
