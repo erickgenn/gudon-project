@@ -594,6 +594,35 @@
                             </div>
                             <!-- /.card -->
 
+                            <!-- chart --> 
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header" style="background-color:#5cc5e6">
+                                        <h3 class="card-title" style="color:white"><i class="fas fa-chart-line"></i> Customer Subscription</h3>
+                                        <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                <i class="fas fa-minus" style="color:white"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="chart">
+                                                <div class="chartjs-size-monitor">
+                                                    <div class="chartjs-size-monitor-expand">
+                                                        <div class=""></div>
+                                                    </div>
+                                                    <div class="chartjs-size-monitor-shrink">
+                                                        <div class=""></div>
+                                                    </div>
+                                                </div>
+                                                <canvas id="activeChart" class="chartjs-render-monitor"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end chart -->
+
                             <!-- solid sales graph -->
                             <div class="card bg-gradient-info">
                                 <div class="card-header border-0">
@@ -739,6 +768,45 @@
     <script src="<?php echo base_url() ?>/dist/js/adminlte.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="<?php echo base_url() ?>/dist/js/pages/dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const labels = [
+        'Active Customer','Non-Active Customer'
+        ];
+
+        var coloR = ['rgb(77, 150, 255)','rgb(216, 33, 72)'];
+        
+
+        const data = {
+        labels: labels,
+        datasets: [{
+            label: 'My First dataset',
+            backgroundColor: coloR,
+            data: [
+            '<?php echo $active_cust; ?>','<?php echo $nonactive_cust; ?>'
+            
+            ],
+        }]
+        };
+
+        const config = {
+        type: 'pie',
+        data: data,
+        options: {
+            responsive: true,
+            legend: {
+            display: false
+            },
+        }
+        };
+
+        const myChart = new Chart(
+        document.getElementById('activeChart'),
+        config
+        );
+    </script>
+
 </body>
 
 </html>
