@@ -211,24 +211,32 @@
                   </div>
                 </div>
                 <div class="card-body" style="height: 450px; overflow: auto;">
-                  <table id="product-table" class="table" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th>No.</th>
-                        <th>Product Name</th>
-                        <th>Quantity</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php for ($i = 0; $i < count($low_product); $i++) : ?>
+                  <?php if (count($low_product) == 0) : ?>
+                    <div class="alert alert-success">
+                      <h5><i class="fa-solid fa-face-smile-wink"></i> Horray!</h5>
+                      No low stock products available
+                    </div>
+                  <?php else : ?>
+                    <table id="product-table" class="table" style="width:100%">
+                      <thead>
                         <tr>
-                          <th><?php echo $i + 1; ?></th>
-                          <th><?php echo $low_product[$i]['name']; ?></th>
-                          <th><?php echo $low_product[$i]['quantity']; ?></th>
+                          <th>No.</th>
+                          <th>Product Name</th>
+                          <th>Quantity</th>
                         </tr>
-                      <?php endfor; ?>
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+                        <?php for ($i = 0; $i < count($low_product); $i++) : ?>
+                          <tr>
+                            <th><?php echo $i + 1; ?></th>
+                            <th><?php echo $low_product[$i]['name']; ?></th>
+                            <th><?php echo $low_product[$i]['quantity']; ?></th>
+                          </tr>
+                        <?php endfor; ?>
+                      </tbody>
+                    </table>
+                  <?php endif; ?>
+
                 </div>
               </div>
             </div>
@@ -274,6 +282,7 @@
   </div>
   <!-- ./wrapper -->
 
+  <script src="https://kit.fontawesome.com/6938e8f442.js" crossorigin="anonymous"></script>
   <!-- jQuery -->
   <script src="<?php echo base_url() ?>/plugins/jquery/jquery.min.js"></script>
   <!-- jQuery UI 1.11.4 -->
