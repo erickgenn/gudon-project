@@ -12,4 +12,6 @@ class Delivery extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
+
+    protected $useSoftDeletes = true;
 }

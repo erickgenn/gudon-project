@@ -14,6 +14,8 @@ class Customer extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
+    
+    protected $useSoftDeletes = true;
 
     public function get_balance($id) {
         $builder = $this->db->table('mst_gudon.mst_customer');
