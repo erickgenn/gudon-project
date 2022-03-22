@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Email Service Subscription Renewal",
+        "type": "command",
+        "action": "Email:SubscriptionRenewal",
+        "environment": "[]",
+        "output": "berhasil",
+        "error": null,
+        "start_at": "2022-03-22 22:17:32",
+        "end_at": "2022-03-22 22:17:35",
+        "duration": "00:03",
+        "test_time": null
+    }
+]

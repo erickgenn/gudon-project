@@ -145,6 +145,9 @@ $routes->post('notification/delete/(:num)', 'NotificationController::delete/$1')
 $routes->post('notification/admin/update/(:num)/(:any)/(:any)', 'AdminController::updateAdminNotification/$1/$2/$3');
 $routes->get('admin/notification/index', 'AdminController::notification_index');
 
+// email service
+$routes->get('send/email', 'EmailService::subscriptionEmail');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

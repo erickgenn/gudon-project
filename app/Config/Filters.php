@@ -47,6 +47,7 @@ class Filters extends BaseConfig
                     'forgot_password/authemail',
                     'forgot_password/forgot/changepass/*',
                     'forgot_password/forgot/newpass/*',
+                    'send/email'
                 ],
             ],
             'authAdmin' => [
@@ -101,6 +102,7 @@ class Filters extends BaseConfig
                     'notification/update/*/*/*',
                     'notification/delete/*',
                     'expiredmembership',
+                    'send/email'
                 ]
             ],
             'expGuard' => [
@@ -157,7 +159,8 @@ class Filters extends BaseConfig
                     'admin/report/search',
                     'admin/report/searchAll',
                     'admin/report/searchCust',
-                    'admin/report/view/*'
+                    'admin/report/view/*',
+                    'send/email'
                 ]
             ],
 

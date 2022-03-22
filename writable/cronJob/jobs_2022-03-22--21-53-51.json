@@ -1,0 +1,14 @@
+[
+    {
+        "name": "email_reminder",
+        "type": "closure",
+        "action": "{}",
+        "environment": "[]",
+        "output": null,
+        "error": {},
+        "start_at": "2022-03-22 21:53:51",
+        "end_at": "2022-03-22 21:53:51",
+        "duration": "00:00",
+        "test_time": null
+    }
+]
