@@ -62,7 +62,7 @@ class AdminController extends BaseController
                 $notif[$i]['created_at'] = $interval->format("%s second(s) ago");
             }
         }
-        $adm_data['product'] = $product;
+        
         $adm_data['active_cust'] = $active_cust;
         $adm_data['nonactive_cust'] = $nonactive_cust;
         
