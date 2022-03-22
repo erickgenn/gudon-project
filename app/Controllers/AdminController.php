@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\Customer;
 use App\Models\OrderModel;
 use App\Models\NotificationModel;
+use App\Models\Subscription;
 
 use DateTime;
 
@@ -28,7 +29,13 @@ class AdminController extends BaseController
         $count_order_confirm = count($order_confirm);
         $count_order_success = count($order_success);
         $count_order_cancel = count($order_cancel);
+        
+        $subsModel = new Subscription();
+        $countSubs = $subsModel->where('is_active','1')->findAll();
 
+        $active_cust = count($partners)-count($countSubs);
+        $nonactive_cust = count($partners)-$active_cust;
+    
         // get notification
         $modelNotif = new NotificationModel();
         $notif = $modelNotif->where('adm_notified', 1)->orderBy('created_at', 'desc')->findAll();
@@ -55,14 +62,17 @@ class AdminController extends BaseController
                 $notif[$i]['created_at'] = $interval->format("%s second(s) ago");
             }
         }
-
+        $adm_data['product'] = $product;
+        $adm_data['active_cust'] = $active_cust;
+        $adm_data['nonactive_cust'] = $nonactive_cust;
+        
         $adm_data['admin_data'] = [
             'count_order' => $count_order,
             'count_order_confirm' => $count_order_confirm,
             'count_order_success' => $count_order_success,
             'count_order_cancel' => $count_order_cancel,
             'count_partners' => $count_partners,
-            'notification' => $notif
+            'notification' => $notif,
         ];
 
         return view('admin/dashboard', $adm_data);
