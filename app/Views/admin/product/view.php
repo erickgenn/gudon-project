@@ -26,6 +26,9 @@
   <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/summernote/summernote-bs4.min.css">
+  <!-- Select 2 -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed">
 <div class="wrapper">
@@ -139,9 +142,6 @@
                         <th>Shelf</th>
                         <td>
                           <select class="form-control" name="shelf" id="shelfform" form="productform">
-                            <div id="shelf-content">
-
-                            </div>
                           </select>
                         </td>
                       </tr>
@@ -201,24 +201,29 @@
   function load_shelf() {
     var select = document.getElementById('warehouseform');
     var id_warehouse = select.options[select.selectedIndex].value;
-    console.log(id_warehouse);
+    
     $.ajax({
-      url: <?php echo base_url('admin/product/get_shelf').'/';?>.id_warehouse,
+      url: "<?php echo base_url();?>/admin/product/get_shelf/" + id_warehouse,
       type: "GET",
       dataType: "JSON",
       success: function(respond) {
         var html = "";
-        console.log(respond);
         for (var a = 0; a < respond.length; a++) {
-          html += `<option value ="${respond[a]['shelf_id']}" <?php if("<script>document.writeln(id_warehouse);</script>" == $admin_data['product'][0]['warehouse_id']) { echo 'selected';}?>>${respond[a]['shelf_name']}</option>`;
+          if(respond[a]['shelf_id'] == <?php echo $admin_data['product'][0]['shelf_id'];?> ) {
+            html += `<option value ="${respond[a]['shelf_id']}" selected >${respond[a]['shelf_name']}</option>`;
+          } else {
+            html += `<option value ="${respond[a]['shelf_id']}" >${respond[a]['shelf_name']}</option>`;
+          }
         }
-        $("#shelf-content").html(html);
+        $("#shelfform").html(html);
       }
     });
   }
- </script>
 
- <script>load_shelf();</script>
+  $(document).ready(function() {
+    load_shelf();
+  });
+ </script>
 
 </body>
 </html>
