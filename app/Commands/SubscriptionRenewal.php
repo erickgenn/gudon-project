@@ -69,6 +69,7 @@ class SubscriptionRenewal extends BaseCommand
             for($i=0;$i<count($all_subs);$i++) {
                 $date = new DateTime($all_subs[$i]['subscription_date']);
                 $date->add(new DateInterval('P30D'));
+                $all_subs[$i]['subscription_date'] = $date->format('Y-m-d');
                 if(ceil((strtotime($date->format('Y-m-d')) - time()) / (60 * 60 * 24)) <= 5) {
                     $low_subs[] = $all_subs[$i];
                 } 
@@ -143,7 +144,7 @@ class SubscriptionRenewal extends BaseCommand
                                                                     <tr>
                                                                     <td style="line-height: 24px; font-size: 16px; margin: 0; padding: 16px;" align="left">
                                                                         <div class="">
-                                                                        <h5 class="text-muted" style="font-size: 2vmin; color: #718096; padding-top: 0; padding-bottom: 0; font-weight: 500; vertical-align: baseline; line-height: 24px; margin: 0;" align="left">GUDON Subscription</h5>
+                                                                        <h5 class="text-muted" style="font-size: 2vmin; color: #718096; padding-top: 0; padding-bottom: 0; font-weight: 500; vertical-align: baseline; line-height: 24px; margin: 0;" align="left">Subscription Renewal</h5>
                                                                         <table class="s-2 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
                                                                             <tbody>
                                                                             <tr>
@@ -153,7 +154,7 @@ class SubscriptionRenewal extends BaseCommand
                                                                             </tr>
                                                                             </tbody>
                                                                         </table>
-                                                                        <p style="font-size: 1.8vmin; line-height: 24px; width: 100%; margin: 0;" align="left">Hello  '.$low_subs[$i]['cust_name'].', Your GuDon account subscription is about to end! Please click the button below to extend your subscription.</p>
+                                                                        <p style="font-size: 1.8vmin; line-height: 24px; width: 100%; margin: 0;" align="left">Hello  '.ucwords($low_subs[$i]['cust_name']).', Your GuDon account subscription is about to end! Your subscription is still valid until '.$low_subs[$i]['subscription_date'].'. Please click the button below to extend your subscription.</p>
                                                                         <br>
                                                                         <table class="btn" role="presentation" border="0" cellpadding="0" cellspacing="0" style="border-radius: 6px; border-collapse: separate !important;">
                                                                             <tbody>
@@ -211,12 +212,10 @@ class SubscriptionRenewal extends BaseCommand
                     ');
                     if ($email->send()) {
                         CLI::newLine( 1 );
-                        CLI::write( 'Email Subscription Renewal for '.$low_subs[$i]['cust_name'].' Successful', 'white', 'green' );
-                        CLI::newLine( 1 );
+                        CLI::write( 'Email Subscription Renewal for '.ucwords($low_subs[$i]['cust_name']).' ('.$low_subs[$i]['cust_email'].') Successful', 'black', 'green' );
                     } else {
                         CLI::newLine( 1 );
-                        CLI::write( 'Email Subscription Renewal for '.$low_subs[$i]['cust_name'].' Failed', 'white', 'red' );
-                        CLI::newLine( 1 );
+                        CLI::write( 'Email Subscription Renewal for '.ucwords($low_subs[$i]['cust_name']).' ('.$low_subs[$i]['cust_email'].') Failed', 'white', 'red' );
                     }
                 }
             }
