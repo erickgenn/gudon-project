@@ -11,12 +11,12 @@ class OrderModel extends Model
 
 
     protected $allowedFields = ['customer_id', 'warehouse_id', 'destination_name', 'destination_address', 'destination_phone', 'total_price', 'delivery_price', 'delivery_id', 'status', 'delivery_status', 'is_active', 'notified'];
-    protected $useSoftDeletes = true;
-
 
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
+    
+    protected $useSoftDeletes = true;
 
     public function get_detail($id)
     {

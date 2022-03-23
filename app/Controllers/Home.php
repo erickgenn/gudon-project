@@ -61,6 +61,8 @@ class Home extends BaseController
         } else {
             $percentage_weight = round(($total_weight / $level['max_weight']) * 100);
         }
+        // get low quantity product
+        $low_product = $modelProduct->where('customer_id', $_SESSION['id'])->where('quantity <=','5')->findAll();
 
         // get notification
         $modelNotif = new NotificationModel();
@@ -117,6 +119,7 @@ class Home extends BaseController
         $cust_data['count_order'] = [count($monday), count($tuesday), count($wednesday), count($thursday), count($friday), count($saturday), count($sunday)];
         $cust_data['ongoing_order'] = $count_ongoing_order;
         $cust_data['product'] = $product;
+        $cust_data['low_product'] = $low_product;
         return view('dashboard', $cust_data);
     }
 

@@ -3,7 +3,8 @@
 namespace App\Controllers;
 use \App\Models\ProductModel;
 use \App\Models\NotificationModel;
-
+use App\Models\StorageModel;
+use App\Models\Warehouse;
 use DateTime;
 
 date_default_timezone_set("Asia/Jakarta");
@@ -67,8 +68,21 @@ class ProductAdminController extends BaseController
 
     public function view_detail($id)
     {
-        $model= new ProductModel;
-        $product = $model->where('id', $id)->where('deleted_at', null)->first();
+        $modelProduct= new ProductModel;
+        $valid = $modelProduct->where('id',$id)->where('storage_id is NULL', NULL, FALSE)->first();
+        if($valid) {
+            $product[] = $modelProduct->where('id', $id)->first();
+            $product[0]['warehouse_id'] = 1;
+            $product[0]['shelf_id'] = 1;
+        }
+        else {$product = $modelProduct->get_product_storage($id);}
+
+        $modelWarehouse = new Warehouse();
+        $warehouse = $modelWarehouse->where('deleted_at is NULL', NULL, FALSE)->findAll();
+
+        $modelStorage = new StorageModel();
+        $storage = $modelStorage->get_storage();
+
         // get notification
         $modelNotif = new NotificationModel();
         $notif = $modelNotif->where('adm_notified', 1)->orderBy('created_at', 'desc')->findAll();
@@ -98,10 +112,19 @@ class ProductAdminController extends BaseController
 
         $adm_data['admin_data'] = [
             'notification' => $notif,
-            'product' => $product
+            'product' => $product,
+            'storage' => $storage,
+            'warehouse' => $warehouse
         ];
 
         return view('admin/product/view', $adm_data);
+    }
+
+    public function get_shelf($id) {
+        $modelStorage = new StorageModel();
+        $storage = $modelStorage->get_shelf($id);
+
+        return json_encode($storage);
     }
 
     public function store()
@@ -189,9 +212,16 @@ class ProductAdminController extends BaseController
 
     public function update($id)
     {   
-        $model = new ProductModel();
+        $modelProduct = new ProductModel();
+
+        $modelStorage = new StorageModel();
 
         $data = $this->request->getPost();
+        $storage_id = NULL;
+        if($data['warehouse'] && $data['shelf']) {
+            $storage_id = $modelStorage->where('warehouse_id', $data['warehouse'])->where('shelf_id', $data['shelf'])->first();
+        }
+
         $modified_data = [
             'name' => $data['name'],
             'quantity' => $data['quantity'],
@@ -199,8 +229,9 @@ class ProductAdminController extends BaseController
             'description'  => $data['description'],
             'weight' => $data['weight'],
             'volume' => $data['volume'],
+            'storage_id' => $storage_id['id']
         ];  
-        $model->update($id, $modified_data);
+        $modelProduct->update($id, $modified_data);
         // notify
         $modelNotif = new NotificationModel();
         $data_notif = [

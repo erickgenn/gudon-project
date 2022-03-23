@@ -175,7 +175,7 @@
           <!-- /.row (main row) -->
           <!-- Second row -->
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-5">
               <div class="card">
                 <div class="card-header" style="background-color:#5cc5e6">
                   <h3 class="card-title" style="color:white"><i class="fas fa-chart-line"></i> This Week's Orders Chart</h3>
@@ -195,15 +195,55 @@
                         <div class=""></div>
                       </div>
                     </div>
-                    <canvas id="orderChart" width="798" height="450" class="chartjs-render-monitor"></canvas>
+                    <canvas id="orderChart" width="798" height="613" class="chartjs-render-monitor"></canvas>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
+              <div class="card">
+                <div class=" card-header" style="background-color:#5cc5e6">
+                  <h3 class="card-title" style="color:white"><i class="fas fa-box"></i> Your Low-stock Product</h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus" style="color:white"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body" style="height: 450px; overflow: auto;">
+                  <?php if (count($low_product) == 0) : ?>
+                    <div class="alert alert-success">
+                      <h5><i class="fa-solid fa-face-smile-wink"></i> Horray!</h5>
+                      No low stock products available
+                    </div>
+                  <?php else : ?>
+                    <table id="product-table" class="table" style="width:100%">
+                      <thead>
+                        <tr>
+                          <th>No.</th>
+                          <th>Product Name</th>
+                          <th>Quantity</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php for ($i = 0; $i < count($low_product); $i++) : ?>
+                          <tr>
+                            <th><?php echo $i + 1; ?></th>
+                            <th><?php echo $low_product[$i]['name']; ?></th>
+                            <th><?php echo $low_product[$i]['quantity']; ?></th>
+                          </tr>
+                        <?php endfor; ?>
+                      </tbody>
+                    </table>
+                  <?php endif; ?>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
               <div class="card">
                 <div class="card-header" style="background-color:#5cc5e6">
-                  <h3 class="card-title" style="color:white"><i class="fas fa-chart-line"></i> Your Products</h3>
+                  <h3 class="card-title" style="color:white"><i class="fas fa-chart-pie"></i> Your Products</h3>
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                       <i class="fas fa-minus" style="color:white"></i>
@@ -220,7 +260,9 @@
                         <div class=""></div>
                       </div>
                     </div>
-                    <canvas id="productsChart" class="chartjs-render-monitor"></canvas>
+                    <div class="chart-container" style="position: relative; height:410px; width:410px">
+                      <canvas id="productsChart" class="chartjs-render-monitor"></canvas>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -240,6 +282,7 @@
   </div>
   <!-- ./wrapper -->
 
+  <script src="https://kit.fontawesome.com/6938e8f442.js" crossorigin="anonymous"></script>
   <!-- jQuery -->
   <script src="<?php echo base_url() ?>/plugins/jquery/jquery.min.js"></script>
   <!-- jQuery UI 1.11.4 -->
@@ -373,7 +416,6 @@
     const data = {
       labels: labels,
       datasets: [{
-        label: 'My First dataset',
         backgroundColor: coloR,
         data: [
           <?php for ($i = 0; $i < count($product); $i++) : ?> '<?php echo $product[$i]['quantity']; ?>',
