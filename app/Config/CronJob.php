@@ -2,7 +2,7 @@
 
 use Daycry\CronJob\Scheduler;
 
-use App\Commands\SubscriptionRenewal;
+date_default_timezone_set("Asia/Jakarta");
 
 class CronJob extends \Daycry\CronJob\Config\CronJob
 {
@@ -67,6 +67,6 @@ class CronJob extends \Daycry\CronJob\Config\CronJob
 	public function init( Scheduler $schedule )
 	{
 		// Subscription Renewal
-		$schedule->command('Email:SubscriptionRenewal')->cron('35 22 * * *')->named('Email Service Subscription Renewal');
+		$schedule->command('Email:SubscriptionRenewal')->cron('0 9 * * *')->named('Email Service Subscription Renewal');
 	}
 }

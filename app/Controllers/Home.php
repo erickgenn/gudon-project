@@ -56,11 +56,15 @@ class Home extends BaseController
         // get level max_weight
         $modelLevel = new MembershipModel();
         $level = $modelLevel->where('id', $_SESSION['level_id'])->first();
-        if ($level['max_weight'] == 0) {
-            $percentage_weight = 0;
-        } else {
-            $percentage_weight = round(($total_weight / $level['max_weight']) * 100);
+        $percentage_weight = 0;
+        if($level) {
+            if ($level['max_weight'] == 0) {
+                $percentage_weight = 0;
+            } else {
+                $percentage_weight = round(($total_weight / $level['max_weight']) * 100);
+            }
         }
+        
         // get low quantity product
         $low_product = $modelProduct->where('customer_id', $_SESSION['id'])->where('quantity <=','5')->findAll();
 
