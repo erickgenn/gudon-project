@@ -209,7 +209,7 @@
   <script>
     $(document).ready(function() {
       let current = window.location.href;
-      if (current.includes('/home')) {
+      if (current.includes('/admin/index')) {
         document.getElementById("home").className = "nav-link active";
       }
       if (current.includes('/admin/customer/index')) {
