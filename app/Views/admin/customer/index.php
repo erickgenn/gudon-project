@@ -170,10 +170,10 @@
             render: function(data, type, row, meta) {
               switch (row.is_active) {
                 case "1":
-                  return `<button type="button" class="btn btn-block btn-success">Aktif</button>`;
+                  return `<button type="button" class="btn btn-block btn-success">Active</button>`;
                   break;
                 case "0":
-                  return `<button type="button" class="btn btn-block btn-danger">Tidak Aktif</button>`;
+                  return `<button type="button" class="btn btn-block btn-danger">Inactive</button>`;
                   break;
                 default:
                   return `-`;
