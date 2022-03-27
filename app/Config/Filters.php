@@ -71,6 +71,7 @@ class Filters extends BaseConfig
                     '/product/search',
                     '/product/view/*',
                     'product/update/*',
+                    'product/updatePicture/*',
                     'product/store',
                     'order/index',
                     'order/search',
@@ -101,6 +102,7 @@ class Filters extends BaseConfig
                     'notification/update/*/*/*',
                     'notification/delete/*',
                     'expiredmembership',
+
                 ]
             ],
             'expGuard' => [
