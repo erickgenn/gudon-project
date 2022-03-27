@@ -85,62 +85,23 @@ class DeliveryController extends BaseController
         }
     }
 
-    public function getKurir($kurir_id)
+    public function getService($destination_id, $weight, $courier)
     {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://api.rajaongkir.com/starter/cost",
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => "",
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 30,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => "POST",
-          CURLOPT_POSTFIELDS => "origin=501&destination=114&weight=1700&courier=jne",
-          CURLOPT_HTTPHEADER => array(
-            "content-type: application/x-www-form-urlencoded",
-            "key: $this->api_key"
-          ),
-        ));
-        
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-        
-        curl_close($curl);
-        
-        if ($err) {
-            echo "cURL Error #:" . $err;
-        } else {
-            $array_response = json_decode($response, true);
-            $result = $array_response['rajaongkir']['results'];
-            $list = array();
-            for ($i = 0; $i < count($result); $i++) {
-                $list[$i]['id'] = $result[$i]['kurir_id'];
-                $list[$i]['text'] = $result[$i]['kurir_name'];
-            }
-
-            return json_encode($list);
-        }
-    }
-
-    public function getService($kurir_id)
-    {
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://api.rajaongkir.com/starter/cost" . $kurir_id,
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => "",
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 30,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => "POST",
-          CURLOPT_POSTFIELDS => "origin=501&destination=114&weight=1700&courier=jne",
-          CURLOPT_HTTPHEADER => array(
-            "content-type: application/x-www-form-urlencoded",
-            "key: $this->api_key"
-          ),
+            CURLOPT_URL => "https://api.rajaongkir.com/starter/cost",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "origin=457&destination=" . $destination_id . "&weight=" . $weight . "&courier=" . $courier,
+            CURLOPT_HTTPHEADER => array(
+                "content-type: application/x-www-form-urlencoded",
+                "key: $this->api_key"
+            ),
         ));
         $response = curl_exec($curl);
         $err = curl_error($curl);
@@ -153,9 +114,9 @@ class DeliveryController extends BaseController
             $array_response = json_decode($response, true);
             $result = $array_response['rajaongkir']['results'];
             $list = array();
-            for ($i = 0; $i < count($result); $i++) {
-                $list[$i]['id'] = $result[$i]['service_id'];
-                $list[$i]['text'] = $result[$i]['service_name'];
+            for ($i = 0; $i < count($result[0]['costs']); $i++) {
+                $list[$i]['id'] = $result[0]['costs'][$i]['cost'][0]['value'];
+                $list[$i]['text'] = $result[0]['costs'][$i]['service'];
             }
 
             return json_encode($list);

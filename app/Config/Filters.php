@@ -104,7 +104,7 @@ class Filters extends BaseConfig
                     'delivery/getprovinsi',
                     'delivery/getcity/*',
                     'delivery/getkurir/',
-                    'delivery/getservice/*',
+                    'delivery/getservice/*/*/*',
 
 
                 ]
@@ -166,6 +166,8 @@ class Filters extends BaseConfig
                     'admin/report/view/*',
                     'delivery/getprovinsi',
                     'delivery/getcity/*',
+                    'delivery/getservice/*/*/*',
+
                 ]
             ],
 
