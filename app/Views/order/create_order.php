@@ -20,7 +20,8 @@
     <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/jqvmap/jqvmap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url() ?>/dist/css/adminlte.min.css">
-
+    <!-- Select2 -->
+    <link href="<?php echo base_url(); ?>/adminlte/plugins/select2/css/select2.css" rel="stylesheet" />
 
 </head>
 
@@ -76,6 +77,16 @@
                                         <input type="number" name="notelp" id="notelp" class="form-control" required>
                                     </div>
                                     <div class="form-group">
+                                        <label>Province</label>
+                                        <select class="form-control" id="province_id" name="province_id" onchange="getKota()">
+                                        </select>
+                                    </div>
+                                    <div id="div_kota" style="display:none;" class="form-group">
+                                        <label>City</label>
+                                        <select class="form-control" id="city_id" name="city_id" onchange="getKurir()">
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label>Destination Address</label>
                                         <input type="text" name="alamat" id="alamat" class="form-control" required>
                                     </div>
@@ -83,9 +94,9 @@
                                         <label>Shipment Type</label>
                                         <select class='form-control' style="width:100%;" name="tipe_pengiriman" id='tipe_pengiriman'>
                                             <option selected disabled>------ Choose Shipment Type ------</option>
-                                        <?php for ($i = 0; $i < count ($customer_data['data']['groupdelivery']); $i++) : ?>
-                                            <option value = "<?php echo $customer_data['data']['groupdelivery'][$i]["id"]; ?>"><?php echo $customer_data['data']['groupdelivery'][$i]["name"]; ?></option>
-                                        <?php endfor; ?>
+                                            <?php for ($i = 0; $i < count($customer_data['data']['groupdelivery']); $i++) : ?>
+                                                <option value="<?php echo $customer_data['data']['groupdelivery'][$i]["id"]; ?>"><?php echo $customer_data['data']['groupdelivery'][$i]["name"]; ?></option>
+                                            <?php endfor; ?>
                                         </select>
                                     </div>
                                 </div>
@@ -142,16 +153,14 @@
     <!-- ./wrapper -->
     <link rel="stylesheet" href="<?php echo base_url('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
 
-    <link href="<?php echo base_url('plugins/select2/css/select2.css'); ?>" rel="stylesheet" />
-    <link href="<?php echo base_url('plugins/select2/js/select2.js'); ?>" rel="stylesheet" />
     <script src="<?php echo base_url('adminlte/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
     <script src="<?php echo base_url('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"></script>
     <script src="<?php echo base_url('adminlte/plugins/jquery/jquery.min.js'); ?>"></script>
     <!-- Select 2 -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="<?php echo base_url(); ?>/adminlte/plugins/select2/js/select2.min.js"></script>
+
 
     <!-- Bootstrap 4 -->
     <script src="<?php echo base_url(); ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -164,6 +173,23 @@
         });
         var row = 0;
     </script>
+    <script>
+        $(document).ready(function() {
+            $('#province_id').select2({
+                placeholder: 'Choose Province',
+                width: 'resolve',
+                ajax: {
+                    dataType: 'json',
+                    url: '<?php echo base_url("delivery/getprovinsi"); ?>',
+                    processResults: function(data, page) {
+                        return {
+                            results: data
+                        };
+                    },
+                }
+            })
+        });
+    </script>
 
     <script>
         function tambahRowProduk() {
@@ -173,7 +199,7 @@
                   <input type ='hidden' name='data_produk[]' value='${row}'>
                   <select class = 'js-example-basic-single form-control select2-hidden-accessible' style="width:100%;" name = 'id_produk${row}' id = 'get_product${row}' onchange="showHarga(${row})">
                     <option selected disabled>------ Choose Product ------</option>
-                  <?php for ($i = 0; $i < count ($customer_data['data']['groupproduct']); $i++) : ?>
+                  <?php for ($i = 0; $i < count($customer_data['data']['groupproduct']); $i++) : ?>
                     <option value = "<?php echo $customer_data['data']['groupproduct'][$i]["id"]; ?>"><?php echo $customer_data['data']['groupproduct'][$i]["name"]; ?></option>
                   <?php endfor; ?>
                   </select>
@@ -216,6 +242,44 @@
                     $(`#kuantitas_produk${row}`).text(respond['data_price'][0]['quantity']);
                 }
             });
+        }
+
+        function getKota() {
+            document.getElementById("city_id").value = "";
+            document.getElementById("div_kota").style.display = "block";
+            let province_id = document.getElementById("province_id").value;
+            $('#city_id').select2({
+                placeholder: 'Choose City',
+                width: 'resolve',
+                ajax: {
+                    dataType: 'json',
+                    url: '<?php echo base_url(); ?>/delivery/getcity/' + province_id,
+                    processResults: function(data, page) {
+                        return {
+                            results: data
+                        };
+                    },
+                }
+            })
+        }
+
+        function getKurir() {
+            document.getElementById("city_id").value = "";
+            document.getElementById("div_kota").style.display = "block";
+            let province_id = document.getElementById("province_id").value;
+            $('#city_id').select2({
+                placeholder: 'Choose City',
+                width: 'resolve',
+                ajax: {
+                    dataType: 'json',
+                    url: '<?php echo base_url(); ?>/delivery/getcity/' + province_id,
+                    processResults: function(data, page) {
+                        return {
+                            results: data
+                        };
+                    },
+                }
+            })
         }
     </script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
