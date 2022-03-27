@@ -86,18 +86,19 @@
                                         <select class="form-control" id="city_id" name="city_id" onchange="getKurir()">
                                         </select>
                                     </div>
-                                    <div class="form-group">
+                                    <div id="div_detail" style="display:none;" class="form-group">
                                         <label>Destination Address</label>
                                         <input type="text" name="alamat" id="alamat" class="form-control" required>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Shipment Type</label>
-                                        <select class='form-control' style="width:100%;" name="tipe_pengiriman" id='tipe_pengiriman'>
-                                            <option selected disabled>------ Choose Shipment Type ------</option>
-                                            <?php for ($i = 0; $i < count($customer_data['data']['groupdelivery']); $i++) : ?>
-                                                <option value="<?php echo $customer_data['data']['groupdelivery'][$i]["id"]; ?>"><?php echo $customer_data['data']['groupdelivery'][$i]["name"]; ?></option>
-                                            <?php endfor; ?>
-                                        </select>
+                                    <div class="row">
+                                        <div id="div_kurir" class="col-6" style="display:none;">
+                                            <label>Courier</label>
+                                            <input type="text" name="kurir_id" id="kurir_id" class="form-control" required>
+                                        </div>
+                                        <div id="div_service" class="col-6" style="display:none;">
+                                            <label>Service Type</label>
+                                            <input type="text" name="alamat" id="alamat" class="form-control" required>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -264,22 +265,11 @@
         }
 
         function getKurir() {
-            document.getElementById("city_id").value = "";
-            document.getElementById("div_kota").style.display = "block";
-            let province_id = document.getElementById("province_id").value;
-            $('#city_id').select2({
-                placeholder: 'Choose City',
-                width: 'resolve',
-                ajax: {
-                    dataType: 'json',
-                    url: '<?php echo base_url(); ?>/delivery/getcity/' + province_id,
-                    processResults: function(data, page) {
-                        return {
-                            results: data
-                        };
-                    },
-                }
-            })
+            // document.getElementById("kurir_id").value = "";
+            document.getElementById("div_detail").style.display = "block";
+            document.getElementById("div_kurir").style.display = "block";
+            document.getElementById("div_service").style.display = "block";
+
         }
     </script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
