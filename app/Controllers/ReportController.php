@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use \App\Models\CreateOrderTemp;
-use App\Models\Delivery;
 use App\Models\DetailOrderModel;
 use \App\Models\ProductModel;
 use App\Models\StorageModel;
@@ -29,27 +28,22 @@ class ReportController extends BaseController
     {
         // get notification
         $modelNotif = new NotificationModel();
-        $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active',1)->orderBy('created_at', 'desc')->findAll();
+        $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active', 1)->orderBy('created_at', 'desc')->findAll();
         for ($i = 0; $i < count($notif); $i++) {
             $now = new DateTime('NOW');
             $notif_time = new DateTime($notif[$i]['created_at']);
             $interval = $now->diff($notif_time);
-            if(strcmp($interval->format("%y"), "0") == 1) {
+            if (strcmp($interval->format("%y"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%y year(s) ago");
-            }
-            else if(strcmp($interval->format("%m"), "0") == 1) {
+            } else if (strcmp($interval->format("%m"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%m month(s) ago");
-            }
-            else if(strcmp($interval->format("%d"), "0") == 1) {
+            } else if (strcmp($interval->format("%d"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%d day(s) ago");
-            }
-            else if(strcmp($interval->format("%h"), "0") == 1) {
+            } else if (strcmp($interval->format("%h"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%h hour(s) ago");
-            }
-            else if(strcmp($interval->format("%i"), "0") == 1) {
+            } else if (strcmp($interval->format("%i"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%i minute(s) ago");
-            }
-            else if(strcmp($interval->format("%s"), "0") == 1) {
+            } else if (strcmp($interval->format("%s"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%s second(s) ago");
             }
         }
@@ -72,27 +66,22 @@ class ReportController extends BaseController
         }
         // get notification
         $modelNotif = new NotificationModel();
-        $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active',1)->orderBy('created_at', 'desc')->findAll();
+        $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active', 1)->orderBy('created_at', 'desc')->findAll();
         for ($i = 0; $i < count($notif); $i++) {
             $now = new DateTime('NOW');
             $notif_time = new DateTime($notif[$i]['created_at']);
             $interval = $now->diff($notif_time);
-            if(strcmp($interval->format("%y"), "0") == 1) {
+            if (strcmp($interval->format("%y"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%y year(s) ago");
-            }
-            else if(strcmp($interval->format("%m"), "0") == 1) {
+            } else if (strcmp($interval->format("%m"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%m month(s) ago");
-            }
-            else if(strcmp($interval->format("%d"), "0") == 1) {
+            } else if (strcmp($interval->format("%d"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%d day(s) ago");
-            }
-            else if(strcmp($interval->format("%h"), "0") == 1) {
+            } else if (strcmp($interval->format("%h"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%h hour(s) ago");
-            }
-            else if(strcmp($interval->format("%i"), "0") == 1) {
+            } else if (strcmp($interval->format("%i"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%i minute(s) ago");
-            }
-            else if(strcmp($interval->format("%s"), "0") == 1) {
+            } else if (strcmp($interval->format("%s"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%s second(s) ago");
             }
         }

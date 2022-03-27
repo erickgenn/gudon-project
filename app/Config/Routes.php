@@ -145,6 +145,15 @@ $routes->post('notification/delete/(:num)', 'NotificationController::delete/$1')
 $routes->post('notification/admin/update/(:num)/(:any)/(:any)', 'AdminController::updateAdminNotification/$1/$2/$3');
 $routes->get('admin/notification/index', 'AdminController::notification_index');
 
+// delivery
+$routes->get('delivery/getprovinsi', 'DeliveryController::getProvinsi');
+$routes->get('delivery/getcity/(:num)', 'DeliveryController::getCity/$1');
+
+//kurir
+$routes->get('delivery/getkurir', 'DeliveryController::getKurir');
+$routes->get('delivery/getservice/(:num)/(:num)/(:any)', 'DeliveryController::getService/$1/$2/$3');
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

@@ -101,6 +101,12 @@ class Filters extends BaseConfig
                     'notification/update/*/*/*',
                     'notification/delete/*',
                     'expiredmembership',
+                    'delivery/getprovinsi',
+                    'delivery/getcity/*',
+                    'delivery/getkurir/',
+                    'delivery/getservice/*/*/*',
+
+
                 ]
             ],
             'expGuard' => [
@@ -157,7 +163,11 @@ class Filters extends BaseConfig
                     'admin/report/search',
                     'admin/report/searchAll',
                     'admin/report/searchCust',
-                    'admin/report/view/*'
+                    'admin/report/view/*',
+                    'delivery/getprovinsi',
+                    'delivery/getcity/*',
+                    'delivery/getservice/*/*/*',
+
                 ]
             ],
 

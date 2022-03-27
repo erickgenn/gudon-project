@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use \App\Models\OrderModel;
 use \App\Models\CreateOrderTemp;
-use App\Models\Delivery;
 use App\Models\DetailOrderModel;
 use App\Models\NotificationModel;
 use \App\Models\ProductModel;
@@ -30,27 +29,22 @@ class OrderController extends BaseController
     {
         // get notification
         $modelNotif = new NotificationModel();
-        $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active',1)->orderBy('created_at', 'desc')->findAll();
+        $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active', 1)->orderBy('created_at', 'desc')->findAll();
         for ($i = 0; $i < count($notif); $i++) {
             $now = new DateTime('NOW');
             $notif_time = new DateTime($notif[$i]['created_at']);
             $interval = $now->diff($notif_time);
-            if(strcmp($interval->format("%y"), "0") == 1) {
+            if (strcmp($interval->format("%y"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%y year(s) ago");
-            }
-            else if(strcmp($interval->format("%m"), "0") == 1) {
+            } else if (strcmp($interval->format("%m"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%m month(s) ago");
-            }
-            else if(strcmp($interval->format("%d"), "0") == 1) {
+            } else if (strcmp($interval->format("%d"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%d day(s) ago");
-            }
-            else if(strcmp($interval->format("%h"), "0") == 1) {
+            } else if (strcmp($interval->format("%h"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%h hour(s) ago");
-            }
-            else if(strcmp($interval->format("%i"), "0") == 1) {
+            } else if (strcmp($interval->format("%i"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%i minute(s) ago");
-            }
-            else if(strcmp($interval->format("%s"), "0") == 1) {
+            } else if (strcmp($interval->format("%s"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%s second(s) ago");
             }
         }
@@ -73,27 +67,22 @@ class OrderController extends BaseController
         }
         // get notification
         $modelNotif = new NotificationModel();
-        $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active',1)->orderBy('created_at', 'desc')->findAll();
+        $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active', 1)->orderBy('created_at', 'desc')->findAll();
         for ($i = 0; $i < count($notif); $i++) {
             $now = new DateTime('NOW');
             $notif_time = new DateTime($notif[$i]['created_at']);
             $interval = $now->diff($notif_time);
-            if(strcmp($interval->format("%y"), "0") == 1) {
+            if (strcmp($interval->format("%y"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%y year(s) ago");
-            }
-            else if(strcmp($interval->format("%m"), "0") == 1) {
+            } else if (strcmp($interval->format("%m"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%m month(s) ago");
-            }
-            else if(strcmp($interval->format("%d"), "0") == 1) {
+            } else if (strcmp($interval->format("%d"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%d day(s) ago");
-            }
-            else if(strcmp($interval->format("%h"), "0") == 1) {
+            } else if (strcmp($interval->format("%h"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%h hour(s) ago");
-            }
-            else if(strcmp($interval->format("%i"), "0") == 1) {
+            } else if (strcmp($interval->format("%i"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%i minute(s) ago");
-            }
-            else if(strcmp($interval->format("%s"), "0") == 1) {
+            } else if (strcmp($interval->format("%s"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%s second(s) ago");
             }
         }
@@ -139,34 +128,27 @@ class OrderController extends BaseController
     {
         $orderModel = new ProductModel();
         $orderModel1 = new Warehouse();
-        $orderModel2 = new Delivery();
         $data['groupproduct'] = $orderModel->where('customer_id', $_SESSION["id"])->findAll();
         $data['groupwarehouse'] = $orderModel1->get_warehouse_id()->getResultArray();
-        $data['groupdelivery'] = $orderModel2->findAll();
 
         // get notification
         $modelNotif = new NotificationModel();
-        $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active',1)->orderBy('created_at', 'desc')->findAll();
+        $notif = $modelNotif->where('cust_id', $_SESSION['id'])->where('is_active', 1)->orderBy('created_at', 'desc')->findAll();
         for ($i = 0; $i < count($notif); $i++) {
             $now = new DateTime('NOW');
             $notif_time = new DateTime($notif[$i]['created_at']);
             $interval = $now->diff($notif_time);
-            if(strcmp($interval->format("%y"), "0") == 1) {
+            if (strcmp($interval->format("%y"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%y year(s) ago");
-            }
-            else if(strcmp($interval->format("%m"), "0") == 1) {
+            } else if (strcmp($interval->format("%m"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%m month(s) ago");
-            }
-            else if(strcmp($interval->format("%d"), "0") == 1) {
+            } else if (strcmp($interval->format("%d"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%d day(s) ago");
-            }
-            else if(strcmp($interval->format("%h"), "0") == 1) {
+            } else if (strcmp($interval->format("%h"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%h hour(s) ago");
-            }
-            else if(strcmp($interval->format("%i"), "0") == 1) {
+            } else if (strcmp($interval->format("%i"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%i minute(s) ago");
-            }
-            else if(strcmp($interval->format("%s"), "0") == 1) {
+            } else if (strcmp($interval->format("%s"), "0") == 1) {
                 $notif[$i]['created_at'] = $interval->format("%s second(s) ago");
             }
         }
@@ -187,9 +169,7 @@ class OrderController extends BaseController
 
         try {
             $data = $this->request->getPost();
-
             //Untuk mencari warehouse_id
-
             $product = $productModel->find($this->request->getPost('id_produk')); //isi find adalah array dari id Product
 
             $warehouse_id_arr = [];
@@ -207,30 +187,28 @@ class OrderController extends BaseController
                     'quantity' => $product_qty - $qty
                 ];
                 $productModel->update($product_id, $data_update_product); //kurangin qty product di DB
-            }
 
-            for ($i = 0; $i < count($product); $i++) {
-                $storage_id = (int)$product[$i]['storage_id'];
+                $storage_id = $productModel->where('id', $product_id)->findColumn('storage_id');
                 $warehouse = $storageModel->where('id', $storage_id)->first();
                 $warehouse_id = $warehouse['warehouse_id'];
                 if (!in_array($warehouse_id, $warehouse_id_arr)) {
                     array_push($warehouse_id_arr, $warehouse_id);
                 }
             }
-            $data['warehouse_id'] = implode(",", array_filter($warehouse_id_arr));
 
+            $data['warehouse_id'] = implode(",", array_filter($warehouse_id_arr));
             $data_order = [
                 'customer_id' => $_SESSION['id'],
                 'warehouse_id' => $data['warehouse_id'],
                 'destination_address' => $data['alamat'],
                 'destination_phone' => $data['notelp'],
                 'total_price' => $total_price,
-                'delivery_price' => 9000,
+                'delivery_price' => (int)$data['service_id'],
                 'destination_name' => $data['namacust'],
-                'delivery_id' => $data['tipe_pengiriman']
+                'delivery_courier' => $data['delivery_courier']
             ];
-
             $order_insert = $orderModel->insert($data_order); //insert mst_order
+
             if ($order_insert) {
                 $order_id = $orderModel->getInsertID();
             }
@@ -249,11 +227,11 @@ class OrderController extends BaseController
             $modelNotif = new NotificationModel();
             $data_notif = [
                 'title' => 'Order Successfully Created',
-                'message' => 'Hey '.$_SESSION["name"].', your order was successfully created. Please wait until your order is confirmed 😊',
+                'message' => 'Hey ' . $_SESSION["name"] . ', your order was successfully created. Please wait until your order is confirmed 😊',
                 'cust_id' => $_SESSION['id'],
                 'link' => 'order/index',
                 'adm_notified' => 1,
-                'adm_message' => $_SESSION['name'].'#'.$_SESSION['id'].' recently made new order, please confirm the order with number #'.$order_id
+                'adm_message' => $_SESSION['name'] . '#' . $_SESSION['id'] . ' recently made new order, please confirm the order with number #' . $order_id
             ];
             $modelNotif->insert($data_notif);
         } catch (Exception $e) {
@@ -284,11 +262,11 @@ class OrderController extends BaseController
             $modelNotif = new NotificationModel();
             $data_notif = [
                 'title' => 'Order Cancelled',
-                'message' => 'Hey '.$_SESSION["name"].', your order was recently cancelled. We will notify Warehouse admin soon. Maybe another order 😞',
+                'message' => 'Hey ' . $_SESSION["name"] . ', your order was recently cancelled. We will notify Warehouse admin soon. Maybe another order 😞',
                 'cust_id' => $_SESSION['id'],
                 'link' => 'order/index',
                 'adm_notified' => 1,
-                'adm_message' => $_SESSION['name'].'#'.$_SESSION['id'].' recently just cancelled order with number #'.$id
+                'adm_message' => $_SESSION['name'] . '#' . $_SESSION['id'] . ' recently just cancelled order with number #' . $id
             ];
             $modelNotif->insert($data_notif);
 
