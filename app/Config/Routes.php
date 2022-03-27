@@ -149,6 +149,11 @@ $routes->get('admin/notification/index', 'AdminController::notification_index');
 $routes->get('delivery/getprovinsi', 'DeliveryController::getProvinsi');
 $routes->get('delivery/getcity/(:num)', 'DeliveryController::getCity/$1');
 
+//kurir
+$routes->get('delivery/getkurir', 'DeliveryController::getKurir');
+$routes->get('delivery/getservice/(:num)', 'DeliveryController::getService/$1');
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

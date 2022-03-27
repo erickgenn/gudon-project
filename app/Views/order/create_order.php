@@ -93,7 +93,11 @@
                                     <div class="row">
                                         <div id="div_kurir" class="col-6" style="display:none;">
                                             <label>Courier</label>
-                                            <input type="text" name="kurir_id" id="kurir_id" class="form-control" required>
+                                            <select class="form-control" id="city_id" name="city_id">
+                                            <option value="jne">JNE</option>
+                                                <option value="pos">POS INDONESIA</option>
+                                                <option value="tiki">TIKI</option>
+                                        </select>
                                         </div>
                                         <div id="div_service" class="col-6" style="display:none;">
                                             <label>Service Type</label>
@@ -270,7 +274,48 @@
             document.getElementById("div_kurir").style.display = "block";
             document.getElementById("div_service").style.display = "block";
 
+        $(document).ready(function() {
+            $('#kurir_id').select2({
+                placeholder: 'Choose Courier',
+                width: 'resolve',
+                ajax: {
+                    dataType: 'json',
+                    url: '<?php echo base_url("delivery/getkurir"); ?>',
+                    processResults: function(data, page) {
+                        return {
+                            results: data
+                        };
+                    },
+                }
+            })
+        });
+   
+ 
         }
+
+        function getService() {
+            // document.getElementById("kurir_id").value = "";
+            document.getElementById("div_detail").style.display = "block";
+            document.getElementById("div_kurir").style.display = "block";
+            document.getElementById("div_service").style.display = "block";
+
+          
+        $(document).ready(function() {
+            $('#service_id').select2({
+                placeholder: 'Choose Service',
+                width: 'resolve',
+                ajax: {
+                    dataType: 'json',
+                    url: '<?php echo base_url("delivery/getservice"); ?>',
+                    processResults: function(data, page) {
+                        return {
+                            results: data
+                        };
+                    },
+                }
+            })
+        });
+    }
     </script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="<?php echo base_url(); ?>/dist/js/pages/dashboard.js"></script>

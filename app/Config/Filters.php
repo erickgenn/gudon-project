@@ -103,6 +103,10 @@ class Filters extends BaseConfig
                     'expiredmembership',
                     'delivery/getprovinsi',
                     'delivery/getcity/*',
+                    'delivery/getkurir/',
+                    'delivery/getservice/*',
+
+
                 ]
             ],
             'expGuard' => [
