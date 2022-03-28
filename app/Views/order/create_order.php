@@ -109,7 +109,7 @@
                                     </div>
                                     <div id="div_kota" style="display:none;" class="form-group">
                                         <label>City</label>
-                                        <select class="form-control" id="city_id" name="city_id" onchange="getKurir()">
+                                        <select class="form-control" id="city_id" name="city_id" onchange="getKurir(); getService()">
                                         </select>
                                     </div>
                                     <div id="div_detail" style="display:none;" class="form-group">
@@ -133,9 +133,9 @@
                                         </div>
                                     </div>
                                     <br>
-                                    <div id="div_ongkir" style="display:none;">
+                                    <div id="div_ongkir">
                                         <label>Delivery Price</label>
-                                        <p id="ongkir" class="form-control"></p>
+                                        <p id="ongkir" class="form-control">Rp. </p>
                                     </div>
                                 </div>
                             </div>
@@ -213,7 +213,7 @@
               <tr id = "tambahRowProduk${row}">
                 <td>
                   <input type ='hidden' name='data_produk[]' value='${row}'>
-                  <select class = 'js-example-basic-single form-control select2-hidden-accessible' style="width:100%;" name = 'id_produk${row}' id = 'get_product${row}' onchange="showHarga(${row})">
+                  <select class = 'js-example-basic-single form-control select2-hidden-accessible' style="width:100%;" name = 'id_produk${row}' id = 'get_product${row}' onchange="showHarga(${row}); getService();">
                     <option selected disabled>------ Choose Product ------</option>
                   <?php for ($i = 0; $i < count($customer_data['data']['groupproduct']); $i++) : ?>
                     <option value = "<?php echo $customer_data['data']['groupproduct'][$i]["id"]; ?>"><?php echo $customer_data['data']['groupproduct'][$i]["name"]; ?></option>
@@ -232,7 +232,7 @@
                       <td style="border:none; text-align:right;" id = "kuantitas_produk${row}"></td>
                     </tr>
                   </table>
-                <td><input type = 'number' class = 'form-control nf-input' id='quantity_produk${row}' name = 'detail_quantity${row}' min="0" required></td>
+                <td><input type = 'number' class = 'form-control nf-input' id='quantity_produk${row}' name = 'detail_quantity${row}' min="0" onkeydown="getService()" required></td>
                 <td>
                   <button type = 'button' class = 'btn btn-danger btn-sm' onclick = 'deleteProdukData(this)'><i class="fa fa-fw fa-trash"></i></button>
                 </td>
@@ -241,6 +241,8 @@
             $("#tambah_produk_button_container").before(html);
             $('.js-example-basic-single').select2();
             row++;
+            getService();
+            showOngkir();
         }
 
         function deleteProdukData(r) {
@@ -290,17 +292,16 @@
         }
 
         function showOngkir() {
-            document.getElementById("div_ongkir").style.display = "block";
             let price = document.getElementById("service_id").value;
             $(`#ongkir`).text("Rp. " + price);
             let courier = $("#kurir_name option:selected").text();
             let service = $("#service_id option:selected").text();
             let courier_name = courier + " " + service;
             document.getElementById("delivery_courier").value = courier_name;
-
         }
 
         function getService() {
+            $(`#ongkir`).text("Rp. ");
             document.getElementById("service_id").value = "";
             let destination_id = document.getElementById("city_id").value;
             let courier_name = document.getElementById('kurir_name').value;
