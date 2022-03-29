@@ -142,8 +142,9 @@ class ProductController extends BaseController
 
             // upload image
             $file = $this->request->getFile('productpicture');
-
+            
             $target_dir = "uploads/product/";
+           
             $target_file = $target_dir .'/'. basename($file->getName());
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));  
@@ -251,7 +252,7 @@ class ProductController extends BaseController
             // upload image
             $file = $this->request->getFile('productpicture');
 
-            $target_dir = "uploads/product/";
+            $target_dir = "uploads/product/temp";
             $target_file = $target_dir .'/'. basename($file->getName());
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));  
@@ -285,8 +286,20 @@ class ProductController extends BaseController
                 if (move_uploaded_file($file->getTempName(),$target_dir.'/'.$file->getName())) {
                     // upload to db
                     $data = [
-                        'picture'  => $file->getName(),
+                        'temp_picture'  => $file->getName(),
                     ]; 
+                    // notify
+                    $modelNotif = new NotificationModel();
+                    $data_notif = [
+                        'title' => 'Product Picture Change Request',
+                        'message' => 'Hey '.$_SESSION["name"].', your product picture was recently updated. Sometimes we just need a little update, right 😎',
+                        'cust_id' => $_SESSION['id'],
+                        'link' => 'product/index',
+                        'adm_notified' => 1,
+                        'adm_message' => $_SESSION["name"].'#'.$_SESSION['id'].' recently request product picture change #'.$id.'. Please check carefully'
+                    ];
+                    $modelNotif->insert($data_notif);
+                    $productModel->sendNotif($id);
                     $productModel->update($id, $data);
 
                     return redirect()->to(base_url('/product/index'));

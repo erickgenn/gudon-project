@@ -155,6 +155,8 @@ class Filters extends BaseConfig
                     'admin/product/update/*',
                     'admin/product/search/not_assigned',
                     'admin/product/get_shelf/*',
+                    'admin/product/updatePicture/*',
+                    'admin/product/declinePicture/*',
                     'admin/report/index',
                     'admin/report/search',
                     'admin/report/searchAll',

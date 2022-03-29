@@ -66,26 +66,62 @@
 
     <!-- Main content -->
     <div class="row" style="padding:0 10px 0 10px">
-          <div class="col-12">
-            <div class="card">
+          <div class="col-12" >
+            <div class="card" >
               <div class="card-header">
                 <h3 class="card-title">Product Name: <strong><?php echo $admin_data['product'][0]['name'];?></strong></h3>
                 <br><br>
-                <div class="card col-sm-2" >
-                  <div class="card-body">
-                    <?php if (!empty($admin_data['product'][0]['picture'])): ?>
-                      <div class="card-body" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; margin: auto; padding:0;">
-                        <img src="<?php echo base_url('/uploads/product').'/'.$admin_data['product'][0]['picture'] ?>" class="img-fluid" style="width:100%;height:100%;" />
+                <div style="display:flex;font-weight:600;gap:15px">
+                  <div class="card col-sm-2" >
+                    <div class="card-body" >
+                      <?php if (!empty($admin_data['product'][0]['picture'])): ?>
+                        <div class="card-body" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; margin: auto; padding:0;">
+                          <img src="<?php echo base_url('/uploads/product').'/'.$admin_data['product'][0]['picture'] ?>" class="img-fluid" style="width:100%;height:100%;" />
+                        </div>  
+                      <?php else:?>
+                        <div>
+                          <img src="<?php echo base_url('/assets/no_image.png');?>" class="img-fluid" width="275" height="400" />
+                        </div>
+                      <?php endif;?>  
+                    </div>
+                    <?php if (!empty($admin_data['product'][0]['temp_picture'])): ?>
+                        <span style="padding-bottom:10px;text-align:center">Before</span>
+                    <?php endif;?>
+                  </div>
+                  <?php if (!empty($admin_data['product'][0]['temp_picture'])): ?>    
+                  <div class="card col-sm-2">     
+                      <div class="card-body">
+                        <div class="card-body" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; margin: auto; padding:0;">
+                          <img src="<?php echo base_url('/uploads/product/temp').'/'.$admin_data['product'][0]['temp_picture'] ?>" class="img-fluid" style="width:100%;height:100%;" />
+                        </div>
                       </div>
-                    <?php else:?>
-                      <div>
-                        <img src="<?php echo base_url('/assets/no_image.png');?>" class="img-fluid" width="275" height="400" />
+                      <span style="padding-bottom:10px;text-align:center">After</span>
+                  </div>
+                  <?php endif;?>
+                  <div class="col-6">
+                    <?php if (!empty($admin_data['product'][0]['temp_picture'])): ?>
+                      <span style="color:gray;font-weight:400;font-style:italic;width:100%">* This product request for product picture changes. Please proceed this picture if it is relatable to the previous one</span>
+                      <div style="display:flex;gap:15px;padding-top:20px">
+                        <div>
+                          <form method="POST" action="<?php echo base_url('admin/product/declinePicture/').'/'. $admin_data['product'][0]['id']; ?>" name="updatePicture" enctype="multipart/form-data">
+                            <button type="submit" class="btn btn-block btn-danger">Decline</button>
+                          </form>
+                        </div>
+                        <div >
+                          <form method="POST" action="<?php echo base_url('admin/product/updatePicture/').'/'. $admin_data['product'][0]['id']; ?>" name="updatePicture" enctype="multipart/form-data">
+                            <button type="submit" class="btn btn-block btn-success">Accept</button>      
+                          </form>
+                        </div>
                       </div>
                     <?php endif;?>
                   </div>
-                  
-                </div>    
+                </div>
+                
               </div>
+
+              
+                    
+          
               <!-- /.card-header -->
               
               <form action="<?php echo base_url('admin/product/update') . "/" . $admin_data['product'][0]['id'];?>" method="POST" id="productform">
