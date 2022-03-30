@@ -250,7 +250,7 @@
             <span class="badge badge-warning navbar-badge"><?php echo count($customer_data['notification']); ?></span>
           <?php endif; ?>
         </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;max-height: 400px;overflow-y: auto;" id="style-2">
           <span class="dropdown-item dropdown-header"><?php echo count($customer_data['notification']); ?> Notifications</span>
           <?php if (isset($customer_data['notification'])) : ?>
             <?php for ($i = 0; $i < sizeof($customer_data['notification']); $i++) : ?>
