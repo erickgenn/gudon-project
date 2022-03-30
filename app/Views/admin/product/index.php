@@ -130,6 +130,7 @@
                 <table id="product-table" class="table table-hover text-nowrap" style="width:100%">
                   <thead>
                     <tr>
+                     
                       <th>ID</th>
                       <th>Product Name</th>
                       <th>Partner</th>
@@ -208,7 +209,19 @@
           "dataSrc": ""
       },
       "columns": [
-        { "data": "id_produk" },
+        { searchable: false,
+            sortable: false,
+            name: null,
+            render: function(data, type, row, meta) {
+               var notif = "";
+              if (row.notified == 1) {
+                notif = "●";
+              } else {
+                notif = "";
+              }
+              return row.id_produk + `  <span id="notif${row.id}" style="color:#FFCC00">${notif}</span>`;
+            }
+        },
         { "data": "nama_produk" },
         { "data": "nama_customer" },
         { "data": "nama_warehouse" },

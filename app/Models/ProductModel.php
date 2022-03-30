@@ -9,7 +9,7 @@ class ProductModel extends Model
     protected $table      = 'mst_product';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['name', 'quantity', 'price', 'picture', 'description', 'weight', 'volume', 'is_active', 'storage_id', 'customer_id'];
+    protected $allowedFields = ['name', 'quantity', 'price', 'picture', 'description', 'weight', 'volume', 'is_active', 'storage_id', 'customer_id','temp_picture','notified'];
 
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -34,7 +34,8 @@ class ProductModel extends Model
         mst_warehouse.name as warehouse_name,
         mst_shelf.id as shelf_id,
         mst_shelf.name as shelf_name,
-        mst_product.customer_id as customer_id
+        mst_product.customer_id as customer_id,
+        mst_product.temp_picture as temp_picture
         ');
         $builder->join('mst_gudon.cms_storage', 'cms_storage.id = mst_product.storage_id');
         $builder->join('mst_gudon.mst_warehouse', 'mst_warehouse.id = cms_storage.warehouse_id');
@@ -53,7 +54,8 @@ class ProductModel extends Model
         mst_customer.name as nama_customer,
         mst_warehouse.name as nama_warehouse,
         mst_shelf.name as nama_shelf,
-        mst_product.is_active as is_active
+        mst_product.is_active as is_active,
+        mst_product.notified as notified
         ');
         $builder->join('mst_gudon.mst_customer', 'mst_customer.id = mst_product.customer_id');
         $builder->join('mst_gudon.cms_storage', 'cms_storage.id = mst_product.storage_id');
@@ -83,4 +85,39 @@ class ProductModel extends Model
         $builder->where('id', $id);
         return $builder->get();
     }
+
+
+    public function get_temp_picture($id)
+    {
+        $builder = $this->db->table('mst_gudon.mst_product');
+        $builder->select('temp_picture');
+        $builder->where('id',$id);
+        return $builder->get()->getResultArray();
+    }
+
+    public function get_picture($id)
+    {
+        $builder = $this->db->table('mst_gudon.mst_product');
+        $builder->select('picture');
+        $builder->where('id',$id);
+        return $builder->get()->getResultArray();
+    }
+    public function updateNotif($id)
+    {
+        $builder = $this->db->table('mst_gudon.mst_product');
+        $builder->set('notified', 0);
+        $builder->where('id', $id);
+
+        $builder->update();
+    }
+
+    public function sendNotif($id)
+    {
+        $builder = $this->db->table('mst_gudon.mst_product');
+        $builder->set('notified', 1);
+        $builder->where('id', $id);
+
+        $builder->update();
+    }
+    
 }

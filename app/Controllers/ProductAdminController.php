@@ -88,6 +88,8 @@ class ProductAdminController extends BaseController
         $modelStorage = new StorageModel();
         $storage = $modelStorage->get_storage();
 
+        // $tempProduct = $modelProduct->where('id',$id)->where('');
+
         // get notification
         $modelNotif = new NotificationModel();
         $notif = $modelNotif->where('adm_notified', 1)->orderBy('created_at', 'desc')->findAll();
@@ -114,6 +116,7 @@ class ProductAdminController extends BaseController
                 $notif[$i]['created_at'] = $interval->format("%s second(s) ago");
             }
         }
+        $modelProduct->updateNotif($id);
 
         $adm_data['admin_data'] = [
             'notification' => $notif,
@@ -121,7 +124,7 @@ class ProductAdminController extends BaseController
             'storage' => $storage,
             'warehouse' => $warehouse
         ];
-
+        
         return view('admin/product/view', $adm_data);
     }
 
@@ -251,5 +254,66 @@ class ProductAdminController extends BaseController
 
         return redirect()->to(base_url('admin/product/index'));
     }
+
+    public function updatePicture($id)
+    {
+        $productModel = new ProductModel();
+        $tempPicture = $productModel->get_temp_picture($id);
+        $picture = $productModel->get_picture($id);
+        $data = [
+            'picture' => $tempPicture[0]['temp_picture'],
+            'temp_picture' => NULL
+        ];
+        $upload_dir = 'uploads/product/';
+        $old_dir = 'uploads/product/temp'.'/';
+  
+        unlink($upload_dir.$picture[0]['picture']);
+        rename($old_dir.$tempPicture[0]['temp_picture'],$upload_dir.$tempPicture[0]['temp_picture']);
+        
+        $product = $productModel->where('id',$id)->first();
+
+        // notify
+        $modelNotif = new NotificationModel();
+        $data_notif = [
+            'title' => 'Product Picture Updated',
+            'message' => 'Horray, Hey your product picture has been approved',
+            'cust_id' => $product['customer_id'],
+            'link' => 'product/index',
+            'adm_notified' => 0,
+        ];
+        $modelNotif->insert($data_notif);
+
+        $productModel->update($id,$data);
+        return redirect()->to(base_url('admin/product/view'.'/'.$id));
+    }
+
+    public function declinePicture($id)
+    {
+        $productModel = new ProductModel();
+        $tempPicture = $productModel->get_temp_picture($id);
+        $product = $productModel->where('id',$id)->first();
+        $data = [
+            'temp_picture' => NULL
+        ];
+        $upload_dir = 'uploads/product/temp/';
+        unlink($upload_dir.$tempPicture[0]['temp_picture']);
+
+        // notify
+        $modelNotif = new NotificationModel();
+        $data_notif = [
+            'title' => 'Product Picture Declined',
+            'message' => 'Oh no, your product picture has been declined, please make sure that the photos are relatable to the previous one',
+            'cust_id' => $product['customer_id'],
+            'link' => 'product/index',
+            'adm_notified' => 0,
+        ];
+        $modelNotif->insert($data_notif);
+
+        $productModel->update($id,$data);
+       
+        return redirect()->to(base_url('admin/product/view'.'/'.$id));
+
+    }
+
 
 }

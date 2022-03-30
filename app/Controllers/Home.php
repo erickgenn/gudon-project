@@ -48,7 +48,7 @@ class Home extends BaseController
         $modelProduct = new ProductModel();
         $total_product = 0;
         $total_weight = 0;
-        $product = $modelProduct->where('customer_id', $_SESSION['id'])->findAll();
+        $product = $modelProduct->where('customer_id', $_SESSION['id'])->where('storage_id is not NULL', NULL, false )->findAll();
         for ($i = 0; $i < sizeOf($product); $i++) {
             $total_product += $product[$i]['quantity'];
             $total_weight += $product[$i]['weight'] * $product[$i]['quantity'];
@@ -62,7 +62,7 @@ class Home extends BaseController
             $percentage_weight = round(($total_weight / $level['max_weight']) * 100);
         }
         // get low quantity product
-        $low_product = $modelProduct->where('customer_id', $_SESSION['id'])->where('quantity <=','5')->findAll();
+        $low_product = $modelProduct->where('customer_id', $_SESSION['id'])->where('quantity <=','5')->where('storage_id is not NULL', NULL, false )->findAll();
 
         // get notification
         $modelNotif = new NotificationModel();

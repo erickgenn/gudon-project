@@ -105,9 +105,54 @@
                       </div>
                     <?php endif;?>
                   </div>
-                  
+                  <a class="btn" style="font-weight:550;color:#5cc5e6;" data-toggle="modal" data-target="#productModal">Edit Picture</a>
                 </div>    
               </div>
+
+              <!-- /.modal -->
+              <div id="productModal" class="modal fade" role="dialog">
+              <div class="modal-dialog modal-md">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title">Edit Picture</h3>
+                  </div>
+                  <div class="modal-body" style="text-align: center; margin:auto;">
+                    <table id="profile-table" style="border: none;">
+                      <tbody>
+                        <form method="POST" action="<?php echo base_url('product/updatePicture/').'/'. $customer_data['product']['id']; ?>" name="updatePicture" enctype="multipart/form-data">
+                          <tr>
+                            <td>
+                              <?php if (!empty($customer_data['product']['picture'])) : ?>
+                                <div class="card-body" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; margin: auto; padding:0 0 25px;">
+                                  <img id="product-image" src="<?php echo base_url('/uploads/product') . '/' . $customer_data['product']['picture']; ?>" class="profile-user-img img-fluid img-circle" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px;width:100%;object-fit:cover;" alt="User product picture" />
+                                </div>
+                              <?php else : ?>
+                                <div class="card-body" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; margin: auto; padding:0 0 25px;">
+                                  <img id="product-image" src="<?php echo base_url('/dist/img/avatar5.png'); ?>" class="profile-user-img img-fluid img-circle" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px;width:100%;object-fit:cover;" alt="User product picture" />
+                                </div>
+                              <?php endif; ?>
+                              <div class="form-group">
+                                <div class="col" style="margin-top: 10px;">
+                                  <input type="file" name="productpicture" id="productpicture" onchange="onFileSelected(event)">
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+            
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Save</button>
+                  </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
               <!-- /.card-header -->
               
               <form action="<?php echo base_url('product/update') . "/" . $customer_data['product']['id'];?>" method="POST">
@@ -197,6 +242,21 @@
 <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"></script>
 
+<script>
+  function onFileSelected(event) {
+    var selectedFile = event.target.files[0];
+    var reader = new FileReader();
+
+    var imgtag = document.getElementById("product-image");
+    imgtag.title = selectedFile.name;
+
+    reader.onload = function(event) {
+      imgtag.src = event.target.result;
+    };
+
+    reader.readAsDataURL(selectedFile);
+  }
+</script>
 
 </body>
 </html>
