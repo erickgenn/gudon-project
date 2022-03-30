@@ -2,17 +2,11 @@
 
 namespace App\Controllers;
 
-use App\Models\AuthModel;
-use \App\Models\CreateOrderTemp;
 use App\Models\Customer;
-use App\Models\DetailOrderModel;
-use \App\Models\ProductModel;
-use App\Models\StorageModel;
-use \App\Models\Warehouse;
 use \App\Models\NotificationModel;
 use App\Models\OrderModel;
+
 use DateTime;
-use Exception;
 
 date_default_timezone_set("Asia/Jakarta");
 
@@ -21,6 +15,11 @@ class AdminReportController extends BaseController
 
     public function index()
     {
+        // check order cancellation
+        OrderController::checkOrderCancelation();
+        // check low subscription
+        MembershipLevelController::check_subscription_notification();
+
         // get notification
         $modelNotif = new NotificationModel();
         $notif = $modelNotif->where('adm_notified', 1)->orderBy('created_at', 'desc')->findAll();

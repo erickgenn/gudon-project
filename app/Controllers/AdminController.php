@@ -7,6 +7,7 @@ use App\Models\OrderModel;
 use App\Models\NotificationModel;
 use App\Models\ProductModel;
 use App\Models\Subscription;
+use App\Controllers\OrderController;
 
 use DateTime;
 
@@ -17,6 +18,11 @@ class AdminController extends BaseController
 
     public function index()
     {
+        // check order cancellation
+        OrderController::checkOrderCancelation();
+        // check low subscription
+        MembershipLevelController::check_subscription_notification();
+
         $orderModel = new OrderModel();
         $order = $orderModel->findAll();
         $order_confirm = $orderModel->where('status', 'SEDANG DIPROSES')->findAll();
