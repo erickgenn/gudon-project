@@ -5,7 +5,6 @@ namespace App\Controllers;
 use App\Models\AuthModel;
 use \App\Models\CreateOrderTemp;
 use App\Models\Customer;
-use App\Models\Delivery;
 use App\Models\DetailOrderModel;
 use \App\Models\ProductModel;
 use App\Models\StorageModel;

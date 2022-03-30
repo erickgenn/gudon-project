@@ -17,7 +17,8 @@ class ProductModel extends Model
 
     protected $useSoftDeletes = true;
 
-    public function get_product_storage($id) {
+    public function get_product_storage($id)
+    {
         $builder = $this->db->table('mst_gudon.mst_product');
         $builder->select('
         mst_product.id as id,
@@ -37,14 +38,15 @@ class ProductModel extends Model
         mst_product.temp_picture as temp_picture
         ');
         $builder->join('mst_gudon.cms_storage', 'cms_storage.id = mst_product.storage_id');
-        $builder->join('mst_gudon.mst_warehouse','mst_warehouse.id = cms_storage.warehouse_id');
-        $builder->join('mst_gudon.mst_shelf','mst_shelf.id = cms_storage.shelf_id');
+        $builder->join('mst_gudon.mst_warehouse', 'mst_warehouse.id = cms_storage.warehouse_id');
+        $builder->join('mst_gudon.mst_shelf', 'mst_shelf.id = cms_storage.shelf_id');
         $builder->where('mst_product.id', $id);
 
         return $builder->get()->getResultArray();
     }
 
-    public function get_all_data() {
+    public function get_all_data()
+    {
         $builder = $this->db->table('mst_gudon.mst_product');
         $builder->select('
         mst_product.id as id_produk,
@@ -62,7 +64,8 @@ class ProductModel extends Model
         return $builder->get();
     }
 
-    public function get_not_assigned() {
+    public function get_not_assigned()
+    {
         $builder = $this->db->table('mst_gudon.mst_product');
         $builder->select('
         mst_product.id as id_produk,
@@ -78,10 +81,11 @@ class ProductModel extends Model
     public function get_data_price($id)
     {
         $builder = $this->db->table('mst_gudon.mst_product');
-        $builder->select('id, quantity, price');
+        $builder->select('id, quantity, price, weight');
         $builder->where('id', $id);
         return $builder->get();
     }
+
 
     public function get_temp_picture($id)
     {

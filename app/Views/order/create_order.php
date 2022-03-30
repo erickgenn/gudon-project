@@ -20,7 +20,8 @@
     <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/jqvmap/jqvmap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url() ?>/dist/css/adminlte.min.css">
-
+    <!-- Select2 -->
+    <link href="<?php echo base_url(); ?>/adminlte/plugins/select2/css/select2.css" rel="stylesheet" />
 
 </head>
 
@@ -61,39 +62,9 @@
 
             <!-- Main content -->
             <form method="POST" action="<?php echo base_url('order/store'); ?>" name="createorder">
+                <input type="hidden" id="delivery_courier" name="delivery_courier">
                 <div class="row" style="padding: 0 10px 0 10px">
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <br>
-                                        <label>Customer Name</label>
-                                        <input type="text" name="namacust" id="namacust" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Customer Phone Number</label>
-                                        <input type="number" name="notelp" id="notelp" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Destination Address</label>
-                                        <input type="text" name="alamat" id="alamat" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Shipment Type</label>
-                                        <select class='form-control' style="width:100%;" name="tipe_pengiriman" id='tipe_pengiriman'>
-                                            <option selected disabled>------ Choose Shipment Type ------</option>
-                                        <?php for ($i = 0; $i < count ($customer_data['data']['groupdelivery']); $i++) : ?>
-                                            <option value = "<?php echo $customer_data['data']['groupdelivery'][$i]["id"]; ?>"><?php echo $customer_data['data']['groupdelivery'][$i]["name"]; ?></option>
-                                        <?php endfor; ?>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-8" style="max-height:408px; overflow-y:auto">
+                    <div class="col-md-7" style="max-height:708px; overflow-y:auto">
                         <div class="card">
                             <div class="card-body" style="min-height:407px">
                                 <div class="col-lg-12">
@@ -118,14 +89,67 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12 tampilDataOrder">
+                    <div class="col-md-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <br>
+                                        <label>Customer Name</label>
+                                        <input type="text" name="namacust" id="namacust" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Customer Phone Number</label>
+                                        <input type="number" name="notelp" id="notelp" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Province</label>
+                                        <select class="form-control" id="province_id" name="province_id" onchange="getKota()">
+                                        </select>
+                                    </div>
+                                    <div id="div_kota" style="display:none;" class="form-group">
+                                        <label>City</label>
+                                        <select class="form-control" id="city_id" name="city_id" onchange="getKurir(); getService()">
+                                        </select>
+                                    </div>
+                                    <div id="div_detail" style="display:none;" class="form-group">
+                                        <label>Destination Address</label>
+                                        <input type="text" name="alamat" id="alamat" class="form-control" required>
+                                    </div>
+                                    <div class="row">
+                                        <div id="div_kurir" class="col-6" style="display:none;">
+                                            <label>Courier</label>
+                                            <select class="form-control" id="kurir_name" name="kurir_name" onchange="getService()">
+                                                <option value="" disabled selected>Choose Courier</option>
+                                                <option value="jne">JNE</option>
+                                                <option value="pos">POS INDONESIA</option>
+                                                <option value="tiki">TIKI</option>
+                                            </select>
+                                        </div>
+                                        <div id="div_service" class="col-6" style="display:none;">
+                                            <label>Service Type</label>
+                                            <select class="form-control" id="service_id" name="service_id" onchange="showOngkir()">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div id="div_ongkir">
+                                        <label>Delivery Price</label>
+                                        <p id="ongkir" class="form-control">Rp. </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 tampilDataOrder">
+                            </div>
+                        </div>
+                        <div class="float-right" style="padding:5px 25px 0 0 ">
+                            <button type="submit" class="btn btn-block btn-success">Order</button>
                         </div>
                     </div>
-                </div>
-                <div class="float-right" style="padding:5px 25px 0 0 ">
-                    <button type="submit" class="btn btn-block btn-success">Order</button>
-                </div>
+
             </form>
 
             <!-- /.content -->
@@ -142,16 +166,14 @@
     <!-- ./wrapper -->
     <link rel="stylesheet" href="<?php echo base_url('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
 
-    <link href="<?php echo base_url('plugins/select2/css/select2.css'); ?>" rel="stylesheet" />
-    <link href="<?php echo base_url('plugins/select2/js/select2.js'); ?>" rel="stylesheet" />
     <script src="<?php echo base_url('adminlte/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
     <script src="<?php echo base_url('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"></script>
     <script src="<?php echo base_url('adminlte/plugins/jquery/jquery.min.js'); ?>"></script>
     <!-- Select 2 -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="<?php echo base_url(); ?>/adminlte/plugins/select2/js/select2.min.js"></script>
+
 
     <!-- Bootstrap 4 -->
     <script src="<?php echo base_url(); ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -164,16 +186,36 @@
         });
         var row = 0;
     </script>
+    <script>
+        $(document).ready(function() {
+            $('#province_id').select2({
+                minimumResultsForSearch: -1,
+                placeholder: 'Choose Province',
+                width: 'resolve',
+                ajax: {
+                    dataType: 'json',
+                    url: '<?php echo base_url("delivery/getprovinsi"); ?>',
+                    processResults: function(data, page) {
+                        return {
+                            results: data
+                        };
+                    },
+                }
+            })
+        });
+    </script>
 
     <script>
+        row = 0;
+
         function tambahRowProduk() {
             var html = `
               <tr id = "tambahRowProduk${row}">
                 <td>
                   <input type ='hidden' name='data_produk[]' value='${row}'>
-                  <select class = 'js-example-basic-single form-control select2-hidden-accessible' style="width:100%;" name = 'id_produk${row}' id = 'get_product${row}' onchange="showHarga(${row})">
+                  <select class = 'js-example-basic-single form-control select2-hidden-accessible' style="width:100%;" name = 'id_produk${row}' id = 'get_product${row}' onchange="showHarga(${row}); getService();">
                     <option selected disabled>------ Choose Product ------</option>
-                  <?php for ($i = 0; $i < count ($customer_data['data']['groupproduct']); $i++) : ?>
+                  <?php for ($i = 0; $i < count($customer_data['data']['groupproduct']); $i++) : ?>
                     <option value = "<?php echo $customer_data['data']['groupproduct'][$i]["id"]; ?>"><?php echo $customer_data['data']['groupproduct'][$i]["name"]; ?></option>
                   <?php endfor; ?>
                   </select>
@@ -183,13 +225,14 @@
                     <tr>
                       <td style="border:none;">Price</td>
                       <td style="border:none; text-align:right;" id="harga_produk${row}"></td>
+                      <input type="hidden" id="weight_produk${row}">
                     </tr>
                     <tr>
                       <td style="border:none;">Quantity</td>
                       <td style="border:none; text-align:right;" id = "kuantitas_produk${row}"></td>
                     </tr>
                   </table>
-                <td><input type = 'number' class = 'form-control nf-input' name = 'detail_quantity${row}' min="0" required></td>
+                <td><input type = 'number' class = 'form-control nf-input' id='quantity_produk${row}' name = 'detail_quantity${row}' min="0" onkeydown="getService()" required></td>
                 <td>
                   <button type = 'button' class = 'btn btn-danger btn-sm' onclick = 'deleteProdukData(this)'><i class="fa fa-fw fa-trash"></i></button>
                 </td>
@@ -198,6 +241,8 @@
             $("#tambah_produk_button_container").before(html);
             $('.js-example-basic-single').select2();
             row++;
+            getService();
+            showOngkir();
         }
 
         function deleteProdukData(r) {
@@ -214,8 +259,79 @@
                 success: function(respond) {
                     $(`#harga_produk${row}`).text("Rp. " + respond['data_price'][0]['price']);
                     $(`#kuantitas_produk${row}`).text(respond['data_price'][0]['quantity']);
+                    $(`#weight_produk${row}`).val(respond['data_price'][0]['weight']);
                 }
             });
+        }
+
+        function getKota() {
+            document.getElementById("city_id").value = "";
+            document.getElementById("div_kota").style.display = "block";
+            let province_id = document.getElementById("province_id").value;
+            $('#city_id').select2({
+                minimumResultsForSearch: -1,
+                placeholder: 'Choose City',
+                width: 'resolve',
+                ajax: {
+                    dataType: 'json',
+                    url: '<?php echo base_url(); ?>/delivery/getcity/' + province_id,
+                    processResults: function(data, page) {
+                        return {
+                            results: data
+                        };
+                    },
+                }
+            })
+        }
+
+        function getKurir() {
+            document.getElementById("kurir_name").value = "";
+            document.getElementById("div_detail").style.display = "block";
+            document.getElementById("div_kurir").style.display = "block";
+            document.getElementById("div_service").style.display = "block";
+        }
+
+        function showOngkir() {
+            let price = document.getElementById("service_id").value;
+            $(`#ongkir`).text("Rp. " + price);
+            let courier = $("#kurir_name option:selected").text();
+            let service = $("#service_id option:selected").text();
+            let courier_name = courier + " " + service;
+            document.getElementById("delivery_courier").value = courier_name;
+        }
+
+        function getService() {
+            $(`#ongkir`).text("Rp. ");
+            document.getElementById("service_id").value = "";
+            let destination_id = document.getElementById("city_id").value;
+            let courier_name = document.getElementById('kurir_name').value;
+            let total_weight = 0;
+            for (let i = 0; i < row; i++) {
+                var id_produk = $(`#get_product${i}`).val();
+                var quantity_produk = $(`#quantity_produk${i}`).val();
+                var weight_produk = $(`#weight_produk${i}`).val();
+
+                total_weight = total_weight + (quantity_produk * weight_produk);
+            }
+
+            $(document).ready(function() {
+                $('#service_id').select2({
+                    minimumResultsForSearch: -1,
+                    placeholder: 'Choose Service',
+                    width: 'resolve',
+                    ajax: {
+                        dataType: 'json',
+                        url: '<?php echo base_url(""); ?>/delivery/getservice/' + destination_id + "/" + total_weight + "/" + courier_name,
+                        processResults: function(data, page) {
+                            return {
+                                results: data
+                            };
+                        },
+                    }
+                })
+            });
+
+
         }
     </script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
