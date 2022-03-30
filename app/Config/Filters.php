@@ -106,7 +106,6 @@ class Filters extends BaseConfig
                     'delivery/getcity/*',
                     'delivery/getkurir/',
                     'delivery/getservice/*/*/*',
-
                 ]
             ],
             'expGuard' => [

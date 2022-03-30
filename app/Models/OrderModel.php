@@ -143,4 +143,26 @@ class OrderModel extends Model
 
         $builder->update();
     }
+
+    public function check_notified()
+    {
+        $builder = $this->db->table('mst_gudon.mst_order');
+        $builder->select('
+            mst_order.id as order_id,
+            mst_customer.name as nama_customer,
+            mst_customer.email as email_customer,
+            mst_order.is_active as is_active,
+            mst_order.destination_name as nama_tujuan,
+            mst_order.destination_address as alamat_tujuan,
+            mst_order.total_price as total_harga,
+            mst_order.status as status_order,
+            mst_order.created_at as created_at
+        ');
+        $builder->join('mst_gudon.mst_customer', 'mst_customer.id = mst_order.customer_id');
+        $builder->where('mst_order.is_active', 1);
+        $builder->where('mst_order.cancel_notified', 0);
+        $builder->where('mst_order.status', 'ON PROGRESS');
+
+        return $builder->get();
+    }
 }

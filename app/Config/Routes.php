@@ -117,6 +117,9 @@ $routes->post('order/store', 'OrderController::store');
 $routes->get('order/search', 'OrderController::search');
 $routes->get('order/search/detail/(:num)', 'OrderController::searchDetail/$1');
 $routes->get('order/view/(:num)', 'OrderController::view/$1');
+$routes->get('order/create_order', 'OrderController::create');
+$routes->get('order/get_price/(:num)', 'OrderController::get_price/$1');
+$routes->post('order/(:num)/delete', 'OrderController::delete/$1');
 
 // report
 $routes->get('report/index', 'ReportController::index');
@@ -127,10 +130,6 @@ $routes->get('report/search', 'ReportController::search');
 $routes->get('topup/method', 'PaymentController::method');
 $routes->get('topup/view/(:any)', 'PaymentController::view/$1');
 $routes->post('topup', 'PaymentController::store');
-
-$routes->get('order/create_order', 'OrderController::create');
-$routes->get('order/get_price/(:num)', 'OrderController::get_price/$1');
-$routes->post('order/(:num)/delete', 'OrderController::delete/$1');
 
 // membership
 $routes->get('profile/index', 'MembershipLevelController::index');

@@ -15,6 +15,11 @@ class WarehouseAdminController extends BaseController
 {
     public function index()
     {
+        // check order cancellation
+        OrderController::checkOrderCancelation();
+        // check low subscription
+        MembershipLevelController::check_subscription_notification();
+
         // get notification
         $modelNotif = new NotificationModel();
         $notif = $modelNotif->where('adm_notified', 1)->orderBy('created_at', 'desc')->findAll();
