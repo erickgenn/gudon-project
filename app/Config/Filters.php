@@ -71,6 +71,7 @@ class Filters extends BaseConfig
                     '/product/search',
                     '/product/view/*',
                     'product/update/*',
+                    'product/updatePicture/*',
                     'product/store',
                     'order/index',
                     'order/search',
@@ -105,7 +106,6 @@ class Filters extends BaseConfig
                     'delivery/getcity/*',
                     'delivery/getkurir/',
                     'delivery/getservice/*/*/*',
-
 
                 ]
             ],
@@ -159,6 +159,8 @@ class Filters extends BaseConfig
                     'admin/product/update/*',
                     'admin/product/search/not_assigned',
                     'admin/product/get_shelf/*',
+                    'admin/product/updatePicture/*',
+                    'admin/product/declinePicture/*',
                     'admin/report/index',
                     'admin/report/search',
                     'admin/report/searchAll',
