@@ -97,7 +97,7 @@
                   <div class="card-body">
                     <?php if (!empty($customer_data['product']['picture'])): ?>
                       <div class="card-body" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; margin: auto; padding:0;">
-                        <img src="<?php echo base_url('/uploads/product').'/'.$customer_data['product']['picture'] ?>" class="img-fluid" style="width:100%;height:100%;" />
+                        <img src="<?php echo base_url('/uploads/product').'/'.$customer_data['product']['picture'] ?>" class="img-fluid" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; width:100%;height:100%;object-fit:contain;" />
                       </div>
                     <?php else:?>
                       <div>

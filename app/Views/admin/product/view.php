@@ -101,7 +101,7 @@
                     <div class="card-body" >
                       <?php if (!empty($admin_data['product'][0]['picture'])): ?>
                         <div class="card-body" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; margin: auto; padding:0;">
-                          <img src="<?php echo base_url('/uploads/product').'/'.$admin_data['product'][0]['picture'] ?>" class="img-fluid" style="width:100%;height:100%;" />
+                          <img src="<?php echo base_url('/uploads/product').'/'.$admin_data['product'][0]['picture'] ?>" class="img-fluid" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; width:100%;height:100%;object-fit:contain;" />
                         </div>  
                       <?php else:?>
                         <div>
@@ -117,7 +117,7 @@
                   <div class="card col-sm-2">     
                       <div class="card-body">
                         <div class="card-body" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; margin: auto; padding:0;">
-                          <img src="<?php echo base_url('/uploads/product/temp').'/'.$admin_data['product'][0]['temp_picture'] ?>" class="img-fluid" style="width:100%;height:100%;" />
+                          <img src="<?php echo base_url('/uploads/product/temp').'/'.$admin_data['product'][0]['temp_picture'] ?>" class="img-fluid" style="min-width:150px; min-height:150px; max-width:150px; max-height:150px; width:100%;height:100%;object-fit:contain;" />
                         </div>
                       </div>
                       <span style="padding-bottom:10px;text-align:center">After</span>
