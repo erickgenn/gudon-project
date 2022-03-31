@@ -27,23 +27,20 @@
         *  STYLE 2
         */
 
-        #style-2::-webkit-scrollbar-track
-        {
-            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        #style-2::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
             border-radius: 10px;
             background-color: #F5F5F5;
         }
 
-        #style-2::-webkit-scrollbar
-        {
+        #style-2::-webkit-scrollbar {
             width: 12px;
             background-color: #F5F5F5;
         }
 
-        #style-2::-webkit-scrollbar-thumb
-        {
+        #style-2::-webkit-scrollbar-thumb {
             border-radius: 10px;
-            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
             background-color: #5cc5e6;
         }
     </style>
@@ -237,7 +234,7 @@
               <tr id = "tambahRowProduk${row}">
                 <td>
                   <input type ='hidden' name='data_produk[]' value='${row}'>
-                  <select class = 'js-example-basic-single form-control select2-hidden-accessible' style="width:100%;" name = 'id_produk${row}' id = 'get_product${row}' onchange="showHarga(${row}); getService();">
+                  <select class = 'js-example-basic-single form-control select2-hidden-accessible' style="width:100%;" name = 'id_produk${row}' id = 'get_product${row}' onchange="showHarga(${row}); hide();">
                     <option selected disabled>------ Choose Product ------</option>
                   <?php for ($i = 0; $i < count($customer_data['data']['groupproduct']); $i++) : ?>
                     <option value = "<?php echo $customer_data['data']['groupproduct'][$i]["id"]; ?>"><?php echo $customer_data['data']['groupproduct'][$i]["name"]; ?></option>
@@ -256,16 +253,16 @@
                       <td style="border:none; text-align:right;" id = "kuantitas_produk${row}"></td>
                     </tr>
                   </table>
-                <td><input type = 'number' class = 'form-control nf-input' id='quantity_produk${row}' name = 'detail_quantity${row}' min="0" onkeydown="getService()" required></td>
+                <td><input type = 'number' class = 'form-control nf-input' id='quantity_produk${row}' name = 'detail_quantity${row}' min="0" onkeydown="hide()" required></td>
                 <td>
-                  <button type = 'button' class = 'btn btn-danger btn-sm' onclick = 'deleteProdukData(this)'><i class="fa fa-fw fa-trash"></i></button>
+                  <button type = 'button' class = 'btn btn-danger btn-sm' onclick = 'deleteProdukData(this); hide();'><i class="fa fa-fw fa-trash"></i></button>
                 </td>
               </tr>
             `;
             $("#tambah_produk_button_container").before(html);
             $('.js-example-basic-single').select2();
             row++;
-            getService();
+            hide();
             showOngkir();
         }
 
@@ -313,6 +310,10 @@
             document.getElementById("div_detail").style.display = "block";
             document.getElementById("div_kurir").style.display = "block";
             document.getElementById("div_service").style.display = "block";
+        }
+
+        function hide() {
+            document.getElementById("kurir_name").value = "";
         }
 
         function showOngkir() {
