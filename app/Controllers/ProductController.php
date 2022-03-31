@@ -280,7 +280,7 @@ class ProductController extends BaseController
                     $modelNotif = new NotificationModel();
                     $data_notif = [
                         'title' => 'Product Picture Change Request',
-                        'message' => 'Hey ' . $_SESSION["name"] . ', your product picture was recently updated. Sometimes we just need a little update, right 😎',
+                        'message' => 'Hey ' . $_SESSION["name"] . ', your product picture was recently requested update. PLease wait until we approved it 😊',
                         'cust_id' => $_SESSION['id'],
                         'link' => 'product/index',
                         'adm_notified' => 1,
