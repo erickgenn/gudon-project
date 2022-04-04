@@ -9,7 +9,7 @@ class Subscription extends Model
     protected $table      = 'mst_gudon.mst_subscription';
     protected $primaryKey = 'id';
     
-    protected $allowedFields = ['subscription_date', 'cust_id', 'level_id', 'is_active'];
+    protected $allowedFields = ['subscription_date', 'cust_id', 'level_id', 'is_active', 'subs_notified'];
 
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -29,6 +29,7 @@ class Subscription extends Model
     public function getSubscriptions() {
         $builder = $this->db->table('mst_gudon.mst_subscription');
         $builder->select('
+        mst_subscription.id as subs_id,
         mst_subscription.subscription_date as subscription_date,
         mst_subscription.cust_id as cust_id,
         mst_subscription.level_id as level_id,

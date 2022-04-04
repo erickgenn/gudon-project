@@ -440,6 +440,10 @@ class MembershipLevelController extends BaseController
                             'adm_message' => 'Email Subscription Renewal for '.ucwords($low_subs[$i]['cust_name']).' ('.$low_subs[$i]['cust_email'].') Successful'
                         ];
                         $modelNotif->insert($data_notif);
+                        $data =[
+                            'subs_notified' => 1
+                        ];
+                        $modelSubscription->update($low_subs[$i]['subs_id'], $data);
                     } else {
                         // notify
                         $modelNotif = new NotificationModel();
