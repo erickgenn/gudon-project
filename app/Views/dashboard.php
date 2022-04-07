@@ -27,30 +27,27 @@
   <!-- summernote -->
   <link rel="stylesheet" href="<?php echo base_url() ?>/plugins/summernote/summernote-bs4.min.css">
   <style>
-        /*
+    /*
         *  STYLE 2
         */
 
-        #style-2::-webkit-scrollbar-track
-        {
-            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-            border-radius: 10px;
-            background-color: #F5F5F5;
-        }
+    #style-2::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      background-color: #F5F5F5;
+    }
 
-        #style-2::-webkit-scrollbar
-        {
-            width: 12px;
-            background-color: #F5F5F5;
-        }
+    #style-2::-webkit-scrollbar {
+      width: 12px;
+      background-color: #F5F5F5;
+    }
 
-        #style-2::-webkit-scrollbar-thumb
-        {
-            border-radius: 10px;
-            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-            background-color: #5cc5e6;
-        }
-    </style>
+    #style-2::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+      background-color: #5cc5e6;
+    }
+  </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed">
@@ -93,7 +90,9 @@
               <!-- small box -->
               <div class="small-box" style="padding:5%; background-color:white">
                 <div class="level" style="float:right; padding:3%">
-                  <?php if ($_SESSION['time_left'] <= 0) : ?>
+                  <?php if ($_SESSION['level'] == 'NOT RATED') : ?>
+                    <a href="<?php echo base_url('profile/index'); ?>" style="color:#5cc5e6; font-weight:bold;">NOT RATED</a>
+                  <?php elseif ($_SESSION['time_left'] <= 0) : ?>
                     <a href="<?php echo base_url('profile/index'); ?>" style="color:red; font-weight:bold;">Membership Expired</a>
                   <?php else : ?>
                     <a href="<?php echo base_url('profile/index'); ?>" style="color: 
