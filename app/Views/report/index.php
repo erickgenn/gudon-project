@@ -25,23 +25,20 @@
         *  STYLE 2
         */
 
-        #style-2::-webkit-scrollbar-track
-        {
-            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        #style-2::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
             border-radius: 10px;
             background-color: #F5F5F5;
         }
 
-        #style-2::-webkit-scrollbar
-        {
+        #style-2::-webkit-scrollbar {
             width: 12px;
             background-color: #F5F5F5;
         }
 
-        #style-2::-webkit-scrollbar-thumb
-        {
+        #style-2::-webkit-scrollbar-thumb {
             border-radius: 10px;
-            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
             background-color: #5cc5e6;
         }
     </style>
@@ -240,10 +237,12 @@
                             "data": "destination_address"
                         },
                         {
-                            "data": "total_price"
+                            "data": "total_price",
+                            "className": "text-right"
                         },
                         {
-                            "data": "delivery_price"
+                            "data": "delivery_price",
+                            "className": "text-right"
                         },
                         {
                             "data": "created_at"
@@ -317,10 +316,12 @@
                         "data": "destination_address"
                     },
                     {
-                        "data": "total_price"
+                        "data": "total_price",
+                        "className": "text-right"
                     },
                     {
-                        "data": "delivery_price"
+                        "data": "delivery_price",
+                        "className": "text-right"
                     },
                     {
                         "data": "created_at"
