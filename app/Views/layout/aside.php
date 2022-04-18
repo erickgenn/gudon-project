@@ -71,7 +71,7 @@
 
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link" style="background-color:#5cc5e6">
+    <a href="<?php echo base_url("home")?>" class="brand-link" style="background-color:#5cc5e6">
       <img src="<?php echo base_url() ?>/assets/gudon_logo_white.png" alt="GudOn Logo" class="brand-image img-circle elevation-3">
       <span class="brand-text font-weight-bold">Gud<span style="color:white;">On</span></span>
     </a>
@@ -244,7 +244,7 @@
 
   <aside class="main-sidebar sidebar-light-primary">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link" style="background-color:#5cc5e6">
+    <a href="<?php echo base_url("home")?>" class="brand-link" style="background-color:#5cc5e6">
       <img src="<?php echo base_url() ?>/assets/gudon_logo_white.png" alt="GudOn Logo" class="brand-image img-circle elevation-3">
       <span class="brand-text font-weight-bold">Gud<span style="color:white;">On</span></span>
     </a>
