@@ -129,7 +129,7 @@ class OrderController extends BaseController
     {
         $orderModel = new ProductModel();
         $orderModel1 = new Warehouse();
-        $data['groupproduct'] = $orderModel->where('customer_id', $_SESSION["id"])->findAll();
+        $data['groupproduct'] = $orderModel->where('customer_id', $_SESSION["id"])->where('storage_id is NOT NULL', NULL, FALSE)->findAll();
         $data['groupwarehouse'] = $orderModel1->get_warehouse_id()->getResultArray();
 
         // get notification
