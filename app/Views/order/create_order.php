@@ -140,7 +140,7 @@
                                     <div class="row">
                                         <div id="div_kurir" class="col-6" style="display:none;">
                                             <label>Courier</label>
-                                            <select class="form-control" id="kurir_name" name="kurir_name" onchange="getService()">
+                                            <select class="form-control" id="kurir_name" name="kurir_name" onchange="getService()" required>
                                                 <option value="" disabled selected>Choose Courier</option>
                                                 <option value="jne">JNE</option>
                                                 <option value="pos">POS INDONESIA</option>
@@ -149,7 +149,7 @@
                                         </div>
                                         <div id="div_service" class="col-6" style="display:none;">
                                             <label>Service Type</label>
-                                            <select class="form-control" id="service_id" name="service_id" onchange="showOngkir()">
+                                            <select class="form-control" id="service_id" name="service_id" onchange="showOngkir()" required>
                                             </select>
                                         </div>
                                     </div>
@@ -233,8 +233,8 @@
             var html = `
               <tr id = "tambahRowProduk${row}">
                 <td>
-                  <input type ='hidden' name='data_produk[]' value='${row}'>
-                  <select class = 'js-example-basic-single form-control select2-hidden-accessible' style="width:100%;" name = 'id_produk${row}' id = 'get_product${row}' onchange="showHarga(${row}); hide();">
+                  <input type ='hidden' name='data_produk[]' value='${row}' >
+                  <select class = 'js-example-basic-single form-control select2-hidden-accessible' style="width:100%;" name = 'id_produk${row}' id = 'get_product${row}' onchange="showHarga(${row}); hide();" required>
                     <option selected disabled>------ Choose Product ------</option>
                   <?php for ($i = 0; $i < count($customer_data['data']['groupproduct']); $i++) : ?>
                     <option value = "<?php echo $customer_data['data']['groupproduct'][$i]["id"]; ?>"><?php echo $customer_data['data']['groupproduct'][$i]["name"]; ?></option>

@@ -163,6 +163,7 @@ class OrderController extends BaseController
 
     public function store()
     {
+        $session = session();
         $productModel = new ProductModel();
         $orderModel = new OrderModel();
         $detailOrderModel = new DetailOrderModel();
@@ -235,9 +236,11 @@ class OrderController extends BaseController
                 'adm_message' => $_SESSION['name'] . '#' . $_SESSION['id'] . ' recently made new order, please confirm the order with number #' . $order_id
             ];
             $modelNotif->insert($data_notif);
-        } catch (Exception $e) {
-        }
         return redirect()->to(base_url('order/index'));
+        } catch (Exception $e) {
+         $session->setFlashdata('error', 'Password and Confirm Password do not match!');
+        return redirect()->to(base_url('order/index'));
+        }
     }
 
     public function get_price($id)

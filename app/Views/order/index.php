@@ -84,6 +84,19 @@
         });
       </script>
     <?php endif; ?>
+
+    <?php if (session()->getFlashdata('error')) : ?>
+      <script>
+        swal({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Create Order Failed!',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      </script>
+    <?php endif; ?>
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
