@@ -218,7 +218,7 @@
                 sortable: false,
                 render: function(data, type, row, meta) {
                   switch (row.status) {
-                    case "SEDANG DIPROSES":
+                    case "ON PROGRESS":
                       return `<a href="<?php echo base_url('order/view') ?>/${row.id}" class="btn" style="background-color:#5cc5e6; color:white;"><i class="fas fa-eye"></i></a>
                               <form method='POST' action='<?php echo base_url('order') ?>/${row.id}/delete' style='display: unset;'>
                                 <button type='submit' class='btn btn-danger' onclick="return confirm('Are you sure you want to cancel this order?')">CANCEL</button>

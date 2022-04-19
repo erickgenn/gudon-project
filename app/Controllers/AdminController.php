@@ -25,9 +25,9 @@ class AdminController extends BaseController
 
         $orderModel = new OrderModel();
         $order = $orderModel->findAll();
-        $order_confirm = $orderModel->where('status', 'SEDANG DIPROSES')->findAll();
-        $order_success = $orderModel->where('status', 'SELESAI')->findAll();
-        $order_cancel = $orderModel->where('status', 'BATAL')->findAll();
+        $order_confirm = $orderModel->where('status', 'ON PROGRESS')->findAll();
+        $order_success = $orderModel->where('status', 'DONE')->findAll();
+        $order_cancel = $orderModel->where('status', 'CANCELLED')->findAll();
 
         $custModel = new Customer();
         $partners = $custModel->findAll();
