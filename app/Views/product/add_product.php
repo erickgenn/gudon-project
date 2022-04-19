@@ -63,6 +63,7 @@
 
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+
         <?php if (session()->getFlashdata('insertProductFailed')) : ?>
         <script>
             swal({
@@ -74,6 +75,20 @@
             });
         </script>
         <?php endif; ?>
+
+        <?php if (session()->getFlashdata('ImageFailed')) : ?>
+        <script>
+            swal({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Please Try Another Image',
+            showConfirmButton: false,
+            timer: 2500
+            });
+        </script>
+        <?php endif; ?>
+
+        
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">

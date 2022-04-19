@@ -162,6 +162,8 @@ class ProductController extends BaseController
 
         // Check if $uploadOk is set to 0 by an error
         if ($uploadOk == 0) {
+            $session->setFlashdata('ImageFailed', 'Please Try Another Image');
+            return redirect()->to(base_url('product/add_product'));
             // echo "Sorry, your file was not uploaded.";
             // if everything is ok, try to upload file
         } else {
@@ -236,7 +238,7 @@ class ProductController extends BaseController
         $productModel = new ProductModel();
         try {
             $data = $this->request->getPost();
-
+  
             // upload image
             $file = $this->request->getFile('productpicture');
 
@@ -258,6 +260,7 @@ class ProductController extends BaseController
             // Check file size
             if ($file->getSize() > 5000000) {
                 $uploadOk = 0;
+                
             }
 
             // Allow certain file formats
@@ -268,9 +271,10 @@ class ProductController extends BaseController
             // Check if $uploadOk is set to 0 by an error
             if ($uploadOk == 0) {
                 $session->setFlashdata('ImageFailed', 'Please Try Another Image');
+                return redirect()->to(base_url('/product/index'));
                 // echo "Sorry, your file was not uploaded.";
                 // if everything is ok, try to upload file
-            } else {
+            } else {  
                 if (move_uploaded_file($file->getTempName(), $target_dir . '/' . $file->getName())) {
                     // upload to db
                     $data = [
@@ -280,7 +284,7 @@ class ProductController extends BaseController
                     $modelNotif = new NotificationModel();
                     $data_notif = [
                         'title' => 'Product Picture Change Request',
-                        'message' => 'Hey ' . $_SESSION["name"] . ', your product picture was recently requested update. PLease wait until we approved it 😊',
+                        'message' => 'Hey ' . $_SESSION["name"] . ', your product picture was recently updated. Sometimes we just need a little update, right 😎',
                         'cust_id' => $_SESSION['id'],
                         'link' => 'product/index',
                         'adm_notified' => 1,
