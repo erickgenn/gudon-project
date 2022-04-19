@@ -100,10 +100,10 @@
                                         <div class="input-group">
                                             <select class="form-control" id="status-select" style="width: 100%;">
                                                 <option selected value="0">ALL</option>
-                                                <option value="SELESAI">SELESAI</option>
-                                                <option value="BATAL">BATAL</option>
-                                                <option value="SEDANG DIPROSES">SEDANG DIPROSES</option>
-                                                <option value="TELAH DIKONFIRMASI">TELAH DIKONFIRMASI</option>
+                                                <option value="DONE">DONE</option>
+                                                <option value="CANCELLED">CANCELLED</option>
+                                                <option value="ON PROGRESS">ON PROGRESS</option>
+                                                <option value="CONFIRMED">CONFIRMED</option>
                                             </select>
                                         </div>
                                     </div>
