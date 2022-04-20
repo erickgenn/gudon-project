@@ -73,6 +73,19 @@
       </script>
     <?php endif; ?>
 
+    <?php if (session()->getFlashdata('Order Success')) : ?>
+        <script>
+            swal({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Order Created Successfully!',
+            showConfirmButton: false,
+            timer: 2500
+            });
+        </script>
+        
+        <?php endif; ?>
+
     <?php if (session()->getFlashdata('msg_fail')) : ?>
       <script>
         swal({

@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="<?php echo base_url() ?>/dist/css/adminlte.min.css">
     <!-- Select2 -->
     <link href="<?php echo base_url(); ?>/adminlte/plugins/select2/css/select2.css" rel="stylesheet" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <style>
         /*
         *  STYLE 2
@@ -48,6 +50,19 @@
 
 <body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed">
     <div class="wrapper">
+    <?php if (session()->getFlashdata('Order Fail')) : ?>
+        <script>
+            swal({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Product quantity is not valid!',
+            showConfirmButton: false,
+            timer: 2500
+            });
+        </script>
+        
+        <?php endif; ?>
+        
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
