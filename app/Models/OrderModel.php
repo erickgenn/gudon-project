@@ -29,7 +29,7 @@ class OrderModel extends Model
             mst_product.name as nama_produk,
             mst_product.weight as berat_produk,
             mst_product.volume as volume_produk,
-            mst_product.quantity as kuantitas_produk,
+            mst_detail_order.quantity as kuantitas_produk,
             mst_order.is_active as is_active,
             mst_order.destination_name as nama_tujuan,
             mst_order.destination_address as alamat_tujuan,
