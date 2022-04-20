@@ -425,17 +425,10 @@
       <?php endfor; ?>
     ];
 
-    var coloR = [];
-    var dynamicColors = function() {
-      var r = Math.floor(Math.random() * 255);
-      var g = Math.floor(Math.random() * 255);
-      var b = Math.floor(Math.random() * 255);
-      return "rgb(" + r + "," + g + "," + b + ")";
-    };
+    var coloR = ['rgb(77, 150, 255)', 'rgb(216, 33, 72)', 'rgb(56, 163, 130)', 'rgb(255, 165, 0)', 'rgb(111, 96, 186)', 'rgb(146, 48, 100)', 'rgb(214, 176, 194)', 'rgb(192, 171, 68)', 'rgb(101, 159, 167)', 'rgb(9, 83, 217)', 'rgb(178, 185, 201)', 'rgb(168, 82, 23)', 'rgb(35, 225, 106)', 'rgb(34, 33, 51)', 'rgb(95, 73, 58)', 'rgb(33, 121, 213)'];
 
-    <?php for ($j = 0; $j < count($product); $j++) : ?>
-      coloR.push(dynamicColors());
-    <?php endfor; ?>
+
+
 
     const data = {
       labels: labels,
