@@ -73,6 +73,19 @@
       </script>
     <?php endif; ?>
 
+    <?php if (session()->getFlashdata('Order Success')) : ?>
+        <script>
+            swal({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Order Created Successfully!',
+            showConfirmButton: false,
+            timer: 2500
+            });
+        </script>
+        
+        <?php endif; ?>
+
     <?php if (session()->getFlashdata('msg_fail')) : ?>
       <script>
         swal({
@@ -84,6 +97,19 @@
         });
       </script>
     <?php endif; ?>
+
+    <?php if (session()->getFlashdata('error')) : ?>
+      <script>
+        swal({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Create Order Failed!',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      </script>
+    <?php endif; ?>
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->

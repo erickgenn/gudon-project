@@ -136,10 +136,19 @@ class OrderAdminController extends BaseController
         $session = session();
         $orderModel = new \App\Models\OrderModel();
         $detailOrderModel = new \App\Models\DetailOrderModel();
+        $productModel = new \App\Models\ProductModel();
         try {
             $orderModel->updateNotif($id);
             $detailOrderModel->detailDelete($id);
-
+            $dataorder = $detailOrderModel->where('order_id', $id)->findAll();
+           
+            for($i=0;$i<count($dataorder);$i++){
+                $product = $productModel->where('id',$dataorder[$i]['product_id'])->first();
+                $data = [
+                    "quantity"=> $dataorder[$i]['quantity']+$product['quantity']
+                ];
+                $productModel->update($dataorder[$i]['product_id'],$data);
+            }
             $orderModel->deleteOrder($id);
 
             $session->setFlashdata('msg_success', 'Order Telah Dihapus!');

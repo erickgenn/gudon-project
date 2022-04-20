@@ -129,7 +129,7 @@ class OrderController extends BaseController
     {
         $orderModel = new ProductModel();
         $orderModel1 = new Warehouse();
-        $data['groupproduct'] = $orderModel->where('customer_id', $_SESSION["id"])->findAll();
+        $data['groupproduct'] = $orderModel->where('customer_id', $_SESSION["id"])->where('storage_id is NOT NULL', NULL, FALSE)->findAll();
         $data['groupwarehouse'] = $orderModel1->get_warehouse_id()->getResultArray();
 
         // get notification
@@ -163,6 +163,7 @@ class OrderController extends BaseController
 
     public function store()
     {
+        $session = session();
         $productModel = new ProductModel();
         $orderModel = new OrderModel();
         $detailOrderModel = new DetailOrderModel();
@@ -179,22 +180,28 @@ class OrderController extends BaseController
             //get data from table addRow
             foreach ($temp_data_produk as $a) {
                 $product_id = $this->request->getPost('id_produk' . $a);
-                $product_row =  $productModel->where('id', $product_id)->first();
+                $product_row =  $productModel->where('id', $product_id)->first();  
                 $product_qty = $product_row['quantity'];
                 $product_price = $product_row['price'];
                 $qty = $this->request->getPost('detail_quantity' . $a);
-                $total_price = $total_price + ($product_price * $qty);
-                $data_update_product = [
-                    'quantity' => $product_qty - $qty
-                ];
-                $productModel->update($product_id, $data_update_product); //kurangin qty product di DB
-
-                $storage_id = $productModel->where('id', $product_id)->findColumn('storage_id');
-                $warehouse = $storageModel->where('id', $storage_id)->first();
-                $warehouse_id = $warehouse['warehouse_id'];
-                if (!in_array($warehouse_id, $warehouse_id_arr)) {
-                    array_push($warehouse_id_arr, $warehouse_id);
+                if($product_qty>=$qty){
+                    $total_price = $total_price + ($product_price * $qty);
+                    $data_update_product = [
+                        'quantity' => $product_qty - $qty
+                    ];
+                    $productModel->update($product_id, $data_update_product); //kurangin qty product di DB
+    
+                    $storage_id = $productModel->where('id', $product_id)->findColumn('storage_id');
+                    $warehouse = $storageModel->where('id', $storage_id)->first();
+                    $warehouse_id = $warehouse['warehouse_id'];
+                    if (!in_array($warehouse_id, $warehouse_id_arr)) {
+                        array_push($warehouse_id_arr, $warehouse_id);
+                    }
+                }else{
+                    $session->setFlashdata('Order Fail','oke');
+                    return redirect()->to(base_url('order/create_order'));
                 }
+               
             }
 
             $data['warehouse_id'] = implode(",", array_filter($warehouse_id_arr));
@@ -235,9 +242,12 @@ class OrderController extends BaseController
                 'adm_message' => $_SESSION['name'] . '#' . $_SESSION['id'] . ' recently made new order, please confirm the order with number #' . $order_id
             ];
             $modelNotif->insert($data_notif);
-        } catch (Exception $e) {
-        }
+            $session->setFlashdata('Order Success','oke');
         return redirect()->to(base_url('order/index'));
+        } catch (Exception $e) {
+         $session->setFlashdata('error', 'Password and Confirm Password do not match!');
+        return redirect()->to(base_url('order/index'));
+        }
     }
 
     public function get_price($id)
@@ -259,6 +269,13 @@ class OrderController extends BaseController
 
             $orderModel->deleteOrder($id);
 
+            $dataorder = $detailOrderModel->where('order_id', $id)->findAll();
+           
+            for($i=0;$i<count($dataorder);$i++){
+                $product = $productModel->where('id',$dataorder[$i]['product_id'])->first();
+                $data = $dataorder[$i]['quantity']+$product['quantity'];
+                $productModel->update($dataorder[$i]['id'],$data);
+            }
             // notify
             $modelNotif = new NotificationModel();
             $data_notif = [

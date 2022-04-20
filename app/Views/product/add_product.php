@@ -63,6 +63,7 @@
 
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+
         <?php if (session()->getFlashdata('insertProductFailed')) : ?>
         <script>
             swal({
@@ -74,6 +75,20 @@
             });
         </script>
         <?php endif; ?>
+
+        <?php if (session()->getFlashdata('ImageFailed')) : ?>
+        <script>
+            swal({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Please Try Another Image',
+            showConfirmButton: false,
+            timer: 2500
+            });
+        </script>
+        <?php endif; ?>
+
+        
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -114,9 +129,8 @@
                         <div class="form-group">
                             <label>Picture</label>
                             <div class="col">
-                                <input type="file" name="productpicture" id="productpicture" class="custom-file-input">
-                                
-                                <label class="custom-file-label" for="productpicture">Choose File</label>
+                                <input type="file" name="productpicture" id="productpicture" class="custom-file-input" oninput="changeName()">
+                                <label class="custom-file-label" for="productpicture" id="productpicturename">Choose File</label>
                             </div>
                         </div>
                         <div class="form-group">
@@ -125,11 +139,17 @@
                         </div>
                         <div class="form-group">
                             <label>Weight</label>
-                            <input type="text" name="productweight" id="productweight" class="form-control" required>
+                            <div class="input-group-append">
+                                <input type="number" min="0" name="productweight" id="productweight" class="form-control" required>
+                                <span class="input-group-text">gr</span>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>Volume</label>
-                            <input type="text" name="productvolume" id="productvolume" class="form-control" required>
+                            <div class="input-group-append">
+                                <input type="number" min="0" name="productvolume" id="productvolume" class="form-control" required>
+                                <span class="input-group-text">m³</span>
+                            </div>
                         </div>
                     </div>
                     <div class="float-right" style="padding:5px 25px 0 0">
@@ -176,6 +196,12 @@
   </script>
 
     <script>
+
+    function changeName() {
+        var file = document.getElementById("productpicture");
+        var name = file.files[0].name;
+        document.getElementById("productpicturename").innerHTML = name;
+    }
 
     function deleteProdukData(r) {
       var i = r.parentNode.parentNode.rowIndex;

@@ -266,8 +266,9 @@ class ProductAdminController extends BaseController
         ];
         $upload_dir = 'uploads/product/';
         $old_dir = 'uploads/product/temp'.'/';
-  
-        unlink($upload_dir.$picture[0]['picture']);
+        if(isset($picture)) {
+            unlink($upload_dir.$picture[0]['picture']);
+        }
         rename($old_dir.$tempPicture[0]['temp_picture'],$upload_dir.$tempPicture[0]['temp_picture']);
         
         $product = $productModel->where('id',$id)->first();
