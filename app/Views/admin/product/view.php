@@ -202,7 +202,7 @@
                       <tr>
                         <th>Shelf</th>
                         <td>
-                          <select class="form-control" name="shelf" id="shelfform" form="productform">
+                          <select class="form-control" name="shelf" id="shelfform" form="productform" required>
                           </select>
                         </td>
                       </tr>
