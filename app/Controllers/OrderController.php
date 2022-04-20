@@ -263,6 +263,7 @@ class OrderController extends BaseController
         $session = session();
         $orderModel = new \App\Models\OrderModel();
         $detailOrderModel = new \App\Models\DetailOrderModel();
+        $productModel = new \App\Models\ProductModel();
         try {
 
             $detailOrderModel->detailDelete($id);
