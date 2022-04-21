@@ -274,7 +274,9 @@ class OrderController extends BaseController
            
             for($i=0;$i<count($dataorder);$i++){
                 $product = $productModel->where('id',$dataorder[$i]['product_id'])->first();
-                $data = $dataorder[$i]['quantity']+$product['quantity'];
+                $data = [
+                    'quantity' => $dataorder[$i]['quantity']+$product['quantity']
+                ];
                 $productModel->update($dataorder[$i]['id'],$data);
             }
             // notify

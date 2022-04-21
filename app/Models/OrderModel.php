@@ -53,7 +53,7 @@ class OrderModel extends Model
     public function updateConfirm($id)
     {
         $builder = $this->db->table('mst_gudon.mst_order');
-        $builder->set('status', 'TELAH DIKONFIRMASI');
+        $builder->set('status', 'CONFIRMED');
         $builder->where('id', $id);
 
         $builder->update();
@@ -129,7 +129,7 @@ class OrderModel extends Model
         $builder->where('created_at >=', $date . " 00:00:00.000");
         $builder->where('created_at <=', $date . " 23:59:59.999");
         $builder->where('customer_id', $_SESSION['id']);
-        $builder->where('status', "SELESAI");
+        $builder->where('status', "DONE");
         return $builder->get();
     }
 
@@ -137,8 +137,8 @@ class OrderModel extends Model
     {
         $builder = $this->db->table('mst_gudon.mst_order');
         $builder->set('is_active', 0);
-        $builder->set('status', 'BATAL');
-        $builder->set('delivery_status', 'BATAL');
+        $builder->set('status', 'CANCELLED');
+        $builder->set('delivery_status', 'CANCELLED');
         $builder->where('id', $id);
 
         $builder->update();

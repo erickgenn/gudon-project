@@ -143,9 +143,9 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body table-responsive" style="align-content:flex-end;">
-              <table id="order-table" class="table table-hover text-nowrap table-sm" style="width:100%">
+              <table id="order-table" class="table table-hover text-wrap table-sm" style="width:100%">
                 <thead>
-                  <tr>
+                  <tr class="text-nowrap">
                     <th>No.</th>
                     <th>Customer Name</th>
                     <th>Destination Address</th>
