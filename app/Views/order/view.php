@@ -138,7 +138,7 @@
                 <th>Product Name</th>
                 <th>Quantity</th>
                 <th>Weight (gr)</th>
-                <th>Volume (m³)</th>
+                <th>Volume (cm³)</th>
               </thead>
               <tbody>
                 <?php for ($i = 0; $i < sizeof($customer_data['order']); $i++) : ?>

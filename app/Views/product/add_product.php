@@ -148,7 +148,7 @@
                             <label>Volume</label>
                             <div class="input-group-append">
                                 <input type="number" min="0" name="productvolume" id="productvolume" class="form-control" required>
-                                <span class="input-group-text">m³</span>
+                                <span class="input-group-text">cm³</span>
                             </div>
                         </div>
                     </div>

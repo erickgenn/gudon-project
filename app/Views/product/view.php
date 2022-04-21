@@ -188,7 +188,7 @@
                       </tr>
                       <tr>
                         <th>Volume</th>
-                        <td><?php echo $customer_data['product']['volume'];?> m³</td>
+                        <td><?php echo $customer_data['product']['volume'];?> cm³</td>
                       </tr>
                     </tbody>
                   </table>

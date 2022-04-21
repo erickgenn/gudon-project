@@ -186,7 +186,7 @@
                       <tr>
                         <th>Volume</th>
                         <td><div class="input-group-append">
-                                <span class="input-group-text">m³</span>
+                                <span class="input-group-text">cm³</span>
                           <input type="text" class="form-control" min='0' name='volume' id='product_volume' value="<?php echo $admin_data['product'][0]['volume'];?>" required></div></td>
                       </tr>
                       <tr>

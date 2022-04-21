@@ -99,7 +99,7 @@
                       <th>ID</th>
                       <th>Shelf</th>
                       <th>Max Weight (gr)</th>
-                      <th>Max Volume (m³)</th>
+                      <th>Max Volume (cm³)</th>
                       <th>Status</th>
                       <th>Action</th>
                     </tr>
@@ -141,7 +141,7 @@
               <th>Product Name</th>
               <th>Quantity</th>
               <th>Weight (gr)</th>
-              <th>Volume (m³)</th>
+              <th>Volume (cm³)</th>
             </thead>
             <tbody>
             </tbody>
